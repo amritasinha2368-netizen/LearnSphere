@@ -17,6 +17,6 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   } catch (error) {
     console.error("Delete Coding Test Error:", error);
-    return res.status(500).json({ error: 'Failed to delete coding test' });
+    return res.status(500).json({ error: 'Failed to delete coding test', details: error.message, stack: error.stack });
   }
 }

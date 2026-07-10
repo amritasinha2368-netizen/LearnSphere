@@ -35,14 +35,22 @@ export default function CodeBuilder({ openCreateCodingQuestion, onPublish, refre
     fetchQuestionsAndTests();
   }, [refreshTrigger]);
 
+  const [deletingId, setDeletingId] = useState(null);
+
   const deletePublishedTest = async (id) => {
+    setDeletingId(id);
     try {
       const res = await fetch(`/api/coding-tests/${id}`, { method: 'DELETE' });
       if (res.ok) {
         fetchQuestionsAndTests();
+      } else {
+        alert("Failed to delete. Please try again.");
       }
     } catch (err) {
       console.error(err);
+      alert("Network error during deletion.");
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -171,8 +179,9 @@ export default function CodeBuilder({ openCreateCodingQuestion, onPublish, refre
                     className="ghost-button" 
                     style={{ color: '#e11d48', padding: '6px 12px' }}
                     onClick={(e) => { e.stopPropagation(); deletePublishedTest(test.id); }}
+                    disabled={deletingId === test.id}
                   >
-                    Delete
+                    {deletingId === test.id ? "Deleting..." : "Delete"}
                   </button>
                 </div>
               ))}

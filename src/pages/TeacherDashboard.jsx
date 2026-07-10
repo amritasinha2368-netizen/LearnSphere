@@ -186,16 +186,22 @@ export default function TeacherDashboard({ session, onLogout }) {
     }
   };
 
+  const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
+
   const deleteAssignment = async (id) => {
+    setDeletingAssignmentId(id);
     try {
       const res = await fetch(`/api/assignments/${id}`, { method: 'DELETE' });
       if (res.ok) {
         fetchAssignments();
       } else {
-        console.error("Failed to delete");
+        alert("Failed to delete assignment. Please try again.");
       }
     } catch (err) {
       console.error(err);
+      alert("Network error during deletion.");
+    } finally {
+      setDeletingAssignmentId(null);
     }
   };
 
@@ -443,7 +449,7 @@ export default function TeacherDashboard({ session, onLogout }) {
                 <p>{assignment.subject}</p>
                 <b>Due {formattedDate} - {assignment.maxMarks} marks</b>
                 
-                <button type="button" onClick={() => deleteAssignment(assignment.id)} style={{ position: 'absolute', top: '12px', right: '12px', background: 'transparent', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '4px' }} title="Delete assignment">
+                <button type="button" onClick={() => deleteAssignment(assignment.id)} style={{ position: 'absolute', top: '12px', right: '12px', background: 'transparent', border: 'none', color: deletingAssignmentId === assignment.id ? '#9ca3af' : '#ef4444', cursor: deletingAssignmentId === assignment.id ? 'not-allowed' : 'pointer', padding: '4px' }} title="Delete assignment" disabled={deletingAssignmentId === assignment.id}>
                   <Trash2 size={18} />
                 </button>
 

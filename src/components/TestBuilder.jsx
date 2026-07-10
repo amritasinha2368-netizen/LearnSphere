@@ -30,14 +30,22 @@ export default function TestBuilder({ onPublish, refreshTrigger }) {
     fetchQuizzes();
   }, [refreshTrigger]);
 
+  const [deletingId, setDeletingId] = useState(null);
+
   const deletePublishedQuiz = async (id) => {
+    setDeletingId(id);
     try {
       const res = await fetch(`/api/standard-quizzes/${id}`, { method: 'DELETE' });
       if (res.ok) {
         fetchQuizzes();
+      } else {
+        alert("Failed to delete. Please try again.");
       }
     } catch (err) {
       console.error(err);
+      alert("Network error during deletion.");
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -128,8 +136,9 @@ export default function TestBuilder({ onPublish, refreshTrigger }) {
                     className="ghost-button" 
                     style={{ color: '#e11d48', padding: '6px 12px' }}
                     onClick={(e) => { e.stopPropagation(); deletePublishedQuiz(quiz.id); }}
+                    disabled={deletingId === quiz.id}
                   >
-                    Delete
+                    {deletingId === quiz.id ? "Deleting..." : "Delete"}
                   </button>
                 </div>
               ))}
