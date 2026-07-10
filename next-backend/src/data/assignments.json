@@ -1,0 +1,24 @@
+[
+  {
+    "id": "assignment_1",
+    "subject": "Data Structures",
+    "title": "Graph traversal lab",
+    "due": "15 Jul",
+    "maxMarks": 50,
+    "status": "Published",
+    "fileUrl": null,
+    "createdAt": "2026-07-04T10:00:00Z",
+    "submissions": []
+  },
+  {
+    "id": "a1783164051412",
+    "title": "english assignment",
+    "subject": "Data Structures",
+    "due": "Next Week",
+    "maxMarks": 50,
+    "fileUrl": null,
+    "contentBody": "",
+    "status": "Published",
+    "submissions": []
+  }
+]

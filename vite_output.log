@@ -1,0 +1,13 @@
+
+> institution-lms-ui@1.0.0 dev
+> vite --host 127.0.0.1
+
+Port 5173 is in use, trying another one...
+
+  VITE v7.3.6  ready in 93 ms
+
+  ➜  Local:   http://127.0.0.1:5174/
+12:19:42 PM [vite] (client) hmr update /src/pages/StudentDashboard.jsx
+12:23:21 PM [vite] (client) hmr update /src/components/TestBuilder.jsx
+12:29:31 PM [vite] (client) hmr update /src/components/TestEnvironment.jsx
+12:29:51 PM [vite] (client) hmr update /src/components/TestEnvironment.css

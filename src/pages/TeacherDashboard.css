@@ -1,0 +1,269 @@
+/* Teacher dashboard-specific styling.
+   Shared layout, typography, buttons, and app shell styles stay in src/styles.css. */
+
+.teacher .overview-layout {
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+
+.teacher .teacher-hero {
+  min-height: 360px;
+  padding: 34px;
+  padding-right: min(34vw, 390px);
+  align-items: center;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(240, 255, 248, 0.94)),
+    linear-gradient(90deg, rgba(16, 185, 129, 0.08), rgba(6, 182, 212, 0.06));
+}
+
+.teacher .teacher-hero::after {
+  width: 300px;
+  height: 112px;
+  opacity: 0.4;
+  background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.15), transparent 70%);
+}
+
+.teacher .teacher-hero .hero-3d-object {
+  /* display: none; */
+}
+
+.teacher .teacher-hero h2 {
+  max-width: 560px;
+  font-size: clamp(2.25rem, 3.2vw, 3.55rem);
+  line-height: 1.02;
+}
+
+.teacher .teacher-hero p:not(.eyebrow) {
+  max-width: 520px;
+  margin-top: 14px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.teacher .hero-status-row {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 20px;
+}
+
+.teacher .hero-status-row span {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 11px;
+  border: 1px solid rgba(167, 243, 208, 0.86);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  color: #064e3b;
+  font-size: 0.8rem;
+  font-weight: 850;
+}
+
+.teacher .teacher-figure-scene {
+  position: absolute;
+  right: 26px;
+  top: 50%;
+  width: 320px;
+  min-width: 300px;
+  height: 252px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.teacher .figure-board {
+  position: absolute;
+  right: 8px;
+  bottom: 40px;
+  width: 240px;
+  height: 160px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  border-radius: 12px;
+  box-shadow: 
+    0 12px 24px rgba(16, 185, 129, 0.2),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  transform: rotateY(-10deg) rotateX(5deg);
+  perspective: 1000px;
+}
+
+.teacher .figure-board::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 2px dashed rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+}
+
+.teacher .board-chart {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  height: 80px;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.teacher .board-chart i {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 4px 4px 0 0;
+  animation: growChart 3s ease-out infinite alternate;
+}
+
+.teacher .board-chart i:nth-child(1) { height: 40%; animation-delay: 0s; }
+.teacher .board-chart i:nth-child(2) { height: 70%; animation-delay: 0.2s; }
+.teacher .board-chart i:nth-child(3) { height: 100%; animation-delay: 0.4s; }
+.teacher .board-chart i:nth-child(4) { height: 85%; animation-delay: 0.6s; }
+
+@keyframes growChart {
+  0% { transform: scaleY(0.8); }
+  100% { transform: scaleY(1.1); }
+}
+
+.teacher .teacher-desk-3d {
+  position: absolute;
+  left: 20px;
+  bottom: 10px;
+  width: 140px;
+  height: 90px;
+  background: #f8fafc;
+  border-radius: 10px;
+  box-shadow: 
+    -10px 10px 20px rgba(0, 0, 0, 0.08),
+    inset 0 -4px 10px rgba(148, 163, 184, 0.2);
+  transform: translateZ(40px) rotateY(15deg) scale(0.9);
+}
+
+.teacher .desk-paper {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 60px;
+  height: 40px;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  transform: rotateZ(-8deg);
+}
+.teacher .desk-paper::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 5px;
+  width: 40px;
+  height: 4px;
+  background: #10b981;
+  border-radius: 2px;
+}
+.teacher .desk-paper::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: 5px;
+  width: 30px;
+  height: 4px;
+  background: #cbd5e1;
+  border-radius: 2px;
+}
+
+.teacher .floating-sticker {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-weight: 900;
+  font-size: 0.85rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  color: white;
+  animation: float 4s ease-in-out infinite;
+}
+
+.teacher .sticker-grade {
+  top: 10px;
+  left: 110px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  animation-delay: -1s;
+}
+
+.teacher .sticker-check {
+  top: 60px;
+  right: -10px;
+  background: linear-gradient(135deg, #06b6d4, #0891b2);
+  animation-delay: -2s;
+}
+
+.teacher .sticker-star {
+  right: 70px;
+  bottom: 0px;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  animation-delay: -3s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.teacher .schedule-card-large {
+  background: linear-gradient(135deg, #ffffff, #f0fdf4);
+  border: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+.teacher .schedule-card-large label span {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #064e3b;
+  margin-top: 4px;
+}
+
+@media (max-width: 1180px) {
+  .teacher .overview-layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .teacher .overview-layout {
+    grid-template-columns: 1fr;
+  }
+  .teacher .teacher-hero {
+    min-height: 0;
+    padding-right: 20px;
+  }
+  .teacher .teacher-figure-scene {
+    position: relative;
+    inset: auto;
+    width: min(100%, 420px);
+    min-width: 0;
+    height: 270px;
+    margin-top: 24px;
+    transform: none;
+  }
+}
+
+.delete-cross-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary, #64748b);
+  cursor: pointer;
+  padding: 4px;
+  display: grid;
+  place-items: center;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.delete-cross-btn:hover {
+  background: rgba(225, 29, 72, 0.1);
+  color: #e11d48;
+}

@@ -1,0 +1,244 @@
+/* Admin dashboard-specific styling.
+   Shared layout, typography, buttons, and app shell styles stay in src/styles.css. */
+
+.admin .overview-layout {
+  grid-template-columns: minmax(0, 1.65fr) minmax(310px, 0.72fr);
+  align-items: start;
+}
+
+.admin .admin-hero {
+  min-height: 360px;
+  padding: 34px;
+  padding-right: min(34vw, 390px);
+  align-items: center;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(245, 243, 255, 0.94)),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.08), rgba(168, 85, 247, 0.06));
+}
+
+.admin .admin-hero::after {
+  width: 300px;
+  height: 112px;
+  opacity: 0.4;
+  background: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.15), transparent 70%);
+}
+
+.admin .admin-hero .hero-3d-object {
+  /* display: none; */
+}
+
+.admin .admin-hero h2 {
+  max-width: 560px;
+  font-size: clamp(2.25rem, 3.2vw, 3.55rem);
+  line-height: 1.02;
+}
+
+.admin .admin-hero p:not(.eyebrow) {
+  max-width: 520px;
+  margin-top: 14px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.admin .hero-status-row {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 20px;
+}
+
+.admin .hero-status-row span {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 11px;
+  border: 1px solid rgba(221, 214, 254, 0.86);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  color: #4c1d95;
+  font-size: 0.8rem;
+  font-weight: 850;
+}
+
+.admin .admin-figure-scene {
+  position: absolute;
+  right: 26px;
+  top: 50%;
+  width: 320px;
+  min-width: 300px;
+  height: 252px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.admin .admin-server-stack {
+  position: absolute;
+  right: 15px;
+  bottom: 25px;
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transform: rotateY(-15deg) rotateX(10deg);
+  perspective: 1000px;
+}
+
+.admin .server-blade {
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  border-radius: 6px;
+  box-shadow: 
+    0 10px 15px rgba(139, 92, 246, 0.2),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.admin .server-blade::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 8px #34d399;
+  animation: blink 2s infinite alternate;
+}
+
+.admin .server-blade:nth-child(2)::before {
+  animation-delay: 0.5s;
+}
+
+.admin .server-blade:nth-child(3)::before {
+  animation-delay: 1s;
+}
+
+@keyframes blink {
+  0% { opacity: 0.4; box-shadow: none; }
+  100% { opacity: 1; box-shadow: 0 0 8px #34d399; }
+}
+
+.admin .server-blade::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 25px;
+  right: 10px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.admin .admin-radar-3d {
+  position: absolute;
+  left: 20px;
+  bottom: 40px;
+  width: 120px;
+  height: 120px;
+  background: rgba(139, 92, 246, 0.1);
+  border: 2px solid rgba(139, 92, 246, 0.3);
+  border-radius: 50%;
+  transform: translateZ(40px) rotateX(60deg) scale(0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin .radar-ring {
+  width: 80px;
+  height: 80px;
+  border: 1px dashed rgba(139, 92, 246, 0.5);
+  border-radius: 50%;
+  animation: pulseRadar 3s infinite;
+}
+
+@keyframes pulseRadar {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+.admin .radar-sweep {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.8));
+  transform-origin: left center;
+  animation: sweepRadar 4s linear infinite;
+}
+
+@keyframes sweepRadar {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.admin .floating-sticker {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-weight: 900;
+  font-size: 0.75rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  color: white;
+  animation: float 4s ease-in-out infinite;
+}
+
+.admin .sticker-security {
+  top: 10px;
+  left: 110px;
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  animation-delay: -1s;
+}
+
+.admin .sticker-sync {
+  top: 60px;
+  right: -10px;
+  background: linear-gradient(135deg, #a855f7, #9333ea);
+  animation-delay: -2s;
+}
+
+.admin .sticker-live {
+  right: 70px;
+  bottom: 0px;
+  background: linear-gradient(135deg, #ec4899, #db2777);
+  animation-delay: -3s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@media (max-width: 1180px) {
+  .admin .overview-layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .admin .overview-layout {
+    grid-template-columns: 1fr;
+  }
+  .admin .admin-hero {
+    min-height: 0;
+    padding-right: 20px;
+  }
+  .admin .admin-figure-scene {
+    position: relative;
+    inset: auto;
+    width: min(100%, 420px);
+    min-width: 0;
+    height: 270px;
+    margin-top: 24px;
+    transform: none;
+  }
+}

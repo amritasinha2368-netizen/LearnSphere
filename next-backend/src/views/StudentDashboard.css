@@ -1,0 +1,398 @@
+/* Student dashboard-specific styling.
+   Shared layout, typography, buttons, and app shell styles stay in src/styles.css. */
+
+.student .overview-layout {
+  grid-template-columns: minmax(0, 1.65fr) minmax(310px, 0.72fr);
+  align-items: start;
+}
+
+.student .student-hero {
+  min-height: 360px;
+  padding: 34px;
+  padding-right: min(34vw, 390px);
+  align-items: center;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(244, 248, 255, 0.94)),
+    linear-gradient(90deg, rgba(59, 130, 255, 0.08), rgba(255, 79, 184, 0.06));
+}
+
+.student .student-hero::after {
+  width: 300px;
+  height: 112px;
+  opacity: 0.4;
+}
+
+.student .student-hero .hero-3d-object {
+  display: none;
+}
+
+.student .student-hero h2 {
+  max-width: 560px;
+  font-size: clamp(2.25rem, 3.2vw, 3.55rem);
+  line-height: 1.02;
+}
+
+.student .student-hero p:not(.eyebrow) {
+  max-width: 520px;
+  margin-top: 14px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.student .hero-status-row {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 20px;
+}
+
+.student .hero-status-row span {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 11px;
+  border: 1px solid rgba(210, 220, 238, 0.86);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.74);
+  color: #35445c;
+  font-size: 0.8rem;
+  font-weight: 850;
+}
+
+.student .student-figure-scene {
+  right: 26px;
+  top: 50%;
+  width: 320px;
+  min-width: 300px;
+  height: 252px;
+  transform: translateY(-50%);
+}
+
+.student .figure-screen {
+  right: 8px;
+  bottom: 30px;
+  width: 222px;
+  height: 145px;
+}
+
+.student .student-avatar-3d {
+  left: 18px;
+  bottom: 0;
+  transform: translateZ(36px) rotateY(8deg) scale(0.86);
+  transform-origin: bottom left;
+}
+
+.student .floating-checklist {
+  top: 18px;
+  left: 8px;
+  transform: rotateZ(-5deg) scale(0.9);
+}
+
+.student .sticker-xp {
+  top: 4px;
+  left: 112px;
+}
+
+.student .sticker-quiz {
+  top: 54px;
+  right: 0;
+}
+
+.student .sticker-badge {
+  right: 66px;
+  bottom: 4px;
+}
+
+.student .batch-card {
+  min-height: 360px;
+  gap: 14px;
+}
+
+.student .batch-card .panel-head {
+  margin-bottom: 0;
+}
+
+.student .batch-identity {
+  min-height: 78px;
+  padding: 12px;
+}
+
+.student .batch-avatar {
+  width: 48px;
+  height: 48px;
+}
+
+.student .batch-identity strong {
+  font-size: 0.98rem;
+  line-height: 1.24;
+}
+
+.student .batch-stat-grid div {
+  min-height: 72px;
+}
+
+.student .today-focus-card {
+  min-height: 206px;
+  align-content: stretch;
+  grid-template-rows: auto auto minmax(42px, 1fr) auto auto;
+}
+
+.student .today-focus-card h3 {
+  font-size: 1.18rem;
+}
+
+.student .assignment-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.86fr);
+  gap: 18px;
+}
+
+.student .assignment-list-panel,
+.student .assignment-summary-panel {
+  min-height: 350px;
+}
+
+.student .assignment-list-panel .list-action-row {
+  min-height: 78px;
+  grid-template-columns: 46px minmax(0, 1fr) minmax(140px, auto);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.student .assignment-list-panel .list-action-row button {
+  min-width: 146px;
+}
+
+.student .assignment-summary-panel {
+  display: grid;
+  align-content: start;
+  gap: 18px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(247, 250, 255, 0.86));
+}
+
+.student .assignment-summary-head h2 {
+  margin: 0;
+  font-size: 1.55rem;
+  line-height: 1.12;
+}
+
+.student .assignment-summary-head span {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.student .assignment-summary-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.student .assignment-summary-stats div {
+  min-height: 76px;
+  padding: 12px;
+  display: grid;
+  align-content: center;
+  gap: 5px;
+  border: 1px solid rgba(210, 220, 238, 0.82);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.student .assignment-summary-stats strong {
+  font-size: 1.55rem;
+  line-height: 1;
+}
+
+.student .assignment-summary-stats span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 850;
+}
+
+.student .assignment-next-card {
+  min-height: 86px;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(47, 111, 236, 0.18);
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ffffff, #eef4ff);
+}
+
+.student .assignment-next-card > span {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--blue), var(--neon-purple));
+  color: #ffffff;
+}
+
+.student .assignment-next-card strong,
+.student .assignment-next-card em {
+  display: block;
+}
+
+.student .assignment-next-card em {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-style: normal;
+}
+
+.student .assignment-next-card button {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--ink);
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.student .assignment-status-list {
+  display: grid;
+  gap: 10px;
+}
+
+.student .assignment-status-list p {
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: #536176;
+  line-height: 1.45;
+  font-weight: 700;
+}
+
+.student .assignment-status-list svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: var(--blue);
+}
+
+.student .quiz-module {
+  min-height: 342px;
+  padding: 18px;
+  padding-right: 112px;
+  display: grid;
+  grid-template-rows: auto minmax(58px, auto) minmax(102px, 1fr) auto auto;
+  align-content: stretch;
+  gap: 12px;
+  border-top: 4px solid rgba(47, 111, 236, 0.78);
+}
+
+.student .quiz-module::before {
+  display: none;
+}
+
+.student .quiz-module h3 {
+  min-height: 58px;
+  display: flex;
+  align-items: flex-end;
+  margin: 0;
+  line-height: 1.15;
+}
+
+.student .quiz-module p {
+  min-height: 102px;
+  font-size: 0.9rem;
+}
+
+.student .quiz-module > b,
+.student .quiz-module button {
+  align-self: end;
+}
+
+.student .quiz-card-figure {
+  top: 16px;
+  right: 16px;
+  width: 86px;
+  height: 82px;
+}
+
+.student .quiz-question-mark {
+  width: 34px;
+  height: 34px;
+}
+
+@media (max-width: 1180px) {
+  .student .overview-layout,
+  .student .today-focus-grid,
+  .student .assignment-workspace,
+  .student .badge-status-grid,
+  .student .badge-roadmap-grid,
+  .student .leaderboard-overview,
+  .student .podium-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .student .batch-card {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 760px) {
+  .student .overview-layout,
+  .student .today-focus-grid,
+  .student .assignment-workspace,
+  .student .badge-status-grid,
+  .student .badge-roadmap-grid,
+  .student .leaderboard-overview,
+  .student .podium-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .student .student-hero {
+    min-height: 0;
+    padding-right: 20px;
+  }
+
+  .student .student-figure-scene {
+    position: relative;
+    inset: auto;
+    width: min(100%, 420px);
+    min-width: 0;
+    height: 270px;
+    margin-top: 24px;
+    transform: none;
+  }
+
+  .student .student-hero .hero-3d-object,
+  .student .dashboard-depth,
+  .student .dashboard-visual-field {
+    display: none;
+  }
+
+  .student .quiz-module {
+    padding-right: 18px;
+    grid-template-rows: auto auto minmax(0, 1fr) auto auto;
+  }
+
+  .student .quiz-card-figure {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 120px;
+    height: 92px;
+    order: -1;
+  }
+
+  .student .assignment-list-panel .list-action-row,
+  .student .assignment-next-card,
+  .student .assignment-summary-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .student .assignment-list-panel .list-action-row button,
+  .student .assignment-next-card button {
+    justify-self: start;
+  }
+}
