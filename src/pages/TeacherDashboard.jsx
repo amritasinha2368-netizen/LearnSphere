@@ -568,6 +568,7 @@ export default function TeacherDashboard({ session, onLogout }) {
     tests: () => (
       <section className="role-view">
         <TestBuilder 
+          refreshTrigger={backendAssignments.length}
           onPublish={() => {
             fetchAssignments();
           }}
@@ -577,6 +578,7 @@ export default function TeacherDashboard({ session, onLogout }) {
     code: () => (
       <section className="role-view">
         <CodeBuilder 
+          refreshTrigger={backendCodingTests.length}
           openCreateCodingQuestion={openCreateCodingQuestion}
           onPublish={() => {
             fetchAssignments();

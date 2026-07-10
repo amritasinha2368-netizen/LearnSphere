@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { UploadCloud, CheckCircle, Loader2 } from 'lucide-react';
 import './TestBuilder.css'; // We can share the CSS for now
 
-export default function CodeBuilder({ openCreateCodingQuestion, onPublish }) {
+export default function CodeBuilder({ openCreateCodingQuestion, onPublish, refreshTrigger }) {
   const [codingQuestions, setCodingQuestions] = useState([]);
   const [selectedCodingQuestions, setSelectedCodingQuestions] = useState([]);
   const [codingStep, setCodingStep] = useState(0); // 0: Dashboard (Published), 1: Publish New
@@ -33,7 +33,7 @@ export default function CodeBuilder({ openCreateCodingQuestion, onPublish }) {
 
   useEffect(() => {
     fetchQuestionsAndTests();
-  }, []);
+  }, [refreshTrigger]);
 
   const deletePublishedTest = async (id) => {
     try {

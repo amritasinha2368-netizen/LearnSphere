@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { questionsData } from '../data/questionsData.js';
 import './TestBuilder.css';
 
-export default function TestBuilder({ onPublish }) {
+export default function TestBuilder({ onPublish, refreshTrigger }) {
   const [questions, setQuestions] = useState(questionsData);
   const [categoryFilter, setCategoryFilter] = useState("All");
   const [selectedQuestions, setSelectedQuestions] = useState([]);
@@ -28,7 +28,7 @@ export default function TestBuilder({ onPublish }) {
 
   useEffect(() => {
     fetchQuizzes();
-  }, []);
+  }, [refreshTrigger]);
 
   const deletePublishedQuiz = async (id) => {
     try {
