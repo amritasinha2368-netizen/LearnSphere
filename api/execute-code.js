@@ -55,22 +55,23 @@ export default async function handler(req, res) {
         stderr = "Execution network error.";
       }
 
-      const expected = tc.expectedOutput.trim();
+      const cleanExpected = tc.expectedOutput.replace(/\r/g, '').trim();
+      const cleanOutput = output.replace(/\r/g, '').trim();
       
-      if (stderr && !output) {
-         results.push({ passed: false, error: stderr, expected, output, isHidden: tc.isHidden });
+      if (stderr && !cleanOutput) {
+         results.push({ passed: false, error: stderr, expected: cleanExpected, output: cleanOutput, isHidden: tc.isHidden });
          allPassed = false;
          continue;
       }
       
-      const passed = output === expected;
+      const passed = cleanOutput === cleanExpected;
       if (!passed) allPassed = false;
       
       results.push({
         testCaseIndex: i,
         passed,
-        expected,
-        output,
+        expected: cleanExpected,
+        output: cleanOutput,
         isHidden: tc.isHidden
       });
     }

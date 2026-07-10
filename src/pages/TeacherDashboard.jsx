@@ -570,7 +570,6 @@ export default function TeacherDashboard({ session, onLogout }) {
         <TestBuilder 
           onPublish={() => {
             fetchAssignments();
-            setActiveView("assignments");
           }}
         />
       </section>
@@ -581,7 +580,6 @@ export default function TeacherDashboard({ session, onLogout }) {
           openCreateCodingQuestion={openCreateCodingQuestion}
           onPublish={() => {
             fetchAssignments();
-            setActiveView("assignments");
           }}
         />
       </section>
