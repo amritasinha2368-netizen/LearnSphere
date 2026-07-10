@@ -1,8 +1,0 @@
-{
-  "/_global-error/page": "/_global-error",
-  "/_not-found/page": "/_not-found",
-  "/api/questions/route": "/api/questions",
-  "/api/tests/route": "/api/tests",
-  "/api/upload/route": "/api/upload",
-  "/page": "/"
-}
