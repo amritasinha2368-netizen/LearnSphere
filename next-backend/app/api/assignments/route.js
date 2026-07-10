@@ -30,7 +30,7 @@ export async function POST(request) {
     const newAssignment = await Assignment.create({
       title: payload.title,
       subject: payload.subject,
-      due: payload.due,
+      dueDate: new Date(payload.dueDate),
       maxMarks: payload.maxMarks || 100,
       fileUrl: payload.fileUrl || "",
       contentBody: payload.contentBody || ""

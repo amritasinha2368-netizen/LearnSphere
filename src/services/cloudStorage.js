@@ -30,23 +30,22 @@ export async function uploadFileToCloud(file, onProgress) {
       if (xhr.status >= 200 && xhr.status < 300) {
         try {
           const response = JSON.parse(xhr.responseText);
-          // Return the secure cloud URL generated directly by Cloudinary
-          resolve(response.secure_url);
+          resolve(response.fileUrl);
         } catch (e) {
-          reject(new Error("Invalid response from Cloudinary"));
+          reject(new Error("Invalid response from server"));
         }
       } else {
-        reject(new Error(`Cloudinary responded with ${xhr.status}: ${xhr.statusText}`));
+        reject(new Error(`Server responded with ${xhr.status}: ${xhr.statusText}`));
       }
     });
 
     // Handle errors
     xhr.addEventListener("error", () => {
-      reject(new Error("Network error occurred during direct Cloudinary upload."));
+      reject(new Error("Network error occurred during upload."));
     });
 
-    // Send the request directly to Cloudinary (Bypassing backend entirely)
-    xhr.open("POST", "https://api.cloudinary.com/v1_1/gkv58by2/image/upload", true);
+    // Send the request to our backend
+    xhr.open("POST", "/api/upload", true);
     xhr.send(formData);
   });
 }
