@@ -93,13 +93,7 @@ export default function TestBuilder({ onPublish, refreshTrigger }) {
           startTime: new Date(startTime).toISOString(),
           endTime: new Date(endTime).toISOString(),
           durationMinutes: Number(durationMinutes),
-          questions: selectedQuestions.map(q => ({
-            type: q.type,
-            question: q.question,
-            options: q.options || [],
-            correctOption: q.correctOption,
-            marks: q.marks || 1
-          }))
+          questions: selectedQuestions.map(q => q.id)
         })
       });
       
