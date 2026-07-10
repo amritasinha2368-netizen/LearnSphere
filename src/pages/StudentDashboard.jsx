@@ -67,7 +67,20 @@ function DashboardMetric({ icon: Icon, code, label, value, detail, tone = "blue"
 }
 
 export default function StudentDashboard({ session, onLogout }) {
-  const [activeView, setActiveView] = useState("overview");
+  const [activeView, setActiveViewState] = useState(() => {
+    try {
+      const saved = localStorage.getItem("student_active_view");
+      if (saved) return saved;
+    } catch (e) {
+      console.error(e);
+    }
+    return "overview";
+  });
+
+  const setActiveView = (view) => {
+    setActiveViewState(view);
+    localStorage.setItem("student_active_view", view);
+  };
   const [action, setAction] = useState(null);
   
   // Test Environment State

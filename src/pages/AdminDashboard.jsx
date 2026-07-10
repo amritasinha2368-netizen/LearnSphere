@@ -44,7 +44,20 @@ function AdminMetric({ code, label, value, detail, tone = "blue" }) {
 }
 
 export default function AdminDashboard({ session, onLogout }) {
-  const [activeView, setActiveView] = useState("overview");
+  const [activeView, setActiveViewState] = useState(() => {
+    try {
+      const saved = localStorage.getItem("admin_active_view");
+      if (saved) return saved;
+    } catch (e) {
+      console.error(e);
+    }
+    return "overview";
+  });
+
+  const setActiveView = (view) => {
+    setActiveViewState(view);
+    localStorage.setItem("admin_active_view", view);
+  };
   const [action, setAction] = useState(null);
   const metrics = getAdminMetrics(adminData);
 

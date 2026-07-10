@@ -49,7 +49,20 @@ function TeacherMetric({ code, label, value, detail, tone = "blue" }) {
 }
 
 export default function TeacherDashboard({ session, onLogout }) {
-  const [activeView, setActiveView] = useState("overview");
+  const [activeView, setActiveViewState] = useState(() => {
+    try {
+      const saved = localStorage.getItem("teacher_active_view");
+      if (saved) return saved;
+    } catch (e) {
+      console.error(e);
+    }
+    return "overview";
+  });
+
+  const setActiveView = (view) => {
+    setActiveViewState(view);
+    localStorage.setItem("teacher_active_view", view);
+  };
   const [action, setAction] = useState(null);
   const metrics = getTeacherMetrics(teacherData);
 
