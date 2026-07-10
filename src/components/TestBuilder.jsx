@@ -13,6 +13,7 @@ export default function TestBuilder({ onPublish, refreshTrigger }) {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [durationMinutes, setDurationMinutes] = useState(30);
+  const [publishError, setPublishError] = useState("");
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -63,9 +64,11 @@ export default function TestBuilder({ onPublish, refreshTrigger }) {
 
   const handlePublish = async () => {
     if (!testTitle || !startTime || !endTime || !durationMinutes || selectedQuestions.length === 0) {
-      setMessage("Please fill all fields and select at least one question.");
+      setPublishError("Please fill all fields and select at least one question.");
       return;
     }
+
+    setPublishError("");
 
     // Optimistic UI Update: Instantly inject a dummy card on the screen
     const tempQuiz = {
@@ -226,6 +229,13 @@ export default function TestBuilder({ onPublish, refreshTrigger }) {
                 <input type="datetime-local" value={endTime} onChange={e => setEndTime(e.target.value)} />
               </label>
             </div>
+            
+            {publishError && (
+              <div style={{ color: '#ef4444', marginBottom: '16px', padding: '12px', background: '#fef2f2', border: '1px solid #fca5a5', borderRadius: '8px', textAlign: 'center', fontWeight: 'bold' }}>
+                ⚠️ {publishError}
+              </div>
+            )}
+            
             <button className="publish-btn" onClick={handlePublish} disabled={loading}>
               {loading ? "Publishing..." : "Publish Test to Students"}
             </button>

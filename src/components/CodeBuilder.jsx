@@ -14,6 +14,7 @@ export default function CodeBuilder({ openCreateCodingQuestion, onPublish, refre
   const [uploadStatus, setUploadStatus] = useState("idle");
   const [uploadedCloudUrl, setUploadedCloudUrl] = useState("");
   const [dragActive, setDragActive] = useState(false);
+  const [publishError, setPublishError] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -101,11 +102,12 @@ export default function CodeBuilder({ openCreateCodingQuestion, onPublish, refre
 
   const handleCodingPublish = async () => {
     if (!testTitle || !startTime || selectedCodingQuestions.length === 0) {
-      setMessage("Please fill test title, start time, and select at least one question.");
+      setPublishError("Please fill test title, start time, and select at least one question.");
       return;
     }
 
     setLoading(true);
+    setPublishError("");
     setMessage("");
 
     const isoDate = new Date(startTime).toISOString();
@@ -321,7 +323,13 @@ export default function CodeBuilder({ openCreateCodingQuestion, onPublish, refre
             ))}
           </div>
           
-          <button className="publish-btn" onClick={handleCodingPublish} disabled={loading || selectedCodingQuestions.length === 0} style={{ background: '#8b5cf6', color: 'white', marginTop: '32px', width: '100%', padding: '16px', fontSize: '1.15rem', borderRadius: '8px', fontWeight: 'bold', border: 'none', cursor: (loading || selectedCodingQuestions.length === 0) ? 'not-allowed' : 'pointer', opacity: (loading || selectedCodingQuestions.length === 0) ? 0.6 : 1 }}>
+          {publishError && (
+            <div style={{ color: '#ef4444', marginTop: '16px', padding: '12px', background: '#fef2f2', border: '1px solid #fca5a5', borderRadius: '8px', textAlign: 'center', fontWeight: 'bold' }}>
+              ⚠️ {publishError}
+            </div>
+          )}
+          
+          <button className="publish-btn" onClick={handleCodingPublish} disabled={loading || selectedCodingQuestions.length === 0} style={{ background: '#8b5cf6', color: 'white', marginTop: '16px', width: '100%', padding: '16px', fontSize: '1.15rem', borderRadius: '8px', fontWeight: 'bold', border: 'none', cursor: (loading || selectedCodingQuestions.length === 0) ? 'not-allowed' : 'pointer', opacity: (loading || selectedCodingQuestions.length === 0) ? 0.6 : 1 }}>
             {loading ? "Publishing..." : "Publish Coding Test to Students"}
           </button>
         </div>
