@@ -38,15 +38,19 @@ export default function CodeBuilder({ openCreateCodingQuestion, onPublish, refre
   const [deletingId, setDeletingId] = useState(null);
 
   const deletePublishedTest = async (id) => {
+    // Optimistic UI Update: Instantly remove from screen
+    const previousTests = [...publishedTests];
+    setPublishedTests(publishedTests.filter(t => t.id !== id));
+
     setDeletingId(id);
     try {
       const res = await fetch(`/api/coding-tests/${id}`, { method: 'DELETE' });
-      if (res.ok) {
-        fetchQuestionsAndTests();
-      } else {
+      if (!res.ok) {
+        setPublishedTests(previousTests); // Revert on failure
         alert("Failed to delete. Please try again.");
       }
     } catch (err) {
+      setPublishedTests(previousTests);
       console.error(err);
       alert("Network error during deletion.");
     } finally {
@@ -106,6 +110,24 @@ export default function CodeBuilder({ openCreateCodingQuestion, onPublish, refre
 
     const isoDate = new Date(startTime).toISOString();
     
+    // Optimistic UI Update: Instantly inject dummy card
+    const tempTest = {
+      id: "temp-" + Date.now(),
+      title: testTitle,
+      subject: codingSubject,
+      dueDate: isoDate,
+      questions: selectedCodingQuestions
+    };
+    setPublishedTests([tempTest, ...publishedTests]);
+    
+    // Close modal visually right away
+    setCodingStep(0);
+    setSelectedCodingQuestions([]);
+    setTestTitle("");
+    setUploadedCloudUrl("");
+    setUploadStatus("idle");
+    setLoading(true);
+
     const payload = {
       title: testTitle,
       subject: codingSubject,
@@ -123,19 +145,16 @@ export default function CodeBuilder({ openCreateCodingQuestion, onPublish, refre
       
       if (res.ok) {
         setMessage("Coding Test published successfully!");
-        setCodingStep(0);
-        setSelectedCodingQuestions([]);
-        setTestTitle("");
-        setUploadedCloudUrl("");
-        setUploadStatus("idle");
         fetchQuestionsAndTests();
         if (onPublish) onPublish();
       } else {
-        setMessage("Failed to publish coding test.");
+        alert("Failed to publish coding test. Reverting...");
+        setPublishedTests(publishedTests.filter(t => t.id !== tempTest.id));
       }
     } catch (err) {
       console.error(err);
-      setMessage("Failed to publish coding test.");
+      alert("Network error. Reverting...");
+      setPublishedTests(publishedTests.filter(t => t.id !== tempTest.id));
     } finally {
       setLoading(false);
     }

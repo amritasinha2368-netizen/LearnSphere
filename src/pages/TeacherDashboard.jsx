@@ -102,6 +102,14 @@ export default function TeacherDashboard({ session, onLogout }) {
           contentBody: data.body
         };
 
+        // Optimistic UI Update
+        const tempAssignment = {
+          id: "temp-" + Date.now(),
+          ...payload
+        };
+        setBackendAssignments([tempAssignment, ...backendAssignments]);
+        setAction(null); // Close modal instantly
+
         const res = await fetch('/api/assignments', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -112,9 +120,13 @@ export default function TeacherDashboard({ session, onLogout }) {
           fetchAssignments();
         } else {
           console.error("Failed to create assignment");
+          setBackendAssignments(backendAssignments); // Revert
+          alert("Failed to publish assignment.");
         }
       } catch (err) {
         console.error("Error posting assignment:", err);
+        setBackendAssignments(backendAssignments); // Revert
+        alert("Network error publishing assignment.");
       }
 
     } else if (action.type === "create-coding-question") {
@@ -150,8 +162,17 @@ export default function TeacherDashboard({ session, onLogout }) {
             title: newQuestion.title,
             subject: data.subject || "Computer Science",
             dueDate: isoDate,
-            questions: [newQuestion.id]
+            imageUrl: newQuestion.imageUrl || "",
+            questions: [newQuestion._id]
           };
+
+          // Optimistic UI Update
+          const tempTest = {
+            id: "temp-" + Date.now(),
+            ...testPayload
+          };
+          setBackendCodingTests([tempTest, ...backendCodingTests]);
+          setAction(null); // Close modal instantly
           
           const testRes = await fetch('/api/coding-tests', {
             method: 'POST',
@@ -163,10 +184,13 @@ export default function TeacherDashboard({ session, onLogout }) {
             fetchAssignments();
           } else {
             console.error("Failed to publish coding test");
+            setBackendCodingTests(backendCodingTests); // Revert
           }
+        } else {
+          setAction(null);
         }
       } catch (err) {
-        console.error("Error posting coding question:", err);
+        console.error("Error creating coding question:", err);
       }
     } else if (action.type === "grade") {
       try {
@@ -189,15 +213,19 @@ export default function TeacherDashboard({ session, onLogout }) {
   const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
 
   const deleteAssignment = async (id) => {
+    // Optimistic UI Update: Instantly remove from screen
+    const previousAssignments = [...backendAssignments];
+    setBackendAssignments(backendAssignments.filter(a => a.id !== id));
+
     setDeletingAssignmentId(id);
     try {
       const res = await fetch(`/api/assignments/${id}`, { method: 'DELETE' });
-      if (res.ok) {
-        fetchAssignments();
-      } else {
+      if (!res.ok) {
+        setBackendAssignments(previousAssignments); // Revert on failure
         alert("Failed to delete assignment. Please try again.");
       }
     } catch (err) {
+      setBackendAssignments(previousAssignments);
       console.error(err);
       alert("Network error during deletion.");
     } finally {

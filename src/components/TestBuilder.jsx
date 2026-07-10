@@ -33,19 +33,20 @@ export default function TestBuilder({ onPublish, refreshTrigger }) {
   const [deletingId, setDeletingId] = useState(null);
 
   const deletePublishedQuiz = async (id) => {
-    setDeletingId(id);
+    // Optimistic UI Update: Instantly remove from screen
+    const previousQuizzes = [...publishedQuizzes];
+    setPublishedQuizzes(publishedQuizzes.filter(q => q.id !== id));
+
     try {
       const res = await fetch(`/api/standard-quizzes/${id}`, { method: 'DELETE' });
-      if (res.ok) {
-        fetchQuizzes();
-      } else {
+      if (!res.ok) {
+        setPublishedQuizzes(previousQuizzes); // Revert on failure
         alert("Failed to delete. Please try again.");
       }
     } catch (err) {
+      setPublishedQuizzes(previousQuizzes);
       console.error(err);
       alert("Network error during deletion.");
-    } finally {
-      setDeletingId(null);
     }
   };
 
@@ -66,37 +67,54 @@ export default function TestBuilder({ onPublish, refreshTrigger }) {
       return;
     }
 
-    setLoading(true);
-    setMessage("");
-
-    const payload = {
+    // Optimistic UI Update: Instantly inject a dummy card on the screen
+    const tempQuiz = {
+      id: "temp-" + Date.now(),
       title: testTitle,
       startTime: new Date(startTime).toISOString(),
       endTime: new Date(endTime).toISOString(),
       durationMinutes: Number(durationMinutes),
-      questions: selectedQuestions.map(q => q.id)
+      questions: selectedQuestions.map(q => ({ title: q.question, type: q.type, marks: q.marks }))
     };
+    setPublishedQuizzes([tempQuiz, ...publishedQuizzes]);
+    
+    // Close the modal visually right away
+    setStep(0);
+    setSelectedQuestions([]);
+    setTestTitle("");
+    setLoading(true);
 
     try {
       const res = await fetch('/api/standard-quizzes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify({
+          title: testTitle,
+          startTime: new Date(startTime).toISOString(),
+          endTime: new Date(endTime).toISOString(),
+          durationMinutes: Number(durationMinutes),
+          questions: selectedQuestions.map(q => ({
+            type: q.type,
+            question: q.question,
+            options: q.options || [],
+            correctOption: q.correctOption,
+            marks: q.marks || 1
+          }))
+        })
       });
       
       if (res.ok) {
-        setMessage("Quiz published successfully!");
-        setStep(0);
-        setSelectedQuestions([]);
-        setTestTitle("");
+        // Fetch the real data from DB to replace the temp card
         fetchQuizzes();
         if (onPublish) onPublish();
       } else {
-        setMessage("Failed to publish quiz.");
+        alert("Failed to publish quiz. Reverting...");
+        setPublishedQuizzes(publishedQuizzes.filter(q => q.id !== tempQuiz.id)); // Revert
       }
     } catch (err) {
       console.error(err);
-      setMessage("Failed to publish quiz.");
+      alert("Network error. Reverting...");
+      setPublishedQuizzes(publishedQuizzes.filter(q => q.id !== tempQuiz.id)); // Revert
     } finally {
       setLoading(false);
     }
