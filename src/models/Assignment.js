@@ -32,8 +32,8 @@ const assignmentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  due: {
-    type: String,
+  dueDate: {
+    type: Date,
     required: true,
   },
   maxMarks: {

@@ -1,5 +1,5 @@
-import connectToDatabase from '../../../src/lib/mongodb.js';
-import StandardQuiz from '../../../src/models/StandardQuiz.js';
+import connectToDatabase from '../../src/lib/mongodb.js';
+import StandardQuiz from '../../src/models/StandardQuiz.js';
 
 export default async function handler(req, res) {
   try {
