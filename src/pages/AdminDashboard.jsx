@@ -15,7 +15,7 @@ import {
 import ActionModal from "../components/ActionModal.jsx";
 import RoleShell from "../components/RoleShell.jsx";
 import ProgressBar from "../components/ProgressBar.jsx";
-import { adminData } from "../data/lmsData.js";
+import { adminData as adminDataMock } from "../data/lmsData.js";
 import { getAdminMetrics } from "../data/metrics.js";
 import "./AdminDashboard.css";
 
@@ -59,6 +59,33 @@ export default function AdminDashboard({ session, onLogout }) {
     localStorage.setItem("admin_active_view", view);
   };
   const [action, setAction] = useState(null);
+
+  // Live Database State
+  const [dbUsers, setDbUsers] = useState([]);
+  const [dbNotices, setDbNotices] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/users').then(res => res.json()).then(data => setDbUsers(data)).catch(console.error);
+    fetch('/api/notices').then(res => res.json()).then(data => setDbNotices(data)).catch(console.error);
+  }, []);
+
+  // Merge Live Data into fallback structure
+  const studentsCount = dbUsers.filter(u => u.role === 'student').length || adminDataMock.users.students;
+  const teachersCount = dbUsers.filter(u => u.role === 'teacher').length || adminDataMock.users.teachers;
+  const adminsCount = dbUsers.filter(u => u.role === 'admin').length || adminDataMock.users.admins;
+
+  const adminData = {
+    ...adminDataMock,
+    users: {
+      ...adminDataMock.users,
+      students: studentsCount,
+      teachers: teachersCount,
+      admins: adminsCount,
+    },
+    announcements: dbNotices.length > 0 ? dbNotices : adminDataMock.announcements,
+    recentUsers: dbUsers.slice(0, 5), // Provide latest users
+  };
+
   const metrics = getAdminMetrics(adminData);
 
   function openAdminAction(title, details = []) {

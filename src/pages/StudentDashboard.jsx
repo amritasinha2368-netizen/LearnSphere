@@ -20,7 +20,7 @@ import RoleShell from "../components/RoleShell.jsx";
 import ProgressBar from "../components/ProgressBar.jsx";
 import TestEnvironment from "../components/TestEnvironment.jsx";
 import CodingWorkspace from "./CodingWorkspace.jsx";
-import { studentData } from "../data/lmsData.js";
+import { studentData as studentDataMock } from "../data/lmsData.js";
 import { getStudentMetrics, percent } from "../data/metrics.js";
 import "./StudentDashboard.css";
 
@@ -128,6 +128,26 @@ export default function StudentDashboard({ session, onLogout }) {
     }
   };
 
+  const metrics = getStudentMetrics(studentDataMock);
+
+  // Live Database State
+  const [dbSubjects, setDbSubjects] = useState([]);
+  const [dbClasses, setDbClasses] = useState([]);
+  const [dbBadges, setDbBadges] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/subjects').then(res => res.json()).then(data => setDbSubjects(data)).catch(console.error);
+    fetch('/api/classes').then(res => res.json()).then(data => setDbClasses(data)).catch(console.error);
+    fetch('/api/badges').then(res => res.json()).then(data => setDbBadges(data)).catch(console.error);
+  }, []);
+
+  const studentData = {
+    ...studentDataMock,
+    subjects: dbSubjects.length > 0 ? dbSubjects : studentDataMock.subjects,
+    classSchedule: dbClasses.length > 0 ? dbClasses : studentDataMock.classSchedule,
+    badges: dbBadges.length > 0 ? dbBadges : studentDataMock.badges,
+  };
+
   const handleModalSubmit = async (data) => {
     if (!action) return;
 
@@ -156,8 +176,6 @@ export default function StudentDashboard({ session, onLogout }) {
       }
     }
   };
-
-  const metrics = getStudentMetrics(studentData);
 
   function openClass(item) {
     setAction({

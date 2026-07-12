@@ -18,7 +18,7 @@ import RoleShell from "../components/RoleShell.jsx";
 import ProgressBar from "../components/ProgressBar.jsx";
 import TestBuilder from "../components/TestBuilder.jsx";
 import CodeBuilder from "../components/CodeBuilder.jsx";
-import { teacherData } from "../data/lmsData.js";
+import { teacherData as teacherDataMock } from "../data/lmsData.js";
 import { getTeacherMetrics, percent } from "../data/metrics.js";
 import "./TeacherDashboard.css";
 
@@ -64,6 +64,20 @@ export default function TeacherDashboard({ session, onLogout }) {
     localStorage.setItem("teacher_active_view", view);
   };
   const [action, setAction] = useState(null);
+  const [dbSubjects, setDbSubjects] = useState([]);
+  const [dbFeedback, setDbFeedback] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/subjects').then(res => res.json()).then(data => setDbSubjects(data)).catch(console.error);
+    fetch('/api/feedback').then(res => res.json()).then(data => setDbFeedback(data)).catch(console.error);
+  }, []);
+
+  const teacherData = {
+    ...teacherDataMock,
+    subjects: dbSubjects.length > 0 ? dbSubjects : teacherDataMock.subjects,
+    recentFeedback: dbFeedback.length > 0 ? dbFeedback : teacherDataMock.recentFeedback,
+  };
+
   const metrics = getTeacherMetrics(teacherData);
 
   // Next.js Backend State for Assignments & Coding Tests
