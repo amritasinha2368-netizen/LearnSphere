@@ -234,6 +234,74 @@ export default function TeacherDashboard({ session, onLogout }) {
       } catch (err) {
         console.error("Error submitting grade:", err);
       }
+    } else if (action.type === "schedule" || data.actionType === "schedule") {
+      try {
+        const payload = {
+          title: data.title,
+          time: data.time,
+          room: data.room
+        };
+        const res = await fetch('/api/lms-data?type=classes', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          const newClass = await res.json();
+          setDbClasses([newClass, ...dbClasses]); // Optimistic update
+          setAction(null);
+        }
+      } catch (err) {
+        console.error("Error creating class:", err);
+      }
+    } else if (data.actionType === "create-subject") {
+      try {
+        const payload = {
+          title: data.title,
+          section: data.section,
+          instructor: data.instructor,
+          enrolled: 0,
+          assignments: 0,
+          progress: 0,
+          contentReady: 0,
+          submitted: 0,
+          materials: []
+        };
+        const res = await fetch('/api/lms-data?type=subjects', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          const newSubject = await res.json();
+          setDbSubjects([newSubject, ...dbSubjects]);
+          setAction(null);
+        }
+      } catch (err) {
+        console.error("Error creating subject:", err);
+      }
+    } else if (data.actionType === "upload-material") {
+      try {
+        const payload = {
+          action: "add_material",
+          subjectId: data.subjectId,
+          title: data.title,
+          fileUrl: data.fileUrl,
+          addedBy: "Teacher"
+        };
+        const res = await fetch('/api/lms-data?type=subjects', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          const updatedSubject = await res.json();
+          setDbSubjects(dbSubjects.map(s => s._id === updatedSubject._id ? updatedSubject : s));
+          setAction(null);
+        }
+      } catch (err) {
+        console.error("Error uploading material:", err);
+      }
     }
   };
 
@@ -284,6 +352,27 @@ export default function TeacherDashboard({ session, onLogout }) {
         { label: "Assignments", value: subject.assignments },
       ],
       primaryLabel: "Open subject",
+    });
+  }
+
+  function openCreateSubject() {
+    setAction({
+      kicker: "Add Subject",
+      title: "Create a new subject",
+      description: "Define a new subject to track curriculum and materials.",
+      type: "create-subject",
+      primaryLabel: "Save Subject",
+    });
+  }
+
+  function openUploadMaterial(subject) {
+    setAction({
+      kicker: "Upload Material",
+      title: `Upload notes to ${subject.title}`,
+      description: "Attach reference files, notes, or external links for students.",
+      type: "upload-material",
+      subjectId: subject._id || subject.id,
+      primaryLabel: "Upload Material",
     });
   }
 
@@ -468,17 +557,18 @@ export default function TeacherDashboard({ session, onLogout }) {
   function renderSubjects() {
     return (
       <section className="role-view">
-        {sectionTitle("Subjects Under Teacher", "All subjects assigned to the teacher, with student count and content readiness.")}
+        {sectionTitle("Subjects Under Teacher", "All subjects assigned to the teacher, with student count and content readiness.", "Add Subject", openCreateSubject)}
         <div className="module-grid three">
           {teacherData.subjects.map((subject) => (
             <article className="module-card subject-module" key={subject.title}>
               <span className="module-code green">{subject.title[0]}</span>
               <small>{subject.section}</small>
               <h3>{subject.title}</h3>
-              <p>{subject.enrolled} students - {subject.assignments} assignments</p>
+              <p>{subject.enrolled} students - {subject.materials ? subject.materials.length : 0} materials</p>
               <ProgressBar value={subject.contentReady} label="Content ready" tone="green" />
-              <div className="button-row" style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
+              <div className="button-row" style={{ display: 'flex', gap: '8px', marginTop: '12px', flexWrap: 'wrap' }}>
                 <button type="button" onClick={() => openSubject(subject)}>Open subject</button>
+                <button type="button" className="ghost-button" onClick={() => openUploadMaterial(subject)}>Upload Material</button>
               </div>
             </article>
           ))}
@@ -579,6 +669,14 @@ export default function TeacherDashboard({ session, onLogout }) {
             <label>Room / Link<span>Lab 3 or online meeting</span></label>
             <button className="panel-button" type="button" onClick={openSchedule}>Open scheduling panel</button>
           </article>
+          <div className="compact-list" style={{flex: 1}}>
+            {dbClasses.map(cls => (
+              <div key={cls.id || cls._id} className="list-item" style={{display: 'flex', flexDirection: 'column', gap: '4px'}}>
+                <strong>{cls.title}</strong>
+                <span className="meta">{cls.time} - {cls.room}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     );

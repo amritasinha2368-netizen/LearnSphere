@@ -178,6 +178,10 @@ export default function StudentDashboard({ session, onLogout }) {
   };
 
   function openClass(item) {
+    if (item.room && item.room.startsWith('http')) {
+      window.open(item.room, '_blank');
+      return;
+    }
     setAction({
       kicker: "Class details",
       title: item.subject,
@@ -187,7 +191,7 @@ export default function StudentDashboard({ session, onLogout }) {
         { label: "Room / Link", value: item.room },
         { label: "Topic", value: item.topic },
       ],
-      primaryLabel: "Join class",
+      primaryLabel: "Close",
     });
   }
 
@@ -201,7 +205,8 @@ export default function StudentDashboard({ session, onLogout }) {
         { label: "Next class", value: subject.nextClass },
         { label: "Progress", value: `${subject.progress}%` },
       ],
-      primaryLabel: subject.option,
+      materials: subject.materials, // Pass materials to ActionModal
+      primaryLabel: "Close",
     });
   }
 

@@ -60,6 +60,26 @@ export default async function handler(req, res) {
       return res.status(201).json(doc);
     }
     
+    if (req.method === 'PUT') {
+      const data = req.body;
+      if (type === 'subjects' && data.action === 'add_material' && data.subjectId) {
+        const subject = await Model.findById(data.subjectId);
+        if (!subject) return res.status(404).json({ error: "Subject not found" });
+        
+        subject.materials.push({
+          title: data.title,
+          fileUrl: data.fileUrl,
+          addedBy: data.addedBy || "Teacher"
+        });
+        await subject.save();
+        
+        const doc = subject.toObject();
+        doc.id = doc._id.toString();
+        return res.status(200).json(doc);
+      }
+      return res.status(400).json({ error: "Invalid PUT payload" });
+    }
+    
     return res.status(405).json({ error: "Method not allowed" });
   } catch (error) {
     console.error(`LMS Data API Error [${req.query.type}]:`, error);

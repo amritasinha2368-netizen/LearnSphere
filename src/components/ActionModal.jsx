@@ -21,6 +21,14 @@ export default function ActionModal({ action, onClose, onSubmit }) {
   const [grade, setGrade] = useState("");
   const [feedback, setFeedback] = useState("");
   
+  // New States for Classes and Subjects
+  const [classTitle, setClassTitle] = useState("");
+  const [classTime, setClassTime] = useState("");
+  const [classRoom, setClassRoom] = useState("");
+  
+  const [subjectSection, setSubjectSection] = useState("");
+  const [subjectInstructor, setSubjectInstructor] = useState("");
+  
   const [codingQuestions, setCodingQuestions] = useState([]);
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   
@@ -85,18 +93,20 @@ export default function ActionModal({ action, onClose, onSubmit }) {
       setPublishImmediately(false);
       setGrade("");
       setFeedback("");
-    }
-  }, [action]);
-
-  useEffect(() => {
-    if (action?.prefill) {
-      if (action.prefill.note) setNoteText(action.prefill.note);
-      if (action.prefill.title) setWriteTitle(action.prefill.title);
-      if (action.prefill.body) setWriteBody(action.prefill.body);
-      if (action.prefill.time) setDueTime(action.prefill.time);
-      if (action.prefill.room) setSubject(action.prefill.room);
-      if (action.prefill.grade) setGrade(action.prefill.grade);
-      if (action.prefill.feedback) setFeedback(action.prefill.feedback);
+      setClassTitle("");
+      setClassTime("");
+      setClassRoom("");
+      setSubjectSection("");
+      setSubjectInstructor("");
+    } else if (action) {
+      if (action.prefill) {
+        if (action.prefill.status) setGrade(action.prefill.status);
+        if (action.prefill.title) setClassTitle(action.prefill.title);
+        if (action.prefill.time) setClassTime(action.prefill.time);
+        if (action.prefill.room) setClassRoom(action.prefill.room);
+        if (action.prefill.feedback) setFeedback(action.prefill.feedback);
+      }
+      if (action.subjectContext) setSubject(action.subjectContext);
     }
   }, [action]);
 
@@ -167,6 +177,27 @@ export default function ActionModal({ action, onClose, onSubmit }) {
           submissionId: action.submissionId,
           grade,
           feedback,
+        });
+      } else if (action.type === 'schedule') {
+        onSubmit({
+          actionType: action.type,
+          title: classTitle,
+          time: classTime,
+          room: classRoom,
+        });
+      } else if (action.type === 'create-subject') {
+        onSubmit({
+          actionType: action.type,
+          title: writeTitle,
+          section: subjectSection,
+          instructor: subjectInstructor,
+        });
+      } else if (action.type === 'upload-material') {
+        onSubmit({
+          actionType: action.type,
+          title: writeTitle,
+          fileUrl: uploadedCloudUrl || noteText, // fallback to link if pasted
+          subjectId: action.subjectId
         });
       } else {
         const data = {
@@ -274,6 +305,21 @@ export default function ActionModal({ action, onClose, onSubmit }) {
             ))}
           </div>
         ) : null}
+
+        {action.materials && action.materials.length > 0 && (
+          <div className="action-details" style={{ flexDirection: 'column', gap: '8px', alignItems: 'flex-start', marginTop: '16px' }}>
+            <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--primary)', marginBottom: '4px' }}>Study Materials:</span>
+            {action.materials.map((m, idx) => (
+              <a key={idx} href={m.fileUrl} target="_blank" rel="noreferrer" style={{ background: '#f8fafc', padding: '10px 14px', borderRadius: '6px', fontSize: '14px', color: '#0f172a', display: 'flex', alignItems: 'center', width: '100%', textDecoration: 'none', border: '1px solid #e2e8f0', gap: '8px' }}>
+                <FileImage size={18} color="#64748b" />
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                  <strong>{m.title}</strong>
+                  <small style={{ color: '#64748b', fontSize: '12px' }}>Added by {m.addedBy}</small>
+                </div>
+              </a>
+            ))}
+          </div>
+        )}
 
         {action.type === "upload" && (
           <div className="modal-form">
@@ -547,16 +593,48 @@ export default function ActionModal({ action, onClose, onSubmit }) {
         {action.type === "schedule" && (
           <div className="modal-form">
             <label>
-              Class title
-              <input defaultValue={action.prefill?.title || ""} />
+              Class Topic / Title
+              <input value={classTitle} onChange={(e) => setClassTitle(e.target.value)} placeholder="E.g., Data Structures - Trees" />
             </label>
             <label>
               Date and time
-              <input defaultValue={action.prefill?.time || ""} />
+              <input value={classTime} onChange={(e) => setClassTime(e.target.value)} placeholder="E.g., 09:30 AM, Monday" />
             </label>
             <label>
               Room or meeting link
-              <input defaultValue={action.prefill?.room || ""} />
+              <input value={classRoom} onChange={(e) => setClassRoom(e.target.value)} placeholder="E.g., https://zoom.us/j/12345" />
+            </label>
+          </div>
+        )}
+
+        {action.type === "create-subject" && (
+          <div className="modal-form">
+            <label>
+              Subject Title
+              <input value={writeTitle} onChange={(e) => setWriteTitle(e.target.value)} placeholder="E.g., Computer Networks" />
+            </label>
+            <label>
+              Section / Cohort
+              <input value={subjectSection} onChange={(e) => setSubjectSection(e.target.value)} placeholder="E.g., CSE 4A" />
+            </label>
+            <label>
+              Instructor Name
+              <input value={subjectInstructor} onChange={(e) => setSubjectInstructor(e.target.value)} placeholder="E.g., Dr. Smith" />
+            </label>
+          </div>
+        )}
+
+        {action.type === "upload-material" && (
+          <div className="modal-form">
+            <label>
+              Material Title
+              <input value={writeTitle} onChange={(e) => setWriteTitle(e.target.value)} placeholder="E.g., Lecture 4 Slides" />
+            </label>
+            <label>Upload File</label>
+            {renderDropzone()}
+            <label>
+              Or paste an external link
+              <input value={noteText} onChange={(e) => setNoteText(e.target.value)} placeholder="https://..." />
             </label>
           </div>
         )}
