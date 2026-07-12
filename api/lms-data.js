@@ -6,6 +6,7 @@ import Submission from '../src/models/Submission.js';
 import Feedback from '../src/models/Feedback.js';
 import Notice from '../src/models/Notice.js';
 import Badge from '../src/models/Badge.js';
+import StandardQuiz from '../src/models/StandardQuiz.js';
 
 const models = {
   users: User,
@@ -14,7 +15,8 @@ const models = {
   submissions: Submission,
   feedback: Feedback,
   notices: Notice,
-  badges: Badge
+  badges: Badge,
+  'standard-quizzes': StandardQuiz
 };
 
 export default async function handler(req, res) {
@@ -40,8 +42,20 @@ export default async function handler(req, res) {
     
     if (req.method === 'POST') {
       const data = req.body;
-      const item = await Model.create(data);
-      const doc = item.toObject();
+      
+      let createData = data;
+      if (type === 'standard-quizzes') {
+        createData = {
+          title: data.title,
+          publishTime: new Date(data.startTime),
+          endTime: new Date(data.endTime),
+          durationMinutes: data.durationMinutes,
+          questions: data.questions
+        };
+      }
+      
+      const item = await Model.create(createData);
+      const doc = item.toObject ? item.toObject() : item;
       doc.id = doc._id.toString();
       return res.status(201).json(doc);
     }

@@ -95,7 +95,7 @@ export default function StudentDashboard({ session, onLogout }) {
   const [loadingAssignments, setLoadingAssignments] = useState(true);
 
   useEffect(() => {
-    fetch('/api/standard-quizzes')
+    fetch('/api/lms-data?type=standard-quizzes')
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) setAvailableTests(data);

@@ -21,7 +21,7 @@ export default function TestBuilder({ onPublish, refreshTrigger }) {
   const [publishedQuizzes, setPublishedQuizzes] = useState([]);
 
   const fetchQuizzes = () => {
-    fetch('/api/standard-quizzes')
+    fetch('/api/lms-data?type=standard-quizzes')
       .then(res => res.json())
       .then(data => setPublishedQuizzes(data))
       .catch(err => console.error("Error fetching standard quizzes:", err));
@@ -88,7 +88,7 @@ export default function TestBuilder({ onPublish, refreshTrigger }) {
     setLoading(true);
 
     try {
-      const res = await fetch('/api/standard-quizzes', {
+      const res = await fetch('/api/lms-data?type=standard-quizzes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
