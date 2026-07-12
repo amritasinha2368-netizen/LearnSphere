@@ -65,8 +65,8 @@ export default function AdminDashboard({ session, onLogout }) {
   const [dbNotices, setDbNotices] = useState([]);
 
   useEffect(() => {
-    fetch('/api/users').then(res => res.json()).then(data => setDbUsers(data)).catch(console.error);
-    fetch('/api/notices').then(res => res.json()).then(data => setDbNotices(data)).catch(console.error);
+    fetch('/api/lms-data?type=users').then(res => res.json()).then(data => setDbUsers(data)).catch(console.error);
+    fetch('/api/lms-data?type=notices').then(res => res.json()).then(data => setDbNotices(data)).catch(console.error);
   }, []);
 
   // Merge Live Data into fallback structure
