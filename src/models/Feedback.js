@@ -7,7 +7,10 @@ const feedbackSchema = new mongoose.Schema({
   text: { type: String },
   score: { type: Number },
   date: { type: Date, default: Date.now },
-  status: { type: String }
+  status: { type: String },
+  teacherName: { type: String },
+  studentName: { type: String },
+  message: { type: String }
 }, { timestamps: true });
 
 export default mongoose.models.Feedback || mongoose.model("Feedback", feedbackSchema);

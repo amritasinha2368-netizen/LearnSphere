@@ -174,6 +174,25 @@ export default function StudentDashboard({ session, onLogout }) {
       } catch (err) {
         console.error("Error submitting assignment:", err);
       }
+    } else if (data.actionType === "send-feedback") {
+      try {
+        const payload = {
+          teacherName: data.teacherName,
+          studentName: studentData.profile.name,
+          message: data.message,
+        };
+        const res = await fetch('/api/lms-data?type=feedback', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          setAction(null);
+          alert("Feedback sent successfully!");
+        }
+      } catch (err) {
+        console.error("Error sending feedback:", err);
+      }
     }
   };
 
@@ -246,10 +265,8 @@ export default function StudentDashboard({ session, onLogout }) {
     setAction({
       kicker: "Teacher Feedback",
       title: "Provide Feedback",
-      description: "Let your teachers know how the classes are going or if you need any help.",
-      type: "upload", // Reusing the upload form type to get a note textarea
-      noteLabel: "Your Feedback",
-      notePlaceholder: "Write your feedback here...",
+      description: "Send a direct message to any teacher. They will receive it in their dashboard.",
+      type: "send-feedback", 
       primaryLabel: "Submit Feedback",
     });
   }

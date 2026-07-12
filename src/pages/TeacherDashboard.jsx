@@ -341,6 +341,24 @@ export default function TeacherDashboard({ session, onLogout }) {
     }
   };
 
+  const deleteClass = async (id) => {
+    setDbClasses(dbClasses.filter(c => (c.id || c._id) !== id));
+    try {
+      await fetch(`/api/lms-data?type=classes&id=${id}`, { method: 'DELETE' });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const deleteSubject = async (id) => {
+    setDbSubjects(dbSubjects.filter(s => (s.id || s._id) !== id));
+    try {
+      await fetch(`/api/lms-data?type=subjects&id=${id}`, { method: 'DELETE' });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   function openSubject(subject) {
     setAction({
       kicker: "Subject management",
@@ -566,6 +584,9 @@ export default function TeacherDashboard({ session, onLogout }) {
               <h3>{subject.title}</h3>
               <p>{subject.enrolled} students - {subject.materials ? subject.materials.length : 0} materials</p>
               <ProgressBar value={subject.contentReady} label="Content ready" tone="green" />
+              <button type="button" onClick={() => deleteSubject(subject.id || subject._id)} style={{ position: 'absolute', top: '12px', right: '12px', background: 'transparent', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '4px' }} title="Delete subject">
+                <Trash2 size={18} />
+              </button>
               <div className="button-row" style={{ display: 'flex', gap: '8px', marginTop: '12px', flexWrap: 'wrap' }}>
                 <button type="button" onClick={() => openSubject(subject)}>Open subject</button>
                 <button type="button" className="ghost-button" onClick={() => openUploadMaterial(subject)}>Upload Material</button>
@@ -671,9 +692,14 @@ export default function TeacherDashboard({ session, onLogout }) {
           </article>
           <div className="compact-list" style={{flex: 1}}>
             {dbClasses.map(cls => (
-              <div key={cls.id || cls._id} className="list-item" style={{display: 'flex', flexDirection: 'column', gap: '4px'}}>
-                <strong>{cls.title}</strong>
-                <span className="meta">{cls.time} - {cls.room}</span>
+              <div key={cls.id || cls._id} className="list-item" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                <div style={{display: 'flex', flexDirection: 'column', gap: '4px'}}>
+                  <strong>{cls.title}</strong>
+                  <span className="meta">{cls.time} - {cls.room}</span>
+                </div>
+                <button type="button" onClick={() => deleteClass(cls.id || cls._id)} style={{ background: 'transparent', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '8px' }} title="Delete class">
+                  <Trash2 size={18} />
+                </button>
               </div>
             ))}
           </div>
@@ -702,10 +728,23 @@ export default function TeacherDashboard({ session, onLogout }) {
     );
   }
 
-  function renderActions() {
+  function renderFeedback() {
     return (
       <section className="role-view">
-        {sectionTitle("Grade and Feedback", "Common teaching actions for grading and student progress review.")}
+        {sectionTitle("Student Feedback", "Direct messages and feedback sent to you by students.")}
+        <div className="module-grid three">
+          {teacherData.recentFeedback.length === 0 && <p style={{color: '#64748b'}}>No feedback received yet.</p>}
+          {teacherData.recentFeedback.map((fb, idx) => (
+            <article className="module-card" key={fb._id || idx} style={{ borderTop: '3px solid #8b5cf6' }}>
+              <span className="module-code" style={{ backgroundColor: '#8b5cf6', color: 'white' }}>FB</span>
+              <h3>From: {fb.studentName || "Anonymous Student"}</h3>
+              <p style={{ marginTop: '8px', color: '#334155', fontStyle: 'italic', flex: 1 }}>"{fb.message || fb.content}"</p>
+              <div style={{ marginTop: '12px', fontSize: '12px', color: '#94a3b8' }}>
+                {new Date(fb.date).toLocaleDateString()}
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
     );
   }
@@ -746,7 +785,7 @@ export default function TeacherDashboard({ session, onLogout }) {
       </section>
     ),
     marks: renderMarks,
-    actions: renderActions,
+    actions: renderFeedback,
     announcements: renderAnnouncements,
   };
 

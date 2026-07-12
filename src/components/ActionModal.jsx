@@ -29,6 +29,8 @@ export default function ActionModal({ action, onClose, onSubmit }) {
   const [subjectSection, setSubjectSection] = useState("");
   const [subjectInstructor, setSubjectInstructor] = useState("");
   
+  const [teacherName, setTeacherName] = useState("");
+  
   const [codingQuestions, setCodingQuestions] = useState([]);
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   
@@ -98,6 +100,7 @@ export default function ActionModal({ action, onClose, onSubmit }) {
       setClassRoom("");
       setSubjectSection("");
       setSubjectInstructor("");
+      setTeacherName("");
     } else if (action) {
       if (action.prefill) {
         if (action.prefill.status) setGrade(action.prefill.status);
@@ -198,6 +201,12 @@ export default function ActionModal({ action, onClose, onSubmit }) {
           title: writeTitle,
           fileUrl: uploadedCloudUrl || noteText, // fallback to link if pasted
           subjectId: action.subjectId
+        });
+      } else if (action.type === 'send-feedback') {
+        onSubmit({
+          actionType: action.type,
+          teacherName,
+          message: noteText,
         });
       } else {
         const data = {
@@ -635,6 +644,25 @@ export default function ActionModal({ action, onClose, onSubmit }) {
             <label>
               Or paste an external link
               <input value={noteText} onChange={(e) => setNoteText(e.target.value)} placeholder="https://..." />
+            </label>
+          </div>
+        )}
+
+        {action.type === "send-feedback" && (
+          <div className="modal-form">
+            <label>
+              To Teacher
+              <input value={teacherName} onChange={(e) => setTeacherName(e.target.value)} placeholder="E.g., Dr. Smith" required />
+            </label>
+            <label>
+              Your Message
+              <textarea 
+                rows="5" 
+                value={noteText} 
+                onChange={(e) => setNoteText(e.target.value)} 
+                placeholder="Write your feedback or request for help here..." 
+                required
+              />
             </label>
           </div>
         )}
