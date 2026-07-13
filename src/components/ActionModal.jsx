@@ -612,40 +612,43 @@ export default function ActionModal({ action, onClose, onSubmit }) {
         )}
 
         {action.type === 'create-user' && (
-          <div className="action-form">
-            <div className="date-time-row" style={{ display: "flex", gap: "12px" }}>
-              <label style={{ flex: 1 }}>Name<input type="text" value={writeTitle} onChange={(e) => setWriteTitle(e.target.value)} required /></label>
-              <label style={{ flex: 1 }}>Role
-                <select value={subject} onChange={(e) => setSubject(e.target.value)} required>
-                  <option value="">Select role</option>
-                  <option value="student">Student</option>
-                  <option value="teacher">Teacher</option>
-                  <option value="admin">Admin</option>
-                </select>
-              </label>
-            </div>
-            <div className="date-time-row" style={{ display: "flex", gap: "12px", marginTop: "12px" }}>
-              <label style={{ flex: 1 }}>Username<input type="text" value={subjectSection} onChange={(e) => setSubjectSection(e.target.value)} required /></label>
-              <label style={{ flex: 1 }}>Password<input type="text" value={subjectInstructor} onChange={(e) => setSubjectInstructor(e.target.value)} required /></label>
-            </div>
+          <div className="action-form" style={{ display: 'flex', flexDirection: 'column', gap: '16px', minWidth: '350px' }}>
+            <label>Name<input type="text" value={writeTitle} onChange={(e) => setWriteTitle(e.target.value)} required /></label>
+            <label>Role
+              <select value={subject} onChange={(e) => setSubject(e.target.value)} required>
+                <option value="">Select role</option>
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+                <option value="admin">Admin</option>
+              </select>
+            </label>
+            <label>Username<input type="text" value={subjectSection} onChange={(e) => setSubjectSection(e.target.value)} required /></label>
+            <label>Password<input type="text" value={subjectInstructor} onChange={(e) => setSubjectInstructor(e.target.value)} required /></label>
           </div>
         )}
 
         {action.type === 'bulk-create-users' && (
-          <div className="action-form">
+          <div className="action-form" style={{ minWidth: '350px' }}>
             <label>
-              Paste CSV Data (Name, Role, Username, Password)
-              <textarea 
-                placeholder="John Doe, student, john.d, password123&#10;Jane Smith, teacher, jane.s, teach321" 
-                value={noteText}
-                onChange={(e) => setNoteText(e.target.value)}
-                rows={10}
-                style={{ fontFamily: 'monospace', resize: 'vertical' }}
+              Upload CSV File
+              <input 
+                type="file" 
+                accept=".csv"
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => setNoteText(event.target.result);
+                    reader.readAsText(file);
+                  }
+                }}
+                style={{ marginTop: '8px' }}
                 required
               />
             </label>
-            <p style={{ fontSize: '12px', color: '#64748b', margin: '4px 0 0 0' }}>
-              Ensure each user is on a new line. Supported roles: student, teacher, admin.
+            {noteText && <p style={{ color: 'var(--success-main)', fontSize: '13px', marginTop: '12px' }}>✓ File loaded successfully</p>}
+            <p style={{ fontSize: '12px', color: '#64748b', margin: '8px 0 0 0' }}>
+              Format: Name, Role, Username, Password. Ensure each user is on a new line. Supported roles: student, teacher, admin.
             </p>
           </div>
         )}

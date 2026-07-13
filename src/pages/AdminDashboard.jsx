@@ -220,13 +220,13 @@ export default function AdminDashboard({ session, onLogout }) {
         ]))}
         
         <div style={{ display: 'flex', gap: '12px', marginBottom: '24px' }}>
-          <button className="panel-button" onClick={() => setAction({
+          <button className="panel-button" style={{ flex: 1 }} onClick={() => setAction({
             type: 'create-user',
             kicker: 'User management',
             title: 'Create new user',
             primaryLabel: 'Create User'
           })}>+ Create single user</button>
-          <button className="ghost-button" onClick={() => setAction({
+          <button className="panel-button" style={{ flex: 1, backgroundColor: 'var(--surface-sunken)', color: 'var(--text-main)', border: '1px solid var(--line)', justifyContent: 'center' }} onClick={() => setAction({
             type: 'bulk-create-users',
             kicker: 'Bulk operation',
             title: 'Bulk create users',
