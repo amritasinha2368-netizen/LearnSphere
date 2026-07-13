@@ -28,7 +28,7 @@ export default function RoleShell({
     <div className={`app-shell ${roleTone}`}>
       <aside className="sidebar">
         <div className="brand-lockup">
-          <span className="brand-mark">LS</span>
+          <img src="/logo.jpg" alt="LearnSphere" className="brand-mark" style={{ width: '40px', height: '40px', borderRadius: '12px', objectFit: 'cover', padding: 0, background: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
           <div>
             <strong>LearnSphere</strong>
             <small>Academic command center</small>
