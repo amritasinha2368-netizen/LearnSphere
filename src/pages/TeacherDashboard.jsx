@@ -316,7 +316,7 @@ export default function TeacherDashboard({ session, onLogout }) {
 
     setDeletingAssignmentId(id);
     try {
-      const res = await fetch(`/api/assignments/${id}`, { method: 'DELETE' });
+      const res = await fetch(`/api/assignments?id=${id}`, { method: 'DELETE' });
       if (!res.ok) {
         setBackendAssignments(previousAssignments); // Revert on failure
         alert("Failed to delete assignment. Please try again.");
@@ -332,7 +332,7 @@ export default function TeacherDashboard({ session, onLogout }) {
 
   const deleteCodingTest = async (id) => {
     try {
-      const res = await fetch(`/api/coding-tests/${id}`, { method: 'DELETE' });
+      const res = await fetch(`/api/coding-tests?id=${id}`, { method: 'DELETE' });
       if (res.ok) {
         fetchAssignments();
       } else {

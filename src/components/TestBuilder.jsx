@@ -39,7 +39,7 @@ export default function TestBuilder({ onPublish, refreshTrigger }) {
     setPublishedQuizzes(publishedQuizzes.filter(q => q.id !== id));
 
     try {
-      const res = await fetch(`/api/standard-quizzes/${id}`, { method: 'DELETE' });
+      const res = await fetch(`/api/lms-data?type=standard-quizzes&id=${id}`, { method: 'DELETE' });
       if (!res.ok) {
         setPublishedQuizzes(previousQuizzes); // Revert on failure
         alert("Failed to delete. Please try again.");

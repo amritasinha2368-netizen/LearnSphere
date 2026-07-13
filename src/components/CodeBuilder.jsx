@@ -45,7 +45,7 @@ export default function CodeBuilder({ openCreateCodingQuestion, onPublish, refre
 
     setDeletingId(id);
     try {
-      const res = await fetch(`/api/coding-tests/${id}`, { method: 'DELETE' });
+      const res = await fetch(`/api/coding-tests?id=${id}`, { method: 'DELETE' });
       if (!res.ok) {
         setPublishedTests(previousTests); // Revert on failure
         alert("Failed to delete. Please try again.");
