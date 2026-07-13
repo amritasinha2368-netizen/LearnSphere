@@ -208,6 +208,19 @@ export default function ActionModal({ action, onClose, onSubmit }) {
           teacherName,
           message: noteText,
         });
+      } else if (action.type === 'create-user') {
+        onSubmit({
+          actionType: action.type,
+          name: writeTitle,
+          role: subject,
+          username: subjectSection,
+          password: subjectInstructor,
+        });
+      } else if (action.type === 'bulk-create-users') {
+        onSubmit({
+          actionType: action.type,
+          csvData: noteText,
+        });
       } else {
         const data = {
           actionType: action.type,
@@ -597,6 +610,46 @@ export default function ActionModal({ action, onClose, onSubmit }) {
             </div>
           </div>
         )}
+
+        {action.type === 'create-user' && (
+          <div className="action-form">
+            <div className="date-time-row" style={{ display: "flex", gap: "12px" }}>
+              <label style={{ flex: 1 }}>Name<input type="text" value={writeTitle} onChange={(e) => setWriteTitle(e.target.value)} required /></label>
+              <label style={{ flex: 1 }}>Role
+                <select value={subject} onChange={(e) => setSubject(e.target.value)} required>
+                  <option value="">Select role</option>
+                  <option value="student">Student</option>
+                  <option value="teacher">Teacher</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </label>
+            </div>
+            <div className="date-time-row" style={{ display: "flex", gap: "12px", marginTop: "12px" }}>
+              <label style={{ flex: 1 }}>Username<input type="text" value={subjectSection} onChange={(e) => setSubjectSection(e.target.value)} required /></label>
+              <label style={{ flex: 1 }}>Password<input type="text" value={subjectInstructor} onChange={(e) => setSubjectInstructor(e.target.value)} required /></label>
+            </div>
+          </div>
+        )}
+
+        {action.type === 'bulk-create-users' && (
+          <div className="action-form">
+            <label>
+              Paste CSV Data (Name, Role, Username, Password)
+              <textarea 
+                placeholder="John Doe, student, john.d, password123&#10;Jane Smith, teacher, jane.s, teach321" 
+                value={noteText}
+                onChange={(e) => setNoteText(e.target.value)}
+                rows={10}
+                style={{ fontFamily: 'monospace', resize: 'vertical' }}
+                required
+              />
+            </label>
+            <p style={{ fontSize: '12px', color: '#64748b', margin: '4px 0 0 0' }}>
+              Ensure each user is on a new line. Supported roles: student, teacher, admin.
+            </p>
+          </div>
+        )}
+
 
 
         {action.type === "schedule" && (

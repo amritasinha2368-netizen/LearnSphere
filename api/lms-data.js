@@ -55,9 +55,19 @@ export default async function handler(req, res) {
       }
       
       const item = await Model.create(createData);
-      const doc = item.toObject ? item.toObject() : item;
-      doc.id = doc._id.toString();
-      return res.status(201).json(doc);
+      let result;
+      if (Array.isArray(item)) {
+        result = item.map(i => {
+          const doc = i.toObject ? i.toObject() : i;
+          doc.id = doc._id.toString();
+          return doc;
+        });
+      } else {
+        const doc = item.toObject ? item.toObject() : item;
+        doc.id = doc._id.toString();
+        result = doc;
+      }
+      return res.status(201).json(result);
     }
     
     if (req.method === 'PUT') {

@@ -98,6 +98,49 @@ export default function AdminDashboard({ session, onLogout }) {
     });
   }
 
+  async function handleModalSubmit(data) {
+    if (!action) return;
+    
+    try {
+      if (data.actionType === 'create-user') {
+        const payload = {
+          name: data.name,
+          role: data.role,
+          username: data.username,
+          password: data.password
+        };
+        const res = await fetch('/api/lms-data?type=users', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          const newUser = await res.json();
+          setDbUsers([newUser, ...dbUsers]);
+        }
+      } else if (data.actionType === 'bulk-create-users') {
+        const rows = data.csvData.split('\n').map(r => r.trim()).filter(Boolean);
+        const usersToCreate = rows.map(row => {
+          const [name, role, username, password] = row.split(',').map(s => s.trim());
+          return { name, role, username, password };
+        });
+        
+        const res = await fetch('/api/lms-data?type=users', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(usersToCreate) // Passing array triggers bulk insert
+        });
+        
+        if (res.ok) {
+          const newUsers = await res.json();
+          setDbUsers([...newUsers, ...dbUsers]);
+        }
+      }
+    } catch (err) {
+      console.error("Error creating users:", err);
+    }
+  }
+
   function sectionTitle(title, subtitle, actionLabel, actionHandler) {
     return (
       <div className="view-head">
@@ -175,6 +218,21 @@ export default function AdminDashboard({ session, onLogout }) {
           { label: "Teachers", value: adminData.users.teachers },
           { label: "Pending invites", value: adminData.users.pendingInvites },
         ]))}
+        
+        <div style={{ display: 'flex', gap: '12px', marginBottom: '24px' }}>
+          <button className="panel-button" onClick={() => setAction({
+            type: 'create-user',
+            kicker: 'User management',
+            title: 'Create new user',
+            primaryLabel: 'Create User'
+          })}>+ Create single user</button>
+          <button className="ghost-button" onClick={() => setAction({
+            type: 'bulk-create-users',
+            kicker: 'Bulk operation',
+            title: 'Bulk create users',
+            primaryLabel: 'Upload CSV Data'
+          })}>Bulk upload</button>
+        </div>
         <div className="module-grid three">
           {[
             ["Students", adminData.users.students, "Learner accounts"],
@@ -360,7 +418,7 @@ export default function AdminDashboard({ session, onLogout }) {
       onLogout={onLogout}
     >
       {views[activeView]()}
-      <ActionModal action={action} onClose={() => setAction(null)} />
+      <ActionModal action={action} onClose={() => setAction(null)} onSubmit={handleModalSubmit} />
     </RoleShell>
   );
 }

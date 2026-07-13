@@ -28,8 +28,10 @@ export default function LoginPage({ onLogin }) {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [error, setError] = useState("");
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const activeRole = roles.find((role) => role.key === selectedRole);
-  const canLogin = Boolean(form.name.trim() && form.username.trim() && form.password.trim() && selectedRole);
+  const canLogin = Boolean(form.name.trim() && form.username.trim() && form.password.trim() && selectedRole && !isLoading);
 
   function updateField(event) {
     const { name, value } = event.target;
@@ -44,21 +46,42 @@ export default function LoginPage({ onLogin }) {
     setTilt({ x, y });
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     if (!canLogin) return;
 
-    const creds = CREDENTIALS[selectedRole];
-    if (form.username !== creds.username || form.password !== creds.password) {
-      setError(`Invalid credentials. Please use ${creds.username} / ${creds.password}`);
-      return;
-    }
+    setIsLoading(true);
+    setError("");
 
-    onLogin({
-      role: selectedRole,
-      name: form.name.trim(),
-      username: form.username.trim(),
-    });
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          role: selectedRole,
+          username: form.username.trim(),
+          password: form.password.trim(),
+        })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        onLogin({
+          role: data.role,
+          name: form.name.trim() || data.name, // keep typed name or DB name
+          username: data.username,
+          id: data.id
+        });
+      } else {
+        setError(data.error || "Invalid credentials.");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("An error occurred connecting to the server.");
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
