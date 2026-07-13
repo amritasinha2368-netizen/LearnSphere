@@ -279,10 +279,10 @@ export default function AdminDashboard({ session, onLogout }) {
         {sectionTitle("System Announcements", "Publish and review campus-wide announcements.", "New announcement", () => openAdminAction("New announcement"))}
         <article className="panel">
           <div className="stack-list">
-            {adminData.announcements.map((notice) => (
-              <div className="list-action-row" key={notice.title}>
-                <b>{notice.status[0]}</b>
-                <span><strong>{notice.title}</strong><em>{notice.status} - {notice.audience}</em></span>
+            {adminData.announcements.map((notice, idx) => (
+              <div className="list-action-row" key={notice._id || notice.title || idx}>
+                <b>{(notice.status || notice.title || 'N')[0]}</b>
+                <span><strong>{notice.title}</strong><em>{notice.status || 'Draft'} - {notice.audience || 'All'}</em></span>
                 <button type="button" onClick={() => openAdminAction(notice.title, [
                   { label: "Status", value: notice.status },
                   { label: "Audience", value: notice.audience },
