@@ -19,6 +19,7 @@ import {
   Presentation,
   UploadCloud,
   Trash2,
+  CalendarDays,
   TerminalSquare
 } from "lucide-react";
 import ActionModal from "../components/ActionModal.jsx";
@@ -29,6 +30,21 @@ import CodeBuilder from "../components/CodeBuilder.jsx";
 import { adminData as adminDataMock, teacherData as teacherDataMock } from "../data/lmsData.js";
 import { getAdminMetrics, getTeacherMetrics, percent } from "../data/metrics.js";
 import "./AdminDashboard.css";
+
+const calendarDays = Array.from({ length: 30 }, (_, index) => {
+  const day = index + 1;
+  const color = [1, 2, 3, 5, 6, 8, 9, 10, 12, 16, 18, 22, 23, 26, 27, 30].includes(day)
+    ? "green"
+    : [4, 19].includes(day)
+      ? "blue"
+      : [11, 25].includes(day)
+        ? "amber"
+        : [13].includes(day)
+          ? "red"
+          : "muted";
+
+  return { day, color };
+});
 
 const navItems = [
   { id: "overview", label: "Dashboard", icon: LayoutDashboard },
@@ -43,6 +59,7 @@ const navItems = [
   { id: "tests", label: "Test Builder", icon: FilePenLine },
   { id: "code", label: "Code Builder", icon: TerminalSquare },
   { id: "marks", label: "Quiz Marks", icon: ClipboardCheck },
+  { id: "calendar", label: "Calendar", icon: CalendarDays },
   { id: "actions", label: "Feedback", icon: MessageSquarePlus },
   { id: "leaderboard", label: "Leaderboards", icon: Medal },
 ];
@@ -1288,10 +1305,42 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
     );
   }
 
-  function renderAnnouncements() {
+  function renderCalendar() {
     return (
       <section className="role-view">
-        {sectionTitle("Class Notices", "Announcements and reminders for students.")}
+        {sectionTitle("Institution Calendar", "Monthly activity overview for classes, deadlines, and system events.")}
+        <div className="calendar-shell">
+          <article className="panel calendar-panel">
+            <div className="calendar-title">
+              <h2>June 2026</h2>
+              <span>Green active, amber pending, red alert, blue event completed.</span>
+            </div>
+            <div className="calendar-weekdays">
+              {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day) => <b key={day}>{day}</b>)}
+            </div>
+            <div className="calendar-grid">
+              {calendarDays.map((day) => (
+                <button className={`calendar-day ${day.color}`} type="button" key={day.day}>
+                  {day.day}
+                  <span />
+                </button>
+              ))}
+            </div>
+          </article>
+          <article className="panel calendar-stats">
+            {[
+              ["Events Completed", "32"],
+              ["Alerts", "2"],
+              ["Active Days", "20"],
+              ["System Uptime", "99.9%"],
+            ].map(([label, value]) => (
+              <div key={label}>
+                <strong>{value}</strong>
+                <span>{label}</span>
+              </div>
+            ))}
+          </article>
+        </div>
       </section>
     );
   }
@@ -1307,6 +1356,7 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
     assignments: renderAssignments,
     submissions: renderSubmissions,
     classes: renderClasses,
+    calendar: renderCalendar,
     'quiz-attempts-view': renderQuizAttempts,
     tests: () => (
       <section className="role-view">
