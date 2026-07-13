@@ -115,8 +115,8 @@ export default function AdminDashboard({ session, onLogout }) {
 
   const teacherData = {
     ...teacherDataMock,
-    subjects: dbSubjects.length > 0 ? dbSubjects : teacherDataMock.subjects,
-    recentFeedback: dbFeedback.length > 0 ? dbFeedback : teacherDataMock.recentFeedback,
+    subjects: dbSubjects.length > 0 ? dbSubjects : (teacherDataMock.subjects || []),
+    recentFeedback: dbFeedback.length > 0 ? dbFeedback : (teacherDataMock.recentFeedback || []),
   };
   const teacherMetrics = getTeacherMetrics(teacherData);
 
@@ -1038,8 +1038,8 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
       <section className="role-view">
         {sectionTitle("Student Feedback", "Direct messages and feedback sent to you by students.")}
         <div className="module-grid three">
-          {teacherData.recentFeedback.length === 0 && <p style={{color: '#64748b'}}>No feedback received yet.</p>}
-          {teacherData.recentFeedback.map((fb, idx) => (
+          {(!teacherData.recentFeedback || teacherData.recentFeedback.length === 0) && <p style={{color: '#64748b'}}>No feedback received yet.</p>}
+          {(teacherData.recentFeedback || []).map((fb, idx) => (
             <article className="module-card" key={fb._id || idx} style={{ borderTop: '3px solid #8b5cf6' }}>
               <span className="module-code" style={{ backgroundColor: '#8b5cf6', color: 'white' }}>FB</span>
               <h3>From: {fb.studentName || "Anonymous Student"}</h3>
