@@ -78,6 +78,13 @@ export default function AdminDashboard({ session, onLogout }) {
     localStorage.setItem("admin_active_view", view);
   };
   const [action, setAction] = useState(null);
+  const [selectedRole, setSelectedRole] = useState(null);
+  const [selectedQuiz, setSelectedQuiz] = useState(null);
+
+  // Inline Class Scheduling States
+  const [newClassTitle, setNewClassTitle] = useState("");
+  const [newClassTime, setNewClassTime] = useState("");
+  const [newClassRoom, setNewClassRoom] = useState("");
 
   // Live Database State
   const [dbUsers, setDbUsers] = useState([]);
@@ -157,7 +164,10 @@ if (data.actionType === 'create-user') {
           name: data.name,
           role: data.role,
           username: data.username,
-          password: data.password
+          password: data.password,
+          email: data.email,
+          parentName: data.parentName,
+          mobileNumber: data.mobileNumber
         };
         const res = await fetch('/api/lms-data?type=users', {
           method: 'POST',
@@ -475,16 +485,20 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
         </div>
         <div className="module-grid three">
           {[
-            ["Students", adminData.users.students, "Learner accounts"],
-            ["Teachers", adminData.users.teachers, "Faculty accounts"],
-            ["Admins", adminData.users.admins, "Operations accounts"],
-          ].map(([label, value, detail]) => (
-            <article className="module-card" key={label}>
-              <span className="module-code violet">{label[0]}</span>
-              <h3>{label}</h3>
-              <strong className="module-big">{value}</strong>
-              <p>{detail}</p>
-              <button type="button" onClick={() => openAdminAction(label, [{ label, value }])}>Open</button>
+            {role: "Students", count: adminData.users.students, desc: "Learner accounts"},
+            {role: "Teachers", count: adminData.users.teachers, desc: "Faculty accounts"},
+            {role: "Admins", count: adminData.users.admins, desc: "Operations accounts"},
+          ].map(({role, count, desc}) => (
+            <article className="module-card" key={role}>
+              <h3>{role}</h3>
+              <p>{desc}</p>
+              <b>{count} Active</b>
+              <button type="button" onClick={() => {
+                // Determine the exact role string for filtering ("student", "teacher", "admin")
+                const roleString = role.toLowerCase().replace('s', ''); 
+                setSelectedRole(roleString);
+                setActiveView('role-users-view');
+              }}>Open {role.toLowerCase()}</button>
             </article>
           ))}
         </div>
@@ -513,6 +527,39 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
             </div>
           </article>
         )}
+      </section>
+    );
+  }
+
+  function renderRoleUsers() {
+    const roleUsers = dbUsers.filter(u => u.role === selectedRole);
+    return (
+      <section className="role-view">
+        <div className="view-head">
+          <div>
+            <p className="eyebrow">User Management</p>
+            <h2 style={{ textTransform: 'capitalize' }}>{selectedRole}s</h2>
+            <span>Detailed list of all registered {selectedRole}s.</span>
+          </div>
+          <button className="panel-button" onClick={() => setActiveView('users')}>Back to Users</button>
+        </div>
+        
+        <div className="compact-list" style={{ marginTop: '24px' }}>
+          {roleUsers.length === 0 && <p style={{ color: '#64748b' }}>No {selectedRole}s found.</p>}
+          {roleUsers.map(user => (
+            <div key={user.id || user._id} className="list-item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <strong style={{ fontSize: '16px', color: '#0f172a' }}>{user.name}</strong>
+                <span className="meta">
+                  <b>ID:</b> {user.username} 
+                  {user.email && <span style={{ marginLeft: '12px' }}><b>Email:</b> {user.email}</span>}
+                  {user.mobileNumber && <span style={{ marginLeft: '12px' }}><b>Mobile:</b> {user.mobileNumber}</span>}
+                  {user.parentName && <span style={{ marginLeft: '12px' }}><b>Parent:</b> {user.parentName}</span>}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
     );
   }
@@ -984,50 +1031,147 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
     );
   }
 
+  const handleScheduleClass = async (e) => {
+    e.preventDefault();
+    if (!newClassTitle || !newClassTime || !newClassRoom) return;
+    try {
+      const res = await fetch('/api/lms-data?type=classes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title: newClassTitle, time: newClassTime, room: newClassRoom })
+      });
+      if (res.ok) {
+        const newClass = await res.json();
+        setDbClasses([newClass, ...dbClasses]);
+        setNewClassTitle("");
+        setNewClassTime("");
+        setNewClassRoom("");
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   function renderClasses() {
     return (
       <section className="role-view">
-        {sectionTitle("Class Scheduler", "Schedule a class with subject, time, room, or link.", "Schedule class", openSchedule)}
-        <div className="split-panels">
-          <article className="panel schedule-card-large">
-            <label>Subject<span>Data Structures - CSE 4A</span></label>
-            <label>Time<span>09:30 AM, Monday</span></label>
-            <label>Room / Link<span>Lab 3 or online meeting</span></label>
-            <button className="panel-button" type="button" onClick={openSchedule}>Open scheduling panel</button>
-          </article>
-          <div className="compact-list" style={{flex: 1}}>
-            {dbClasses.map(cls => (
-              <div key={cls.id || cls._id} className="list-item" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                <div style={{display: 'flex', flexDirection: 'column', gap: '4px'}}>
-                  <strong>{cls.title}</strong>
-                  <span className="meta">{cls.time} - {cls.room}</span>
-                </div>
-                <button type="button" onClick={() => deleteClass(cls.id || cls._id)} style={{ background: 'transparent', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '8px' }} title="Delete class">
-                  <Trash2 size={18} />
-                </button>
-              </div>
-            ))}
+        {sectionTitle("Class Scheduler", "Schedule a class with subject, time, room, or link.")}
+        
+        {/* Top Panel - Full Width Form */}
+        <form onSubmit={handleScheduleClass} className="panel" style={{ display: 'flex', gap: '16px', alignItems: 'flex-end', marginBottom: '24px', flexWrap: 'wrap' }}>
+          <div style={{ flex: 1, minWidth: '200px' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: 500 }}>Subject / Title</label>
+            <input type="text" value={newClassTitle} onChange={e => setNewClassTitle(e.target.value)} required placeholder="e.g. Data Structures" style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--line)' }} />
           </div>
+          <div style={{ flex: 1, minWidth: '200px' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: 500 }}>Time</label>
+            <input type="text" value={newClassTime} onChange={e => setNewClassTime(e.target.value)} required placeholder="e.g. 09:30 AM, Monday" style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--line)' }} />
+          </div>
+          <div style={{ flex: 1, minWidth: '200px' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: 500 }}>Room / Link</label>
+            <input type="text" value={newClassRoom} onChange={e => setNewClassRoom(e.target.value)} required placeholder="e.g. Lab 3" style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--line)' }} />
+          </div>
+          <button type="submit" className="panel-button" style={{ padding: '10px 24px', height: '42px' }}>Schedule Class</button>
+        </form>
+
+        {/* Preview List */}
+        <h3 style={{ marginBottom: '16px', fontSize: '18px' }}>Scheduled Classes</h3>
+        <div className="compact-list" style={{ display: 'grid', gap: '12px' }}>
+          {dbClasses.length === 0 && <p style={{ color: '#64748b' }}>No classes scheduled.</p>}
+          {dbClasses.map(cls => (
+            <div key={cls.id || cls._id} className="list-item" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'white', padding: '16px', borderRadius: '8px', border: '1px solid var(--line)'}}>
+              <div style={{display: 'flex', flexDirection: 'column', gap: '4px'}}>
+                <strong style={{ fontSize: '16px' }}>{cls.title}</strong>
+                <span className="meta">{cls.time} • {cls.room}</span>
+              </div>
+              <button type="button" onClick={() => deleteClass(cls.id || cls._id)} style={{ background: '#fef2f2', border: '1px solid #fecaca', color: '#ef4444', cursor: 'pointer', padding: '8px 16px', borderRadius: '6px', fontWeight: 500 }} title="Delete class">
+                Delete
+              </button>
+            </div>
+          ))}
         </div>
       </section>
     );
   }
 
   function renderMarks() {
+    // Both backend coding tests and standard quizzes can be shown here if we merge them
+    // but for now we'll just use backendCodingTests as the actual DB quizzes.
     return (
       <section className="role-view">
-        {sectionTitle("Quiz Marks Center", "Publish marks and see how many students have already given the quiz.", "Publish selected", () => openTeacherAction("Publish selected quiz marks"))}
+        {sectionTitle("Quiz Marks Center", "Publish marks and see how many students have already given the quiz.")}
         <div className="module-grid three">
-          {teacherData.quizStats.map((quiz) => (
-            <article className="module-card quiz-module" key={quiz.title}>
-              <span className="module-code green">QZ</span>
-              <h3>{quiz.title}</h3>
-              <p>{quiz.attempted} of {quiz.total} students have given the quiz.</p>
-              <b>{quiz.average}% average</b>
-              <em className={quiz.published ? "status success" : "status warning"}>{quiz.published ? "Marks published" : "Ready to publish"}</em>
-              <button type="button" onClick={() => openQuizMarks(quiz)}>Open marks</button>
-            </article>
-          ))}
+          {backendCodingTests.length === 0 && <p style={{color: '#64748b'}}>No quizzes found in the LMS.</p>}
+          {backendCodingTests.map((quiz) => {
+            const attempted = quiz.submissions ? quiz.submissions.length : 0;
+            return (
+              <article className="module-card quiz-module" key={quiz.id || quiz._id}>
+                <span className="module-code green">QZ</span>
+                <h3>{quiz.title}</h3>
+                <p style={{ marginTop: '8px', color: '#475569' }}>{quiz.subject}</p>
+                <div style={{ margin: '16px 0' }}>
+                  <b>{attempted} student{attempted !== 1 ? 's' : ''} attempted</b>
+                </div>
+                <button type="button" onClick={() => {
+                  setSelectedQuiz(quiz);
+                  setActiveView('quiz-attempts-view');
+                }}>View Attempted</button>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+    );
+  }
+
+  function renderQuizAttempts() {
+    if (!selectedQuiz) return null;
+    
+    // In our backend, quiz submissions are stored in `submissions` array
+    const attempts = selectedQuiz.submissions || [];
+
+    return (
+      <section className="role-view">
+        <div className="view-head">
+          <div>
+            <p className="eyebrow">Quiz Marks Center</p>
+            <h2>{selectedQuiz.title} Attempts</h2>
+            <span>Review and grade student quiz submissions.</span>
+          </div>
+          <button className="panel-button" onClick={() => setActiveView('marks')}>Back to Quizzes</button>
+        </div>
+        
+        <div className="panel" style={{ marginTop: '24px' }}>
+          <h3 style={{ marginBottom: '16px', fontSize: '18px' }}>Student Submissions</h3>
+          {attempts.length === 0 && <p style={{ color: '#64748b' }}>No students have attempted this quiz yet.</p>}
+          
+          <div className="stack-list">
+            {attempts.map((sub, idx) => (
+              <div key={idx} className="list-action-row" style={{ alignItems: 'flex-start', padding: '16px' }}>
+                <b style={{ background: 'var(--primary)', color: 'white' }}>{(sub.studentName && sub.studentName[0]) || '?'}</b>
+                <div style={{ flex: 1 }}>
+                  <strong style={{ fontSize: '16px' }}>{sub.studentName || "Unknown Student"}</strong>
+                  <br />
+                  <span style={{ fontSize: '12px', color: '#64748b' }}>Submitted recently</span>
+                  
+                  {(sub.grade || sub.feedback) && (
+                    <div style={{ marginTop: '8px', padding: '12px', background: '#f8fafc', borderRadius: '6px', border: '1px solid #e2e8f0' }}>
+                      {sub.grade && <strong style={{ color: '#0369a1', display: 'block', marginBottom: '4px' }}>Marks: {sub.grade}</strong>}
+                      {sub.feedback && <span style={{ color: '#334155' }}>{sub.feedback}</span>}
+                    </div>
+                  )}
+                </div>
+                
+                <button 
+                  className="panel-button" 
+                  style={{ background: 'white', color: 'var(--primary)', border: '1px solid var(--line)', marginLeft: '16px' }}
+                  onClick={() => openGradeSubmission(selectedQuiz.id || selectedQuiz._id, sub)}
+                >
+                  {sub.grade || sub.feedback ? "Edit Marks" : "Give Marks"}
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     );
@@ -1065,6 +1209,7 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
   const views = {
     overview: renderOverview,
     users: renderUsers,
+    'role-users-view': renderRoleUsers,
     curriculum: renderCurriculum,
     mapping: renderMapping,
     governance: renderGovernance,
@@ -1075,6 +1220,7 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
     assignments: renderAssignments,
     submissions: renderSubmissions,
     classes: renderClasses,
+    'quiz-attempts-view': renderQuizAttempts,
     tests: () => (
       <section className="role-view">
         <TestBuilder 

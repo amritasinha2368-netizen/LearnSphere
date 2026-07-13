@@ -29,6 +29,11 @@ export default function ActionModal({ action, onClose, onSubmit }) {
   const [subjectSection, setSubjectSection] = useState("");
   const [subjectInstructor, setSubjectInstructor] = useState("");
   
+  // User Fields
+  const [userEmail, setUserEmail] = useState("");
+  const [userParentName, setUserParentName] = useState("");
+  const [userMobile, setUserMobile] = useState("");
+  
   const [teacherName, setTeacherName] = useState("");
   
   const [codingQuestions, setCodingQuestions] = useState([]);
@@ -209,12 +214,15 @@ export default function ActionModal({ action, onClose, onSubmit }) {
           message: noteText,
         });
       } else if (action.type === 'create-user') {
-        onSubmit({
-          actionType: action.type,
-          name: writeTitle,
-          role: subject,
-          username: subjectSection,
+        onSubmit({ 
+          actionType: 'create-user', 
+          name: writeTitle, 
+          role: subject, 
+          username: subjectSection, 
           password: subjectInstructor,
+          email: userEmail,
+          parentName: userParentName,
+          mobileNumber: userMobile
         });
       } else if (action.type === 'bulk-create-users') {
         onSubmit({
@@ -622,8 +630,11 @@ export default function ActionModal({ action, onClose, onSubmit }) {
                 <option value="admin">Admin</option>
               </select>
             </label>
-            <label>Username<input type="text" value={subjectSection} onChange={(e) => setSubjectSection(e.target.value)} required /></label>
+            <label>Username (ID)<input type="text" value={subjectSection} onChange={(e) => setSubjectSection(e.target.value)} required /></label>
             <label>Password<input type="text" value={subjectInstructor} onChange={(e) => setSubjectInstructor(e.target.value)} required /></label>
+            <label>Email ID<input type="email" value={userEmail} onChange={(e) => setUserEmail(e.target.value)} /></label>
+            <label>Parent's Name<input type="text" value={userParentName} onChange={(e) => setUserParentName(e.target.value)} /></label>
+            <label>Mobile Number<input type="tel" value={userMobile} onChange={(e) => setUserMobile(e.target.value)} /></label>
           </div>
         )}
 
