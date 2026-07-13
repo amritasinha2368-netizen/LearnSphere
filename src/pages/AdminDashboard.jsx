@@ -126,10 +126,10 @@ export default function AdminDashboard({ session, onLogout }) {
   };
   const teacherMetrics = getTeacherMetrics(teacherData);
 
-  // Merge Live Data into fallback structure (Add live count to mock count for realism)
-  const studentsCount = adminDataMock.users.students + dbUsers.filter(u => (u.role || '').toLowerCase() === 'student').length;
-  const teachersCount = adminDataMock.users.teachers + dbUsers.filter(u => (u.role || '').toLowerCase() === 'teacher').length;
-  const adminsCount = adminDataMock.users.admins + dbUsers.filter(u => (u.role || '').toLowerCase() === 'admin').length;
+  // Use strict live data counts for user roles
+  const studentsCount = dbUsers.filter(u => (u.role || '').toLowerCase() === 'student').length;
+  const teachersCount = dbUsers.filter(u => (u.role || '').toLowerCase() === 'teacher').length;
+  const adminsCount = dbUsers.filter(u => (u.role || '').toLowerCase() === 'admin').length;
 
   const adminData = {
     ...adminDataMock,
