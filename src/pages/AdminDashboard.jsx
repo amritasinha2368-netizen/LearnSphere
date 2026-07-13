@@ -495,7 +495,7 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
               <b>{count} Active</b>
               <button type="button" onClick={() => {
                 // Determine the exact role string for filtering ("student", "teacher", "admin")
-                const roleString = role.toLowerCase().replace('s', ''); 
+                const roleString = role.toLowerCase().slice(0, -1); 
                 setSelectedRole(roleString);
                 setActiveView('role-users-view');
               }}>Open {role.toLowerCase()}</button>
