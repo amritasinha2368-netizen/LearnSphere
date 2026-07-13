@@ -136,9 +136,9 @@ export default function StudentDashboard({ session, onLogout }) {
   const [dbBadges, setDbBadges] = useState([]);
 
   useEffect(() => {
-    fetch('/api/lms-data?type=subjects').then(res => res.json()).then(data => setDbSubjects(data)).catch(console.error);
-    fetch('/api/lms-data?type=classes').then(res => res.json()).then(data => setDbClasses(data)).catch(console.error);
-    fetch('/api/lms-data?type=badges').then(res => res.json()).then(data => setDbBadges(data)).catch(console.error);
+    fetch('/api/lms-data?type=subjects').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbSubjects(data) }).catch(console.error);
+    fetch('/api/lms-data?type=classes').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbClasses(data) }).catch(console.error);
+    fetch('/api/lms-data?type=badges').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbBadges(data) }).catch(console.error);
   }, []);
 
   const studentData = {

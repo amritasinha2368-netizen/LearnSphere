@@ -66,10 +66,12 @@ export default function TeacherDashboard({ session, onLogout }) {
   const [action, setAction] = useState(null);
   const [dbSubjects, setDbSubjects] = useState([]);
   const [dbFeedback, setDbFeedback] = useState([]);
+  const [dbClasses, setDbClasses] = useState([]);
 
   useEffect(() => {
-    fetch('/api/lms-data?type=subjects').then(res => res.json()).then(data => setDbSubjects(data)).catch(console.error);
-    fetch('/api/lms-data?type=feedback').then(res => res.json()).then(data => setDbFeedback(data)).catch(console.error);
+    fetch('/api/lms-data?type=subjects').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbSubjects(data) }).catch(console.error);
+    fetch('/api/lms-data?type=feedback').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbFeedback(data) }).catch(console.error);
+    fetch('/api/lms-data?type=classes').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbClasses(data) }).catch(console.error);
   }, []);
 
   const teacherData = {
