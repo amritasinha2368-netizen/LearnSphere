@@ -155,7 +155,21 @@ export default function AdminDashboard({ session, onLogout }) {
     });
   }
 
-    async function handleModalSubmit(data) {
+  const deleteUser = async (id) => {
+    try {
+      const res = await fetch(`/api/lms-data?type=users&id=${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        setDbUsers(dbUsers.filter(u => u._id !== id && u.id !== id));
+      } else {
+        alert("Failed to delete user.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error deleting user.");
+    }
+  };
+
+  async function handleModalSubmit(data) {
     if (!action) return;
     try {
 if (data.actionType === 'create-user') {
@@ -579,6 +593,7 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
                     <th style={{ padding: '12px 8px' }}>Email</th>
                     <th style={{ padding: '12px 8px' }}>Mobile Number</th>
                     <th style={{ padding: '12px 8px' }}>Parent's Name</th>
+                    <th style={{ padding: '12px 8px', textAlign: 'right' }}>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -589,6 +604,11 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
                       <td style={{ padding: '12px 8px' }}>{user.email || <em style={{color: '#94a3b8'}}>N/A</em>}</td>
                       <td style={{ padding: '12px 8px' }}>{user.mobileNumber || <em style={{color: '#94a3b8'}}>N/A</em>}</td>
                       <td style={{ padding: '12px 8px' }}>{user.parentName || <em style={{color: '#94a3b8'}}>N/A</em>}</td>
+                      <td style={{ padding: '12px 8px', textAlign: 'right' }}>
+                        <button type="button" onClick={() => deleteUser(user.id || user._id)} style={{ background: 'transparent', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '4px' }} title="Delete user">
+                          <Trash2 size={18} />
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
