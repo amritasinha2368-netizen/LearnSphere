@@ -248,6 +248,31 @@ export default function AdminDashboard({ session, onLogout }) {
             </article>
           ))}
         </div>
+
+        {dbUsers && dbUsers.length > 0 && (
+          <article className="panel" style={{ marginTop: '24px' }}>
+            <div className="panel-head" style={{ marginBottom: '16px' }}>
+              <div>
+                <h2>Recently Added Users</h2>
+                <span>Preview of the latest accounts created in the system.</span>
+              </div>
+            </div>
+            <div className="stack-list">
+              {dbUsers.slice(0, 10).map((user, idx) => (
+                <div className="list-action-row" key={user._id || idx}>
+                  <b>{(user.name && user.name[0]) || '?'}</b>
+                  <span>
+                    <strong>{user.name}</strong>
+                    <em>{user.role} • {user.username}</em>
+                  </span>
+                  <span className="pill" style={{ marginLeft: 'auto', textTransform: 'capitalize' }}>
+                    {user.role}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </article>
+        )}
       </section>
     );
   }
