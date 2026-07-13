@@ -134,11 +134,13 @@ export default function StudentDashboard({ session, onLogout }) {
   const [dbSubjects, setDbSubjects] = useState([]);
   const [dbClasses, setDbClasses] = useState([]);
   const [dbBadges, setDbBadges] = useState([]);
+  const [dbUsers, setDbUsers] = useState([]);
 
   useEffect(() => {
     fetch('/api/lms-data?type=subjects').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbSubjects(data) }).catch(console.error);
     fetch('/api/lms-data?type=classes').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbClasses(data) }).catch(console.error);
     fetch('/api/lms-data?type=badges').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbBadges(data) }).catch(console.error);
+    fetch('/api/lms-data?type=users').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbUsers(data) }).catch(console.error);
   }, []);
 
   const studentData = {
@@ -817,9 +819,56 @@ export default function StudentDashboard({ session, onLogout }) {
   }
 
   function renderLeaderboard() {
-    const topThree = studentData.leaderboard.slice(0, 3);
-    const currentRank = studentData.leaderboard.find((item) => item.name === "Aarav");
-    const gapToTopThree = topThree[2].xp - currentRank.xp;
+    // 1. Calculate Real XP Leaderboard
+    const xpMap = {};
+    const students = dbUsers.filter(u => u.role === 'student');
+    
+    // Fallback to mock if dbUsers is not loaded or empty yet
+    let activeLeaderboard = studentData.leaderboard;
+
+    if (students.length > 0) {
+      students.forEach(s => { xpMap[s.name] = 0; });
+      
+      const processSubmissions = (arr) => {
+        arr.forEach(item => {
+          if (item.submissions) {
+            item.submissions.forEach(sub => {
+              if (sub.grade) {
+                // Grade might be "8/10", parse first number
+                const gradeStr = sub.grade.split('/')[0];
+                const gradeNum = parseInt(gradeStr, 10);
+                if (!isNaN(gradeNum) && xpMap[sub.studentName] !== undefined) {
+                  xpMap[sub.studentName] += gradeNum;
+                } else if (!isNaN(gradeNum)) {
+                  // If student wasn't in dbUsers but has submissions (e.g. mock student Aarav)
+                  xpMap[sub.studentName] = (xpMap[sub.studentName] || 0) + gradeNum;
+                }
+              }
+            });
+          }
+        });
+      };
+
+      processSubmissions(backendAssignments);
+      processSubmissions(codingTests);
+
+      // Add current user if not in map
+      if (xpMap[studentData.profile.name] === undefined) {
+        xpMap[studentData.profile.name] = 0;
+      }
+
+      const board = Object.keys(xpMap).map(name => ({
+        name,
+        xp: xpMap[name]
+      })).sort((a, b) => b.xp - a.xp);
+
+      board.forEach((item, idx) => { item.rank = idx + 1; });
+      activeLeaderboard = board;
+    }
+
+    const topThree = activeLeaderboard.slice(0, 3);
+    const currentRank = activeLeaderboard.find((item) => item.name === studentData.profile.name) || activeLeaderboard[0] || { rank: 1, xp: 0, name: studentData.profile.name };
+    const gapToTopThree = topThree.length >= 3 && currentRank.rank > 3 ? topThree[2].xp - currentRank.xp : 0;
 
     return (
       <section className="role-view">
@@ -829,12 +878,12 @@ export default function StudentDashboard({ session, onLogout }) {
             <p className="eyebrow">Your position</p>
             <h3>Rank #{currentRank.rank}</h3>
             <span>{currentRank.xp} XP collected in {studentData.batch.name}</span>
-            <ProgressBar value={Math.min(100, percent(currentRank.xp, topThree[0].xp))} label={`${gapToTopThree} XP to enter top 3`} tone="blue" />
+            <ProgressBar value={topThree.length > 0 ? Math.min(100, percent(currentRank.xp, topThree[0].xp)) : 0} label={currentRank.rank > 3 ? `${gapToTopThree} XP to enter top 3` : `You are in the top 3!`} tone="blue" />
           </article>
 
           <div className="podium-grid">
             {topThree.map((item) => (
-              <article className={`podium-card rank-${item.rank}`} key={item.rank}>
+              <article className={`podium-card rank-${item.rank}`} key={item.name}>
                 <b>#{item.rank}</b>
                 <strong>{item.name}</strong>
                 <span>{item.xp} XP</span>
@@ -844,12 +893,12 @@ export default function StudentDashboard({ session, onLogout }) {
         </div>
 
         <article className="panel leaderboard-panel detailed-leaderboard">
-          {studentData.leaderboard.map((item) => (
-            <div className={item.name === "Aarav" ? "rank-row current" : "rank-row"} key={item.rank}>
+          {activeLeaderboard.map((item) => (
+            <div className={item.name === studentData.profile.name ? "rank-row current" : "rank-row"} key={item.name}>
               <b>{item.rank}</b>
               <span>
                 <strong>{item.name}</strong>
-                <em>{item.name === "Aarav" ? "You - keep pushing toward top 3" : `${studentData.batch.name} batchmate`}</em>
+                <em>{item.name === studentData.profile.name ? "You - keep pushing toward top 3" : `${studentData.batch.name} batchmate`}</em>
               </span>
               <i>{item.xp} XP</i>
             </div>
