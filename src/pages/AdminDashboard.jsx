@@ -126,10 +126,10 @@ export default function AdminDashboard({ session, onLogout }) {
   };
   const teacherMetrics = getTeacherMetrics(teacherData);
 
-  // Merge Live Data into fallback structure
-  const studentsCount = dbUsers.filter(u => u.role === 'student').length || adminDataMock.users.students;
-  const teachersCount = dbUsers.filter(u => u.role === 'teacher').length || adminDataMock.users.teachers;
-  const adminsCount = dbUsers.filter(u => u.role === 'admin').length || adminDataMock.users.admins;
+  // Merge Live Data into fallback structure (Add live count to mock count for realism)
+  const studentsCount = adminDataMock.users.students + dbUsers.filter(u => (u.role || '').toLowerCase() === 'student').length;
+  const teachersCount = adminDataMock.users.teachers + dbUsers.filter(u => (u.role || '').toLowerCase() === 'teacher').length;
+  const adminsCount = adminDataMock.users.admins + dbUsers.filter(u => (u.role || '').toLowerCase() === 'admin').length;
 
   const adminData = {
     ...adminDataMock,
@@ -176,6 +176,9 @@ if (data.actionType === 'create-user') {
         if (res.ok) {
           const newUser = await res.json();
           setDbUsers([newUser, ...dbUsers]);
+          setAction(null);
+        } else {
+          alert("Failed to create user.");
         }
       } else if (data.actionType === 'bulk-create-users') {
         const rows = data.csvData.split('\n').map(r => r.trim()).filter(Boolean);
@@ -193,6 +196,9 @@ if (data.actionType === 'create-user') {
         if (res.ok) {
           const newUsers = await res.json();
           setDbUsers([...newUsers, ...dbUsers]);
+          setAction(null);
+        } else {
+          alert("Failed to bulk upload users.");
         }
       }
       // -- Teacher logic --
@@ -531,7 +537,7 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
 
   function renderRoleUsers() {
     const roleTitle = selectedRole ? selectedRole.charAt(0).toUpperCase() + selectedRole.slice(1) + 's' : 'Users';
-    const roleUsers = dbUsers.filter(u => u.role === selectedRole);
+    const roleUsers = dbUsers.filter(u => (u.role || '').toLowerCase() === selectedRole);
     const filteredUsers = roleUsers.filter(u => 
       u.name.toLowerCase().includes(userSearchQuery.toLowerCase()) || 
       u.username.toLowerCase().includes(userSearchQuery.toLowerCase()) ||
