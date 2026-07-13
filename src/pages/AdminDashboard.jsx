@@ -81,6 +81,7 @@ export default function AdminDashboard({ session, onLogout }) {
   const [action, setAction] = useState(null);
   const [selectedRole, setSelectedRole] = useState(null);
   const [selectedQuiz, setSelectedQuiz] = useState(null);
+  const [userSearchQuery, setUserSearchQuery] = useState("");
 
   // Inline Class Scheduling States
   const [newClassTitle, setNewClassTitle] = useState("");
@@ -533,33 +534,65 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
   }
 
   function renderRoleUsers() {
+    const roleTitle = selectedRole ? selectedRole.charAt(0).toUpperCase() + selectedRole.slice(1) + 's' : 'Users';
     const roleUsers = dbUsers.filter(u => u.role === selectedRole);
+    const filteredUsers = roleUsers.filter(u => 
+      u.name.toLowerCase().includes(userSearchQuery.toLowerCase()) || 
+      u.username.toLowerCase().includes(userSearchQuery.toLowerCase()) ||
+      (u.email && u.email.toLowerCase().includes(userSearchQuery.toLowerCase()))
+    );
+
     return (
       <section className="role-view">
         <div className="view-head">
           <div>
             <p className="eyebrow">User Management</p>
-            <h2 style={{ textTransform: 'capitalize' }}>{selectedRole}s</h2>
-            <span>Detailed list of all registered {selectedRole}s.</span>
+            <h2>{roleTitle}</h2>
+            <span>Detailed list of all registered {roleTitle.toLowerCase()}.</span>
           </div>
-          <button className="panel-button" onClick={() => setActiveView('users')}>Back to Users</button>
+          <button className="panel-button" onClick={() => { setActiveView('users'); setUserSearchQuery(''); }}>Back to Users</button>
         </div>
         
-        <div className="compact-list" style={{ marginTop: '24px' }}>
-          {roleUsers.length === 0 && <p style={{ color: '#64748b' }}>No {selectedRole}s found.</p>}
-          {roleUsers.map(user => (
-            <div key={user.id || user._id} className="list-item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                <strong style={{ fontSize: '16px', color: '#0f172a' }}>{user.name}</strong>
-                <span className="meta">
-                  <b>ID:</b> {user.username} 
-                  {user.email && <span style={{ marginLeft: '12px' }}><b>Email:</b> {user.email}</span>}
-                  {user.mobileNumber && <span style={{ marginLeft: '12px' }}><b>Mobile:</b> {user.mobileNumber}</span>}
-                  {user.parentName && <span style={{ marginLeft: '12px' }}><b>Parent:</b> {user.parentName}</span>}
-                </span>
-              </div>
+        <div className="panel" style={{ marginTop: '24px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+            <h3 style={{ fontSize: '18px' }}>User Directory</h3>
+            <input 
+              type="text" 
+              placeholder={`Search ${roleTitle.toLowerCase()} by name, ID, or email...`}
+              value={userSearchQuery}
+              onChange={(e) => setUserSearchQuery(e.target.value)}
+              style={{ padding: '8px 12px', width: '300px', borderRadius: '6px', border: '1px solid var(--line)' }}
+            />
+          </div>
+
+          {filteredUsers.length === 0 ? (
+            <p style={{ color: '#64748b', padding: '16px 0' }}>No {roleTitle.toLowerCase()} found matching your search.</p>
+          ) : (
+            <div style={{ overflowX: 'auto' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '700px' }}>
+                <thead>
+                  <tr style={{ borderBottom: '2px solid var(--line)', color: '#64748b', fontSize: '14px' }}>
+                    <th style={{ padding: '12px 8px' }}>Name</th>
+                    <th style={{ padding: '12px 8px' }}>User ID</th>
+                    <th style={{ padding: '12px 8px' }}>Email</th>
+                    <th style={{ padding: '12px 8px' }}>Mobile Number</th>
+                    <th style={{ padding: '12px 8px' }}>Parent's Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredUsers.map(user => (
+                    <tr key={user.id || user._id} style={{ borderBottom: '1px solid var(--line)', fontSize: '15px', color: '#334155' }}>
+                      <td style={{ padding: '12px 8px', fontWeight: 500, color: '#0f172a' }}>{user.name}</td>
+                      <td style={{ padding: '12px 8px' }}>{user.username}</td>
+                      <td style={{ padding: '12px 8px' }}>{user.email || <em style={{color: '#94a3b8'}}>N/A</em>}</td>
+                      <td style={{ padding: '12px 8px' }}>{user.mobileNumber || <em style={{color: '#94a3b8'}}>N/A</em>}</td>
+                      <td style={{ padding: '12px 8px' }}>{user.parentName || <em style={{color: '#94a3b8'}}>N/A</em>}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-          ))}
+          )}
         </div>
       </section>
     );
