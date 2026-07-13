@@ -33,11 +33,8 @@ import "./AdminDashboard.css";
 const navItems = [
   { id: "overview", label: "Dashboard", icon: LayoutDashboard },
   { id: "users", label: "Users", icon: UsersRound },
-  { id: "curriculum", label: "Curriculum", icon: BookOpenCheck },
-  { id: "mapping", label: "Teacher Mapping", icon: GraduationCap },
   { id: "governance", label: "Governance", icon: ShieldCheck },
   { id: "announcements", label: "Announcements", icon: BellRing },
-  { id: "reports", label: "Reports", icon: FileBarChart2 },
   { id: "health", label: "System Health", icon: BarChart3 },
   { id: "subjects", label: "Subjects", icon: BookCopy },
   { id: "assignments", label: "Assignments", icon: UploadCloud },
@@ -415,11 +412,11 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
             <div className="hero-copy">
               <p className="eyebrow">Admin control room</p>
               <h2>Run LearnSphere through <span>separate command modules.</span></h2>
-              <p>Manage users, curriculum, teacher assignments, announcements, badges, leaderboards, system health, and reports without stacking everything in one long screen.</p>
+              <p>Manage users, announcements, badges, leaderboards, and system health without stacking everything in one long screen.</p>
               <div className="hero-status-row" aria-label="Admin dashboard status">
                 <span>{adminData.users.students + adminData.users.teachers + adminData.users.admins} Total Users</span>
                 <span>System {metrics.systemAverage}%</span>
-                <span>{adminData.governance.reportRequests} Open Reports</span>
+                <span>{adminData.governance.reportRequests} Open Requests</span>
               </div>
             </div>
             <div className="admin-figure-scene" aria-hidden="true">
@@ -447,8 +444,7 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
             </div>
             <div className="compact-list">
               <button className="compact-item violet" type="button" onClick={() => setActiveView("users")}><b>1</b><span><strong>Pending invites</strong><em>{adminData.users.pendingInvites} invitations pending</em></span><i>Users</i></button>
-              <button className="compact-item green" type="button" onClick={() => setActiveView("curriculum")}><b>2</b><span><strong>Curriculum mapping</strong><em>{metrics.curriculumCoverage}% complete</em></span><i>Map</i></button>
-              <button className="compact-item amber" type="button" onClick={() => setActiveView("reports")}><b>3</b><span><strong>Report requests</strong><em>{adminData.governance.reportRequests} open</em></span><i>Reports</i></button>
+              <button className="compact-item green" type="button" onClick={() => setActiveView("health")}><b>2</b><span><strong>System Checks</strong><em>{metrics.systemAverage}% running</em></span><i>Health</i></button>
             </div>
           </article>
         </div>
@@ -679,54 +675,7 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
     );
   }
 
-  function renderCurriculum() {
-    return (
-      <section className="role-view">
-        {sectionTitle("Department Mapping", "Manage users and curriculum department-wise.", "Open curriculum panel", () => openAdminAction("Curriculum mapping", [
-          { label: "Mapped subjects", value: adminData.curriculum.mappedSubjects },
-          { label: "Total subjects", value: adminData.curriculum.totalSubjects },
-        ]))}
-        <div className="module-grid three">
-          {adminData.departments.map((department) => (
-            <article className="module-card" key={department.name}>
-              <span className="module-code blue">{department.name[0]}</span>
-              <h3>{department.name}</h3>
-              <p>Lead: {department.lead}. {department.users} users.</p>
-              <ProgressBar value={department.mapped} label="Mapped" tone="blue" />
-              <button type="button" onClick={() => openAdminAction(`${department.name} mapping`, [
-                { label: "Department lead", value: department.lead },
-                { label: "Users", value: department.users },
-                { label: "Mapped", value: `${department.mapped}%` },
-              ])}>Open mapping</button>
-            </article>
-          ))}
-        </div>
-      </section>
-    );
-  }
 
-  function renderMapping() {
-    return (
-      <section className="role-view">
-        {sectionTitle("Teacher and Student Assignment", "Assign teachers and students to curriculum, sections, and subjects.")}
-        <div className="split-panels">
-          <article className="panel">
-            <h2>Assignment Coverage</h2>
-            <ProgressBar value={metrics.assignmentCoverage} label="Teacher assignment coverage" tone="green" />
-            <ProgressBar value={metrics.curriculumCoverage} label="Curriculum coverage" tone="blue" />
-            <button className="panel-button" type="button" onClick={() => openAdminAction("Assign teachers/students", [
-              { label: "Teacher assignments", value: adminData.curriculum.teacherAssignments },
-              { label: "Student mappings", value: adminData.curriculum.studentMappings },
-            ])}>Assign teachers/students</button>
-          </article>
-          <article className="panel soft-panel">
-            <h2>Mapping Summary</h2>
-            <p>Use this module to connect faculty and students to the right courses and sections.</p>
-          </article>
-        </div>
-      </section>
-    );
-  }
 
   function renderGovernance() {
     const items = [
@@ -780,27 +729,7 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
     );
   }
 
-  function renderReports() {
-    return (
-      <section className="role-view">
-        {sectionTitle("Performance Reports", "Generate performance reports, badge audits, and curriculum mapping reports.", "Generate report", () => openAdminAction("Generate performance report"))}
-        <div className="module-grid three">
-          {adminData.reports.map((report) => (
-            <article className="module-card" key={report.name}>
-              <span className="module-code blue">RP</span>
-              <h3>{report.name}</h3>
-              <p>Owner: {report.owner}</p>
-              <ProgressBar value={report.progress} label="Progress" tone="blue" />
-              <button type="button" onClick={() => openAdminAction(report.name, [
-                { label: "Owner", value: report.owner },
-                { label: "Progress", value: `${report.progress}%` },
-              ])}>Open report</button>
-            </article>
-          ))}
-        </div>
-      </section>
-    );
-  }
+
 
   function renderHealth() {
     return (
@@ -1325,11 +1254,8 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
     overview: renderOverview,
     users: renderUsers,
     'role-users-view': renderRoleUsers,
-    curriculum: renderCurriculum,
-    mapping: renderMapping,
     governance: renderGovernance,
     announcements: renderAnnouncements,
-    reports: renderReports,
     health: renderHealth,
     subjects: renderSubjects,
     assignments: renderAssignments,
