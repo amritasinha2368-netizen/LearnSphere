@@ -877,58 +877,6 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
     );
   }
 
-  function renderOverview() {
-    return (
-      <section className="role-view">
-        <div className="overview-layout">
-          <article className="hero-panel hero-panel-3d teacher-hero">
-            <div className="teacher-figure-scene" aria-hidden="true">
-              <div className="figure-board">
-                <div className="board-chart">
-                  <i /><i /><i /><i />
-                </div>
-              </div>
-              <div className="desk-paper" />
-              <span className="floating-sticker sticker-grade">A+</span>
-              <span className="floating-sticker sticker-check">✓</span>
-              <span className="floating-sticker sticker-star">★</span>
-            </div>
-            <div className="hero-copy">
-              <p className="eyebrow">Teacher Workspace</p>
-              <h1>Manage teaching work from <span>one calm control panel.</span></h1>
-              <p>Publish assignments, schedule classes, monitor subjects, and release quiz marks without crowding every feature into one screen.</p>
-              <div className="hero-pills">
-                <span><b>{metrics.activeCourses}</b> Subjects</span>
-                <span><b>{metrics.gradingQueue}</b> Pending Grades</span>
-                <span className="status-pill">Workflow {metrics.workflowIndex}%</span>
-              </div>
-            </div>
-          </article>
-          <article className="panel schedule-panel faculty-queue">
-            <div className="panel-head">
-              <div>
-                <h2>Today's Faculty Queue</h2>
-                <span>Teaching actions that need attention.</span>
-              </div>
-            </div>
-            <div className="compact-list">
-              <button className="compact-item green" type="button" onClick={() => setActiveView("assignments")}><b>1</b><span><strong>Publish assignment</strong><em>Graph traversal lab</em></span><i>Ready</i></button>
-              <button className="compact-item blue" type="button" onClick={() => setActiveView("submissions")}><b>2</b><span><strong>Review submissions</strong><em>13 students pending</em></span><i>Open</i></button>
-              <button className="compact-item violet" type="button" onClick={() => setActiveView("marks")}><b>3</b><span><strong>Publish Quiz Marks</strong><em>Review test attempts</em></span><i>Marks</i></button>
-              <button className="compact-item amber" type="button" onClick={() => setActiveView("classes")}><b>4</b><span><strong>Schedule Class</strong><em>Set up next meeting</em></span><i>Plan</i></button>
-            </div>
-          </article>
-        </div>
-        <div className="dash-metric-grid">
-          <TeacherMetric code="SB" label="Subjects under you" value={metrics.activeCourses} detail={`${metrics.totalEnrolled} students enrolled`} tone="green" />
-          <TeacherMetric code="SU" label="Submission rate" value={`${metrics.submissionRate}%`} detail="Submitted across sections" />
-          <TeacherMetric code="GQ" label="Review queue" value={metrics.gradingQueue} detail="Student files need grading" tone="amber" />
-          <TeacherMetric code="WI" label="Workflow index" value={`${metrics.workflowIndex}%`} detail="Calculated from teaching activity" tone="violet" />
-        </div>
-      </section>
-    );
-  }
-
   function renderSubjects() {
     return (
       <section className="role-view">
