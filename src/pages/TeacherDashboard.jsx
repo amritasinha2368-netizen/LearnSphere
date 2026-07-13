@@ -82,8 +82,8 @@ export default function TeacherDashboard({ session, onLogout }) {
 
   const teacherData = {
     ...teacherDataMock,
-    subjects: dbSubjects.length > 0 ? dbSubjects : teacherDataMock.subjects,
-    recentFeedback: dbFeedback.length > 0 ? dbFeedback : teacherDataMock.recentFeedback,
+    subjects: dbSubjects.length > 0 ? dbSubjects : (teacherDataMock.subjects || []),
+    recentFeedback: dbFeedback.length > 0 ? dbFeedback : (teacherDataMock.recentFeedback || []),
   };
 
   const metrics = getTeacherMetrics(teacherData);
