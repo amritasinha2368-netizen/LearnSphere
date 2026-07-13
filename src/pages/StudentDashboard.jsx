@@ -14,6 +14,7 @@ import {
   Sparkles,
   Trophy,
   UploadCloud,
+  Megaphone,
 } from "lucide-react";
 import ActionModal from "../components/ActionModal.jsx";
 import RoleShell from "../components/RoleShell.jsx";
@@ -32,6 +33,7 @@ const navItems = [
   { id: "assignments", label: "Assignments", icon: FileUp },
   { id: "quizzes", label: "Quizzes", icon: ClipboardList },
   { id: "badges", label: "Badges", icon: Medal },
+  { id: "announcements", label: "Announcements", icon: Megaphone },
   { id: "calendar", label: "Calendar", icon: CalendarDays },
   { id: "xp", label: "XP Progress", icon: Award },
   { id: "leaderboard", label: "Leaderboard", icon: Trophy },
@@ -135,12 +137,14 @@ export default function StudentDashboard({ session, onLogout }) {
   const [dbClasses, setDbClasses] = useState([]);
   const [dbBadges, setDbBadges] = useState([]);
   const [dbUsers, setDbUsers] = useState([]);
+  const [dbNotices, setDbNotices] = useState([]);
 
   useEffect(() => {
     fetch('/api/lms-data?type=subjects').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbSubjects(data) }).catch(console.error);
     fetch('/api/lms-data?type=classes').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbClasses(data) }).catch(console.error);
     fetch('/api/lms-data?type=badges').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbBadges(data) }).catch(console.error);
     fetch('/api/lms-data?type=users').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbUsers(data) }).catch(console.error);
+    fetch('/api/lms-data?type=notices').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbNotices(data) }).catch(console.error);
   }, []);
 
   const studentData = {
@@ -908,6 +912,36 @@ export default function StudentDashboard({ session, onLogout }) {
     );
   }
 
+  function renderAnnouncements() {
+    const studentNotices = dbNotices.filter(notice => notice.audience === 'All' || notice.audience === 'Students');
+    return (
+      <section className="role-view">
+        <div className="view-head">
+          <div>
+            <p className="eyebrow">Campus Feed</p>
+            <h2>Announcements</h2>
+            <span>Important notices from the administration and faculty.</span>
+          </div>
+        </div>
+        <article className="panel" style={{ marginTop: '24px' }}>
+          <div className="stack-list">
+            {studentNotices.length === 0 && <p style={{ color: '#64748b', padding: '16px' }}>No announcements published yet.</p>}
+            {studentNotices.map((notice, idx) => (
+              <div className="list-action-row" key={notice._id || notice.title || idx}>
+                <b>{(notice.status || notice.title || 'N')[0]}</b>
+                <div style={{ flex: 1, padding: '0 12px' }}>
+                  <strong style={{ display: 'block' }}>{notice.title}</strong>
+                  <span style={{ fontSize: '12px', color: '#64748b', display: 'block' }}>{notice.status || 'Published'} • {new Date(notice.date || Date.now()).toLocaleDateString()}</span>
+                  {notice.content && <p style={{ fontSize: '13px', color: '#334155', marginTop: '4px' }}>{notice.content}</p>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </article>
+      </section>
+    );
+  }
+
   const views = {
     overview: renderOverview,
     plan: renderPlan,
@@ -919,6 +953,7 @@ export default function StudentDashboard({ session, onLogout }) {
     calendar: renderCalendar,
     xp: renderXp,
     leaderboard: renderLeaderboard,
+    announcements: renderAnnouncements,
   };
 
   // If a test is active, hijack the entire UI to lock the student into the Test Environment Arena

@@ -229,6 +229,13 @@ export default function ActionModal({ action, onClose, onSubmit }) {
           actionType: action.type,
           csvData: noteText,
         });
+      } else if (action.type === 'publish-announcement') {
+        onSubmit({
+          actionType: action.type,
+          title: writeTitle,
+          audience: subject, // Re-using subject state for Audience
+          content: noteText, // Re-using noteText state for Message body
+        });
       } else {
         const data = {
           actionType: action.type,
@@ -664,7 +671,30 @@ export default function ActionModal({ action, onClose, onSubmit }) {
           </div>
         )}
 
-
+        {action.type === 'publish-announcement' && (
+          <div className="action-form" style={{ minWidth: '400px' }}>
+            <label>Title
+              <input type="text" value={writeTitle} onChange={(e) => setWriteTitle(e.target.value)} required placeholder="E.g., Tomorrow's assembly cancelled" />
+            </label>
+            <label>Audience
+              <select value={subject} onChange={(e) => setSubject(e.target.value)} required>
+                <option value="">Select target audience</option>
+                <option value="All">All Users</option>
+                <option value="Students">Students Only</option>
+                <option value="Teachers">Teachers Only</option>
+              </select>
+            </label>
+            <label>Message
+              <textarea 
+                value={noteText} 
+                onChange={(e) => setNoteText(e.target.value)} 
+                required 
+                placeholder="Write the announcement details here..."
+                style={{ minHeight: '120px', resize: 'vertical' }}
+              />
+            </label>
+          </div>
+        )}
 
         {action.type === "schedule" && (
           <div className="modal-form">

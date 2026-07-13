@@ -71,11 +71,13 @@ export default function TeacherDashboard({ session, onLogout }) {
   const [dbSubjects, setDbSubjects] = useState([]);
   const [dbFeedback, setDbFeedback] = useState([]);
   const [dbClasses, setDbClasses] = useState([]);
+  const [dbNotices, setDbNotices] = useState([]);
 
   useEffect(() => {
     fetch('/api/lms-data?type=subjects').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbSubjects(data) }).catch(console.error);
     fetch('/api/lms-data?type=feedback').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbFeedback(data) }).catch(console.error);
     fetch('/api/lms-data?type=classes').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbClasses(data) }).catch(console.error);
+    fetch('/api/lms-data?type=notices').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbNotices(data) }).catch(console.error);
   }, []);
 
   const teacherData = {
@@ -256,9 +258,35 @@ export default function TeacherDashboard({ session, onLogout }) {
           const newClass = await res.json();
           setDbClasses([newClass, ...dbClasses]); // Optimistic update
           setAction(null);
+        } else {
+          console.error("Failed to schedule class");
         }
       } catch (err) {
-        console.error("Error creating class:", err);
+        console.error("Error scheduling class:", err);
+      }
+    } else if (data.actionType === 'publish-announcement') {
+      try {
+        const res = await fetch('/api/lms-data?type=notices', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title: data.title,
+            audience: data.audience,
+            content: data.content,
+            date: new Date().toISOString(),
+            status: "Published",
+            type: "notice"
+          })
+        });
+        if (res.ok) {
+          const newNotice = await res.json();
+          setDbNotices([newNotice, ...dbNotices]);
+          setAction(null);
+        } else {
+          alert("Failed to publish announcement.");
+        }
+      } catch (err) {
+        console.error("Error publishing announcement:", err);
       }
     } else if (data.actionType === "create-subject") {
       try {
@@ -852,7 +880,22 @@ export default function TeacherDashboard({ session, onLogout }) {
   function renderAnnouncements() {
     return (
       <section className="role-view">
-        {sectionTitle("Class Notices", "Announcements and reminders for students.")}
+        {sectionTitle("Class Notices", "Announcements and reminders for students.", "New announcement", () => setAction({ type: 'publish-announcement', title: 'New announcement', kicker: 'Announcements', primaryLabel: 'Publish' }))}
+        <article className="panel">
+          <div className="stack-list">
+            {dbNotices.length === 0 && <p style={{ color: '#64748b', padding: '16px' }}>No announcements published yet.</p>}
+            {dbNotices.map((notice, idx) => (
+              <div className="list-action-row" key={notice._id || notice.title || idx}>
+                <b>{(notice.status || notice.title || 'N')[0]}</b>
+                <div style={{ flex: 1, padding: '0 12px' }}>
+                  <strong style={{ display: 'block' }}>{notice.title}</strong>
+                  <span style={{ fontSize: '12px', color: '#64748b', display: 'block' }}>{notice.status || 'Draft'} - {notice.audience || 'All'} • {new Date(notice.date || Date.now()).toLocaleDateString()}</span>
+                  {notice.content && <p style={{ fontSize: '13px', color: '#334155', marginTop: '4px' }}>{notice.content}</p>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </article>
       </section>
     );
   }
@@ -887,7 +930,7 @@ export default function TeacherDashboard({ session, onLogout }) {
     'quiz-attempts-view': renderQuizAttempts,
     marks: renderMarks,
     actions: renderFeedback,
-    announcements: () => <div style={{padding:'24px',color:'#64748b'}}>Select a different view.</div>,
+    announcements: renderAnnouncements,
   };
 
   return (

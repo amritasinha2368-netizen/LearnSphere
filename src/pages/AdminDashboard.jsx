@@ -214,6 +214,26 @@ if (data.actionType === 'create-user') {
         } else {
           alert("Failed to bulk upload users.");
         }
+      } else if (data.actionType === 'publish-announcement') {
+        const res = await fetch('/api/lms-data?type=notices', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title: data.title,
+            audience: data.audience,
+            content: data.content,
+            date: new Date().toISOString(),
+            status: "Published",
+            type: "notice"
+          })
+        });
+        if (res.ok) {
+          const newNotice = await res.json();
+          setDbNotices([newNotice, ...dbNotices]);
+          setAction(null);
+        } else {
+          alert("Failed to publish announcement.");
+        }
       }
       // -- Teacher logic --
 if (action.kicker === "Publish assignment" || action.kicker === "Write Instructions" || action.kicker === "Attach File") {
@@ -736,7 +756,7 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
   function renderAnnouncements() {
     return (
       <section className="role-view">
-        {sectionTitle("System Announcements", "Publish and review campus-wide announcements.", "New announcement", () => openAdminAction("New announcement"))}
+        {sectionTitle("System Announcements", "Publish and review campus-wide announcements.", "New announcement", () => setAction({ type: 'publish-announcement', title: 'New announcement', kicker: 'Announcements', primaryLabel: 'Publish' }))}
         <article className="panel">
           <div className="stack-list">
             {adminData.announcements.map((notice, idx) => (
