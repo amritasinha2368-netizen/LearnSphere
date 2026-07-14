@@ -896,7 +896,7 @@ export default function ActionModal({ action, onClose, onSubmit }) {
             className="primary-button modal-primary" 
             type="button" 
             onClick={handleDone} 
-            disabled={action.existingSubmission || ((action.type === "upload" || action.type === "upload-material") && files.length > 0 && uploadStatus !== "success")}
+            disabled={action.existingSubmission || ((action.type === "upload" || action.type === "upload-material") && file !== null && uploadStatus !== "success")}
           >
             <CheckCircle2 size={18} />
             {action.primaryLabel || "Done"}
