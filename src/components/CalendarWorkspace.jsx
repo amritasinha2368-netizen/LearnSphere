@@ -48,11 +48,7 @@ export default function CalendarWorkspace({ classes = [], notices = [], assignme
   }, [classes, notices, assignments]);
 
   return (
-    <section className="role-view" style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 160px)', boxSizing: 'border-box' }}>
-      <div style={{ flexShrink: 0, marginBottom: '16px' }}>
-        <h2 style={{ fontSize: '28px', fontWeight: 800, color: '#0f172a', marginBottom: '4px' }}>Global Calendar</h2>
-        <p style={{ color: '#64748b' }}>View all scheduled classes, notices, and upcoming assignments in one place.</p>
-      </div>
+    <section className="role-view" style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 110px)', boxSizing: 'border-box' }}>
       <div className="calendar-wrapper">
         <Calendar
           localizer={localizer}
