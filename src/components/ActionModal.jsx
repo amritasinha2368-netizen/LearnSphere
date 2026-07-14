@@ -351,6 +351,16 @@ export default function ActionModal({ action, onClose, onSubmit }) {
           </div>
         ) : null}
 
+        {action.fileUrl && action.type !== 'upload-material' && (
+          <div style={{ marginTop: '16px', padding: '12px', background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: '6px' }}>
+            <span style={{ fontSize: '13px', fontWeight: 600, color: '#166534', display: 'block', marginBottom: '8px' }}>Attached Assignment File:</span>
+            <a href={action.fileUrl} target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#15803d', textDecoration: 'none', fontWeight: 500, fontSize: '14px' }}>
+              <FileImage size={18} />
+              View Teacher's Document
+            </a>
+          </div>
+        )}
+
         {action.materials && action.materials.length > 0 && (
           <div className="action-details" style={{ flexDirection: 'column', gap: '8px', alignItems: 'flex-start', marginTop: '16px' }}>
             <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--primary)', marginBottom: '4px' }}>Study Materials:</span>
@@ -368,15 +378,6 @@ export default function ActionModal({ action, onClose, onSubmit }) {
 
         {action.type === "upload" && (
           <div className="modal-form">
-            {action.fileUrl && (
-              <div style={{ marginBottom: '16px', padding: '12px', background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: '6px' }}>
-                <span style={{ fontSize: '13px', fontWeight: 600, color: '#166534', display: 'block', marginBottom: '8px' }}>Attached Assignment File:</span>
-                <a href={action.fileUrl} target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#15803d', textDecoration: 'none', fontWeight: 500, fontSize: '14px' }}>
-                  <FileImage size={18} />
-                  View Teacher's Document
-                </a>
-              </div>
-            )}
             <label>
               Note (Optional)
               <textarea 

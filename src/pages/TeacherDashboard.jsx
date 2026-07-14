@@ -480,7 +480,8 @@ export default function TeacherDashboard({ session, onLogout }) {
     setAction({
       kicker: "View assignment",
       title: assignment.title,
-      description: "Review this assignment.",
+      description: assignment.contentBody || assignment.description || "Review this assignment.",
+      fileUrl: assignment.fileUrl,
       type: "marks",
       details: [
         { label: "Subject", value: assignment.subject },
