@@ -121,17 +121,34 @@ export default function SubjectDetails({ subject, onBack, role = 'student' }) {
       <button 
         type="button" 
         onClick={onBack} 
-        style={{ display: 'flex', alignItems: 'center', gap: '8px', border: 'none', background: 'none', color: '#64748b', cursor: 'pointer', padding: '0 0 24px 0', fontSize: '15px' }}
+        style={{ 
+          display: 'inline-flex', 
+          alignItems: 'center', 
+          gap: '8px', 
+          border: '1px solid #e2e8f0', 
+          background: 'white', 
+          color: '#475569', 
+          cursor: 'pointer', 
+          padding: '8px 16px', 
+          borderRadius: '8px',
+          fontSize: '14px',
+          fontWeight: 600,
+          marginBottom: '24px',
+          boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+          transition: 'all 0.2s'
+        }}
+        onMouseOver={(e) => { e.currentTarget.style.background = '#f8fafc'; e.currentTarget.style.color = '#0f172a'; }}
+        onMouseOut={(e) => { e.currentTarget.style.background = 'white'; e.currentTarget.style.color = '#475569'; }}
       >
-        <ArrowLeft size={18} /> Back to Subjects
+        <ArrowLeft size={16} /> Back to Subjects
       </button>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '32px' }}>
         <div>
-          <h2 style={{ fontSize: '32px', fontWeight: 800, color: '#0f172a', marginBottom: '8px' }}>{localSubject.title}</h2>
-          <div style={{ display: 'flex', gap: '16px', color: '#64748b', fontSize: '15px' }}>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><BookOpen size={16} /> Instructor: {localSubject.instructor}</span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Layers size={16} /> {localSubject.chapters?.length || 0} Chapters</span>
+          <h2 style={{ fontSize: '36px', fontWeight: 900, color: '#0f172a', marginBottom: '12px', letterSpacing: '-0.02em' }}>{localSubject.title}</h2>
+          <div style={{ display: 'flex', gap: '20px', color: '#334155', fontSize: '16px', fontWeight: 600 }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#f1f5f9', padding: '6px 12px', borderRadius: '6px' }}><BookOpen size={18} color="#2563eb" /> Instructor: {localSubject.instructor}</span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#f1f5f9', padding: '6px 12px', borderRadius: '6px' }}><Layers size={18} color="#059669" /> {localSubject.chapters?.length || 0} Chapters</span>
           </div>
         </div>
       </div>
