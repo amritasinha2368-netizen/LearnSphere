@@ -845,6 +845,7 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
         { label: "Students", value: subject.enrolled },
         { label: "Assignments", value: subject.assignments },
       ],
+      materials: subject.materials,
       primaryLabel: "Open subject",
     });
   }

@@ -450,6 +450,7 @@ export default function TeacherDashboard({ session, onLogout }) {
         { label: "Students", value: subject.enrolled },
         { label: "Assignments", value: subject.assignments },
       ],
+      materials: subject.materials,
       primaryLabel: "Open subject",
     });
   }
