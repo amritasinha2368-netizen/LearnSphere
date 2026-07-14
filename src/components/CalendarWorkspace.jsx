@@ -49,20 +49,18 @@ export default function CalendarWorkspace({ classes = [], notices = [], assignme
   }, [classes, notices, assignments]);
 
   return (
-    <section className="role-view" style={{ height: 'calc(100vh - 100px)', padding: '24px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px' }}>
-        <div>
-          <h2 style={{ fontSize: '32px', fontWeight: 800, color: '#0f172a', marginBottom: '8px' }}>Global Calendar</h2>
-          <p style={{ color: '#64748b' }}>View all scheduled classes, notices, and upcoming assignments in one place.</p>
-        </div>
+    <section className="role-view" style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 'calc(100vh - 80px)', boxSizing: 'border-box' }}>
+      <div style={{ flexShrink: 0, marginBottom: '24px' }}>
+        <h2 style={{ fontSize: '32px', fontWeight: 800, color: '#0f172a', marginBottom: '8px' }}>Global Calendar</h2>
+        <p style={{ color: '#64748b' }}>View all scheduled classes, notices, and upcoming assignments in one place.</p>
       </div>
-      <div style={{ background: 'white', padding: '24px', borderRadius: '12px', border: '1px solid var(--line)', height: '100%', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
+      <div style={{ flex: 1, background: 'white', padding: '24px', borderRadius: '12px', border: '1px solid var(--line)', minHeight: '600px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)', display: 'flex', flexDirection: 'column' }}>
         <Calendar
           localizer={localizer}
           events={events}
           startAccessor="start"
           endAccessor="end"
-          style={{ height: '100%', fontFamily: 'inherit' }}
+          style={{ flex: 1, height: '100%', fontFamily: 'inherit' }}
           views={['month', 'week', 'day']}
           defaultView="month"
           eventPropGetter={(event) => {

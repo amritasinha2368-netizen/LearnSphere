@@ -65,7 +65,6 @@ const navItems = [
   { id: "tests", label: "Test Builder", icon: FilePenLine },
   { id: "code", label: "Code Builder", icon: TerminalSquare },
   { id: "marks", label: "Quiz Marks", icon: ClipboardCheck },
-  { id: "calendar", label: "Calendar", icon: CalendarDays },
   { id: "actions", label: "Feedback", icon: MessageSquarePlus },
   { id: "leaderboard", label: "Leaderboards", icon: Medal },
 ];
