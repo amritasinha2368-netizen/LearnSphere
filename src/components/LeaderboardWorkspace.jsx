@@ -166,7 +166,7 @@ export default function LeaderboardWorkspace({ users = [], assignments = [], cod
                 <div className="row-score">
                   {item.xp} <span className="xp-label">XP</span>
                 </div>
-                {currentUser.role === 'admin' && (
+                {(currentUser.role === 'admin' || currentUser.role === 'Administrator') && (
                   <div className="row-admin-actions">
                     <button className="lb-edit-btn" onClick={() => handleEdit(item.originalName, item.xp)} title="Edit Player">
                       <Edit2 size={14} />
