@@ -480,11 +480,11 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
             <div className="hero-copy">
               <p className="eyebrow">Admin control room</p>
               <h2>Run LearnSphere through <span>separate command modules.</span></h2>
-              <p>Manage users, announcements, badges, leaderboards, and system health without stacking everything in one long screen.</p>
+              <p>Manage users, announcements, subjects, classes, and calendar events without stacking everything in one long screen.</p>
               <div className="hero-status-row" aria-label="Admin dashboard status">
-                <span>{adminData.users.students + adminData.users.teachers + adminData.users.admins} Total Users</span>
-                <span>System {metrics.systemAverage}%</span>
-                <span>{adminData.governance.reportRequests} Open Requests</span>
+                <span>{dbUsers.length} Total Users</span>
+                <span>{dbEvents.length} Calendar Events</span>
+                <span>{dbNotices.length} Announcements</span>
               </div>
             </div>
             <div className="admin-figure-scene" aria-hidden="true">
@@ -511,16 +511,17 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
               </div>
             </div>
             <div className="compact-list">
-              <button className="compact-item violet" type="button" onClick={() => setActiveView("users")}><b>1</b><span><strong>Pending invites</strong><em>{adminData.users.pendingInvites} invitations pending</em></span><i>Users</i></button>
-              <button className="compact-item green" type="button" onClick={() => setActiveView("health")}><b>2</b><span><strong>System Checks</strong><em>{metrics.systemAverage}% running</em></span><i>Health</i></button>
+              <button className="compact-item violet" type="button" onClick={() => setActiveView("users")}><b>1</b><span><strong>Manage Users</strong><em>{dbUsers.length} total users in the system</em></span><i>Users</i></button>
+              <button className="compact-item blue" type="button" onClick={() => setActiveView("calendar")}><b>2</b><span><strong>Calendar</strong><em>{dbEvents.length} events scheduled</em></span><i>Calendar</i></button>
+              <button className="compact-item green" type="button" onClick={() => setActiveView("announcements")}><b>3</b><span><strong>Announcements</strong><em>{dbNotices.length} active notices published</em></span><i>Notices</i></button>
             </div>
           </article>
         </div>
         <div className="dash-metric-grid">
-          <AdminMetric code="US" label="Total users" value={metrics.totalUsers.toLocaleString()} detail={`${metrics.activeRate}% active today`} tone="violet" />
-          <AdminMetric code="CU" label="Curriculum coverage" value={`${metrics.curriculumCoverage}%`} detail="Subjects mapped to LMS" />
-          <AdminMetric code="TA" label="Teacher assignment" value={`${metrics.assignmentCoverage}%`} detail="Courses with assigned faculty" tone="green" />
-          <AdminMetric code="GI" label="Governance index" value={`${metrics.governanceIndex}%`} detail="Calculated health score" tone="amber" />
+          <AdminMetric code="US" label="Total users" value={dbUsers.length.toLocaleString()} detail={`${dbUsers.length > 0 ? 100 : 0}% active today`} tone="violet" />
+          <AdminMetric code="EV" label="Calendar events" value={dbEvents.length.toLocaleString()} detail="Scheduled events & deadlines" tone="blue" />
+          <AdminMetric code="AN" label="Announcements" value={dbNotices.length.toLocaleString()} detail="System-wide notices" tone="green" />
+          <AdminMetric code="SB" label="Subjects" value={dbSubjects.length.toLocaleString()} detail="Managed subjects" tone="amber" />
         </div>
       </section>
     );
