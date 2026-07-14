@@ -17,6 +17,16 @@ const subjectSchema = new mongoose.Schema({
     fileUrl: { type: String },
     addedBy: { type: String },
     addedAt: { type: Date, default: Date.now }
+  }],
+  chapters: [{
+    title: { type: String },
+    materials: [{
+      title: { type: String },
+      url: { type: String },
+      type: { type: String }, // 'video', 'pdf', 'image', 'link', 'text'
+      addedBy: { type: String },
+      addedAt: { type: Date, default: Date.now }
+    }]
   }]
 }, { timestamps: true });
 

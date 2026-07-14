@@ -16,12 +16,16 @@ import {
   ChevronLeft,
   ChevronRight
 } from "lucide-react";
-import { format, addMonths, subMonths, startOfMonth, endOfMonth, startOfWeek, endOfWeek, isSameMonth, isSameDay, addDays, parseISO } from 'date-fns';
+import { format, addMonths, subMonths, startOfMonth, endOfMonth, startOfWeek, endOfWeek, isSameMonth, isSameDay, addDays, parseISO, parse, getDay } from 'date-fns';
+import { enUS } from 'date-fns/locale';
+import { Calendar as BigCalendar, dateFnsLocalizer } from 'react-big-calendar';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 import ActionModal from "../components/ActionModal.jsx";
 import RoleShell from "../components/RoleShell.jsx";
 import ProgressBar from "../components/ProgressBar.jsx";
 import TestBuilder from "../components/TestBuilder.jsx";
 import CodeBuilder from "../components/CodeBuilder.jsx";
+import SubjectDetails from "../components/SubjectDetails.jsx";
 import { teacherData as teacherDataMock } from "../data/lmsData.js";
 import { getTeacherMetrics, percent } from "../data/metrics.js";
 import "./TeacherDashboard.css";
@@ -32,7 +36,7 @@ const navItems = [
   { id: "subjects", label: "Subjects", icon: BookCopy },
   { id: "assignments", label: "Assignments", icon: UploadCloud },
   { id: "submissions", label: "Submissions", icon: UsersRound },
-  { id: "classes", label: "Schedule Class", icon: CalendarClock },
+  { id: "classes", label: "Classes", icon: CalendarClock },
   { id: "tests", label: "Test Builder", icon: FilePenLine },
   { id: "code", label: "Code Builder", icon: TerminalSquare },
   { id: "marks", label: "Quiz Marks", icon: ClipboardCheck },
@@ -69,6 +73,7 @@ export default function TeacherDashboard({ session, onLogout }) {
     localStorage.setItem("teacher_active_view", view);
   };
   const [action, setAction] = useState(null);
+  const [activeSubject, setActiveSubject] = useState(null);
   const [newClassTitle, setNewClassTitle] = useState("");
   const [newClassTime, setNewClassTime] = useState("");
   const [newClassRoom, setNewClassRoom] = useState("");
@@ -441,18 +446,7 @@ export default function TeacherDashboard({ session, onLogout }) {
   };
 
   function openSubject(subject) {
-    setAction({
-      kicker: "Subject management",
-      title: subject.title,
-      description: "Manage content, assignments, student submissions, and quiz marks for this subject.",
-      details: [
-        { label: "Section", value: subject.section },
-        { label: "Students", value: subject.enrolled },
-        { label: "Assignments", value: subject.assignments },
-      ],
-      materials: subject.materials,
-      primaryLabel: "Open subject",
-    });
+    setActiveSubject(subject);
   }
 
   function openCreateSubject() {
@@ -778,46 +772,59 @@ export default function TeacherDashboard({ session, onLogout }) {
   };
 
   function renderClasses() {
+    const localizer = dateFnsLocalizer({
+      format, parse, startOfWeek, getDay, locales: { 'en-US': enUS }
+    });
+    
     return (
       <section className="role-view">
-        {sectionTitle("Class Scheduler", "Schedule a class with subject, time, room, or link.")}
+        {sectionTitle("Classes", "View scheduled classes and events on your calendar.")}
         
-        {/* Top Panel - Full Width Form */}
-        <form onSubmit={handleScheduleClass} className="panel" style={{ display: 'flex', gap: '16px', alignItems: 'flex-end', marginBottom: '24px', flexWrap: 'wrap' }}>
-          <div style={{ flex: 1, minWidth: '200px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: 500 }}>Subject / Title</label>
-            <input type="text" value={newClassTitle} onChange={e => setNewClassTitle(e.target.value)} required placeholder="e.g. Data Structures" style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--line)' }} />
-          </div>
-          <div style={{ flex: 1, minWidth: '200px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: 500 }}>Time</label>
-            <input type="text" value={newClassTime} onChange={e => setNewClassTime(e.target.value)} required placeholder="e.g. 09:30 AM, Monday" style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--line)' }} />
-          </div>
-          <div style={{ flex: 1, minWidth: '200px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: 500 }}>Room / Link</label>
-            <input type="text" value={newClassRoom} onChange={e => setNewClassRoom(e.target.value)} required placeholder="e.g. Lab 3" style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--line)' }} />
-          </div>
-          <button type="submit" className="panel-button" style={{ padding: '10px 24px', height: '42px' }}>Schedule Class</button>
-        </form>
-
-        {/* Preview List */}
-        <h3 style={{ marginBottom: '16px', fontSize: '18px' }}>Scheduled Classes</h3>
-        <div className="compact-list" style={{ display: 'grid', gap: '12px' }}>
-          {dbClasses.length === 0 && <p style={{ color: '#64748b' }}>No classes scheduled.</p>}
-          {dbClasses.map(cls => (
-            <div key={cls.id || cls._id} className="list-item" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'white', padding: '16px', borderRadius: '8px', border: '1px solid var(--line)'}}>
-              <div style={{display: 'flex', flexDirection: 'column', gap: '4px'}}>
-                <strong style={{ fontSize: '16px' }}>{cls.title}</strong>
-                <span className="meta">{cls.time} • {cls.room}</span>
-              </div>
-              <button type="button" onClick={() => deleteClass(cls.id || cls._id)} style={{ background: '#fef2f2', border: '1px solid #fecaca', color: '#ef4444', cursor: 'pointer', padding: '8px 16px', borderRadius: '6px', fontWeight: 500 }} title="Delete class">
-                Delete
-              </button>
+        {/* Preview List & Calendar */}
+        <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
+          <div style={{ flex: '1 1 300px' }}>
+            <h3 style={{ marginBottom: '16px', fontSize: '18px' }}>Upcoming Classes</h3>
+            <div className="compact-list" style={{ display: 'grid', gap: '12px' }}>
+              {dbClasses.length === 0 && <p style={{ color: '#64748b' }}>No classes scheduled.</p>}
+              {dbClasses.map(cls => (
+                <div key={cls.id || cls._id} className="list-item" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'white', padding: '16px', borderRadius: '8px', border: '1px solid var(--line)'}}>
+                  <div style={{display: 'flex', flexDirection: 'column', gap: '4px'}}>
+                    <strong style={{ fontSize: '16px' }}>{cls.title}</strong>
+                    <span className="meta">{cls.time} • {cls.room}</span>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+          
+          <div style={{ flex: '2 1 600px', background: 'white', padding: '16px', borderRadius: '12px', border: '1px solid var(--line)', height: '600px' }}>
+            <BigCalendar
+              localizer={localizer}
+              events={[
+                ...dbClasses.map(c => {
+                  let startDate = new Date();
+                  return { title: `Class: ${c.title} (${c.room})`, start: startDate, end: startDate, allDay: false, resource: c }
+                }),
+                ...dbEvents.map(e => ({ title: `Event: ${e.title}`, start: parseISO(e.date), end: parseISO(e.date), allDay: true, resource: e }))
+              ]}
+              startAccessor="start"
+              endAccessor="end"
+              style={{ height: '100%' }}
+              views={['month', 'week', 'day']}
+              defaultView="month"
+              eventPropGetter={(event) => {
+                let backgroundColor = '#3b82f6';
+                if (event.title.startsWith('Event')) backgroundColor = '#8b5cf6';
+                return { style: { backgroundColor, borderRadius: '4px', border: 'none' } };
+              }}
+            />
+          </div>
         </div>
       </section>
     );
   }
+
+
 
   function renderMarks() {
     return (
@@ -1061,6 +1068,26 @@ export default function TeacherDashboard({ session, onLogout }) {
     actions: renderFeedback,
     announcements: renderAnnouncements,
   };
+
+  if (activeSubject) {
+    return (
+      <RoleShell
+        session={session}
+        profile={teacherData.profile}
+        roleLabel="Teacher"
+        roleTone="teacher"
+        navItems={navItems}
+        activeView={activeView}
+        onViewChange={setActiveView}
+        onLogout={onLogout}
+      >
+        <SubjectDetails 
+          subject={activeSubject} 
+          onBack={() => setActiveSubject(null)} 
+        />
+      </RoleShell>
+    );
+  }
 
   return (
     <RoleShell

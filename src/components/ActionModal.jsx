@@ -33,6 +33,9 @@ export default function ActionModal({ action, onClose, onSubmit }) {
   const [userEmail, setUserEmail] = useState("");
   const [userParentName, setUserParentName] = useState("");
   const [userMobile, setUserMobile] = useState("");
+  const [userYear, setUserYear] = useState("");
+  const [userBranch, setUserBranch] = useState("");
+  const [userCollege, setUserCollege] = useState("");
   
   const [teacherName, setTeacherName] = useState("");
   
@@ -222,7 +225,10 @@ export default function ActionModal({ action, onClose, onSubmit }) {
           password: subjectInstructor,
           email: userEmail,
           parentName: userParentName,
-          mobileNumber: userMobile
+          mobileNumber: userMobile,
+          year: userYear,
+          branch: userBranch,
+          collegeName: userCollege
         });
       } else if (action.type === 'bulk-create-users') {
         onSubmit({
@@ -723,6 +729,12 @@ export default function ActionModal({ action, onClose, onSubmit }) {
             <label>Email ID<input type="email" value={userEmail} onChange={(e) => setUserEmail(e.target.value)} /></label>
             <label>Parent's Name<input type="text" value={userParentName} onChange={(e) => setUserParentName(e.target.value)} /></label>
             <label>Mobile Number<input type="tel" value={userMobile} onChange={(e) => setUserMobile(e.target.value)} /></label>
+            
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              <label>Year<input type="text" value={userYear} onChange={(e) => setUserYear(e.target.value)} placeholder="e.g. 2nd Year" /></label>
+              <label>Branch<input type="text" value={userBranch} onChange={(e) => setUserBranch(e.target.value)} placeholder="e.g. Computer Science" /></label>
+            </div>
+            <label>College Name<input type="text" value={userCollege} onChange={(e) => setUserCollege(e.target.value)} placeholder="e.g. Tech University" /></label>
           </div>
         )}
 

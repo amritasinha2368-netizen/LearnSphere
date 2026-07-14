@@ -74,15 +74,33 @@ export default async function handler(req, res) {
     
     if (req.method === 'PUT') {
       const data = req.body;
-      if (type === 'subjects' && data.action === 'add_material' && data.subjectId) {
+      if (type === 'subjects' && data.subjectId) {
         const subject = await Model.findById(data.subjectId);
         if (!subject) return res.status(404).json({ error: "Subject not found" });
         
-        subject.materials.push({
-          title: data.title,
-          fileUrl: data.fileUrl,
-          addedBy: data.addedBy || "Teacher"
-        });
+        if (data.action === 'add_material') {
+          subject.materials.push({
+            title: data.title,
+            fileUrl: data.fileUrl,
+            addedBy: data.addedBy || "Teacher"
+          });
+        } else if (data.action === 'add_chapter') {
+          subject.chapters.push({
+            title: data.title,
+            materials: []
+          });
+        } else if (data.action === 'add_chapter_material') {
+          const chapter = subject.chapters.id(data.chapterId);
+          if (chapter) {
+            chapter.materials.push({
+              title: data.title,
+              url: data.url,
+              type: data.materialType || 'link',
+              addedBy: data.addedBy || "Teacher"
+            });
+          }
+        }
+        
         await subject.save();
         
         const doc = subject.toObject();

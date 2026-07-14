@@ -11,6 +11,9 @@ const userSchema = new mongoose.Schema({
   cohort: { type: String },
   mentor: { type: String },
   department: { type: String },
+  year: { type: String },
+  branch: { type: String },
+  collegeName: { type: String },
 }, { timestamps: true });
 
 export default mongoose.models.User || mongoose.model("User", userSchema);

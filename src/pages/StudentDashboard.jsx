@@ -24,6 +24,7 @@ import RoleShell from "../components/RoleShell.jsx";
 import ProgressBar from "../components/ProgressBar.jsx";
 import TestEnvironment from "../components/TestEnvironment.jsx";
 import CodingWorkspace from "./CodingWorkspace.jsx";
+import SubjectDetails from "../components/SubjectDetails.jsx";
 import { studentData as studentDataMock } from "../data/lmsData.js";
 import { getStudentMetrics, percent } from "../data/metrics.js";
 import "./StudentDashboard.css";
@@ -80,6 +81,7 @@ export default function StudentDashboard({ session, onLogout }) {
   
   const [activeCodingTest, setActiveCodingTest] = useState(null);
   const [codingTests, setCodingTests] = useState([]);
+  const [activeSubject, setActiveSubject] = useState(null);
 
   // Assignment Backend State
   const [backendAssignments, setBackendAssignments] = useState([]);
@@ -216,18 +218,7 @@ export default function StudentDashboard({ session, onLogout }) {
   }
 
   function openSubject(subject) {
-    setAction({
-      kicker: "Subject workspace",
-      title: subject.title,
-      description: "Open lessons, resources, assignments, quiz marks, and teacher notes for this subject.",
-      details: [
-        { label: "Teacher", value: subject.instructor },
-        { label: "Next class", value: subject.nextClass },
-        { label: "Progress", value: `${subject.progress}%` },
-      ],
-      materials: subject.materials, // Pass materials to ActionModal
-      primaryLabel: "Close",
-    });
+    setActiveSubject(subject);
   }
 
   function openAssignment(assignment) {
@@ -1005,6 +996,26 @@ export default function StudentDashboard({ session, onLogout }) {
   
   if (activeCodingTest) {
     return <CodingWorkspace testId={activeCodingTest.id || activeCodingTest._id} onBack={() => setActiveCodingTest(null)} />;
+  }
+
+  if (activeSubject) {
+    return (
+      <RoleShell
+        session={session}
+        profile={studentData.profile}
+        roleLabel="Student"
+        roleTone="student"
+        navItems={navItems}
+        activeView={activeView}
+        onViewChange={setActiveView}
+        onLogout={onLogout}
+      >
+        <SubjectDetails 
+          subject={activeSubject} 
+          onBack={() => setActiveSubject(null)} 
+        />
+      </RoleShell>
+    );
   }
 
   return (

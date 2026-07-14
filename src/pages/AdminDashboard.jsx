@@ -24,7 +24,10 @@ import {
   ChevronLeft,
   ChevronRight
 } from "lucide-react";
-import { format, addMonths, subMonths, startOfMonth, endOfMonth, startOfWeek, endOfWeek, isSameMonth, isSameDay, addDays, parseISO } from 'date-fns';
+import { format, addMonths, subMonths, startOfMonth, endOfMonth, startOfWeek, endOfWeek, isSameMonth, isSameDay, addDays, parseISO, parse, getDay } from 'date-fns';
+import { enUS } from 'date-fns/locale';
+import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 import ActionModal from "../components/ActionModal.jsx";
 import RoleShell from "../components/RoleShell.jsx";
 import ProgressBar from "../components/ProgressBar.jsx";
@@ -35,6 +38,18 @@ import { getAdminMetrics, getTeacherMetrics, percent } from "../data/metrics.js"
 import "./AdminDashboard.css";
 
 // calendarDays mock removed
+
+const locales = {
+  'en-US': enUS,
+};
+
+const localizer = dateFnsLocalizer({
+  format,
+  parse,
+  startOfWeek,
+  getDay,
+  locales,
+});
 
 const navItems = [
   { id: "overview", label: "Dashboard", icon: LayoutDashboard },
@@ -476,17 +491,6 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
       <section className="role-view">
         <div className="overview-layout">
           <article className="hero-panel hero-panel-3d admin-hero">
-
-            <div className="hero-copy">
-              <p className="eyebrow">Admin control room</p>
-              <h2>Run LearnSphere through <span>separate command modules.</span></h2>
-              <p>Manage users, announcements, subjects, classes, and calendar events without stacking everything in one long screen.</p>
-              <div className="hero-status-row" aria-label="Admin dashboard status">
-                <span>{dbUsers.length} Total Users</span>
-                <span>{dbEvents.length} Calendar Events</span>
-                <span>{dbNotices.length} Announcements</span>
-              </div>
-            </div>
             <div className="admin-figure-scene" aria-hidden="true">
               <div className="admin-server-stack">
                 <div className="server-blade" />
@@ -501,6 +505,18 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
               <span className="floating-sticker sticker-sync">SYNC</span>
               <span className="floating-sticker sticker-live">LIVE</span>
             </div>
+            
+            <div className="hero-copy">
+              <p className="eyebrow">Admin control room</p>
+              <h2>Run LearnSphere through <span>separate command modules.</span></h2>
+              <p>Manage users, announcements, subjects, classes, and calendar events without stacking everything in one long screen.</p>
+              <div className="hero-status-row" aria-label="Admin dashboard status">
+                <span>{dbUsers.length} Total Users</span>
+                <span>{dbEvents.length} Calendar Events</span>
+                <span>{dbNotices.length} Announcements</span>
+              </div>
+            </div>
+
             <div className="hero-3d-object" aria-hidden="true"><span /><span /><span /></div>
           </article>
           <article className="panel">
@@ -1140,21 +1156,70 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
           <button type="submit" className="panel-button" style={{ padding: '10px 24px', height: '42px' }}>Schedule Class</button>
         </form>
 
-        {/* Preview List */}
-        <h3 style={{ marginBottom: '16px', fontSize: '18px' }}>Scheduled Classes</h3>
-        <div className="compact-list" style={{ display: 'grid', gap: '12px' }}>
-          {dbClasses.length === 0 && <p style={{ color: '#64748b' }}>No classes scheduled.</p>}
-          {dbClasses.map(cls => (
-            <div key={cls.id || cls._id} className="list-item" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'white', padding: '16px', borderRadius: '8px', border: '1px solid var(--line)'}}>
-              <div style={{display: 'flex', flexDirection: 'column', gap: '4px'}}>
-                <strong style={{ fontSize: '16px' }}>{cls.title}</strong>
-                <span className="meta">{cls.time} • {cls.room}</span>
-              </div>
-              <button type="button" onClick={() => deleteClass(cls.id || cls._id)} style={{ background: '#fef2f2', border: '1px solid #fecaca', color: '#ef4444', cursor: 'pointer', padding: '8px 16px', borderRadius: '6px', fontWeight: 500 }} title="Delete class">
-                Delete
-              </button>
+        {/* Preview List & Calendar */}
+        <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
+          <div style={{ flex: '1 1 300px' }}>
+            <h3 style={{ marginBottom: '16px', fontSize: '18px' }}>Scheduled Classes</h3>
+            <div className="compact-list" style={{ display: 'grid', gap: '12px' }}>
+              {dbClasses.length === 0 && <p style={{ color: '#64748b' }}>No classes scheduled.</p>}
+              {dbClasses.map(cls => (
+                <div key={cls.id || cls._id} className="list-item" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'white', padding: '16px', borderRadius: '8px', border: '1px solid var(--line)'}}>
+                  <div style={{display: 'flex', flexDirection: 'column', gap: '4px'}}>
+                    <strong style={{ fontSize: '16px' }}>{cls.title}</strong>
+                    <span className="meta">{cls.time} • {cls.room}</span>
+                  </div>
+                  <button type="button" onClick={() => deleteClass(cls.id || cls._id)} style={{ background: '#fef2f2', border: '1px solid #fecaca', color: '#ef4444', cursor: 'pointer', padding: '8px 16px', borderRadius: '6px', fontWeight: 500 }} title="Delete class">
+                    Delete
+                  </button>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+          
+          <div style={{ flex: '2 1 600px', background: 'white', padding: '16px', borderRadius: '12px', border: '1px solid var(--line)', height: '600px' }}>
+            <Calendar
+              localizer={localizer}
+              events={[
+                ...dbClasses.map(c => {
+                  let startDate = new Date();
+                  // Try to parse relative strings like "10:00 AM, Monday" if possible, else default to today
+                  // For a real app, dbClasses should store actual Date objects.
+                  return {
+                    title: `Class: ${c.title} (${c.room})`,
+                    start: startDate,
+                    end: addDays(startDate, 0),
+                    allDay: false,
+                    resource: c
+                  }
+                }),
+                ...dbEvents.map(e => ({
+                  title: `Event: ${e.title}`,
+                  start: parseISO(e.date),
+                  end: parseISO(e.date),
+                  allDay: true,
+                  resource: e
+                })),
+                ...dbNotices.map(n => ({
+                  title: `Notice: ${n.title}`,
+                  start: new Date(n.publishDate || n.createdAt),
+                  end: new Date(n.publishDate || n.createdAt),
+                  allDay: true,
+                  resource: n
+                }))
+              ]}
+              startAccessor="start"
+              endAccessor="end"
+              style={{ height: '100%' }}
+              views={['month', 'week', 'day']}
+              defaultView="month"
+              eventPropGetter={(event) => {
+                let backgroundColor = '#3b82f6'; // class blue
+                if (event.title.startsWith('Event')) backgroundColor = '#8b5cf6'; // event violet
+                if (event.title.startsWith('Notice')) backgroundColor = '#10b981'; // notice green
+                return { style: { backgroundColor, borderRadius: '4px', border: 'none' } };
+              }}
+            />
+          </div>
         </div>
       </section>
     );
