@@ -41,7 +41,6 @@ const navItems = [
   { id: "users", label: "Users", icon: UsersRound },
   { id: "governance", label: "Governance", icon: ShieldCheck },
   { id: "announcements", label: "Announcements", icon: BellRing },
-  { id: "health", label: "System Health", icon: BarChart3 },
   { id: "subjects", label: "Subjects", icon: BookCopy },
   { id: "assignments", label: "Assignments", icon: UploadCloud },
   { id: "submissions", label: "Submissions", icon: UsersRound },
@@ -754,23 +753,28 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
 
   function renderGovernance() {
     const items = [
-      ["Badge rules", adminData.governance.badgeRules, Medal],
-      ["Leaderboards", adminData.governance.leaderboardGroups, TrophyFallback],
-      ["Announcements", adminData.governance.openAnnouncements, BellRing],
-      ["Report requests", adminData.governance.reportRequests, FileBarChart2],
+      ["Badge rules", adminData.governance.badgeRules, Medal, null],
+      ["Leaderboards", adminData.governance.leaderboardGroups, TrophyFallback, "leaderboard"],
+      ["Announcements", adminData.governance.openAnnouncements, BellRing, "announcements"],
     ];
 
     return (
       <section className="role-view">
-        {sectionTitle("Governance", "Control badges, leaderboards, announcements, and report requests.")}
-        <div className="module-grid four">
-          {items.map(([label, value, Icon]) => (
+        {sectionTitle("Governance", "Control badges, leaderboards, and announcements.")}
+        <div className="module-grid three">
+          {items.map(([label, value, Icon, viewId]) => (
             <article className="module-card" key={label}>
               <span className="module-code violet"><Icon size={18} /></span>
               <h3>{label}</h3>
               <strong className="module-big">{value}</strong>
               <p>Open governance control for {label.toLowerCase()}.</p>
-              <button type="button" onClick={() => openAdminAction(label, [{ label, value }])}>Open</button>
+              <button type="button" onClick={() => {
+                if (viewId) {
+                  setActiveView(viewId);
+                } else {
+                  openAdminAction(label, [{ label, value }]);
+                }
+              }}>Open</button>
             </article>
           ))}
         </div>
@@ -805,26 +809,6 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
   }
 
 
-
-  function renderHealth() {
-    return (
-      <section className="role-view">
-        {sectionTitle("Health Calculation", "System health, LMS activity, grading SLA, and attendance sync.", "Publish campus summary", () => openAdminAction("Publish campus summary", [
-          { label: "System average", value: `${metrics.systemAverage}%` },
-          { label: "Governance index", value: `${metrics.governanceIndex}%` },
-        ]))}
-        <div className="module-grid four">
-          {adminData.systemHealth.map((item) => (
-            <article className="module-card" key={item.label}>
-              <span className="module-code green">{item.value}%</span>
-              <h3>{item.label}</h3>
-              <ProgressBar value={item.value} label="Current value" tone="green" />
-            </article>
-          ))}
-        </div>
-      </section>
-    );
-  }
 
   
 
@@ -1408,7 +1392,6 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
     'role-users-view': renderRoleUsers,
     governance: renderGovernance,
     announcements: renderAnnouncements,
-    health: renderHealth,
     subjects: renderSubjects,
     assignments: renderAssignments,
     submissions: renderSubmissions,
