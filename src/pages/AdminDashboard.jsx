@@ -33,6 +33,7 @@ import RoleShell from "../components/RoleShell.jsx";
 import ProgressBar from "../components/ProgressBar.jsx";
 import TestBuilder from "../components/TestBuilder.jsx";
 import CodeBuilder from "../components/CodeBuilder.jsx";
+import SubjectDetails from "../components/SubjectDetails.jsx";
 import { adminData as adminDataMock, teacherData as teacherDataMock } from "../data/lmsData.js";
 import { getAdminMetrics, getTeacherMetrics, percent } from "../data/metrics.js";
 import "./AdminDashboard.css";
@@ -96,6 +97,7 @@ export default function AdminDashboard({ session, onLogout }) {
     localStorage.setItem("admin_active_view", view);
   };
   const [action, setAction] = useState(null);
+  const [activeSubject, setActiveSubject] = useState(null);
   const [selectedRole, setSelectedRole] = useState(null);
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [userSearchQuery, setUserSearchQuery] = useState("");
@@ -852,18 +854,7 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
   };
 
   function openSubject(subject) {
-    setAction({
-      kicker: "Subject management",
-      title: subject.title,
-      description: "Manage content, assignments, student submissions, and quiz marks for this subject.",
-      details: [
-        { label: "Section", value: subject.section },
-        { label: "Students", value: subject.enrolled },
-        { label: "Assignments", value: subject.assignments },
-      ],
-      materials: subject.materials,
-      primaryLabel: "Open subject",
-    });
+    setActiveSubject(subject);
   }
 
   function openCreateSubject() {
@@ -1450,6 +1441,27 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
     marks: renderMarks,
     actions: renderFeedback,
   };
+  if (activeSubject) {
+    return (
+      <RoleShell
+        session={session}
+        profile={adminData.profile}
+        roleLabel="Admin"
+        roleTone="admin"
+        navItems={navItems}
+        activeView={activeView}
+        onViewChange={setActiveView}
+        onLogout={onLogout}
+      >
+        <SubjectDetails 
+          subject={activeSubject} 
+          onBack={() => setActiveSubject(null)} 
+          role="admin"
+        />
+      </RoleShell>
+    );
+  }
+
   return (
     <RoleShell
       session={session}

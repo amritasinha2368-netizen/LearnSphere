@@ -1084,6 +1084,7 @@ export default function TeacherDashboard({ session, onLogout }) {
         <SubjectDetails 
           subject={activeSubject} 
           onBack={() => setActiveSubject(null)} 
+          role="teacher"
         />
       </RoleShell>
     );

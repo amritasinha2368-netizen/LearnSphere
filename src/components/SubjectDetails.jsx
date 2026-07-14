@@ -1,10 +1,91 @@
 import { useState } from "react";
-import { ChevronDown, ChevronRight, FileText, ArrowLeft, BookOpen, Layers } from "lucide-react";
+import { ChevronDown, ChevronRight, FileText, ArrowLeft, BookOpen, Layers, Plus, Link as LinkIcon, UploadCloud, Video, Image as ImageIcon } from "lucide-react";
 import MaterialPreview from "./MaterialPreview.jsx";
 import ProgressBar from "./ProgressBar.jsx";
 
-export default function SubjectDetails({ subject, onBack }) {
-  const [openChapters, setOpenChapters] = useState([0]); // first chapter open by default
+export default function SubjectDetails({ subject, onBack, role = 'student' }) {
+  const [openChapters, setOpenChapters] = useState([0]);
+  const [localSubject, setLocalSubject] = useState(subject);
+  
+  // Chapter creation state
+  const [isAddingChapter, setIsAddingChapter] = useState(false);
+  const [newChapterTitle, setNewChapterTitle] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Material creation state
+  const [addingMaterialTo, setAddingMaterialTo] = useState(null); // chapter _id
+  const [matType, setMatType] = useState('video');
+  const [matTitle, setMatTitle] = useState('');
+  const [matUrl, setMatUrl] = useState('');
+  const [matFile, setMatFile] = useState(null);
+
+  const canManage = role === 'admin' || role === 'teacher';
+
+  const handleAddChapter = async (e) => {
+    e.preventDefault();
+    if (!newChapterTitle.trim()) return;
+    setIsSubmitting(true);
+    try {
+      const res = await fetch('/api/lms-data?type=subjects', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'add_chapter',
+          subjectId: localSubject.id || localSubject._id,
+          title: newChapterTitle
+        })
+      });
+      if (res.ok) {
+        const updated = await res.json();
+        setLocalSubject(updated);
+        setNewChapterTitle("");
+        setIsAddingChapter(false);
+      }
+    } catch (err) { console.error(err); }
+    setIsSubmitting(false);
+  };
+
+  const handleAddMaterial = async (e, chapterId) => {
+    e.preventDefault();
+    if (!matTitle.trim()) return;
+    setIsSubmitting(true);
+    try {
+      let finalUrl = matUrl;
+      
+      // Upload file if it's pdf/image
+      if ((matType === 'pdf' || matType === 'image') && matFile) {
+        const fd = new FormData();
+        fd.append('file', matFile);
+        const uploadRes = await fetch('/api/upload', { method: 'POST', body: fd });
+        if (uploadRes.ok) {
+          const { fileUrl } = await uploadRes.json();
+          finalUrl = fileUrl;
+        }
+      }
+
+      const res = await fetch('/api/lms-data?type=subjects', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'add_chapter_material',
+          subjectId: localSubject.id || localSubject._id,
+          chapterId: chapterId,
+          title: matTitle,
+          url: finalUrl,
+          materialType: matType
+        })
+      });
+      if (res.ok) {
+        const updated = await res.json();
+        setLocalSubject(updated);
+        setAddingMaterialTo(null);
+        setMatTitle('');
+        setMatUrl('');
+        setMatFile(null);
+      }
+    } catch (err) { console.error(err); }
+    setIsSubmitting(false);
+  };
   
   const toggleChapter = (index) => {
     if (openChapters.includes(index)) {
@@ -26,27 +107,56 @@ export default function SubjectDetails({ subject, onBack }) {
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '32px' }}>
         <div>
-          <h2 style={{ fontSize: '32px', fontWeight: 800, color: '#0f172a', marginBottom: '8px' }}>{subject.title}</h2>
+          <h2 style={{ fontSize: '32px', fontWeight: 800, color: '#0f172a', marginBottom: '8px' }}>{localSubject.title}</h2>
           <div style={{ display: 'flex', gap: '16px', color: '#64748b', fontSize: '15px' }}>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><BookOpen size={16} /> Instructor: {subject.instructor}</span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Layers size={16} /> {subject.chapters?.length || 0} Chapters</span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><BookOpen size={16} /> Instructor: {localSubject.instructor}</span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Layers size={16} /> {localSubject.chapters?.length || 0} Chapters</span>
           </div>
         </div>
         
         <div style={{ background: 'white', padding: '16px 24px', borderRadius: '12px', border: '1px solid var(--line)', width: '250px' }}>
           <strong style={{ display: 'block', fontSize: '14px', marginBottom: '8px', color: '#475569' }}>Course Progress</strong>
-          <ProgressBar value={subject.progress || 0} label={`${subject.progress || 0}% Completed`} tone="green" />
+          <ProgressBar value={localSubject.progress || 0} label={`${localSubject.progress || 0}% Completed`} tone="green" />
         </div>
       </div>
 
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+        <h3 style={{ fontSize: '20px', fontWeight: 700 }}>Course Content</h3>
+        {canManage && (
+          <button 
+            type="button" 
+            onClick={() => setIsAddingChapter(!isAddingChapter)}
+            style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'var(--primary)', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontWeight: 600 }}
+          >
+            <Plus size={16} /> Add Chapter
+          </button>
+        )}
+      </div>
+
+      {isAddingChapter && (
+        <form onSubmit={handleAddChapter} style={{ background: 'white', padding: '20px', borderRadius: '12px', border: '1px solid var(--line)', marginBottom: '16px', display: 'flex', gap: '12px' }}>
+          <input 
+            type="text" 
+            value={newChapterTitle} 
+            onChange={e => setNewChapterTitle(e.target.value)} 
+            placeholder="E.g. Chapter 1: Introduction to Data Structures" 
+            style={{ flex: 1, padding: '10px', borderRadius: '6px', border: '1px solid var(--line)' }} 
+            required 
+          />
+          <button type="submit" disabled={isSubmitting} style={{ background: 'var(--ink)', color: 'white', padding: '0 20px', borderRadius: '6px', border: 'none', cursor: 'pointer', fontWeight: 600 }}>
+            {isSubmitting ? 'Saving...' : 'Save Chapter'}
+          </button>
+        </form>
+      )}
+
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-        {(!subject.chapters || subject.chapters.length === 0) && (
+        {(!localSubject.chapters || localSubject.chapters.length === 0) && (
           <div style={{ padding: '48px', textAlign: 'center', background: 'white', borderRadius: '12px', border: '1px solid var(--line)', color: '#64748b' }}>
             No chapters available yet for this subject.
           </div>
         )}
         
-        {subject.chapters && subject.chapters.map((chapter, idx) => (
+        {localSubject.chapters && localSubject.chapters.map((chapter, idx) => (
           <div key={idx} style={{ background: 'white', borderRadius: '12px', border: '1px solid var(--line)', overflow: 'hidden' }}>
             <button 
               type="button"
@@ -73,16 +183,65 @@ export default function SubjectDetails({ subject, onBack }) {
                 {chapter.materials && chapter.materials.map((mat, midx) => (
                   <MaterialPreview key={midx} material={mat} />
                 ))}
+
+                {canManage && addingMaterialTo !== (chapter.id || chapter._id) && (
+                  <button 
+                    type="button"
+                    onClick={() => setAddingMaterialTo(chapter.id || chapter._id)}
+                    style={{ marginTop: '16px', display: 'flex', alignItems: 'center', gap: '6px', background: 'transparent', color: 'var(--primary)', border: '1px dashed var(--primary)', padding: '12px', borderRadius: '8px', cursor: 'pointer', fontWeight: 600, width: '100%', justifyContent: 'center' }}
+                  >
+                    <Plus size={16} /> Add Topic / Material
+                  </button>
+                )}
+
+                {canManage && addingMaterialTo === (chapter.id || chapter._id) && (
+                  <form onSubmit={(e) => handleAddMaterial(e, chapter.id || chapter._id)} style={{ marginTop: '16px', background: '#f8fafc', padding: '20px', borderRadius: '8px', border: '1px solid var(--line)' }}>
+                    <div style={{ display: 'flex', gap: '12px', marginBottom: '16px', flexWrap: 'wrap' }}>
+                      <label style={{ flex: 1, minWidth: '200px' }}>
+                        <span style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 600, color: '#475569' }}>Topic Title</span>
+                        <input type="text" value={matTitle} onChange={e => setMatTitle(e.target.value)} required placeholder="E.g. Lecture 1 Video" style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--line)' }} />
+                      </label>
+                      <label style={{ flex: 1, minWidth: '150px' }}>
+                        <span style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 600, color: '#475569' }}>Type</span>
+                        <select value={matType} onChange={e => setMatType(e.target.value)} style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--line)' }}>
+                          <option value="video">Video Link</option>
+                          <option value="link">Other Link</option>
+                          <option value="pdf">PDF Document</option>
+                          <option value="image">Image</option>
+                        </select>
+                      </label>
+                    </div>
+
+                    {(matType === 'video' || matType === 'link') ? (
+                      <label style={{ display: 'block', marginBottom: '16px' }}>
+                        <span style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 600, color: '#475569' }}>URL</span>
+                        <input type="url" value={matUrl} onChange={e => setMatUrl(e.target.value)} required placeholder="https://youtube.com/..." style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--line)' }} />
+                      </label>
+                    ) : (
+                      <label style={{ display: 'block', marginBottom: '16px' }}>
+                        <span style={{ display: 'block', marginBottom: '6px', fontSize: '13px', fontWeight: 600, color: '#475569' }}>Upload File</span>
+                        <input type="file" onChange={e => setMatFile(e.target.files[0])} required style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px dashed var(--line)', background: 'white' }} />
+                      </label>
+                    )}
+
+                    <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+                      <button type="button" onClick={() => setAddingMaterialTo(null)} style={{ background: 'transparent', border: 'none', color: '#64748b', cursor: 'pointer', fontWeight: 600, padding: '8px 16px' }}>Cancel</button>
+                      <button type="submit" disabled={isSubmitting} style={{ background: 'var(--primary)', color: 'white', padding: '8px 24px', borderRadius: '6px', border: 'none', cursor: 'pointer', fontWeight: 600 }}>
+                        {isSubmitting ? 'Uploading...' : 'Save Material'}
+                      </button>
+                    </div>
+                  </form>
+                )}
               </div>
             )}
           </div>
         ))}
       </div>
       
-      {subject.materials && subject.materials.length > 0 && (!subject.chapters || subject.chapters.length === 0) && (
+      {localSubject.materials && localSubject.materials.length > 0 && (!localSubject.chapters || localSubject.chapters.length === 0) && (
          <div style={{ marginTop: '32px', background: 'white', borderRadius: '12px', border: '1px solid var(--line)', padding: '24px' }}>
             <h3 style={{ fontSize: '18px', fontWeight: 600, marginBottom: '16px' }}>Legacy Materials (Uncategorized)</h3>
-            {subject.materials.map((mat, midx) => (
+            {localSubject.materials.map((mat, midx) => (
               <MaterialPreview key={midx} material={{ title: mat.title, url: mat.fileUrl, type: mat.fileUrl.endsWith('.pdf') ? 'pdf' : 'link' }} />
             ))}
          </div>
