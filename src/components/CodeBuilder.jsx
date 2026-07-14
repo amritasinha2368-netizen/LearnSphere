@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { UploadCloud, CheckCircle, Loader2 } from 'lucide-react';
 import './TestBuilder.css'; // We can share the CSS for now
 
+let cachedCodingQuestions = [];
+let cachedPublishedTests = [];
+
 export default function CodeBuilder({ openCreateCodingQuestion, onPublish, refreshTrigger }) {
-  const [codingQuestions, setCodingQuestions] = useState([]);
+  const [codingQuestions, setCodingQuestions] = useState(cachedCodingQuestions);
   const [selectedCodingQuestions, setSelectedCodingQuestions] = useState([]);
   const [codingStep, setCodingStep] = useState(0); // 0: Dashboard (Published), 1: Publish New
   const [codingSubject, setCodingSubject] = useState("Computer Science");
@@ -18,17 +21,23 @@ export default function CodeBuilder({ openCreateCodingQuestion, onPublish, refre
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const [publishedTests, setPublishedTests] = useState([]);
+  const [publishedTests, setPublishedTests] = useState(cachedPublishedTests);
 
   const fetchQuestionsAndTests = () => {
     fetch('/api/coding-questions')
       .then(res => res.json())
-      .then(data => setCodingQuestions(data))
+      .then(data => {
+        cachedCodingQuestions = data;
+        setCodingQuestions(data);
+      })
       .catch(err => console.error("Error fetching coding questions:", err));
       
     fetch('/api/coding-tests')
       .then(res => res.json())
-      .then(data => setPublishedTests(data))
+      .then(data => {
+        cachedPublishedTests = data;
+        setPublishedTests(data);
+      })
       .catch(err => console.error("Error fetching coding tests:", err));
   };
 
@@ -49,6 +58,8 @@ export default function CodeBuilder({ openCreateCodingQuestion, onPublish, refre
       if (!res.ok) {
         setPublishedTests(previousTests); // Revert on failure
         alert("Failed to delete. Please try again.");
+      } else {
+        cachedPublishedTests = cachedPublishedTests.filter(t => t.id !== id);
       }
     } catch (err) {
       setPublishedTests(previousTests);

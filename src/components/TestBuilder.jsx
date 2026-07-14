@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { questionsData } from '../data/questionsData.js';
 import './TestBuilder.css';
 
+let cachedStandardQuizzes = [];
+
 export default function TestBuilder({ onPublish, refreshTrigger }) {
   const [questions, setQuestions] = useState(questionsData);
   const [categoryFilter, setCategoryFilter] = useState("All");
@@ -18,12 +20,15 @@ export default function TestBuilder({ onPublish, refreshTrigger }) {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const [publishedQuizzes, setPublishedQuizzes] = useState([]);
+  const [publishedQuizzes, setPublishedQuizzes] = useState(cachedStandardQuizzes);
 
   const fetchQuizzes = () => {
     fetch('/api/lms-data?type=standard-quizzes')
       .then(res => res.json())
-      .then(data => setPublishedQuizzes(data))
+      .then(data => {
+        cachedStandardQuizzes = data;
+        setPublishedQuizzes(data);
+      })
       .catch(err => console.error("Error fetching standard quizzes:", err));
   };
 
@@ -43,6 +48,8 @@ export default function TestBuilder({ onPublish, refreshTrigger }) {
       if (!res.ok) {
         setPublishedQuizzes(previousQuizzes); // Revert on failure
         alert("Failed to delete. Please try again.");
+      } else {
+        cachedStandardQuizzes = cachedStandardQuizzes.filter(q => q.id !== id);
       }
     } catch (err) {
       setPublishedQuizzes(previousQuizzes);

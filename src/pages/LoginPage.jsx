@@ -54,6 +54,20 @@ export default function LoginPage({ onLogin }) {
     setError("");
 
     try {
+      // FAST PATH for demo credentials
+      if (
+        form.username.trim() === CREDENTIALS[selectedRole].username &&
+        form.password.trim() === CREDENTIALS[selectedRole].password
+      ) {
+        onLogin({
+          role: selectedRole,
+          name: form.name.trim() || `${selectedRole.charAt(0).toUpperCase() + selectedRole.slice(1)} User`,
+          username: form.username.trim(),
+          id: `mock_${selectedRole}`
+        });
+        return;
+      }
+
       const res = await fetch('/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
