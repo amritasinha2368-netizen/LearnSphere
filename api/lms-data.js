@@ -99,6 +99,8 @@ export default async function handler(req, res) {
               addedBy: data.addedBy || "Teacher"
             });
           }
+        } else if (data.action === 'delete_chapter') {
+          subject.chapters.pull({ _id: data.chapterId });
         }
         
         await subject.save();

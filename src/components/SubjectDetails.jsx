@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, ChevronRight, FileText, ArrowLeft, BookOpen, Layers, Plus, Link as LinkIcon, UploadCloud, Video, Image as ImageIcon } from "lucide-react";
+import { ChevronDown, ChevronRight, FileText, ArrowLeft, BookOpen, Layers, Plus, Link as LinkIcon, UploadCloud, Video, Image as ImageIcon, Trash2 } from "lucide-react";
 import MaterialPreview from "./MaterialPreview.jsx";
 import ProgressBar from "./ProgressBar.jsx";
 
@@ -20,6 +20,27 @@ export default function SubjectDetails({ subject, onBack, role = 'student' }) {
   const [matFile, setMatFile] = useState(null);
 
   const canManage = role === 'admin' || role === 'teacher';
+
+  const handleDeleteChapter = async (e, chapterId) => {
+    e.stopPropagation();
+    if (!confirm("Are you sure you want to delete this chapter?")) return;
+    
+    try {
+      const res = await fetch('/api/lms-data?type=subjects', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'delete_chapter',
+          subjectId: localSubject.id || localSubject._id,
+          chapterId: chapterId
+        })
+      });
+      if (res.ok) {
+        const updated = await res.json();
+        setLocalSubject(updated);
+      }
+    } catch (err) { console.error(err); }
+  };
 
   const handleAddChapter = async (e) => {
     e.preventDefault();
@@ -113,11 +134,6 @@ export default function SubjectDetails({ subject, onBack, role = 'student' }) {
             <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Layers size={16} /> {localSubject.chapters?.length || 0} Chapters</span>
           </div>
         </div>
-        
-        <div style={{ background: 'white', padding: '16px 24px', borderRadius: '12px', border: '1px solid var(--line)', width: '250px' }}>
-          <strong style={{ display: 'block', fontSize: '14px', marginBottom: '8px', color: '#475569' }}>Course Progress</strong>
-          <ProgressBar value={localSubject.progress || 0} label={`${localSubject.progress || 0}% Completed`} tone="green" />
-        </div>
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
@@ -126,9 +142,24 @@ export default function SubjectDetails({ subject, onBack, role = 'student' }) {
           <button 
             type="button" 
             onClick={() => setIsAddingChapter(!isAddingChapter)}
-            style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'var(--primary)', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontWeight: 600 }}
+            style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '6px', 
+              background: '#0f172a', 
+              color: 'white', 
+              border: '2px solid transparent', 
+              padding: '10px 18px', 
+              borderRadius: '8px', 
+              cursor: 'pointer', 
+              fontWeight: 600,
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+              transition: 'all 0.2s'
+            }}
+            onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1)'; }}
+            onMouseOut={(e) => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)'; }}
           >
-            <Plus size={16} /> Add Chapter
+            <Plus size={18} /> Add Chapter
           </button>
         )}
       </div>
@@ -169,9 +200,21 @@ export default function SubjectDetails({ subject, onBack, role = 'student' }) {
                 </div>
                 <h3 style={{ fontSize: '18px', fontWeight: 600, color: '#1e293b', margin: 0 }}>{chapter.title}</h3>
               </div>
-              <span style={{ color: '#94a3b8' }}>
-                {openChapters.includes(idx) ? <ChevronDown size={20} /> : <ChevronRight size={20} />}
-              </span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                {canManage && (
+                  <button 
+                    type="button"
+                    onClick={(e) => handleDeleteChapter(e, chapter.id || chapter._id)}
+                    style={{ background: 'transparent', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '4px', display: 'flex' }}
+                    title="Delete chapter"
+                  >
+                    <Trash2 size={18} />
+                  </button>
+                )}
+                <span style={{ color: '#94a3b8', display: 'flex' }}>
+                  {openChapters.includes(idx) ? <ChevronDown size={20} /> : <ChevronRight size={20} />}
+                </span>
+              </div>
             </button>
             
             {openChapters.includes(idx) && (
