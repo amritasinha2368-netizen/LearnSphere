@@ -368,6 +368,15 @@ export default function ActionModal({ action, onClose, onSubmit }) {
 
         {action.type === "upload" && (
           <div className="modal-form">
+            {action.fileUrl && (
+              <div style={{ marginBottom: '16px', padding: '12px', background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: '6px' }}>
+                <span style={{ fontSize: '13px', fontWeight: 600, color: '#166534', display: 'block', marginBottom: '8px' }}>Attached Assignment File:</span>
+                <a href={action.fileUrl} target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#15803d', textDecoration: 'none', fontWeight: 500, fontSize: '14px' }}>
+                  <FileImage size={18} />
+                  View Teacher's Document
+                </a>
+              </div>
+            )}
             <label>
               Note (Optional)
               <textarea 
@@ -498,6 +507,49 @@ export default function ActionModal({ action, onClose, onSubmit }) {
         )}
 
 
+        {action.type === "view-submissions" && (
+          <div className="submissions-modal-container" style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxHeight: '500px', overflowY: 'auto', paddingRight: '8px' }}>
+            {action.submissions.length === 0 ? (
+              <div style={{ textAlign: 'center', padding: '32px', color: '#64748b', background: '#f8fafc', borderRadius: '8px' }}>
+                <p>No submissions yet.</p>
+              </div>
+            ) : (
+              action.submissions.map((sub, idx) => (
+                <div key={idx} style={{ padding: '16px', border: '1px solid #e2e8f0', borderRadius: '8px', background: '#fff' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                    <div>
+                      <strong style={{ fontSize: '15px', color: '#0f172a' }}>{sub.studentName}</strong>
+                      {sub.note && <p style={{ fontSize: '13px', color: '#475569', marginTop: '6px', background: '#f1f5f9', padding: '8px', borderRadius: '4px' }}>Note: {sub.note}</p>}
+                      {sub.fileUrl && (
+                        <a href={sub.fileUrl} target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'var(--primary)', marginTop: '8px', fontWeight: 500, fontSize: '13px', background: '#f0f9ff', padding: '6px 10px', borderRadius: '4px', textDecoration: 'none' }}>
+                          <FileImage size={16} /> View Attached File
+                        </a>
+                      )}
+                      
+                      {(sub.grade || sub.feedback) && (
+                        <div style={{ marginTop: '12px', padding: '10px', background: '#f0fdf4', borderRadius: '6px', border: '1px solid #bbf7d0' }}>
+                          {sub.grade && <strong style={{ color: '#166534', display: 'block', marginBottom: '4px' }}>Grade: {sub.grade}</strong>}
+                          {sub.feedback && <span style={{ color: '#15803d', fontSize: '13px' }}>{sub.feedback}</span>}
+                        </div>
+                      )}
+                    </div>
+                    <button 
+                      className="ghost-button" 
+                      style={{ padding: '6px 12px', fontSize: '12px', border: '1px solid #cbd5e1' }}
+                      onClick={() => {
+                        if (onSubmit) {
+                          onSubmit({ actionType: 'initiate-grade', submission: sub, assignmentId: action.assignmentId });
+                        }
+                      }}
+                    >
+                      {sub.grade || sub.feedback ? "Edit Grade" : "Grade"}
+                    </button>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        )}
         {action.type === "create-coding-question" && (
           <div className="modal-form write-content-form">
             <div style={{ background: 'linear-gradient(135deg, #f0f9ff, #e0f2fe)', padding: '16px', borderRadius: '8px', border: '1px solid #bae6fd', marginBottom: '16px' }}>

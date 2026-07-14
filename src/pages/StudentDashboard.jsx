@@ -235,7 +235,8 @@ export default function StudentDashboard({ session, onLogout }) {
       kicker: "Assignment upload",
       title: assignment.title,
       assignmentId: assignment.id, // For backend targeting
-      description: "Choose a file and submit your assignment before the due date.",
+      description: assignment.description || "Choose a file and submit your assignment before the due date.",
+      fileUrl: assignment.fileUrl,
       type: "upload",
       details: [
         { label: "Subject", value: assignment.subject },

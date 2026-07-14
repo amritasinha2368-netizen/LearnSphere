@@ -367,6 +367,8 @@ if (action.kicker === "Publish assignment" || action.kicker === "Write Instructi
       } catch (err) {
         console.error("Error creating coding question:", err);
       }
+    } else if (data.actionType === "initiate-grade") {
+      openGradeSubmission(data.assignmentId, data.submission);
     } else if (action.type === "grade") {
       try {
         const res = await fetch(`/api/assignments/${data.assignmentId}/submissions/${data.submissionId}/grade`, {
@@ -952,20 +954,28 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
       prefill: { grade: sub.grade || "", feedback: sub.feedback || "" },
       primaryLabel: "Submit Feedback",
     });
+  }  function openWriteContent(assignment) {
+    setAction({
+      kicker: "Publish assignment",
+      title: "Write details for " + assignment.title,
+      description: "Provide comprehensive instructions, guidelines, and optionally attach a file for this assignment.",
+      type: "upload",
+      primaryLabel: "Publish to students",
+      writeBodyLabel: "Assignment Description",
+      writeBodyPlaceholder: "Write the assignment prompt and details here...",
+      assignmentId: assignment.id,
+    });
   }
 
-  function openWriteContent(assignment) {
+  function openSubmissions(assignment) {
     setAction({
-      kicker: "Write Instructions",
+      kicker: "Submissions Monitor",
       title: assignment.title,
-      description: "Write detailed text instructions or content directly into the LMS.",
-      type: "write",
-      subjectContext: assignment.subject,
-      writeTitleLabel: "Section title",
-      writeTitlePlaceholder: "E.g., Lab Requirements",
-      writeBodyLabel: "Detailed instructions",
-      writeBodyPlaceholder: "Write the assignment objectives and instructions here...",
-      primaryLabel: "Save content",
+      description: `Viewing submissions for ${assignment.subject}`,
+      type: "view-submissions",
+      submissions: assignment.submissions || [],
+      assignmentId: assignment.id,
+      primaryLabel: "Close",
     });
   }
 
@@ -1064,33 +1074,17 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
               <span className="module-code green">SB</span>
               <h3>{item.title}</h3>
               <p>{item.subject}</p>
-              <b>{item.submissions.length} submissions received</b>
-              <div className="submission-list" style={{ marginTop: '10px' }}>
-                {item.submissions.map((sub, idx) => (
-                  <div key={idx} style={{ fontSize: '12px', borderTop: '1px solid var(--line)', paddingTop: '12px', paddingBottom: '4px', marginTop: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                    <div>
-                      <strong style={{ fontSize: '14px', color: '#0f172a' }}>{sub.studentName}</strong>
-                      <br />
-                      {sub.note && <em style={{ color: '#475569', display: 'block', marginTop: '4px' }}>Note: {sub.note}</em>}
-                      {sub.fileUrl && <a href={sub.fileUrl} target="_blank" rel="noreferrer" style={{display: 'inline-block', color: 'var(--primary)', marginTop: '6px', fontWeight: 500}}>View File</a>}
-                      
-                      {(sub.grade || sub.feedback) && (
-                        <div style={{ marginTop: '8px', padding: '8px', background: '#f8fafc', borderRadius: '4px', border: '1px solid #e2e8f0' }}>
-                          {sub.grade && <strong style={{ color: '#0369a1', display: 'block', marginBottom: '2px' }}>Grade: {sub.grade}</strong>}
-                          {sub.feedback && <span style={{ color: '#334155' }}>{sub.feedback}</span>}
-                        </div>
-                      )}
-                    </div>
-                    <button 
-                      className="ghost-button" 
-                      style={{ padding: '6px 12px', fontSize: '12px', border: '1px solid #cbd5e1' }}
-                      onClick={() => openGradeSubmission(item.id, sub)}
-                    >
-                      {sub.grade || sub.feedback ? "Edit Grade" : "Grade"}
-                    </button>
-                  </div>
-                ))}
+              <div style={{ marginTop: '12px', padding: '12px', background: '#f8fafc', borderRadius: '6px', border: '1px solid #e2e8f0', textAlign: 'center' }}>
+                <b style={{ fontSize: '18px', color: '#0f172a', display: 'block' }}>{item.submissions.length}</b>
+                <span style={{ fontSize: '12px', color: '#64748b' }}>submissions received</span>
               </div>
+              <button 
+                type="button" 
+                style={{ marginTop: '16px', width: '100%' }}
+                onClick={() => openSubmissions(item)}
+              >
+                View Submissions
+              </button>
             </article>
           ))}
           {!loadingAssignments && backendAssignments.filter(a => a.submissions && a.submissions.length > 0).length === 0 && (
