@@ -231,19 +231,22 @@ export default function StudentDashboard({ session, onLogout }) {
   }
 
   function openAssignment(assignment) {
+    const existingSubmission = assignment.submissions?.find(sub => sub.studentId === "student-123");
+
     setAction({
       kicker: "Assignment upload",
       title: assignment.title,
-      assignmentId: assignment.id, // For backend targeting
+      assignmentId: assignment.id || assignment._id, // For backend targeting
       description: assignment.contentBody || assignment.description || "Choose a file and submit your assignment before the due date.",
       fileUrl: assignment.fileUrl,
       type: "upload",
+      existingSubmission,
       details: [
         { label: "Subject", value: assignment.subject },
-        { label: "Due", value: assignment.due },
+        { label: "Due", value: assignment.dueDate ? new Date(assignment.dueDate).toLocaleDateString('en-GB') : assignment.due },
         { label: "Marks", value: `${assignment.maxMarks}` },
       ],
-      primaryLabel: "Upload assignment",
+      primaryLabel: existingSubmission ? "Close" : "Upload assignment",
     });
   }
 

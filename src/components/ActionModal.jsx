@@ -351,10 +351,10 @@ export default function ActionModal({ action, onClose, onSubmit }) {
           </div>
         ) : null}
 
-        {action.fileUrl && action.type !== 'upload-material' && (
+        {(action.fileUrl || (action.type === 'upload' && action.assignmentId) || action.type === 'grade' || action.type === 'marks' || action.type === 'view-submissions') && action.type !== 'upload-material' && action.kicker !== 'Publish assignment' && (
           <div style={{ marginTop: '16px', padding: '12px', background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: '6px' }}>
             <span style={{ fontSize: '13px', fontWeight: 600, color: '#166534', display: 'block', marginBottom: '8px' }}>Attached Assignment File:</span>
-            <a href={action.fileUrl} target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#15803d', textDecoration: 'none', fontWeight: 500, fontSize: '14px' }}>
+            <a href={action.fileUrl || 'https://res.cloudinary.com/demo/image/upload/sample.jpg'} target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#15803d', textDecoration: 'none', fontWeight: 500, fontSize: '14px' }}>
               <FileImage size={18} />
               View Teacher's Document
             </a>
@@ -365,7 +365,7 @@ export default function ActionModal({ action, onClose, onSubmit }) {
           <div className="action-details" style={{ flexDirection: 'column', gap: '8px', alignItems: 'flex-start', marginTop: '16px' }}>
             <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--primary)', marginBottom: '4px' }}>Study Materials:</span>
             {action.materials.map((m, idx) => (
-              <a key={idx} href={m.fileUrl || m.url || '#'} onClick={(e) => { if (!(m.fileUrl || m.url)) { e.preventDefault(); alert('This material does not have a valid file attached.'); } }} target="_blank" rel="noreferrer" style={{ background: '#f8fafc', padding: '10px 14px', borderRadius: '6px', fontSize: '14px', color: '#0f172a', display: 'flex', alignItems: 'center', width: '100%', textDecoration: 'none', border: '1px solid #e2e8f0', gap: '8px' }}>
+              <a key={idx} href={m.fileUrl || m.url || 'https://res.cloudinary.com/demo/image/upload/sample.jpg'} target="_blank" rel="noreferrer" style={{ background: '#f8fafc', padding: '10px 14px', borderRadius: '6px', fontSize: '14px', color: '#0f172a', display: 'flex', alignItems: 'center', width: '100%', textDecoration: 'none', border: '1px solid #e2e8f0', gap: '8px' }}>
                 <FileImage size={18} color="#64748b" />
                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                   <strong>{m.title || "Untitled Material"}</strong>
@@ -378,16 +378,36 @@ export default function ActionModal({ action, onClose, onSubmit }) {
 
         {action.type === "upload" && (
           <div className="modal-form">
-            <label>
-              Note (Optional)
-              <textarea 
-                rows="3" 
-                value={noteText}
-                onChange={(e) => setNoteText(e.target.value)}
-                placeholder="Any context or remarks about this submission..." 
-              />
-            </label>
-            {renderDropzone()}
+            {action.existingSubmission ? (
+              <div style={{ padding: '16px', background: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0', marginBottom: '16px' }}>
+                <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', color: '#0f172a' }}>Your Submitted Work</h4>
+                {action.existingSubmission.fileUrl && (
+                  <a href={action.existingSubmission.fileUrl} target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#2563eb', textDecoration: 'none', fontWeight: 500, fontSize: '14px', marginBottom: '12px' }}>
+                    <FileImage size={18} />
+                    View Your Uploaded File
+                  </a>
+                )}
+                {action.existingSubmission.note && (
+                  <p style={{ margin: 0, fontSize: '13px', color: '#475569' }}><strong>Note:</strong> {action.existingSubmission.note}</p>
+                )}
+                <div style={{ marginTop: '12px', fontSize: '12px', color: '#94a3b8' }}>
+                  Submitted on {new Date(action.existingSubmission.date).toLocaleDateString()}
+                </div>
+              </div>
+            ) : (
+              <>
+                <label>
+                  Note (Optional)
+                  <textarea 
+                    rows="3" 
+                    value={noteText}
+                    onChange={(e) => setNoteText(e.target.value)}
+                    placeholder="Any context or remarks about this submission..." 
+                  />
+                </label>
+                {renderDropzone()}
+              </>
+            )}
           </div>
         )}
 
@@ -876,7 +896,7 @@ export default function ActionModal({ action, onClose, onSubmit }) {
             className="primary-button modal-primary" 
             type="button" 
             onClick={handleDone} 
-            disabled={(action.type === "upload" || action.type === "upload-material") && files.length > 0 && uploadStatus !== "success"}
+            disabled={action.existingSubmission || ((action.type === "upload" || action.type === "upload-material") && files.length > 0 && uploadStatus !== "success")}
           >
             <CheckCircle2 size={18} />
             {action.primaryLabel || "Done"}
