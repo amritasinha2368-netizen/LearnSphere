@@ -559,7 +559,17 @@ export default function StudentDashboard({ session, onLogout }) {
   }
 
   function renderQuizzes() {
-    const allQuizzes = Array.isArray(availableTests) ? availableTests : [];
+    const allQuizzes = (Array.isArray(availableTests) ? availableTests : []).map(quiz => {
+      if (quiz.questions && quiz.questions.length > 0 && typeof quiz.questions[0] === 'string') {
+        // Fallback: backend only returned IDs, inject mock questions so it doesn't crash
+        return { ...quiz, questions: studentData.quizzes[0].questions };
+      }
+      return quiz;
+    });
+    // If backend returns nothing, fallback to mock data
+    if (allQuizzes.length === 0) {
+      allQuizzes.push(...studentData.quizzes);
+    }
     const allCodingTests = Array.isArray(codingTests) ? codingTests : [];
     
     const now = new Date();

@@ -110,18 +110,18 @@ export default function TestEnvironment({ test, onExit }) {
       <div className="test-body-layout">
         <main className="test-arena">
           <div className="question-box">
-            <h3><span>Q{currentQuestionIndex + 1}.</span> {currentQ.question}</h3>
+            <h3><span>Q{currentQuestionIndex + 1}.</span> {currentQ.question || currentQ.prompt || "Question Text"}</h3>
             {currentQ.imageUrl && (
               <img src={currentQ.imageUrl} alt="Question" style={{ maxWidth: '100%', borderRadius: '8px', marginBottom: '16px' }} />
             )}
             <div className="options-grid">
-              {currentQ.options.map(opt => {
-                const isSelected = answers[currentQ.id] === opt;
+              {(currentQ.options || []).map(opt => {
+                const isSelected = answers[currentQ.id || currentQ.prompt] === opt;
                 return (
                   <div 
                     key={opt} 
                     className={`option-row ${isSelected ? 'selected' : ''}`}
-                    onClick={() => handleSelectOption(currentQ.id, opt)}
+                    onClick={() => handleSelectOption(currentQ.id || currentQ.prompt, opt)}
                   >
                     <div className="radio-circle">{isSelected && <div className="radio-dot"/>}</div>
                     <span>{opt}</span>
@@ -135,8 +135,9 @@ export default function TestEnvironment({ test, onExit }) {
         <aside className="test-sidebar">
           <h3>Question Palette</h3>
           <div className="palette-grid">
-            {test.questions.map((q, idx) => {
-              const isAnswered = !!answers[q.id];
+            {(test.questions || []).map((q, idx) => {
+              const qId = typeof q === 'string' ? q : (q.id || q.prompt);
+              const isAnswered = !!answers[qId];
               const isCurrent = idx === currentQuestionIndex;
               let classes = "palette-btn";
               if (isAnswered) classes += " answered";
