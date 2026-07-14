@@ -7,6 +7,7 @@ import Feedback from '../src/models/Feedback.js';
 import Notice from '../src/models/Notice.js';
 import Badge from '../src/models/Badge.js';
 import StandardQuiz from '../src/models/StandardQuiz.js';
+import Event from '../src/models/Event.js';
 
 const models = {
   users: User,
@@ -16,7 +17,8 @@ const models = {
   feedback: Feedback,
   notices: Notice,
   badges: Badge,
-  'standard-quizzes': StandardQuiz
+  'standard-quizzes': StandardQuiz,
+  events: Event
 };
 
 export default async function handler(req, res) {

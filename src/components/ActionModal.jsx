@@ -236,6 +236,14 @@ export default function ActionModal({ action, onClose, onSubmit }) {
           audience: subject, // Re-using subject state for Audience
           content: noteText, // Re-using noteText state for Message body
         });
+      } else if (action.type === 'add-event') {
+        onSubmit({
+          actionType: action.type,
+          title: writeTitle,
+          date: action.date,
+          type: subject, // Event type (event, deadline, etc.)
+          description: noteText
+        });
       } else {
         const data = {
           actionType: action.type,
@@ -701,17 +709,43 @@ export default function ActionModal({ action, onClose, onSubmit }) {
 
         {action.type === "schedule" && (
           <div className="modal-form">
-            <label>
-              Class Topic / Title
-              <input value={classTitle} onChange={(e) => setClassTitle(e.target.value)} placeholder="E.g., Data Structures - Trees" />
+            <label>Class Title <input type="text" value={classTitle} onChange={e => setClassTitle(e.target.value)} required placeholder="e.g. Intro to Databases" /></label>
+            <div className="split-row">
+              <label>Time <input type="time" value={classTime} onChange={e => setClassTime(e.target.value)} required /></label>
+              <label>Room <input type="text" value={classRoom} onChange={e => setClassRoom(e.target.value)} required placeholder="e.g. Room 402" /></label>
+            </div>
+          </div>
+        )}
+
+        {action.type === 'add-event' && (
+          <div className="action-form" style={{ display: 'flex', flexDirection: 'column', gap: '20px', minWidth: '400px' }}>
+            <label style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '14px', fontWeight: '500', color: '#1e293b' }}>
+              Event Title
+              <input type="text" value={writeTitle} onChange={(e) => setWriteTitle(e.target.value)} required placeholder="E.g., Board Meeting" style={{ padding: '10px 12px', border: '1px solid #cbd5e1', borderRadius: '6px', fontSize: '14px', width: '100%', boxSizing: 'border-box' }} />
             </label>
-            <label>
-              Date and time
-              <input value={classTime} onChange={(e) => setClassTime(e.target.value)} placeholder="E.g., 09:30 AM, Monday" />
-            </label>
-            <label>
-              Room or meeting link
-              <input value={classRoom} onChange={(e) => setClassRoom(e.target.value)} placeholder="E.g., https://zoom.us/j/12345" />
+            <div style={{ display: 'flex', gap: '16px' }}>
+              <label style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '14px', fontWeight: '500', color: '#1e293b', flex: 1 }}>
+                Date
+                <input type="date" value={action.date} readOnly disabled style={{ padding: '10px 12px', border: '1px solid #cbd5e1', borderRadius: '6px', fontSize: '14px', width: '100%', boxSizing: 'border-box', backgroundColor: '#f1f5f9' }} />
+              </label>
+              <label style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '14px', fontWeight: '500', color: '#1e293b', flex: 1 }}>
+                Event Type
+                <select value={subject} onChange={(e) => setSubject(e.target.value)} required style={{ padding: '10px 12px', border: '1px solid #cbd5e1', borderRadius: '6px', fontSize: '14px', width: '100%', boxSizing: 'border-box', backgroundColor: 'white' }}>
+                  <option value="event">General Event</option>
+                  <option value="deadline">Deadline</option>
+                  <option value="holiday">Holiday</option>
+                  <option value="alert">System Alert</option>
+                </select>
+              </label>
+            </div>
+            <label style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '14px', fontWeight: '500', color: '#1e293b' }}>
+              Description
+              <textarea 
+                value={noteText} 
+                onChange={(e) => setNoteText(e.target.value)} 
+                placeholder="Optional details..."
+                style={{ minHeight: '80px', resize: 'vertical', padding: '12px', border: '1px solid #cbd5e1', borderRadius: '6px', fontSize: '14px', width: '100%', boxSizing: 'border-box', lineHeight: '1.5' }}
+              />
             </label>
           </div>
         )}

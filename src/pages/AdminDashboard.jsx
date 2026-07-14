@@ -18,10 +18,12 @@ import {
   MessageSquarePlus,
   Presentation,
   UploadCloud,
-  Trash2,
   CalendarDays,
-  TerminalSquare
+  TerminalSquare,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
+import { format, addMonths, subMonths, startOfMonth, endOfMonth, startOfWeek, endOfWeek, isSameMonth, isSameDay, addDays, parseISO } from 'date-fns';
 import ActionModal from "../components/ActionModal.jsx";
 import RoleShell from "../components/RoleShell.jsx";
 import ProgressBar from "../components/ProgressBar.jsx";
@@ -31,20 +33,7 @@ import { adminData as adminDataMock, teacherData as teacherDataMock } from "../d
 import { getAdminMetrics, getTeacherMetrics, percent } from "../data/metrics.js";
 import "./AdminDashboard.css";
 
-const calendarDays = Array.from({ length: 30 }, (_, index) => {
-  const day = index + 1;
-  const color = [1, 2, 3, 5, 6, 8, 9, 10, 12, 16, 18, 22, 23, 26, 27, 30].includes(day)
-    ? "green"
-    : [4, 19].includes(day)
-      ? "blue"
-      : [11, 25].includes(day)
-        ? "amber"
-        : [13].includes(day)
-          ? "red"
-          : "muted";
-
-  return { day, color };
-});
+// calendarDays mock removed
 
 const navItems = [
   { id: "overview", label: "Dashboard", icon: LayoutDashboard },
@@ -105,8 +94,10 @@ export default function AdminDashboard({ session, onLogout }) {
   // Live Database State
   const [dbUsers, setDbUsers] = useState([]);
   const [dbNotices, setDbNotices] = useState([]);
+  const [dbEvents, setDbEvents] = useState([]);
+  const [currentMonth, setCurrentMonth] = useState(new Date());
 
-  // Ported Teacher State
+  // Teacher specific state
   const [dbSubjects, setDbSubjects] = useState([]);
   const [dbFeedback, setDbFeedback] = useState([]);
   const [dbClasses, setDbClasses] = useState([]);
@@ -128,6 +119,7 @@ export default function AdminDashboard({ session, onLogout }) {
   useEffect(() => {
     fetch('/api/lms-data?type=users').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbUsers(data) }).catch(console.error);
     fetch('/api/lms-data?type=notices').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbNotices(data) }).catch(console.error);
+    fetch('/api/lms-data?type=events').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbEvents(data) }).catch(console.error);
     
     // Teacher API calls
     fetch('/api/lms-data?type=subjects').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbSubjects(data) }).catch(console.error);
@@ -250,6 +242,24 @@ if (data.actionType === 'create-user') {
           setAction(null);
         } else {
           alert("Failed to publish announcement.");
+        }
+      } else if (data.actionType === 'add-event') {
+        const res = await fetch('/api/lms-data?type=events', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title: data.title,
+            date: data.date,
+            type: data.type,
+            description: data.description
+          })
+        });
+        if (res.ok) {
+          const newEvent = await res.json();
+          setDbEvents([...dbEvents, newEvent]);
+          setAction(null);
+        } else {
+          alert("Failed to add event.");
         }
       }
       // -- Teacher logic --
@@ -1306,33 +1316,78 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
   }
 
   function renderCalendar() {
+    const monthStart = startOfMonth(currentMonth);
+    const monthEnd = endOfMonth(monthStart);
+    const startDate = startOfWeek(monthStart, { weekStarts: 1 }); // Monday start
+    const endDate = endOfWeek(monthEnd, { weekStarts: 1 });
+
+    const dateFormat = "d";
+    const rows = [];
+    let days = [];
+    let day = startDate;
+    let formattedDate = "";
+
+    const prevMonth = () => setCurrentMonth(subMonths(currentMonth, 1));
+    const nextMonth = () => setCurrentMonth(addMonths(currentMonth, 1));
+
+    while (day <= endDate) {
+      for (let i = 0; i < 7; i++) {
+        formattedDate = format(day, dateFormat);
+        const cloneDay = day;
+        const dayEvents = dbEvents.filter(e => isSameDay(parseISO(e.date), cloneDay));
+        
+        let colorClass = "muted"; // Default out of month
+        if (isSameMonth(day, monthStart)) {
+          if (dayEvents.some(e => e.type === 'alert')) colorClass = "red";
+          else if (dayEvents.some(e => e.type === 'deadline')) colorClass = "amber";
+          else if (dayEvents.some(e => e.type === 'event')) colorClass = "blue";
+          else colorClass = "green";
+        }
+
+        days.push(
+          <button 
+            className={`calendar-day ${colorClass}`} 
+            type="button" 
+            key={day} 
+            onClick={() => setAction({ type: 'add-event', title: 'Add Event', date: format(cloneDay, 'yyyy-MM-dd'), kicker: 'Calendar', primaryLabel: 'Save' })}
+          >
+            {formattedDate}
+            {dayEvents.length > 0 && <div style={{ fontSize: '10px', marginTop: '4px', color: '#1e293b' }}>{dayEvents[0].title}</div>}
+          </button>
+        );
+        day = addDays(day, 1);
+      }
+      rows.push(<div className="calendar-grid" key={day} style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '1px' }}>{days}</div>);
+      days = [];
+    }
+
     return (
       <section className="role-view">
         {sectionTitle("Institution Calendar", "Monthly activity overview for classes, deadlines, and system events.")}
         <div className="calendar-shell">
           <article className="panel calendar-panel">
-            <div className="calendar-title">
-              <h2>June 2026</h2>
-              <span>Green active, amber pending, red alert, blue event completed.</span>
+            <div className="calendar-title" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div>
+                <h2>{format(currentMonth, "MMMM yyyy")}</h2>
+                <span>Click any date to mark an event.</span>
+              </div>
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <button className="panel-button" onClick={prevMonth} style={{ padding: '8px' }}><ChevronLeft size={20} /></button>
+                <button className="panel-button" onClick={nextMonth} style={{ padding: '8px' }}><ChevronRight size={20} /></button>
+              </div>
             </div>
-            <div className="calendar-weekdays">
-              {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day) => <b key={day}>{day}</b>)}
+            <div className="calendar-weekdays" style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', textAlign: 'center', marginBottom: '8px' }}>
+              {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => <b key={d} style={{ color: '#64748b' }}>{d}</b>)}
             </div>
-            <div className="calendar-grid">
-              {calendarDays.map((day) => (
-                <button className={`calendar-day ${day.color}`} type="button" key={day.day}>
-                  {day.day}
-                  <span />
-                </button>
-              ))}
+            <div style={{ background: '#e2e8f0', border: '1px solid #e2e8f0' }}>
+              {rows}
             </div>
           </article>
           <article className="panel calendar-stats">
             {[
-              ["Events Completed", "32"],
-              ["Alerts", "2"],
-              ["Active Days", "20"],
-              ["System Uptime", "99.9%"],
+              ["Total Events", dbEvents.length.toString()],
+              ["Alerts", dbEvents.filter(e => e.type === 'alert').length.toString()],
+              ["Deadlines", dbEvents.filter(e => e.type === 'deadline').length.toString()],
             ].map(([label, value]) => (
               <div key={label}>
                 <strong>{value}</strong>
