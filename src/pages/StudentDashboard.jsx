@@ -30,7 +30,6 @@ import "./StudentDashboard.css";
 
 const navItems = [
   { id: "overview", label: "Dashboard", icon: BarChart3 },
-  { id: "plan", label: "Learning Plan", icon: Sparkles },
   { id: "classes", label: "Classes", icon: Clock3 },
   { id: "subjects", label: "Subjects", icon: BookOpen },
   { id: "assignments", label: "Assignments", icon: FileUp },
@@ -406,26 +405,7 @@ export default function StudentDashboard({ session, onLogout }) {
     );
   }
 
-  function renderPlan() {
-    return (
-      <section className="role-view">
-        {sectionTitle("Today's Learning Plan", "A clean queue of what the student should do today.")}
-        <div className="compact-list" style={{ display: 'grid', gap: '12px' }}>
-          {studentData.classSchedule.map((item, idx) => (
-            <div key={idx} className="list-item" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'white', padding: '16px', borderRadius: '8px', border: '1px solid var(--line)'}}>
-              <div style={{display: 'flex', flexDirection: 'column', gap: '4px'}}>
-                <strong style={{ fontSize: '16px' }}>{item.title || item.subject}</strong>
-                <span className="meta">{item.time} • {item.room} {item.topic ? `• ${item.topic}` : ''}</span>
-              </div>
-              <button type="button" onClick={() => openClass(item)} style={{ background: '#f0f9ff', border: '1px solid #bae6fd', color: '#0284c7', cursor: 'pointer', padding: '8px 16px', borderRadius: '6px', fontWeight: 500 }}>
-                Open class
-              </button>
-            </div>
-          ))}
-        </div>
-      </section>
-    );
-  }
+
 
   function renderClasses() {
     return (
@@ -459,7 +439,7 @@ export default function StudentDashboard({ session, onLogout }) {
               <small>{subject.progress}% complete</small>
               <h3>{subject.title}</h3>
               <p>{subject.instructor}. Next class {subject.nextClass}.</p>
-              <button type="button" onClick={() => openSubject(subject)}>{subject.option}</button>
+              <button type="button" onClick={() => openSubject(subject)}>{subject.option || 'Open lessons'}</button>
             </article>
           ))}
         </div>
@@ -1003,7 +983,6 @@ export default function StudentDashboard({ session, onLogout }) {
 
   const views = {
     overview: renderOverview,
-    plan: renderPlan,
     classes: renderClasses,
     subjects: renderSubjects,
     assignments: renderAssignments,

@@ -355,7 +355,7 @@ export default function ActionModal({ action, onClose, onSubmit }) {
           <div className="action-details" style={{ flexDirection: 'column', gap: '8px', alignItems: 'flex-start', marginTop: '16px' }}>
             <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--primary)', marginBottom: '4px' }}>Study Materials:</span>
             {action.materials.map((m, idx) => (
-              <a key={idx} href={m.fileUrl} target="_blank" rel="noreferrer" style={{ background: '#f8fafc', padding: '10px 14px', borderRadius: '6px', fontSize: '14px', color: '#0f172a', display: 'flex', alignItems: 'center', width: '100%', textDecoration: 'none', border: '1px solid #e2e8f0', gap: '8px' }}>
+              <a key={idx} href={m.fileUrl || m.url || '#'} onClick={(e) => { if (!(m.fileUrl || m.url)) e.preventDefault(); }} target="_blank" rel="noreferrer" style={{ background: '#f8fafc', padding: '10px 14px', borderRadius: '6px', fontSize: '14px', color: '#0f172a', display: 'flex', alignItems: 'center', width: '100%', textDecoration: 'none', border: '1px solid #e2e8f0', gap: '8px' }}>
                 <FileImage size={18} color="#64748b" />
                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                   <strong>{m.title}</strong>

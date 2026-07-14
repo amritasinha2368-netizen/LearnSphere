@@ -31,7 +31,7 @@ export default async function handler(req, res) {
     }
     
     try {
-      const uploadResult = await cloudinary.uploader.upload(file.filepath, { folder: 'lms-uploads' });
+      const uploadResult = await cloudinary.uploader.upload(file.filepath, { folder: 'lms-uploads', resource_type: 'auto' });
       return res.status(200).json({ fileUrl: uploadResult.secure_url });
     } catch (uploadErr) {
       console.error("Cloudinary Upload Error:", uploadErr);
