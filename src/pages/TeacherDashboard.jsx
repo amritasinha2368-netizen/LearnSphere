@@ -11,8 +11,11 @@ import {
   UploadCloud,
   UsersRound,
   Trash2,
-  TerminalSquare
+  TerminalSquare,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
+import { format, addMonths, subMonths, startOfMonth, endOfMonth, startOfWeek, endOfWeek, isSameMonth, isSameDay, addDays, parseISO } from 'date-fns';
 import ActionModal from "../components/ActionModal.jsx";
 import RoleShell from "../components/RoleShell.jsx";
 import ProgressBar from "../components/ProgressBar.jsx";
@@ -72,12 +75,15 @@ export default function TeacherDashboard({ session, onLogout }) {
   const [dbFeedback, setDbFeedback] = useState([]);
   const [dbClasses, setDbClasses] = useState([]);
   const [dbNotices, setDbNotices] = useState([]);
+  const [dbEvents, setDbEvents] = useState([]);
+  const [currentMonth, setCurrentMonth] = useState(new Date());
 
   useEffect(() => {
     fetch('/api/lms-data?type=subjects').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbSubjects(data) }).catch(console.error);
     fetch('/api/lms-data?type=feedback').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbFeedback(data) }).catch(console.error);
     fetch('/api/lms-data?type=classes').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbClasses(data) }).catch(console.error);
     fetch('/api/lms-data?type=notices').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbNotices(data) }).catch(console.error);
+    fetch('/api/lms-data?type=events').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbEvents(data) }).catch(console.error);
   }, []);
 
   const teacherData = {
@@ -122,7 +128,43 @@ export default function TeacherDashboard({ session, onLogout }) {
   const handleModalSubmit = async (data) => {
     if (!action) return;
 
-    if (action.kicker === "Publish assignment" || action.kicker === "Write Instructions" || action.kicker === "Attach File") {
+    if (data.actionType === 'publish-announcement') {
+      const res = await fetch('/api/lms-data?type=notices', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: data.title,
+          audience: data.audience,
+          content: data.content,
+          publisher: "Teacher",
+        })
+      });
+      if (res.ok) {
+        const newNotice = await res.json();
+        setDbNotices([newNotice, ...dbNotices]);
+        setAction(null);
+      } else {
+        alert("Failed to publish announcement.");
+      }
+    } else if (data.actionType === 'add-event') {
+      const res = await fetch('/api/lms-data?type=events', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: data.title,
+          date: data.date,
+          type: data.type,
+          description: data.description
+        })
+      });
+      if (res.ok) {
+        const newEvent = await res.json();
+        setDbEvents([...dbEvents, newEvent]);
+        setAction(null);
+      } else {
+        alert("Failed to add event.");
+      }
+    } else if (action.kicker === "Publish assignment" || action.kicker === "Write Instructions" || action.kicker === "Attach File") {
       try {
         const isoDate = data.dueDate && data.dueTime 
           ? new Date(`${data.dueDate}T${data.dueTime}`).toISOString() 
