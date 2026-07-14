@@ -2,7 +2,7 @@
    Shared layout, typography, buttons, and app shell styles stay in src/styles.css. */
 
 .admin .overview-layout {
-  grid-template-columns: minmax(0, 1.65fr) minmax(310px, 0.72fr);
+  grid-template-columns: 1fr;
   align-items: start;
 }
 
@@ -219,9 +219,6 @@
 }
 
 @media (max-width: 1180px) {
-  .admin .overview-layout {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 @media (max-width: 760px) {

@@ -503,7 +503,7 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
             </div>
             <div className="hero-3d-object" aria-hidden="true"><span /><span /><span /></div>
           </article>
-          <article className="plan-card">
+          <article className="panel">
             <div className="panel-head">
               <div>
                 <h2>Admin Queue</h2>
