@@ -241,7 +241,7 @@ export default function ActionModal({ action, onClose, onSubmit }) {
           actionType: action.type,
           title: writeTitle,
           date: action.date,
-          type: subject, // Event type (event, deadline, etc.)
+          type: subject || 'event', // Event type (event, deadline, etc.) with fallback
           description: noteText
         });
       } else {
@@ -731,6 +731,7 @@ export default function ActionModal({ action, onClose, onSubmit }) {
               <label style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '14px', fontWeight: '500', color: '#1e293b', flex: 1 }}>
                 Event Type
                 <select value={subject} onChange={(e) => setSubject(e.target.value)} required style={{ padding: '10px 12px', border: '1px solid #cbd5e1', borderRadius: '6px', fontSize: '14px', width: '100%', boxSizing: 'border-box', backgroundColor: 'white' }}>
+                  <option value="">Select Event Type</option>
                   <option value="event">General Event</option>
                   <option value="deadline">Deadline</option>
                   <option value="holiday">Holiday</option>
