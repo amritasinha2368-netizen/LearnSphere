@@ -34,6 +34,7 @@ import ProgressBar from "../components/ProgressBar.jsx";
 import TestBuilder from "../components/TestBuilder.jsx";
 import CodeBuilder from "../components/CodeBuilder.jsx";
 import SubjectDetails from "../components/SubjectDetails.jsx";
+import CalendarWorkspace from "../components/CalendarWorkspace.jsx";
 import { adminData as adminDataMock, teacherData as teacherDataMock } from "../data/lmsData.js";
 import { getAdminMetrics, getTeacherMetrics, percent } from "../data/metrics.js";
 import "./AdminDashboard.css";
@@ -59,6 +60,7 @@ const navItems = [
   { id: "subjects", label: "Subjects", icon: BookCopy },
   { id: "assignments", label: "Assignments", icon: UploadCloud },
   { id: "submissions", label: "Submissions", icon: UsersRound },
+  { id: "calendar", label: "Calendar", icon: CalendarDays },
   { id: "classes", label: "Schedule Class", icon: CalendarClock },
   { id: "tests", label: "Test Builder", icon: FilePenLine },
   { id: "code", label: "Code Builder", icon: TerminalSquare },
@@ -530,8 +532,9 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
             </div>
             <div className="compact-list">
               <button className="compact-item violet" type="button" onClick={() => setActiveView("users")}><b>1</b><span><strong>Manage Users</strong><em>{dbUsers.length} total users in the system</em></span><i>Users</i></button>
-              <button className="compact-item blue" type="button" onClick={() => setActiveView("calendar")}><b>2</b><span><strong>Calendar</strong><em>{dbEvents.length} events scheduled</em></span><i>Calendar</i></button>
-              <button className="compact-item green" type="button" onClick={() => setActiveView("announcements")}><b>3</b><span><strong>Announcements</strong><em>{dbNotices.length} active notices published</em></span><i>Notices</i></button>
+              <button className="compact-item blue" type="button" onClick={() => setActiveView("calendar")}><b>2</b><span><strong>Global Calendar</strong><em>All upcoming schedules</em></span><i>Calendar</i></button>
+              <button className="compact-item green" type="button" onClick={() => setActiveView("classes")}><b>3</b><span><strong>Scheduled Classes</strong><em>Manage upcoming classes</em></span><i>Classes</i></button>
+              <button className="compact-item amber" type="button" onClick={() => setActiveView("announcements")}><b>4</b><span><strong>Announcements</strong><em>{dbNotices.length} active notices published</em></span><i>Notices</i></button>
             </div>
           </article>
         </div>
@@ -1147,16 +1150,15 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
           <button type="submit" className="panel-button" style={{ padding: '10px 24px', height: '42px' }}>Schedule Class</button>
         </form>
 
-        {/* Preview List & Calendar */}
+        {/* Preview List */}
         <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
-          <div style={{ flex: '1 1 300px' }}>
+          <div style={{ flex: '1 1 100%' }}>
             <h3 style={{ marginBottom: '16px', fontSize: '18px' }}>Scheduled Classes</h3>
             <div className="compact-list" style={{ display: 'grid', gap: '12px' }}>
               {dbClasses.length === 0 && <p style={{ color: '#64748b' }}>No classes scheduled.</p>}
               {dbClasses.map(cls => (
                 <div key={cls.id || cls._id} className="list-item" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'white', padding: '16px', borderRadius: '8px', border: '1px solid var(--line)'}}>
                   <div style={{display: 'flex', flexDirection: 'column', gap: '4px'}}>
-                    <strong style={{ fontSize: '16px' }}>{cls.title}</strong>
                     <span className="meta">{cls.time} • {cls.room}</span>
                   </div>
                   <button type="button" onClick={() => deleteClass(cls.id || cls._id)} style={{ background: '#fef2f2', border: '1px solid #fecaca', color: '#ef4444', cursor: 'pointer', padding: '8px 16px', borderRadius: '6px', fontWeight: 500 }} title="Delete class">
@@ -1165,51 +1167,6 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
                 </div>
               ))}
             </div>
-          </div>
-          
-          <div style={{ flex: '2 1 600px', background: 'white', padding: '16px', borderRadius: '12px', border: '1px solid var(--line)', height: '600px' }}>
-            <Calendar
-              localizer={localizer}
-              events={[
-                ...dbClasses.map(c => {
-                  let startDate = new Date();
-                  // Try to parse relative strings like "10:00 AM, Monday" if possible, else default to today
-                  // For a real app, dbClasses should store actual Date objects.
-                  return {
-                    title: `Class: ${c.title} (${c.room})`,
-                    start: startDate,
-                    end: addDays(startDate, 0),
-                    allDay: false,
-                    resource: c
-                  }
-                }),
-                ...dbEvents.map(e => ({
-                  title: `Event: ${e.title}`,
-                  start: parseISO(e.date),
-                  end: parseISO(e.date),
-                  allDay: true,
-                  resource: e
-                })),
-                ...dbNotices.map(n => ({
-                  title: `Notice: ${n.title}`,
-                  start: new Date(n.publishDate || n.createdAt),
-                  end: new Date(n.publishDate || n.createdAt),
-                  allDay: true,
-                  resource: n
-                }))
-              ]}
-              startAccessor="start"
-              endAccessor="end"
-              style={{ height: '100%' }}
-              views={['month', 'week', 'day']}
-              defaultView="month"
-              eventPropGetter={(event) => {
-                let backgroundColor = '#3b82f6'; // class blue
-                if (event.title.startsWith('Event')) backgroundColor = '#8b5cf6'; // event violet
-                if (event.title.startsWith('Notice')) backgroundColor = '#10b981'; // notice green
-                return { style: { backgroundColor, borderRadius: '4px', border: 'none' } };
-              }}
-            />
           </div>
         </div>
       </section>
@@ -1413,9 +1370,8 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
     subjects: renderSubjects,
     assignments: renderAssignments,
     submissions: renderSubmissions,
+    calendar: () => <CalendarWorkspace classes={dbClasses} notices={dbNotices} assignments={backendAssignments} />,
     classes: renderClasses,
-    calendar: renderCalendar,
-    'quiz-attempts-view': renderQuizAttempts,
     tests: () => (
       <section className="role-view">
         <TestBuilder 

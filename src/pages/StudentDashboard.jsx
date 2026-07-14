@@ -7,6 +7,7 @@ import {
   CheckCircle2,
   ClipboardList,
   Clock3,
+  CalendarClock,
   FileUp,
   GraduationCap,
   Medal,
@@ -25,6 +26,7 @@ import ProgressBar from "../components/ProgressBar.jsx";
 import TestEnvironment from "../components/TestEnvironment.jsx";
 import CodingWorkspace from "./CodingWorkspace.jsx";
 import SubjectDetails from "../components/SubjectDetails.jsx";
+import CalendarWorkspace from "../components/CalendarWorkspace.jsx";
 import { studentData as studentDataMock } from "../data/lmsData.js";
 import { getStudentMetrics, percent } from "../data/metrics.js";
 import "./StudentDashboard.css";
@@ -311,6 +313,26 @@ export default function StudentDashboard({ session, onLogout }) {
         tone: "pink",
         action: "Give feedback",
         onClick: () => openFeedback(),
+      },
+      {
+        Icon: CalendarDays,
+        label: "Global Calendar",
+        title: "All Events",
+        detail: "Upcoming classes, events & notices",
+        meta: "View Calendar",
+        tone: "amber",
+        action: "Open Calendar",
+        onClick: () => setActiveView("calendar"),
+      },
+      {
+        Icon: CalendarClock,
+        label: "Scheduled Classes",
+        title: "Live Classes",
+        detail: "View all scheduled live classes",
+        meta: "View Classes",
+        tone: "green",
+        action: "Open Classes",
+        onClick: () => setActiveView("classes"),
       },
     ];
 
@@ -738,95 +760,6 @@ export default function StudentDashboard({ session, onLogout }) {
     );
   }
 
-  function renderCalendar() {
-    const monthStart = startOfMonth(currentMonth);
-    const monthEnd = endOfMonth(monthStart);
-    const startDate = startOfWeek(monthStart, { weekStarts: 1 }); // Monday start
-    const endDate = endOfWeek(monthEnd, { weekStarts: 1 });
-
-    const dateFormat = "d";
-    const rows = [];
-    let days = [];
-    let day = startDate;
-    let formattedDate = "";
-
-    const prevMonth = () => setCurrentMonth(subMonths(currentMonth, 1));
-    const nextMonth = () => setCurrentMonth(addMonths(currentMonth, 1));
-
-    while (day <= endDate) {
-      for (let i = 0; i < 7; i++) {
-        formattedDate = format(day, dateFormat);
-        const cloneDay = day;
-        const dayEvents = dbEvents.filter(e => isSameDay(parseISO(e.date), cloneDay));
-        
-        let colorClass = "muted"; // Default out of month
-        if (isSameMonth(day, monthStart)) {
-          if (dayEvents.some(e => e.type === 'alert')) colorClass = "red";
-          else if (dayEvents.some(e => e.type === 'deadline')) colorClass = "amber";
-          else if (dayEvents.some(e => e.type === 'event')) colorClass = "blue";
-          else colorClass = "green";
-        }
-
-        days.push(
-          <div 
-            className={`calendar-day ${colorClass}`} 
-            key={day} 
-            style={{ cursor: 'default' }}
-          >
-            {formattedDate}
-            {dayEvents.length > 0 && <div style={{ fontSize: '10px', marginTop: '4px', color: '#1e293b' }}>{dayEvents[0].title}</div>}
-          </div>
-        );
-        day = addDays(day, 1);
-      }
-      rows.push(<div className="calendar-grid" key={day} style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '1px' }}>{days}</div>);
-      days = [];
-    }
-
-    return (
-      <section className="role-view">
-        <div className="section-title">
-          <div>
-            <h1>Institution Calendar</h1>
-            <span>Monthly activity overview for classes, deadlines, and system events.</span>
-          </div>
-        </div>
-        <div className="calendar-shell">
-          <article className="panel calendar-panel">
-            <div className="calendar-title" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div>
-                <h2>{format(currentMonth, "MMMM yyyy")}</h2>
-                <span>Important dates and system events.</span>
-              </div>
-              <div style={{ display: 'flex', gap: '8px' }}>
-                <button className="panel-button" onClick={prevMonth} style={{ padding: '8px' }}><ChevronLeft size={20} /></button>
-                <button className="panel-button" onClick={nextMonth} style={{ padding: '8px' }}><ChevronRight size={20} /></button>
-              </div>
-            </div>
-            <div className="calendar-weekdays" style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', textAlign: 'center', marginBottom: '8px' }}>
-              {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => <b key={d} style={{ color: '#64748b' }}>{d}</b>)}
-            </div>
-            <div style={{ background: '#e2e8f0', border: '1px solid #e2e8f0' }}>
-              {rows}
-            </div>
-          </article>
-          <article className="panel calendar-stats">
-            {[
-              ["Total Events", dbEvents.length.toString()],
-              ["Alerts", dbEvents.filter(e => e.type === 'alert').length.toString()],
-              ["Deadlines", dbEvents.filter(e => e.type === 'deadline').length.toString()],
-            ].map(([label, value]) => (
-              <div key={label}>
-                <strong>{value}</strong>
-                <span>{label}</span>
-              </div>
-            ))}
-          </article>
-        </div>
-      </section>
-    );
-  }
-
   function renderXp() {
     return (
       <section className="role-view">
@@ -983,10 +916,10 @@ export default function StudentDashboard({ session, onLogout }) {
     assignments: renderAssignments,
     quizzes: renderQuizzes,
     badges: renderBadges,
-    calendar: renderCalendar,
+    announcements: renderAnnouncements,
+    calendar: () => <CalendarWorkspace classes={dbClasses} notices={dbNotices} assignments={backendAssignments} />,
     xp: renderXp,
     leaderboard: renderLeaderboard,
-    announcements: renderAnnouncements,
   };
 
   // If a test is active, hijack the entire UI to lock the student into the Test Environment Arena
