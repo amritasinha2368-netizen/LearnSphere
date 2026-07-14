@@ -18,6 +18,7 @@ import {
   MessageSquarePlus,
   Presentation,
   UploadCloud,
+  Trash2,
   CalendarDays,
   TerminalSquare,
   ChevronLeft,
