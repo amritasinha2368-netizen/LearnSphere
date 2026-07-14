@@ -14,7 +14,8 @@ import {
   Trash2,
   TerminalSquare,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Trophy
 } from "lucide-react";
 import { format, addMonths, subMonths, startOfMonth, endOfMonth, startOfWeek, endOfWeek, isSameMonth, isSameDay, addDays, parseISO, parse, getDay } from 'date-fns';
 import { enUS } from 'date-fns/locale';
@@ -27,6 +28,7 @@ import TestBuilder from "../components/TestBuilder.jsx";
 import CodeBuilder from "../components/CodeBuilder.jsx";
 import SubjectDetails from "../components/SubjectDetails.jsx";
 import CalendarWorkspace from "../components/CalendarWorkspace.jsx";
+import LeaderboardWorkspace from "../components/LeaderboardWorkspace.jsx";
 import { teacherData as teacherDataMock } from "../data/lmsData.js";
 import { getTeacherMetrics, percent } from "../data/metrics.js";
 import "./TeacherDashboard.css";
@@ -43,6 +45,7 @@ const navItems = [
   { id: "marks", label: "Quiz Marks", icon: ClipboardCheck },
   { id: "actions", label: "Feedback", icon: MessageSquarePlus },
   { id: "announcements", label: "Notices", icon: Megaphone },
+  { id: "leaderboard", label: "Leaderboard", icon: Trophy },
 ];
 
 function TeacherMetric({ code, label, value, detail, tone = "blue" }) {
@@ -1006,6 +1009,14 @@ export default function TeacherDashboard({ session, onLogout }) {
     marks: renderMarks,
     actions: renderFeedback,
     announcements: renderAnnouncements,
+    leaderboard: () => (
+      <LeaderboardWorkspace 
+        users={[]} 
+        assignments={backendAssignments} 
+        codingTests={backendCodingTests} 
+        currentUser={teacherData.profile} 
+      />
+    ),
   };
 
   if (activeSubject) {

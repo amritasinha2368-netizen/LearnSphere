@@ -25,8 +25,9 @@ import RoleShell from "../components/RoleShell.jsx";
 import ProgressBar from "../components/ProgressBar.jsx";
 import TestEnvironment from "../components/TestEnvironment.jsx";
 import CodingWorkspace from "./CodingWorkspace.jsx";
-import SubjectDetails from "../components/SubjectDetails.jsx";
 import CalendarWorkspace from "../components/CalendarWorkspace.jsx";
+import LeaderboardWorkspace from "../components/LeaderboardWorkspace.jsx";
+import SubjectDetails from "../components/SubjectDetails.jsx";
 import { studentData as studentDataMock } from "../data/lmsData.js";
 import { getStudentMetrics, percent } from "../data/metrics.js";
 import "./StudentDashboard.css";
@@ -790,92 +791,13 @@ export default function StudentDashboard({ session, onLogout }) {
   }
 
   function renderLeaderboard() {
-    // 1. Calculate Real XP Leaderboard
-    const xpMap = {};
-    const students = dbUsers.filter(u => u.role === 'student');
-    
-    // Fallback to mock if dbUsers is not loaded or empty yet
-    let activeLeaderboard = studentData.leaderboard;
-
-    if (students.length > 0) {
-      students.forEach(s => { xpMap[s.name] = 0; });
-      
-      const processSubmissions = (arr) => {
-        arr.forEach(item => {
-          if (item.submissions) {
-            item.submissions.forEach(sub => {
-              if (sub.grade) {
-                // Grade might be "8/10", parse first number
-                const gradeStr = sub.grade.split('/')[0];
-                const gradeNum = parseInt(gradeStr, 10);
-                if (!isNaN(gradeNum) && xpMap[sub.studentName] !== undefined) {
-                  xpMap[sub.studentName] += gradeNum;
-                } else if (!isNaN(gradeNum)) {
-                  // If student wasn't in dbUsers but has submissions (e.g. mock student Aarav)
-                  xpMap[sub.studentName] = (xpMap[sub.studentName] || 0) + gradeNum;
-                }
-              }
-            });
-          }
-        });
-      };
-
-      processSubmissions(backendAssignments);
-      processSubmissions(codingTests);
-
-      // Add current user if not in map
-      if (xpMap[studentData.profile.name] === undefined) {
-        xpMap[studentData.profile.name] = 0;
-      }
-
-      const board = Object.keys(xpMap).map(name => ({
-        name,
-        xp: xpMap[name]
-      })).sort((a, b) => b.xp - a.xp);
-
-      board.forEach((item, idx) => { item.rank = idx + 1; });
-      activeLeaderboard = board;
-    }
-
-    const topThree = activeLeaderboard.slice(0, 3);
-    const currentRank = activeLeaderboard.find((item) => item.name === studentData.profile.name) || activeLeaderboard[0] || { rank: 1, xp: 0, name: studentData.profile.name };
-    const gapToTopThree = topThree.length >= 3 && currentRank.rank > 3 ? topThree[2].xp - currentRank.xp : 0;
-
     return (
-      <section className="role-view">
-        {sectionTitle("Leaderboard", "Batch ranking with your current XP position and the gap to the top three.", "View full")}
-        <div className="leaderboard-overview">
-          <article className="leaderboard-rank-card">
-            <p className="eyebrow">Your position</p>
-            <h3>Rank #{currentRank.rank}</h3>
-            <span>{currentRank.xp} XP collected in {studentData.batch.name}</span>
-            <ProgressBar value={topThree.length > 0 ? Math.min(100, percent(currentRank.xp, topThree[0].xp)) : 0} label={currentRank.rank > 3 ? `${gapToTopThree} XP to enter top 3` : `You are in the top 3!`} tone="blue" />
-          </article>
-
-          <div className="podium-grid">
-            {topThree.map((item) => (
-              <article className={`podium-card rank-${item.rank}`} key={item.name}>
-                <b>#{item.rank}</b>
-                <strong>{item.name}</strong>
-                <span>{item.xp} XP</span>
-              </article>
-            ))}
-          </div>
-        </div>
-
-        <article className="panel leaderboard-panel detailed-leaderboard">
-          {activeLeaderboard.map((item) => (
-            <div className={item.name === studentData.profile.name ? "rank-row current" : "rank-row"} key={item.name}>
-              <b>{item.rank}</b>
-              <span>
-                <strong>{item.name}</strong>
-                <em>{item.name === studentData.profile.name ? "You - keep pushing toward top 3" : `${studentData.batch.name} batchmate`}</em>
-              </span>
-              <i>{item.xp} XP</i>
-            </div>
-          ))}
-        </article>
-      </section>
+      <LeaderboardWorkspace 
+        users={dbUsers} 
+        assignments={backendAssignments} 
+        codingTests={codingTests} 
+        currentUser={studentData.profile} 
+      />
     );
   }
 

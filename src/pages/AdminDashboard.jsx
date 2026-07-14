@@ -33,8 +33,9 @@ import RoleShell from "../components/RoleShell.jsx";
 import ProgressBar from "../components/ProgressBar.jsx";
 import TestBuilder from "../components/TestBuilder.jsx";
 import CodeBuilder from "../components/CodeBuilder.jsx";
-import SubjectDetails from "../components/SubjectDetails.jsx";
 import CalendarWorkspace from "../components/CalendarWorkspace.jsx";
+import LeaderboardWorkspace from "../components/LeaderboardWorkspace.jsx";
+import SubjectDetails from "../components/SubjectDetails.jsx";
 import { adminData as adminDataMock, teacherData as teacherDataMock } from "../data/lmsData.js";
 import { getAdminMetrics, getTeacherMetrics, percent } from "../data/metrics.js";
 import "./AdminDashboard.css";
@@ -690,83 +691,13 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
   }
 
   function renderLeaderboard() {
-    // Calculate Real XP Leaderboard for Admin View
-    const xpMap = {};
-    const students = dbUsers.filter(u => u.role === 'student');
-    
-    let activeLeaderboard = [];
-
-    if (students.length > 0) {
-      students.forEach(s => { xpMap[s.name] = 0; });
-      
-      const processSubmissions = (arr) => {
-        arr.forEach(item => {
-          if (item.submissions) {
-            item.submissions.forEach(sub => {
-              if (sub.grade) {
-                const gradeStr = sub.grade.split('/')[0];
-                const gradeNum = parseInt(gradeStr, 10);
-                if (!isNaN(gradeNum) && xpMap[sub.studentName] !== undefined) {
-                  xpMap[sub.studentName] += gradeNum;
-                } else if (!isNaN(gradeNum)) {
-                  xpMap[sub.studentName] = (xpMap[sub.studentName] || 0) + gradeNum;
-                }
-              }
-            });
-          }
-        });
-      };
-
-      processSubmissions(backendAssignments);
-      processSubmissions(backendCodingTests);
-
-      const board = Object.keys(xpMap).map(name => ({
-        name,
-        xp: xpMap[name]
-      })).sort((a, b) => b.xp - a.xp);
-
-      board.forEach((item, idx) => { item.rank = idx + 1; });
-      activeLeaderboard = board;
-    }
-
-    const topThree = activeLeaderboard.slice(0, 3);
-
     return (
-      <section className="role-view">
-        <div className="view-head">
-          <div>
-            <p className="eyebrow">Governance</p>
-            <h2>Campus Leaderboard</h2>
-            <span>Real-time global ranking based on assignment and quiz grades.</span>
-          </div>
-        </div>
-        <div className="leaderboard-overview" style={{ marginTop: '24px' }}>
-          <div className="podium-grid" style={{ gridColumn: 'span 2' }}>
-            {topThree.length === 0 && <p style={{ color: '#64748b' }}>No data to generate podium.</p>}
-            {topThree.map((item) => (
-              <article className={`podium-card rank-${item.rank}`} key={item.name}>
-                <b>#{item.rank}</b>
-                <strong>{item.name}</strong>
-                <span>{item.xp} XP</span>
-              </article>
-            ))}
-          </div>
-        </div>
-
-        <article className="panel leaderboard-panel detailed-leaderboard" style={{ marginTop: '24px' }}>
-          {activeLeaderboard.length === 0 && <p style={{ color: '#64748b' }}>No students found in the database yet.</p>}
-          {activeLeaderboard.map((item) => (
-            <div className="rank-row" key={item.name}>
-              <b>{item.rank}</b>
-              <span>
-                <strong>{item.name}</strong>
-                <em>Global Campus Ranking</em>
-              </span>
-              <i>{item.xp} XP</i>
-            </div>
-          ))}
-        </article>
-      </section>
+      <LeaderboardWorkspace 
+        users={dbUsers} 
+        assignments={backendAssignments} 
+        codingTests={backendCodingTests} 
+        currentUser={adminData.profile} 
+      />
     );
   }
 
