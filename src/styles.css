@@ -2719,6 +2719,7 @@ button {
   place-content: center;
   gap: 4px;
   border-bottom: 1px solid var(--line);
+  text-align: center;
 }
 
 .calendar-stats div:last-child {
