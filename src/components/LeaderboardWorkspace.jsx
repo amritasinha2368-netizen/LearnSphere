@@ -1,8 +1,23 @@
-import React, { useMemo } from 'react';
-import { Trophy, Star, Sparkles, Crown, Medal, Zap, Flame, Award } from 'lucide-react';
+import React, { useMemo, useState } from 'react';
+import { Trophy, Star, Sparkles, Crown, Medal, Zap, Flame, Award, Edit2 } from 'lucide-react';
 import './LeaderboardWorkspace.css';
 
 export default function LeaderboardWorkspace({ users = [], assignments = [], codingTests = [], currentUser = {} }) {
+  const [overrides, setOverrides] = useState({});
+
+  const handleEdit = (origName, origXp) => {
+    const newName = window.prompt(`Edit name for ${origName}:`, overrides[origName]?.name || origName);
+    if (newName === null) return;
+    const newXpStr = window.prompt(`Edit XP for ${newName}:`, overrides[origName]?.xp || origXp);
+    if (newXpStr === null) return;
+    
+    const newXp = parseInt(newXpStr, 10);
+    setOverrides(prev => ({
+      ...prev,
+      [origName]: { name: newName, xp: isNaN(newXp) ? origXp : newXp }
+    }));
+  };
+
   // Calculate Leaderboard
   const { activeLeaderboard, topThree, currentRank, gapToTopThree } = useMemo(() => {
     const xpMap = {};
@@ -38,10 +53,15 @@ export default function LeaderboardWorkspace({ users = [], assignments = [], cod
       xpMap[currentUser.name] = 0;
     }
 
-    const board = Object.keys(xpMap).map(name => ({
-      name,
-      xp: xpMap[name]
-    })).sort((a, b) => b.xp - a.xp);
+    const board = Object.keys(xpMap).map(name => {
+      const finalName = overrides[name]?.name || name;
+      const finalXp = overrides[name]?.xp !== undefined ? overrides[name].xp : xpMap[name];
+      return {
+        originalName: name,
+        name: finalName,
+        xp: finalXp
+      };
+    }).sort((a, b) => b.xp - a.xp);
 
     board.forEach((item, idx) => { item.rank = idx + 1; });
     
@@ -55,7 +75,7 @@ export default function LeaderboardWorkspace({ users = [], assignments = [], cod
       : 0;
 
     return { activeLeaderboard: board, topThree, currentRank, gapToTopThree };
-  }, [users, assignments, codingTests, currentUser]);
+  }, [users, assignments, codingTests, currentUser, overrides]);
 
   return (
     <section className="leaderboard-workspace">
@@ -146,6 +166,13 @@ export default function LeaderboardWorkspace({ users = [], assignments = [], cod
                 <div className="row-score">
                   {item.xp} <span className="xp-label">XP</span>
                 </div>
+                {currentUser.role === 'admin' && (
+                  <div className="row-admin-actions">
+                    <button className="lb-edit-btn" onClick={() => handleEdit(item.originalName, item.xp)} title="Edit Player">
+                      <Edit2 size={14} />
+                    </button>
+                  </div>
+                )}
               </div>
             ))}
             {activeLeaderboard.length === 0 && (

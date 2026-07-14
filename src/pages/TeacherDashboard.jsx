@@ -87,6 +87,7 @@ export default function TeacherDashboard({ session, onLogout }) {
   const [dbClasses, setDbClasses] = useState([]);
   const [dbNotices, setDbNotices] = useState([]);
   const [dbEvents, setDbEvents] = useState([]);
+  const [dbUsers, setDbUsers] = useState([]);
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
   useEffect(() => {
@@ -96,6 +97,7 @@ export default function TeacherDashboard({ session, onLogout }) {
     fetch('/api/lms-data?type=classes').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbClasses(data) }).catch(console.error);
     fetch('/api/lms-data?type=notices').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbNotices(data) }).catch(console.error);
     fetch('/api/lms-data?type=events').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbEvents(data) }).catch(console.error);
+    fetch('/api/lms-data?type=users').then(res => res.json()).then(data => { if (Array.isArray(data)) setDbUsers(data) }).catch(console.error);
   }, []);
 
   const teacherData = {
@@ -1011,7 +1013,7 @@ export default function TeacherDashboard({ session, onLogout }) {
     announcements: renderAnnouncements,
     leaderboard: () => (
       <LeaderboardWorkspace 
-        users={[]} 
+        users={dbUsers} 
         assignments={backendAssignments} 
         codingTests={backendCodingTests} 
         currentUser={teacherData.profile} 

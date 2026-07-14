@@ -362,6 +362,35 @@
   font-style: italic;
 }
 
+.row-admin-actions {
+  margin-left: 16px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.roster-row:hover .row-admin-actions {
+  opacity: 1;
+}
+
+.lb-edit-btn {
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  color: #64748b;
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.lb-edit-btn:hover {
+  background: #f8fafc;
+  color: #3b82f6;
+  border-color: #94a3b8;
+}
+
 @media (max-width: 900px) {
   .leaderboard-arena {
     grid-template-columns: 1fr;
