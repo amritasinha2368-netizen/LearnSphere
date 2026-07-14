@@ -672,25 +672,28 @@ export default function ActionModal({ action, onClose, onSubmit }) {
         )}
 
         {action.type === 'publish-announcement' && (
-          <div className="action-form" style={{ minWidth: '400px' }}>
-            <label>Title
-              <input type="text" value={writeTitle} onChange={(e) => setWriteTitle(e.target.value)} required placeholder="E.g., Tomorrow's assembly cancelled" />
+          <div className="action-form" style={{ display: 'flex', flexDirection: 'column', gap: '20px', minWidth: '450px' }}>
+            <label style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '14px', fontWeight: '500', color: '#1e293b' }}>
+              Title
+              <input type="text" value={writeTitle} onChange={(e) => setWriteTitle(e.target.value)} required placeholder="E.g., Tomorrow's assembly cancelled" style={{ padding: '10px 12px', border: '1px solid #cbd5e1', borderRadius: '6px', fontSize: '14px', width: '100%', boxSizing: 'border-box' }} />
             </label>
-            <label>Audience
-              <select value={subject} onChange={(e) => setSubject(e.target.value)} required>
+            <label style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '14px', fontWeight: '500', color: '#1e293b' }}>
+              Audience
+              <select value={subject} onChange={(e) => setSubject(e.target.value)} required style={{ padding: '10px 12px', border: '1px solid #cbd5e1', borderRadius: '6px', fontSize: '14px', width: '100%', boxSizing: 'border-box', backgroundColor: 'white' }}>
                 <option value="">Select target audience</option>
                 <option value="All">All Users</option>
                 <option value="Students">Students Only</option>
                 <option value="Teachers">Teachers Only</option>
               </select>
             </label>
-            <label>Message
+            <label style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '14px', fontWeight: '500', color: '#1e293b' }}>
+              Message
               <textarea 
                 value={noteText} 
                 onChange={(e) => setNoteText(e.target.value)} 
                 required 
                 placeholder="Write the announcement details here..."
-                style={{ minHeight: '120px', resize: 'vertical' }}
+                style={{ minHeight: '140px', resize: 'vertical', padding: '12px', border: '1px solid #cbd5e1', borderRadius: '6px', fontSize: '14px', width: '100%', boxSizing: 'border-box', lineHeight: '1.5' }}
               />
             </label>
           </div>
