@@ -39,7 +39,6 @@ import "./AdminDashboard.css";
 const navItems = [
   { id: "overview", label: "Dashboard", icon: LayoutDashboard },
   { id: "users", label: "Users", icon: UsersRound },
-  { id: "governance", label: "Governance", icon: ShieldCheck },
   { id: "announcements", label: "Announcements", icon: BellRing },
   { id: "subjects", label: "Subjects", icon: BookCopy },
   { id: "assignments", label: "Assignments", icon: UploadCloud },
@@ -750,38 +749,6 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
   }
 
 
-
-  function renderGovernance() {
-    const items = [
-      ["Badge rules", adminData.governance.badgeRules, Medal, null],
-      ["Leaderboards", adminData.governance.leaderboardGroups, TrophyFallback, "leaderboard"],
-      ["Announcements", adminData.governance.openAnnouncements, BellRing, "announcements"],
-    ];
-
-    return (
-      <section className="role-view">
-        {sectionTitle("Governance", "Control badges, leaderboards, and announcements.")}
-        <div className="module-grid three">
-          {items.map(([label, value, Icon, viewId]) => (
-            <article className="module-card" key={label}>
-              <span className="module-code violet"><Icon size={18} /></span>
-              <h3>{label}</h3>
-              <strong className="module-big">{value}</strong>
-              <p>Open governance control for {label.toLowerCase()}.</p>
-              <button type="button" onClick={() => {
-                if (viewId) {
-                  setActiveView(viewId);
-                } else {
-                  openAdminAction(label, [{ label, value }]);
-                }
-              }}>Open</button>
-            </article>
-          ))}
-        </div>
-      </section>
-    );
-  }
-
   function TrophyFallback(props) {
     return <Medal {...props} />;
   }
@@ -1390,7 +1357,6 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
     overview: renderOverview,
     users: renderUsers,
     'role-users-view': renderRoleUsers,
-    governance: renderGovernance,
     announcements: renderAnnouncements,
     subjects: renderSubjects,
     assignments: renderAssignments,
