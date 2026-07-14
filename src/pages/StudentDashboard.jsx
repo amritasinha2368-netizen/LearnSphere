@@ -410,7 +410,7 @@ export default function StudentDashboard({ session, onLogout }) {
         <div className="module-grid three">
           {studentData.classSchedule.map((item) => (
             <article className="module-card class-module" key={item.subject}>
-              <span className="module-code">{item.subject[0]}</span>
+              <span className="module-code">{(item.subject || ' ')[0]}</span>
               <h3>{item.subject}</h3>
               <p>{item.topic}</p>
               <b>{item.time} - {item.room}</b>
@@ -429,7 +429,7 @@ export default function StudentDashboard({ session, onLogout }) {
         <div className="module-grid three">
           {studentData.classSchedule.map((item) => (
             <article className="module-card class-module" key={`${item.time}-${item.subject}`}>
-              <span className="module-code">{item.subject[0]}</span>
+              <span className="module-code">{(item.subject || ' ')[0]}</span>
               <h3>{item.subject}</h3>
               <p>{item.topic}</p>
               <b>{item.time} - {item.room}</b>
@@ -448,7 +448,7 @@ export default function StudentDashboard({ session, onLogout }) {
         <div className="module-grid three">
           {studentData.subjects.map((subject) => (
             <article className="module-card subject-module" key={subject.title}>
-              <span className="module-code">{subject.title[0]}</span>
+              <span className="module-code">{(subject.title || ' ')[0]}</span>
               <small>{subject.progress}% complete</small>
               <h3>{subject.title}</h3>
               <p>{subject.instructor}. Next class {subject.nextClass}.</p>

@@ -658,7 +658,7 @@ export default function TeacherDashboard({ session, onLogout }) {
         <div className="module-grid three">
           {teacherData.subjects.map((subject) => (
             <article className="module-card subject-module" key={subject.title}>
-              <span className="module-code green">{subject.title[0]}</span>
+              <span className="module-code green">{(subject.title || ' ')[0]}</span>
               <small>{subject.section}</small>
               <h3>{subject.title}</h3>
               <p>{subject.enrolled} students - {subject.materials ? subject.materials.length : 0} materials</p>
