@@ -483,17 +483,17 @@ export default function StudentDashboard({ session, onLogout }) {
                 
                 return (
                   <div key={assignment.id} style={{ display: 'flex', flexDirection: 'column', gap: '8px', paddingBottom: '16px' }}>
-                    <div className="list-action-row">
+                    <div className="list-action-row" onClick={() => openAssignment(assignment)} style={{ cursor: 'pointer' }}>
                       <b>{index + 1}</b>
                       <span>
                         <strong>{assignment.title}</strong>
                         <em>{assignment.subject} - Due {formattedDate}</em>
                       </span>
                       {status === "Completed" && !hasFeedback && (
-                        <button type="button" disabled style={{opacity: 0.5}}><CheckCircle2 size={16} /> Completed</button>
+                        <button type="button" onClick={() => openAssignment(assignment)} style={{opacity: 0.8}}><CheckCircle2 size={16} /> View Submission</button>
                       )}
                       {status === "Completed" && hasFeedback && (
-                        <button type="button" disabled style={{backgroundColor: '#10b981', color: 'white', border: 'none', opacity: 1}}><CheckCircle2 size={16} /> Graded</button>
+                        <button type="button" onClick={() => openAssignment(assignment)} style={{backgroundColor: '#10b981', color: 'white', border: 'none', opacity: 1}}><CheckCircle2 size={16} /> View Grade</button>
                       )}
                       {status === "Missed" && (
                         <button type="button" disabled style={{opacity: 0.5, backgroundColor: 'var(--rose-600)', color: 'white', border: 'none'}}>Locked</button>
