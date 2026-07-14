@@ -111,6 +111,9 @@ export default function TestEnvironment({ test, onExit }) {
         <main className="test-arena">
           <div className="question-box">
             <h3><span>Q{currentQuestionIndex + 1}.</span> {currentQ.question}</h3>
+            {currentQ.imageUrl && (
+              <img src={currentQ.imageUrl} alt="Question" style={{ maxWidth: '100%', borderRadius: '8px', marginBottom: '16px' }} />
+            )}
             <div className="options-grid">
               {currentQ.options.map(opt => {
                 const isSelected = answers[currentQ.id] === opt;

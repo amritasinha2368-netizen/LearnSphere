@@ -192,6 +192,9 @@ export default function StudentDashboard({ session, onLogout }) {
       } catch (err) {
         console.error("Error sending feedback:", err);
       }
+    } else if (data.actionType === "quiz") {
+      setActiveTest(action);
+      setAction(null);
     }
   };
 
@@ -407,15 +410,17 @@ export default function StudentDashboard({ session, onLogout }) {
     return (
       <section className="role-view">
         {sectionTitle("Today's Learning Plan", "A clean queue of what the student should do today.")}
-        <div className="module-grid three">
-          {studentData.classSchedule.map((item) => (
-            <article className="module-card class-module" key={item.subject}>
-              <span className="module-code">{(item.subject || ' ')[0]}</span>
-              <h3>{item.subject}</h3>
-              <p>{item.topic}</p>
-              <b>{item.time} - {item.room}</b>
-              <button type="button" onClick={() => openClass(item)}>Open class</button>
-            </article>
+        <div className="compact-list" style={{ display: 'grid', gap: '12px' }}>
+          {studentData.classSchedule.map((item, idx) => (
+            <div key={idx} className="list-item" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'white', padding: '16px', borderRadius: '8px', border: '1px solid var(--line)'}}>
+              <div style={{display: 'flex', flexDirection: 'column', gap: '4px'}}>
+                <strong style={{ fontSize: '16px' }}>{item.title || item.subject}</strong>
+                <span className="meta">{item.time} • {item.room} {item.topic ? `• ${item.topic}` : ''}</span>
+              </div>
+              <button type="button" onClick={() => openClass(item)} style={{ background: '#f0f9ff', border: '1px solid #bae6fd', color: '#0284c7', cursor: 'pointer', padding: '8px 16px', borderRadius: '6px', fontWeight: 500 }}>
+                Open class
+              </button>
+            </div>
           ))}
         </div>
       </section>
@@ -426,15 +431,17 @@ export default function StudentDashboard({ session, onLogout }) {
     return (
       <section className="role-view">
         {sectionTitle("Scheduled Classes", "Classes scheduled by teachers appear with subject, time, and room/link status.", "View timetable")}
-        <div className="module-grid three">
-          {studentData.classSchedule.map((item) => (
-            <article className="module-card class-module" key={`${item.time}-${item.subject}`}>
-              <span className="module-code">{(item.subject || ' ')[0]}</span>
-              <h3>{item.subject}</h3>
-              <p>{item.topic}</p>
-              <b>{item.time} - {item.room}</b>
-              <button type="button" onClick={() => openClass(item)}>Open class</button>
-            </article>
+        <div className="compact-list" style={{ display: 'grid', gap: '12px' }}>
+          {studentData.classSchedule.map((item, idx) => (
+            <div key={idx} className="list-item" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'white', padding: '16px', borderRadius: '8px', border: '1px solid var(--line)'}}>
+              <div style={{display: 'flex', flexDirection: 'column', gap: '4px'}}>
+                <strong style={{ fontSize: '16px' }}>{item.title || item.subject}</strong>
+                <span className="meta">{item.time} • {item.room} {item.topic ? `• ${item.topic}` : ''}</span>
+              </div>
+              <button type="button" onClick={() => openClass(item)} style={{ background: '#f0f9ff', border: '1px solid #bae6fd', color: '#0284c7', cursor: 'pointer', padding: '8px 16px', borderRadius: '6px', fontWeight: 500 }}>
+                Open class
+              </button>
+            </div>
           ))}
         </div>
       </section>
