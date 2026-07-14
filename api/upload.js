@@ -31,7 +31,13 @@ export default async function handler(req, res) {
     }
     
     try {
-      const uploadResult = await cloudinary.uploader.upload(file.filepath, { folder: 'lms-uploads', resource_type: 'auto' });
+      const isImageOrVideo = file.mimetype && (file.mimetype.startsWith('image/') || file.mimetype.startsWith('video/'));
+      const rType = isImageOrVideo ? 'auto' : 'raw';
+      
+      const uploadResult = await cloudinary.uploader.upload(file.filepath, { 
+        folder: 'lms-uploads', 
+        resource_type: rType 
+      });
       return res.status(200).json({ fileUrl: uploadResult.secure_url });
     } catch (uploadErr) {
       console.error("Cloudinary Upload Error:", uploadErr);
