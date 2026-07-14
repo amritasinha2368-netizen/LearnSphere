@@ -981,7 +981,6 @@ export default function TeacherDashboard({ session, onLogout }) {
     subjects: renderSubjects,
     assignments: renderAssignments,
     submissions: renderSubmissions,
-    classes: renderClasses,
     tests: () => (
       <section className="role-view">
         <TestBuilder 
