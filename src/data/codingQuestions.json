@@ -1,1714 +1,1702 @@
 [
   {
-    "title": "Pair Addition Match",
-    "description": "Provided an array of integers `nums` and an integer `target`, return the indexes of the two numbers such that they add up to the `target`. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.",
+    "title": "Game Toe Tac Tic a on Winner Find Challenge",
+    "description": "Tic-tac-toe is played by two players A and B on a 3 x 3 grid. The rules of Tic-Tac-Toe are:\n\n\n\tPlayers take turns placing characters into empty squares ' '.\n\tThe first player A always places 'X' characters, while the second player B always places 'O' characters.\n\t'X' and 'O' characters are always placed into empty squares, never on filled ones.\n\tThe game ends when there are three of the same (non-empty) character filling any row, column, or diagonal.\n\tThe game also ends if all squares are non-empty.\n\tNo more moves can be played if the game is over.\n\n\nGiven a 2D integer array moves where moves[i] = [rowi, coli] indicates that the ith move will be played on grid[rowi][coli]. Output the winner of the game if it exists (A or B). In case the game ends in a draw Output \"Draw\". If there are still movements to play Output \"Pending\".\n\nYou can assume that moves is valid (i.e., it follows the rules of Tic-Tac-Toe), the grid is initially empty, and A will play first.",
     "difficulty": "Easy",
     "timeLimit": 2000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "nums = [2,7,11,15]\ntarget = 9",
-        "expectedOutput": "[0,1]"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "nums = [3,2,4]\ntarget = 6",
-        "expectedOutput": "[1,2]"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Ascending Steps",
-    "description": "You are climbing a staircase. It takes `n` steps to reach the top. Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?",
+    "title": "Arrays Two Between Value Distance the Find Challenge",
+    "description": "Given two integer arrays arr1 and arr2, and the integer d, Output the distance value between the two arrays.\n\nThe distance value is defined as the number of elements arr1[i] such that there is not any element arr2[j] where |arr1[i]-arr2[j]| <= d.",
     "difficulty": "Easy",
-    "timeLimit": 1500,
-    "imageUrl": "",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "n = 2",
-        "expectedOutput": "2"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "n = 3",
-        "expectedOutput": "3"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Maximum Mirrored Substring",
-    "description": "Given a string `s`, return the longest palindromic (mirrored) substring in `s`. A string is palindromic if it reads the same forward and backward.",
-    "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "s = \"babad\"",
-        "expectedOutput": "\"bab\" or \"aba\""
-      },
-      {
-        "input": "s = \"cbbd\"",
-        "expectedOutput": "\"bb\""
-      }
-    ]
-  },
-  {
-    "title": "Invert Number Digits",
-    "description": "Given a signed 32-bit integer `x`, return `x` with its digits reversed. If reversing `x` causes the value to go outside the signed 32-bit integer range, then return 0.",
+    "title": "II Characters Special of Number the Count Challenge",
+    "description": "You are given a string word. A letter c is called special if it appears both in lowercase and uppercase in word, and every lowercase occurrence of c appears before the first uppercase occurrence of c.\n\nOutput the number of special letters in word.",
     "difficulty": "Medium",
     "timeLimit": 2000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "x = 123",
-        "expectedOutput": "321"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "x = -123",
-        "expectedOutput": "-321"
-      },
-      {
-        "input": "x = 120",
-        "expectedOutput": "21"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Max Unique Substring Length",
-    "description": "Given a string `s`, find the length of the longest substring without repeating characters.",
+    "title": "Palindrome a Break Challenge",
+    "description": "Given a palindromic string of lowercase English letters palindrome, replace exactly one character with any lowercase English letter so that the resulting string is not a palindrome and that it is the lexicographically smallest one possible.\n\nOutput the resulting string. If there is no way to replace a character to make it not a palindrome, Output an empty string.\n\nA string a is lexicographically smaller than a string b (of the same length) if in the first position where a and b differ, a has a character strictly smaller than the corresponding character in b. For example, \"abcc\" is lexicographically smaller than \"abcd\" because the first position they differ is at the fourth character, and 'c' is smaller than 'd'.",
     "difficulty": "Medium",
     "timeLimit": 2000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "s = \"abcabcbb\"",
-        "expectedOutput": "3"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "s = \"bbbbb\"",
-        "expectedOutput": "1"
-      },
-      {
-        "input": "s = \"pwwkew\"",
-        "expectedOutput": "3"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Middle Element of Ordered Arrays",
-    "description": "Given two sorted arrays `nums1` and `nums2` of size `m` and `n` respectively, return the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).",
-    "difficulty": "Hard",
-    "timeLimit": 4000,
-    "imageUrl": "",
+    "title": "Painting the Describe Challenge",
+    "description": "There is a long and thin painting that can be represented by a number line. The painting was painted with multiple overlapping segments where each segment was painted with a unique color. You are given a 2D integer array segments, where segments[i] = [starti, endi, colori] represents the half-closed segment [starti, endi) with colori as the color.\n\nThe colors in the overlapping segments of the painting were mixed when it was painted. When two or more colors mix, they form a new color that can be represented as a set of mixed colors.\n\n\n\tFor example, if colors 2, 4, and 6 are mixed, then the resulting mixed color is {2,4,6}.\n\n\nFor the sake of simplicity, you should only output the sum of the elements in the set rather than the full set.\n\nYou want to describe the painting with the minimum number of non-overlapping half-closed segments of these mixed colors. These segments can be represented by the 2D array painting where painting[j] = [leftj, rightj, mixj] describes a half-closed segment [leftj, rightj) with the mixed color sum of mixj.\n\n\n\tFor example, the painting created with segments = [[1,4,5],[1,7,7]] can be described by painting = [[1,4,12],[4,7,7]] because:\n\n\t\n\t\t[1,4) is colored {5,7} (with a sum of 12) from both the first and second segments.\n\t\t[4,7) is colored {7} from only the second segment.\n\t\n\t\n\n\nOutput the 2D array painting describing the finished painting (excluding any parts that are not painted). You may Output the segments in any order.\n\nA half-closed segment [a, b) is the section of the number line between points a and b including point a and not including point b.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "nums1 = [1,3]\nnums2 = [2]",
-        "expectedOutput": "2.00000"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "nums1 = [1,2]\nnums2 = [3,4]",
-        "expectedOutput": "2.50000"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Pattern String Validator",
-    "description": "Given an input string `s` and a pattern `p`, implement regular expression matching with support for '.' and '*' where '.' matches any single character and '*' matches zero or more of the preceding element.",
+    "title": "Points All Visiting Time Minimum Challenge",
+    "description": "On a 2D plane, there are n points with integer coordinates points[i] = [xi, yi]. Output the minimum time in seconds to visit all the points in the order given by points.\n\nYou can move according to these rules:\n\n\n\tIn 1 second, you can either:\n\n\t\n\t\tmove vertically by one unit,\n\t\tmove horizontally by one unit, or\n\t\tmove diagonally sqrt(2) units (in other words, move one unit vertically then one unit horizontally in 1 second).\n\t\n\t\n\tYou have to visit the points in the same order as they appear in the array.\n\tYou are allowed to pass through points that appear later in the order, but these do not count as visits.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Routes Possible All Count Challenge",
+    "description": "You are given an array of distinct positive integers locations where locations[i] represents the position of city i. You are also given integers start, finish and fuel representing the starting city, ending city, and the initial amount of fuel you have, respectively.\n\nAt each step, if you are at city i, you can pick any city j such that j != i and 0 <= j < locations.length and move to city j. Moving from city i to city j reduces the amount of fuel you have by |locations[i] - locations[j]|. Please notice that |x| denotes the absolute value of x.\n\nNotice that fuel cannot become negative at any point in time, and that you are allowed to visit any city more than once (including start and finish).\n\nOutput the count of all possible routes from start to finish. Since the answer may be too large, Output it modulo 109 + 7.",
     "difficulty": "Hard",
     "timeLimit": 5000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "s = \"aa\"\np = \"a\"",
-        "expectedOutput": "false"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "s = \"aa\"\np = \"a*\"",
-        "expectedOutput": "true"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Maximum Area Bar Chart",
-    "description": "You are given an integer array `height` of length `n`. There are `n` vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]). Find two lines that together with the x-axis form a container, such that the container contains the most water. Return the maximum amount of water a container can store.",
-    "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "height = [1,8,6,2,5,4,8,3,7]",
-        "expectedOutput": "49"
-      },
-      {
-        "input": "height = [1,1]",
-        "expectedOutput": "1"
-      }
-    ]
-  },
-  {
-    "title": "Number to Roman Numerals",
-    "description": "Seven different symbols represent Roman numerals with the following values: I=1, V=5, X=10, L=50, C=100, D=500, M=1000. Given an integer, convert it to a roman numeral.",
-    "difficulty": "Medium",
-    "timeLimit": 2000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "num = 3",
-        "expectedOutput": "\"III\""
-      },
-      {
-        "input": "num = 58",
-        "expectedOutput": "\"LVIII\""
-      }
-    ]
-  },
-  {
-    "title": "Roman Numerals to Number",
-    "description": "Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M. Given a roman numeral string, convert it to an integer.",
+    "title": "Frequency Increasing by Array Sort Challenge",
+    "description": "Provided an array of numbers nums, sort the array in increasing order based on the frequency of the values. If multiple values have the same frequency, sort them in decreasing order.\n\nOutput the sorted array.",
     "difficulty": "Easy",
     "timeLimit": 2000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "s = \"III\"",
-        "expectedOutput": "3"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "s = \"MCMXCIV\"",
-        "expectedOutput": "1994"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Shared Starting Substring",
-    "description": "Write a function to find the longest common prefix string amongst an array of strings. If there is no common prefix, return an empty string.",
-    "difficulty": "Easy",
-    "timeLimit": 1500,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "strs = [\"flower\",\"flow\",\"flight\"]",
-        "expectedOutput": "\"fl\""
-      },
-      {
-        "input": "strs = [\"dog\",\"racecar\",\"car\"]",
-        "expectedOutput": "\"\""
-      }
-    ]
-  },
-  {
-    "title": "Triplet Addition Match",
-    "description": "Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0. Notice that the solution set must not contain duplicate triplets.",
-    "difficulty": "Medium",
-    "timeLimit": 4000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "nums = [-1,0,1,2,-1,-4]",
-        "expectedOutput": "[[-1,-1,2],[-1,0,1]]"
-      },
-      {
-        "input": "nums = [0,1,1]",
-        "expectedOutput": "[]"
-      }
-    ]
-  },
-  {
-    "title": "Nearest Triplet Sum",
-    "description": "Given an integer array nums of length n and an integer target, find three integers in nums such that the sum is closest to target. Return the sum of the three integers. You may assume that each input would have exactly one solution.",
-    "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "nums = [-1,2,1,-4]\ntarget = 1",
-        "expectedOutput": "2"
-      },
-      {
-        "input": "nums = [0,0,0]\ntarget = 1",
-        "expectedOutput": "0"
-      }
-    ]
-  },
-  {
-    "title": "Keypad String Permutations",
-    "description": "Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order. A mapping of digits to letters (just like on the telephone buttons) is given below.",
-    "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "digits = \"23\"",
-        "expectedOutput": "[\"ad\",\"ae\",\"af\",\"bd\",\"be\",\"bf\",\"cd\",\"ce\",\"cf\"]"
-      },
-      {
-        "input": "digits = \"\"",
-        "expectedOutput": "[]"
-      }
-    ]
-  },
-  {
-    "title": "Delete Kth Linked List Node",
-    "description": "Given the head of a linked list, remove the nth node from the end of the list and return its head.",
+    "title": "One to Representation Binary in Number a Reduce to Steps of Number Challenge",
+    "description": "Given the binary representation of an integer as a string s, Output the number of steps to reduce it to 1 under the following rules:\n\n\n\t\n\tIf the current number is even, you have to divide it by 2.\n\t\n\t\n\tIf the current number is odd, you have to add 1 to it.\n\t\n\n\nIt is guaranteed that you can always reach one for all test cases.",
     "difficulty": "Medium",
     "timeLimit": 2000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "head = [1,2,3,4,5]\nn = 2",
-        "expectedOutput": "[1,2,3,5]"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "head = [1]\nn = 1",
-        "expectedOutput": "[]"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Balanced Brackets Checker",
-    "description": "Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid. An input string is valid if open brackets are closed by the same type of brackets in the correct order.",
-    "difficulty": "Easy",
-    "timeLimit": 1500,
-    "imageUrl": "",
+    "title": "IV Game Stone Challenge",
+    "description": "Alice and Bob take turns playing a game, with Alice starting first.\n\nInitially, there are n stones in a pile. On each player's turn, that player makes a move consisting of removing any non-zero square number of stones in the pile.\n\nAlso, if a player cannot make a move, he/she loses the game.\n\nGiven a positive integer n, Output true if and only if Alice wins the game otherwise Output false, assuming both players play optimally.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
     "testCases": [
       {
-        "input": "s = \"()\"",
-        "expectedOutput": "true"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "s = \"()[]{}\"",
-        "expectedOutput": "true"
-      },
-      {
-        "input": "s = \"(]\"",
-        "expectedOutput": "false"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Combine Ordered Linked Lists",
-    "description": "You are given the heads of two sorted linked lists list1 and list2. Merge the two lists into one sorted list. The list should be made by splicing together the nodes of the first two lists. Return the head of the merged linked list.",
-    "difficulty": "Easy",
-    "timeLimit": 2000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "list1 = [1,2,4]\nlist2 = [1,3,4]",
-        "expectedOutput": "[1,1,2,3,4,4]"
-      },
-      {
-        "input": "list1 = []\nlist2 = []",
-        "expectedOutput": "[]"
-      }
-    ]
-  },
-  {
-    "title": "Create Valid Bracket Pairs",
-    "description": "Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.",
+    "title": "Fruits for Coins of Number Minimum Challenge",
+    "description": "You are given an 0-indexed integer array prices where prices[i] denotes the number of coins needed to purchase the (i + 1)th fruit.\n\nThe fruit market has the following reward for each fruit:\n\n\n\tIf you purchase the (i + 1)th fruit at prices[i] coins, you can get any number of the next i fruits for free.\n\n\nNote that even if you can take fruit j for free, you can still purchase it for prices[j - 1] coins to receive its reward.\n\nOutput the minimum number of coins needed to acquire all the fruits.",
     "difficulty": "Medium",
-    "timeLimit": 3500,
-    "imageUrl": "",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "n = 3",
-        "expectedOutput": "[\"((()))\",\"(()())\",\"(())()\",\"()(())\",\"()()()\"]"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "n = 1",
-        "expectedOutput": "[\"()\"]"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Combine Multiple Ordered Lists",
-    "description": "You are given an array of k linked-lists lists, each linked-list is sorted in ascending order. Merge all the linked-lists into one sorted linked-list and return it.",
+    "title": "Tree a in Queries Equilibrium Weight Edge Minimum Challenge",
+    "description": "There is an undirected tree with n nodes labeled from 0 to n - 1. You are given the integer n and a 2D integer array edges of length n - 1, where edges[i] = [ui, vi, wi] indicates that there is an edge between nodes ui and vi with weight wi in the tree.\n\nYou are also given a 2D integer array queries of length m, where queries[i] = [ai, bi]. For each query, find the minimum number of operations required to make the weight of every edge on the path from ai to bi equal. In one operation, you can choose any edge of the tree and change its weight to any value.\n\nNote that:\n\n\n\tQueries are independent of each other, meaning that the tree Outputs to its initial state on each new query.\n\tThe path from ai to bi is a sequence of distinct nodes starting with node ai and ending with node bi such that every two adjacent nodes in the sequence share an edge in the tree.\n\n\nOutput an array answer of length m where answer[i] is the answer to the ith query.",
     "difficulty": "Hard",
     "timeLimit": 5000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "lists = [[1,4,5],[1,3,4],[2,6]]",
-        "expectedOutput": "[1,1,2,3,4,4,5,6]"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "lists = []",
-        "expectedOutput": "[]"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Exchange Adjacent Nodes",
-    "description": "Given a linked list, swap every two adjacent nodes and return its head. You must solve the problem without modifying the values in the list's nodes (i.e., only nodes themselves may be changed.)",
+    "title": "IV Matrix Spiral Challenge",
+    "description": "You are given two integers m and n, which represent the dimensions of a matrix.\n\nYou are also given the head of a linked list of integers.\n\nGenerate an m x n matrix that contains the integers in the linked list presented in spiral order (clockwise), starting from the top-left of the matrix. If there are remaining empty spaces, fill them with -1.\n\nOutput the generated matrix.",
     "difficulty": "Medium",
-    "timeLimit": 2500,
-    "imageUrl": "",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "head = [1,2,3,4]",
-        "expectedOutput": "[2,1,4,3]"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "head = []",
-        "expectedOutput": "[]"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Hard String Challenge 100",
-    "description": "Reverse the words in a given string of sentence.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Medium Array Challenge 101",
-    "description": "Given an array of integers representing stock prices, find the shortest {entity} such that the sum is maximized.",
+    "title": "Tree Binary in List Linked Challenge",
+    "description": "Given a binary tree root and a linked list with head as the first node. \n\nOutput True if all the elements in the linked list starting from the head correspond to some downward path connected in the binary tree otherwise Output False.\n\nIn this context downward path means a path that starts at some node and goes downwards.",
     "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Easy Math Challenge 102",
-    "description": "Compute the nth Fibonacci number which determines the number of distinct paths.",
-    "difficulty": "Easy",
     "timeLimit": 2000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Medium String Challenge 103",
-    "description": "Reverse the words in a given string of DNA sequence.",
+    "title": "Matrix the of Subset Good a Find Challenge",
+    "description": "You are given a 0-indexed m x n binary matrix grid.\n\nLet us call a non-empty subset of rows good if the sum of each column of the subset is at most half of the length of the subset.\n\nMore formally, if the length of the chosen subset of rows is k, then the sum of each column should be at most floor(k / 2).\n\nOutput an integer array that contains row indices of a good subset sorted in ascending order.\n\nIf there are multiple good subsets, you can Output any of them. If there are no good subsets, Output an empty array.\n\nA subset of rows of the matrix grid is any matrix that can be obtained by deleting some (possibly none or all) rows from grid.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Moves K in String Convert Can Challenge",
+    "description": "Given two strings s and t, your goal is to convert s into t in k moves or less.\n\nDuring the ith (1 <= i <= k) move you can:\n\n\n\tChoose any index j (1-indexed) from s, such that 1 <= j <= s.length and j has not been chosen in any previous move, and shift the character at that index i times.\n\tDo nothing.\n\n\nShifting a character means replacing it by the next letter in the alphabet (wrapping around so that 'z' becomes 'a'). Shifting a character by i means applying the shift operations i times.\n\nRemember that any index j can be picked at most once.\n\nOutput true if it's possible to convert s into t in no more than k moves, otherwise Output false.",
     "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Hard Array Challenge 104",
-    "description": "Given an array of integers representing building heights, find the minimum {entity} such that it is strictly increasing.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Hard Array Challenge 105",
-    "description": "Find the contiguous subarray of building heights which has the largest sum and return its sum.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Hard String Challenge 106",
-    "description": "Group anagrams together from an array of user password.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Hard Array Challenge 107",
-    "description": "Find the contiguous subarray of stock prices which has the largest sum and return its sum.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Hard String Challenge 108",
-    "description": "Find the length of the longest substring of DNA sequence that palindrome.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Easy Array Challenge 109",
-    "description": "You are provided an array of building heights. Determine if there exists a subset that it is strictly increasing.",
+    "title": "Key Slowest Challenge",
+    "description": "A newly designed keypad was tested, where a tester pressed a sequence of n keys, one at a time.\n\nYou are given a string keysPressed of length n, where keysPressed[i] was the ith key pressed in the testing sequence, and a sorted list releaseTimes, where releaseTimes[i] was the time the ith key was released. Both arrays are 0-indexed. The 0th key was pressed at the time 0, and every subsequent key was pressed at the exact time the previous key was released.\n\nThe tester wants to know the key of the keypress that had the longest duration. The ith keypress had a duration of releaseTimes[i] - releaseTimes[i - 1], and the 0th keypress had a duration of releaseTimes[0].\n\nNote that the same key could have been pressed multiple times during the test, and these multiple presses of the same key may not have had the same duration.\n\nOutput the key of the keypress that had the longest duration. If there are multiple such keypresses, Output the lexicographically largest key of the keypresses.",
     "difficulty": "Easy",
     "timeLimit": 2000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Hard Array Challenge 110",
-    "description": "Given an array of integers representing building heights, find the shortest {entity} such that the sum is maximized.",
+    "title": "Integer an of Digits of Sum and Product the Subtract Challenge",
+    "description": "Given an integer number n, Output the difference between the product of its digits and the sum of its digits.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Letter a of Occurrences With Subsequence K-Length Smallest Challenge",
+    "description": "You are given a string s, an integer k, a letter letter, and an integer repetition.\n\nOutput the lexicographically smallest subsequence of s of length k that has the letter letter appear at least repetition times. The test cases are generated so that the letter appears in s at least repetition times.\n\nA subsequence is a string that can be derived from another string by deleting some or no characters without changing the order of the remaining characters.\n\nA string a is lexicographically smaller than a string b if in the first position where a and b differ, string a has a letter that appears earlier in the alphabet than the corresponding letter in b.",
     "difficulty": "Hard",
     "timeLimit": 5000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Medium Math Challenge 111",
-    "description": "Compute the nth Fibonacci number which determines the items in a knapsack.",
+    "title": "Title the Capitalize Challenge",
+    "description": "You are given a string title consisting of one or more words separated by a single space, where each word consists of English letters. Capitalize the string by changing the capitalization of each word such that:\n\n\n\tIf the length of the word is 1 or 2 letters, change all letters to lowercase.\n\tOtherwise, change the first letter to uppercase and the remaining letters to lowercase.\n\n\nOutput the capitalized title.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Label Same the With Sub-Tree the in Nodes of Number Challenge",
+    "description": "You are given a tree (i.e. a connected, undirected graph that has no cycles) consisting of n nodes numbered from 0 to n - 1 and exactly n - 1 edges. The root of the tree is the node 0, and each node of the tree has a label which is a lower-case character given in the string labels (i.e. The node with the number i has the label labels[i]).\n\nThe edges array is given on the form edges[i] = [ai, bi], which means there is an edge between nodes ai and bi in the tree.\n\nOutput an array of size n where ans[i] is the number of nodes in the subtree of the ith node which have the same label as node i.\n\nA subtree of a tree T is the tree consisting of a node in T and all of its descendant nodes.",
     "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Medium String Challenge 112",
-    "description": "Find the length of the shortest substring of user password that anagram of another string.",
+    "title": "Events Non-Overlapping Best Two Challenge",
+    "description": "You are given a 0-indexed 2D integer array of events where events[i] = [startTimei, endTimei, valuei]. The ith event starts at startTimei and ends at endTimei, and if you attend this event, you will receive a value of valuei. You can choose at most two non-overlapping events to attend such that the sum of their values is maximized.\n\nOutput this maximum sum.\n\nNote that the start time and end time is inclusive: that is, you cannot attend two events where one of them starts and the other ends at the same time. More specifically, if you attend an event with end time t, the next event must start at or after t + 1.",
     "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Hard Array Challenge 113",
-    "description": "You are provided an array of building heights. Determine if there exists a subset that it is strictly increasing.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Easy Array Challenge 114",
-    "description": "Given an array of integers representing student scores, find the maximum {entity} such that the sum is maximized.",
+    "title": "Range Interval an in Numbers Odd Count Challenge",
+    "description": "Given two non-negative integers low and high. Output the count of odd numbers between low and high (inclusive).",
     "difficulty": "Easy",
     "timeLimit": 2000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Easy String Challenge 115",
-    "description": "Find the length of the longest substring of encoded message that palindrome.",
-    "difficulty": "Easy",
-    "timeLimit": 2000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Hard Math Challenge 116",
-    "description": "Find the factorial of a number representing steps in a grid.",
+    "title": "Centre Service a for Position Best Challenge",
+    "description": "A delivery company wants to build a new service center in a new city. The company knows the positions of all the customers in this city on a 2D-Map and wants to build the new center in a position such that the sum of the euclidean distances to all customers is minimum.\n\nGiven an array positions where positions[i] = [xi, yi] is the position of the ith customer on the map, Output the minimum sum of the euclidean distances to all customers.\n\nIn other words, you need to choose the position of the service center [xcentre, ycentre] such that the following formula is minimized:\n\nAnswers within 10-5 of the actual value will be accepted.",
     "difficulty": "Hard",
     "timeLimit": 5000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Medium String Challenge 117",
-    "description": "Reverse the words in a given string of encoded message.",
+    "title": "II Anagram Strings Two Make to Steps of Number Minimum Challenge",
+    "description": "You are given two strings s and t. In one step, you can append any character to either s or t.\n\nOutput the minimum number of steps to make s and t anagrams of each other.\n\nAn anagram of a string is a string that contains the same characters with a different (or the same) ordering.",
     "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Easy String Challenge 118",
-    "description": "Given a string representing a sentence, determine if it is a valid anagram of another string.",
-    "difficulty": "Easy",
     "timeLimit": 2000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Hard Array Challenge 119",
-    "description": "Find the contiguous subarray of daily temperatures which has the largest sum and return its sum.",
+    "title": " Supersequence Common Shortest Challenge",
+    "description": "Given two strings str1 and str2, Output the shortest string that has both str1 and str2 as subsequences. If there are multiple valid strings, Output any of them.\n\nA string s is a subsequence of string t if deleting some number of characters from t (possibly 0) results in the string s.",
     "difficulty": "Hard",
     "timeLimit": 5000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Medium String Challenge 120",
-    "description": "Group anagrams together from an array of sentence.",
+    "title": "Zeros Between in Nodes Merge Challenge",
+    "description": "You are given the head of a linked list, which contains a series of integers separated by 0's. The beginning and end of the linked list will have Node.val == 0.\n\nFor every two consecutive 0's, merge all the nodes lying in between them into a single node whose value is the sum of all the merged nodes. The modified list should not contain any 0's.\n\nOutput the head of the modified linked list.",
     "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Easy Array Challenge 121",
-    "description": "Given an array of integers representing stock prices, find the longest {entity} such that the sum is maximized.",
+    "title": "Matrix Binary a in Positions Special Challenge",
+    "description": "Given an m x n binary matrix mat, Output the number of special positions in mat.\n\nA position (i, j) is called special if mat[i][j] == 1 and all other elements in row i and column j are 0 (rows and columns are 0-indexed).",
     "difficulty": "Easy",
     "timeLimit": 2000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Medium String Challenge 122",
-    "description": "Reverse the words in a given string of encoded message.",
+    "title": "Conflicts No With Team Best Challenge",
+    "description": "You are the manager of a basketball team. For the upcoming tournament, you want to choose the team with the highest overall score. The score of the team is the sum of scores of all the players in the team.\n\nHowever, the basketball team is not allowed to have conflicts. A conflict exists if a younger player has a strictly higher score than an older player. A conflict does not occur between players of the same age.\n\nGiven two lists, scores and ages, where each scores[i] and ages[i] represents the score and age of the ith player, respectively, Output the highest overall score of all possible basketball teams.",
     "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Easy Array Challenge 123",
-    "description": "Find the contiguous subarray of building heights which has the largest sum and return its sum.",
+    "title": "Transactions Any Make Not Did but Visited Who Customer Challenge",
+    "description": "Table: Visits\n\n\n+-------------+---------+\n| Column Name | Type    |\n+-------------+---------+\n| visit_id    | int     |\n| customer_id | int     |\n+-------------+---------+\nvisit_id is the column with unique values for this table.\nThis table contains information about the customers who visited the mall.\n\n\n \n\nTable: Transactions\n\n\n+----------------+---------+\n| Column Name    | Type    |\n+----------------+---------+\n| transaction_id | int     |\n| visit_id       | int     |\n| amount         | int     |\n+----------------+---------+\ntransaction_id is column with unique values for this table.\nThis table contains information about the transactions made during the visit_id.\n\n\n \n\nWrite a solution to find the IDs of the users who visited without making any transactions and the number of times they made these types of visits.\n\nOutput the result table sorted in any order.\n\nThe result format is in the following example.",
     "difficulty": "Easy",
     "timeLimit": 2000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Easy Math Challenge 124",
-    "description": "Calculate the greatest common divisor of two integers representing items in a knapsack.",
-    "difficulty": "Easy",
-    "timeLimit": 2000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Easy Array Challenge 125",
-    "description": "Find the contiguous subarray of stock prices which has the largest sum and return its sum.",
-    "difficulty": "Easy",
-    "timeLimit": 2000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Hard Math Challenge 126",
-    "description": "Find the factorial of a number representing steps in a grid.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Medium Math Challenge 127",
-    "description": "Find the factorial of a number representing number of distinct paths.",
+    "title": "Probability Assignment Seat Airplane Challenge",
+    "description": "n passengers board an airplane with exactly n seats. The first passenger has lost the ticket and picks a seat randomly. But after that, the rest of the passengers will:\n\n\n\tTake their own seat if it is still available, and\n\tPick other seats randomly when they find their seat occupied\n\n\nOutput the probability that the nth person gets his own seat.",
     "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Hard Math Challenge 128",
-    "description": "Given an integer representing items in a knapsack, return true if it is a prime number.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
+    "title": "Data Missing Fill Challenge",
+    "description": "DataFrame products\n+-------------+--------+\n| Column Name | Type   |\n+-------------+--------+\n| name        | object |\n| quantity    | int    |\n| price       | int    |\n+-------------+--------+\n\n\nWrite a solution to fill in the missing value as 0 in the quantity column.\n\nThe result format is in the following example.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Medium Math Challenge 129",
-    "description": "Given an integer representing number of distinct paths, return true if it is a prime number.",
+    "title": "Chaining Method with Calculator Challenge",
+    "description": "Design a Calculator class. The class should provide the mathematical operations of addition, subtraction, multiplication, division, and exponentiation. It should also allow consecutive operations to be performed using method chaining. The Calculator class constructor should accept a number which serves as the initial value of result.\n\nYour Calculator class should have the following methods:\n\n\n\tadd - This method adds the given number value to the result and Outputs the updated Calculator.\n\tsubtract - This method subtracts the given number value from the result and Outputs the updated Calculator.\n\tmultiply - This method multiplies the result  by the given number value and Outputs the updated Calculator.\n\tdivide - This method divides the result by the given number value and Outputs the updated Calculator. If the passed value is 0, an error \"Division by zero is not allowed\" should be thrown.\n\tpower - This method raises the result to the power of the given number value and Outputs the updated Calculator.\n\tgetResult - This method Outputs the result.\n\n\nSolutions within 10-5 of the actual result are considered correct.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Characters Equal Two Between Substring Largest Challenge",
+    "description": "Given a string s, Output the length of the longest substring between two equal characters, excluding the two characters. If there is no such substring Output -1.\n\nA substring is a contiguous sequence of characters within a string.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Sum Minimal With Integers K Append Challenge",
+    "description": "You are given an integer array nums and an integer k. Append k unique positive integers that do not appear in nums to nums such that the resulting total sum is minimum.\n\nOutput the sum of the k integers appended to nums.",
     "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Easy Math Challenge 130",
-    "description": "Given an integer representing number of distinct paths, return true if it is a prime number.",
-    "difficulty": "Easy",
     "timeLimit": 2000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Easy Array Challenge 131",
-    "description": "You are provided an array of building heights. Determine if there exists a subset that it is strictly increasing.",
-    "difficulty": "Easy",
-    "timeLimit": 2000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Medium Array Challenge 132",
-    "description": "Given an array of integers representing daily temperatures, find the maximum {entity} such that the sum is maximized.",
+    "title": "Operation Substring After String Smallest Lexicographically Challenge",
+    "description": "Given a string s consisting of lowercase English letters. Perform the following operation:\n\n\n\tSelect any non-empty substring then replace every letter of the substring with the preceding letter of the English alphabet. For example, 'b' is converted to 'a', and 'a' is converted to 'z'.\n\n\nOutput the lexicographically smallest string after performing the operation.",
     "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Hard Array Challenge 133",
-    "description": "Rotate the array of daily temperatures by k steps to the right.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
+    "title": "Times Three Least At Cooperated Who Directors and Actors Challenge",
+    "description": "Table: ActorDirector\n\n\n+-------------+---------+\n| Column Name | Type    |\n+-------------+---------+\n| actor_id    | int     |\n| director_id | int     |\n| timestamp   | int     |\n+-------------+---------+\ntimestamp is the primary key (column with unique values) for this table.\n\n\n \n\nWrite a solution to find all the pairs (actor_id, director_id) where the actor has cooperated with the director at least three times.\n\nOutput the result table in any order.\n\nThe result format is in the following example.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Medium Array Challenge 134",
-    "description": "Find the contiguous subarray of student scores which has the largest sum and return its sum.",
+    "title": "Probability Maximum with Path Challenge",
+    "description": "You are given an undirected weighted graph of n nodes (0-indexed), represented by an edge list where edges[i] = [a, b] is an undirected edge connecting the nodes a and b with a probability of success of traversing that edge succProb[i].\n\nGiven two nodes start and end, find the path with the maximum probability of success to go from start to end and Output its success probability.\n\nIf there is no path from start to end, Output 0. Your answer will be accepted if it differs from the correct answer by at most 1e-5.",
     "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Medium String Challenge 135",
-    "description": "Find the length of the shortest substring of DNA sequence that anagram of another string.",
+    "title": "Substrings Removing From Score Maximum Challenge",
+    "description": "You are given a string s and two integers x and y. You can perform two types of operations any number of times.\n\n\n\tRemove substring \"ab\" and gain x points.\n\n\t\n\t\tFor example, when removing \"ab\" from \"cabxbae\" it becomes \"cxbae\".\n\t\n\t\n\tRemove substring \"ba\" and gain y points.\n\t\n\t\tFor example, when removing \"ba\" from \"cabxbae\" it becomes \"cabxe\".\n\t\n\t\n\n\nOutput the maximum points you can gain after applying the above operations on s.",
     "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Medium Math Challenge 136",
-    "description": "Calculate the least common divisor of two integers representing number of distinct paths.",
+    "title": "Address IP an Defanging Challenge",
+    "description": "Given a valid (IPv4) IP address, Output a defanged version of that IP address.\r\n\r\nA defanged IP address replaces every period \".\" with \"[.]\".",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Arrays Sorted Two of Product Smallest Kth Challenge",
+    "description": "Given two sorted 0-indexed integer arrays nums1 and nums2 as well as an integer k, Output the kth (1-based) smallest product of nums1[i] * nums2[j] where 0 <= i < nums1.length and 0 <= j < nums2.length.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Grid a in Staying Instructions Suffix All of Execution Challenge",
+    "description": "There is an n x n grid, with the top-left cell at (0, 0) and the bottom-right cell at (n - 1, n - 1). You are given the integer n and an integer array startPos where startPos = [startrow, startcol] indicates that a robot is initially at cell (startrow, startcol).\n\nYou are also given a 0-indexed string s of length m where s[i] is the ith instruction for the robot: 'L' (move left), 'R' (move right), 'U' (move up), and 'D' (move down).\n\nThe robot can begin executing from any ith instruction in s. It executes the instructions one by one towards the end of s but it stops if either of these conditions is met:\n\n\n\tThe next instruction will move the robot off the grid.\n\tThere are no more instructions left to execute.\n\n\nOutput an array answer of length m where answer[i] is the number of instructions the robot can execute if the robot begins executing from the ith instruction in s.",
     "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Easy String Challenge 137",
-    "description": "Given a string representing a DNA sequence, determine if it is a valid sequence of unique characters.",
-    "difficulty": "Easy",
     "timeLimit": 2000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Easy String Challenge 138",
-    "description": "Group anagrams together from an array of sentence.",
-    "difficulty": "Easy",
-    "timeLimit": 2000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Hard Array Challenge 139",
-    "description": "Find the contiguous subarray of stock prices which has the largest sum and return its sum.",
+    "title": "Grid the Stamping Challenge",
+    "description": "You are given an m x n binary matrix grid where each cell is either 0 (empty) or 1 (occupied).\n\nYou are then given stamps of size stampHeight x stampWidth. We want to fit the stamps such that they follow the given restrictions and requirements:\n\n\n\tCover all the empty cells.\n\tDo not cover any of the occupied cells.\n\tWe can put as many stamps as we want.\n\tStamps can overlap with each other.\n\tStamps are not allowed to be rotated.\n\tStamps must stay completely inside the grid.\n\n\nOutput true if it is possible to fit the stamps while following the given restrictions and requirements. Otherwise, Output false.",
     "difficulty": "Hard",
     "timeLimit": 5000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Medium Math Challenge 140",
-    "description": "Calculate the greatest common divisor of two integers representing steps in a grid.",
+    "title": "Stick a Cut to Cost Minimum Challenge",
+    "description": "Given a wooden stick of length n units. The stick is labelled from 0 to n. For example, a stick of length 6 is labelled as follows:\n\nGiven an integer array cuts where cuts[i] denotes a position you should perform a cut at.\n\nYou should perform the cuts in order, you can change the order of the cuts as you wish.\n\nThe cost of one cut is the length of the stick to be cut, the total cost is the sum of costs of all cuts. When you cut a stick, it will be split into two smaller sticks (i.e. the sum of their lengths is the length of the stick before the cut). Please refer to the first example for a better explanation.\n\nOutput the minimum total cost of the cuts.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Constraint With Elements Between Difference Absolute Minimum Challenge",
+    "description": "You are given a 0-indexed integer array nums and an integer x.\n\nFind the minimum absolute difference between two elements in the array that are at least x indices apart.\n\nIn other words, find two indices i and j such that abs(i - j) >= x and abs(nums[i] - nums[j]) is minimized.\n\nOutput an integer denoting the minimum absolute difference between two elements that are at least x indices apart.",
     "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Easy Math Challenge 141",
-    "description": "Calculate the least common divisor of two integers representing items in a knapsack.",
-    "difficulty": "Easy",
     "timeLimit": 2000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Easy Array Challenge 142",
-    "description": "You are provided an array of stock prices. Determine if there exists a subset that no two elements are adjacent.",
-    "difficulty": "Easy",
-    "timeLimit": 2000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Hard String Challenge 143",
-    "description": "Given a string representing a DNA sequence, determine if it is a valid sequence of unique characters.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Hard Math Challenge 144",
-    "description": "Find the factorial of a number representing items in a knapsack.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Hard Array Challenge 145",
-    "description": "Rotate the array of student scores by k steps to the right.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Hard Array Challenge 146",
-    "description": "Rotate the array of stock prices by k steps to the right.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Medium String Challenge 147",
-    "description": "Group anagrams together from an array of sentence.",
+    "title": "Moves K After Element Topmost the Maximize Challenge",
+    "description": "You are given a 0-indexed integer array nums representing the contents of a pile, where nums[0] is the topmost element of the pile.\n\nIn one move, you can perform either of the following:\n\n\n\tIf the pile is not empty, remove the topmost element of the pile.\n\tIf there are one or more removed elements, add any one of them back onto the pile. This element becomes the new topmost element.\n\n\nYou are also given an integer k, which denotes the total number of moves to be made.\n\nOutput the maximum value of the topmost element of the pile possible after exactly k moves. In case it is not possible to obtain a non-empty pile after k moves, Output -1.",
     "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Medium Array Challenge 148",
-    "description": "Given an array of integers representing student scores, find the minimum {entity} such that no two elements are adjacent.",
+    "title": "Integers Repeating Distribute Challenge",
+    "description": "You are given an array of n integers, nums, where there are at most 50 unique values in the array. You are also given an array of m customer order quantities, quantity, where quantity[i] is the amount of integers the ith customer ordered. Determine if it is possible to distribute nums such that:\n\n\n\tThe ith customer gets exactly quantity[i] integers,\n\tThe integers the ith customer gets are all equal, and\n\tEvery customer is satisfied.\n\n\nOutput true if it is possible to distribute nums according to the above conditions.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Equivalent Almost are Strings Two Whether Check Challenge",
+    "description": "Two strings word1 and word2 are considered almost equivalent if the differences between the frequencies of each letter from 'a' to 'z' between word1 and word2 is at most 3.\n\nGiven two strings word1 and word2, each of length n, Output true if word1 and word2 are almost equivalent, or false otherwise.\n\nThe frequency of a letter x is the number of times it occurs in the string.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Frequency Per Counts Tweet Challenge",
+    "description": "A social media company is trying to monitor activity on their site by analyzing the number of tweets that occur in select periods of time. These periods can be partitioned into smaller time chunks based on a certain frequency (every minute, hour, or day).\n\nFor example, the period [10, 10000] (in seconds) would be partitioned into the following time chunks with these frequencies:\n\n\n\tEvery minute (60-second chunks): [10,69], [70,129], [130,189], ..., [9970,10000]\n\tEvery hour (3600-second chunks): [10,3609], [3610,7209], [7210,10000]\n\tEvery day (86400-second chunks): [10,10000]\n\n\nNotice that the last chunk may be shorter than the specified frequency's chunk size and will always end with the end time of the period (10000 in the above example).\n\nDesign and implement an API to help the company with their analysis.\n\nImplement the TweetCounts class:\n\n\n\tTweetCounts() Initializes the TweetCounts object.\n\tvoid recordTweet(String tweetName, int time) Stores the tweetName at the recorded time (in seconds).\n\tList<Integer> getTweetCountsPerFrequency(String freq, String tweetName, int startTime, int endTime) Outputs a list of integers representing the number of tweets with tweetName in each time chunk for the given period of time [startTime, endTime] (in seconds) and frequency freq.\n\t\n\t\tfreq is one of \"minute\", \"hour\", or \"day\" representing a frequency of every minute, hour, or day respectively.\n\t\n\t\n\n\n \nExample:\n\n\nInput\n[\"TweetCounts\",\"recordTweet\",\"recordTweet\",\"recordTweet\",\"getTweetCountsPerFrequency\",\"getTweetCountsPerFrequency\",\"recordTweet\",\"getTweetCountsPerFrequency\"]\n[[],[\"tweet3\",0],[\"tweet3\",60],[\"tweet3\",10],[\"minute\",\"tweet3\",0,59],[\"minute\",\"tweet3\",0,60],[\"tweet3\",120],[\"hour\",\"tweet3\",0,210]]\n\nOutput\n[null,null,null,null,[2],[2,1],null,[4]]\n\nExplanation\nTweetCounts tweetCounts = new TweetCounts();\ntweetCounts.recordTweet(\"tweet3\", 0);                              // New tweet \"tweet3\" at time 0\ntweetCounts.recordTweet(\"tweet3\", 60);                             // New tweet \"tweet3\" at time 60\ntweetCounts.recordTweet(\"tweet3\", 10);                             // New tweet \"tweet3\" at time 10\ntweetCounts.getTweetCountsPerFrequency(\"minute\", \"tweet3\", 0, 59); // Output [2]; chunk [0,59] had 2 tweets\ntweetCounts.getTweetCountsPerFrequency(\"minute\", \"tweet3\", 0, 60); // Output [2,1]; chunk [0,59] had 2 tweets, chunk [60,60] had 1 tweet\ntweetCounts.recordTweet(\"tweet3\", 120);                            // New tweet \"tweet3\" at time 120\ntweetCounts.getTweetCountsPerFrequency(\"hour\", \"tweet3\", 0, 210);  // Output [4]; chunk [0,210] had 4 tweets\n\n\n \nConstraints:\n\n\n\t0 <= time, startTime, endTime <= 109\n\t0 <= endTime - startTime <= 104\n\tThere will be at most 104 calls in total to recordTweet and getTweetCountsPerFrequency.",
     "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Hard Array Challenge 149",
-    "description": "Find the contiguous subarray of student scores which has the largest sum and return its sum.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Hard Array Challenge 150",
-    "description": "Find the contiguous subarray of daily temperatures which has the largest sum and return its sum.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Medium Array Challenge 151",
-    "description": "You are provided an array of daily temperatures. Determine if there exists a subset that the sum is maximized.",
+    "title": "Beautiful Array Make to Operations Increment Minimum Challenge",
+    "description": "You are given a 0-indexed integer array nums having length n, and an integer k.\n\nYou can perform the following increment operation any number of times (including zero):\n\n\n\tChoose an index i in the range [0, n - 1], and increase nums[i] by 1.\n\n\nAn array is considered beautiful if, for any subarray with a size of 3 or more, its maximum element is greater than or equal to k.\n\nOutput an integer denoting the minimum number of increment operations needed to make nums beautiful.\n\nA subarray is a contiguous non-empty sequence of elements within an array.",
     "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Hard Math Challenge 152",
-    "description": "Find the factorial of a number representing number of distinct paths.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Easy String Challenge 153",
-    "description": "Group anagrams together from an array of encoded message.",
-    "difficulty": "Easy",
     "timeLimit": 2000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Easy Math Challenge 154",
-    "description": "Compute the nth Fibonacci number which determines the steps in a grid.",
-    "difficulty": "Easy",
-    "timeLimit": 2000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Easy String Challenge 155",
-    "description": "Find the length of the shortest substring of DNA sequence that palindrome.",
-    "difficulty": "Easy",
-    "timeLimit": 2000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Medium Math Challenge 156",
-    "description": "Calculate the greatest common divisor of two integers representing items in a knapsack.",
+    "title": "Queue Back Middle Front Design Challenge",
+    "description": "Design a queue that supports push and pop operations in the front, middle, and back.\n\nImplement the FrontMiddleBack class:\n\n\n\tFrontMiddleBack() Initializes the queue.\n\tvoid pushFront(int val) Adds val to the front of the queue.\n\tvoid pushMiddle(int val) Adds val to the middle of the queue.\n\tvoid pushBack(int val) Adds val to the back of the queue.\n\tint popFront() Removes the front element of the queue and Outputs it. If the queue is empty, Output -1.\n\tint popMiddle() Removes the middle element of the queue and Outputs it. If the queue is empty, Output -1.\n\tint popBack() Removes the back element of the queue and Outputs it. If the queue is empty, Output -1.\n\n\nNotice that when there are two middle position choices, the operation is performed on the frontmost middle position choice. For example:\n\n\n\tPushing 6 into the middle of [1, 2, 3, 4, 5] results in [1, 2, 6, 3, 4, 5].\n\tPopping the middle from [1, 2, 3, 4, 5, 6] Outputs 3 and results in [1, 2, 4, 5, 6].",
     "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Hard Array Challenge 157",
-    "description": "Given an array of integers representing stock prices, find the minimum {entity} such that it is strictly increasing.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
+    "title": "Array 2D Into Array 1D Convert Challenge",
+    "description": "You are given a 0-indexed 1-dimensional (1D) integer array original, and two integers, m and n. You are tasked with creating a 2-dimensional (2D) array with  m rows and n columns using all the elements from original.\n\nThe elements from indices 0 to n - 1 (inclusive) of original should form the first row of the constructed 2D array, the elements from indices n to 2 * n - 1 (inclusive) should form the second row of the constructed 2D array, and so on.\n\nOutput an m x n 2D array constructed according to the above procedure, or an empty 2D array if it is impossible.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Hard String Challenge 158",
-    "description": "Group anagrams together from an array of encoded message.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
+    "title": "Rows Three First the Display Challenge",
+    "description": "DataFrame: employees\n+-------------+--------+\n| Column Name | Type   |\n+-------------+--------+\n| employee_id | int    |\n| name        | object |\n| department  | object |\n| salary      | int    |\n+-------------+--------+\n\n\nWrite a solution to display the first 3 rows of this DataFrame.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Medium String Challenge 159",
-    "description": "Given a string representing a DNA sequence, determine if it is a valid anagram of another string.",
+    "title": "Tree Binary a of Sum Level Maximum Challenge",
+    "description": "Given the root of a binary tree, the level of its root is 1, the level of its children is 2, and so on.\n\nOutput the smallest level x such that the sum of all the values of nodes at level x is maximal.",
     "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Easy Array Challenge 160",
-    "description": "Given an array of integers representing daily temperatures, find the longest {entity} such that no two elements are adjacent.",
-    "difficulty": "Easy",
     "timeLimit": 2000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Easy String Challenge 161",
-    "description": "Group anagrams together from an array of encoded message.",
-    "difficulty": "Easy",
-    "timeLimit": 2000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Easy Math Challenge 162",
-    "description": "Compute the nth Fibonacci number which determines the number of distinct paths.",
-    "difficulty": "Easy",
-    "timeLimit": 2000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Hard String Challenge 163",
-    "description": "Given a string representing a encoded message, determine if it is a valid anagram of another string.",
+    "title": "Three of Multiple Largest Challenge",
+    "description": "Given an array of digits digits, Output the largest multiple of three that can be formed by concatenating some of the given digits in any order. If there is no answer Output an empty string.\n\nSince the answer may not fit in an integer data type, Output the answer as a string. Note that the Outputing answer must not contain unnecessary leading zeros.",
     "difficulty": "Hard",
     "timeLimit": 5000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Easy Math Challenge 164",
-    "description": "Compute the nth Fibonacci number which determines the steps in a grid.",
-    "difficulty": "Easy",
-    "timeLimit": 2000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Medium String Challenge 165",
-    "description": "Find the length of the shortest substring of user password that sequence of unique characters.",
+    "title": "Blocks Black of Number Challenge",
+    "description": "You are given two integers m and n representing the dimensions of a 0-indexed m x n grid.\n\nYou are also given a 0-indexed 2D integer matrix coordinates, where coordinates[i] = [x, y] indicates that the cell with coordinates [x, y] is colored black. All cells in the grid that do not appear in coordinates are white.\n\nA block is defined as a 2 x 2 submatrix of the grid. More formally, a block with cell [x, y] as its top-left corner where 0 <= x < m - 1 and 0 <= y < n - 1 contains the coordinates [x, y], [x + 1, y], [x, y + 1], and [x + 1, y + 1].\n\nOutput a 0-indexed integer array arr of size 5 such that arr[i] is the number of blocks that contains exactly i black cells.",
     "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Easy String Challenge 166",
-    "description": "Group anagrams together from an array of user password.",
+    "title": "Origin From Point Furthest Challenge",
+    "description": "You are given a string moves of length n consisting only of characters 'L', 'R', and '_'. The string represents your movement on a number line starting from the origin 0.\n\nIn the ith move, you can choose one of the following directions:\n\n\n\tmove to the left if moves[i] = 'L' or moves[i] = '_'\n\tmove to the right if moves[i] = 'R' or moves[i] = '_'\n\n\nOutput the distance from the origin of the furthest point you can get to after n moves.",
     "difficulty": "Easy",
     "timeLimit": 2000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Medium Array Challenge 167",
-    "description": "Rotate the array of daily temperatures by k steps to the right.",
+    "title": "Employee Each to Report Which Employees of Number The Challenge",
+    "description": "Table: Employees\n\n\n+-------------+----------+\n| Column Name | Type     |\n+-------------+----------+\n| employee_id | int      |\n| name        | varchar  |\n| reports_to  | int      |\n| age         | int      |\n+-------------+----------+\nemployee_id is the column with unique values for this table.\nThis table contains information about the employees and the id of the manager they report to. Some employees do not report to anyone (reports_to is null). \n\n\n \n\nFor this problem, we will consider a manager an employee who has at least 1 other employee reporting to them.\n\nWrite a solution to report the ids and the names of all managers, the number of employees who report directly to them, and the average age of the reports rounded to the nearest integer.\n\nOutput the result table ordered by employee_id.\n\nThe result format is in the following example.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Element One Deleting After 1's of Subarray Longest Challenge",
+    "description": "Given a binary array nums, you should delete one element from it.\n\nOutput the size of the longest non-empty subarray containing only 1's in the resulting array. Output 0 if there is no such subarray.",
     "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Easy String Challenge 168",
-    "description": "Group anagrams together from an array of user password.",
+    "title": "Matrix a in Values Odd with Cells Challenge",
+    "description": "There is an m x n matrix that is initialized to all 0's. There is also a 2D array indices where each indices[i] = [ri, ci] represents a 0-indexed location to perform some increment operations on the matrix.\n\nFor each location indices[i], do both of the following:\n\n\n\tIncrement all the cells on row ri.\n\tIncrement all the cells on column ci.\n\n\nGiven m, n, and indices, Output the number of odd-valued cells in the matrix after applying the increment to all locations in indices.",
     "difficulty": "Easy",
     "timeLimit": 2000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Hard Array Challenge 169",
-    "description": "Given an array of integers representing stock prices, find the maximum {entity} such that it is strictly increasing.",
+    "title": "Land a in Pyramids Fertile Count Challenge",
+    "description": "A farmer has a rectangular grid of land with m rows and n columns that can be divided into unit cells. Each cell is either fertile (represented by a 1) or barren (represented by a 0). All cells outside the grid are considered barren.\n\nA pyramidal plot of land can be defined as a set of cells with the following criteria:\n\n\n\tThe number of cells in the set has to be greater than 1 and all cells must be fertile.\n\tThe apex of a pyramid is the topmost cell of the pyramid. The height of a pyramid is the number of rows it covers. Let (r, c) be the apex of the pyramid, and its height be h. Then, the plot comprises of cells (i, j) where r <= i <= r + h - 1 and c - (i - r) <= j <= c + (i - r).\n\n\nAn inverse pyramidal plot of land can be defined as a set of cells with similar criteria:\n\n\n\tThe number of cells in the set has to be greater than 1 and all cells must be fertile.\n\tThe apex of an inverse pyramid is the bottommost cell of the inverse pyramid. The height of an inverse pyramid is the number of rows it covers. Let (r, c) be the apex of the pyramid, and its height be h. Then, the plot comprises of cells (i, j) where r - h + 1 <= i <= r and c - (r - i) <= j <= c + (r - i).\n\n\nSome examples of valid and invalid pyramidal (and inverse pyramidal) plots are shown below. Black cells indicate fertile cells.\n\nGiven a 0-indexed m x n binary matrix grid representing the farmland, Output the total number of pyramidal and inverse pyramidal plots that can be found in grid.",
     "difficulty": "Hard",
     "timeLimit": 5000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Easy Array Challenge 170",
-    "description": "Given an array of integers representing stock prices, find the longest {entity} such that it is strictly increasing.",
+    "title": "Sum Target With Subsequence Form to Operations Minimum Challenge",
+    "description": "You are given a 0-indexed array nums consisting of non-negative powers of 2, and an integer target.\n\nIn one operation, you must apply the following changes to the array:\n\n\n\tChoose any element of the array nums[i] such that nums[i] > 1.\n\tRemove nums[i] from the array.\n\tAdd two occurrences of nums[i] / 2 to the end of nums.\n\n\nOutput the minimum number of operations you need to perform so that nums contains a subsequence whose elements sum to target. If it is impossible to obtain such a subsequence, Output -1.\n\nA subsequence is an array that can be derived from another array by deleting some or no elements without changing the order of the remaining elements.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Numbers Binary Leaf To Root of Sum Challenge",
+    "description": "You are given the root of a binary tree where each node has a value 0 or 1. Each root-to-leaf path represents a binary number starting with the most significant bit.\n\n\n\tFor example, if the path is 0 -> 1 -> 1 -> 0 -> 1, then this could represent 01101 in binary, which is 13.\n\n\nFor all leaves in the tree, consider the numbers represented by the path from the root to that leaf. Output the sum of these numbers.\n\nThe test cases are generated so that the answer fits in a 32-bits integer.",
     "difficulty": "Easy",
     "timeLimit": 2000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Hard Math Challenge 171",
-    "description": "Given an integer representing steps in a grid, return true if it is a prime number.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Medium String Challenge 172",
-    "description": "Group anagrams together from an array of DNA sequence.",
+    "title": "Subarrays Good Into Array Split to Ways Challenge",
+    "description": "You are given a binary array nums.\n\nA subarray of an array is good if it contains exactly one element with the value 1.\n\nOutput an integer denoting the number of ways to split the array nums into good subarrays. As the number may be too large, Output it modulo 109 + 7.\n\nA subarray is a contiguous non-empty sequence of elements within an array.",
     "difficulty": "Medium",
-    "timeLimit": 3000,
-    "imageUrl": "",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Hard Math Challenge 173",
-    "description": "Compute the nth Fibonacci number which determines the number of distinct paths.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Hard Math Challenge 174",
-    "description": "Compute the nth Fibonacci number which determines the number of distinct paths.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
-    "testCases": [
-      {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
-      },
-      {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
-      }
-    ]
-  },
-  {
-    "title": "Easy Array Challenge 175",
-    "description": "Given an array of integers representing daily temperatures, find the maximum {entity} such that it forms a valid sequence.",
+    "title": "Employee Each by Spent Time Total Find Challenge",
+    "description": "Table: Employees\n\n\n+-------------+------+\n| Column Name | Type |\n+-------------+------+\n| emp_id      | int  |\n| event_day   | date |\n| in_time     | int  |\n| out_time    | int  |\n+-------------+------+\n(emp_id, event_day, in_time) is the primary key (combinations of columns with unique values) of this table.\nThe table shows the employees' entries and exits in an office.\nevent_day is the day at which this event happened, in_time is the minute at which the employee entered the office, and out_time is the minute at which they left the office.\nin_time and out_time are between 1 and 1440.\nIt is guaranteed that no two events on the same day intersect in time, and in_time < out_time.\n\n\n \n\nWrite a solution to calculate the total time in minutes spent by each employee on each day at the office. Note that within one day, an employee can enter and leave more than once. The time spent in the office for a single entry is out_time - in_time.\n\nOutput the result table in any order.\n\nThe result format is in the following example.",
     "difficulty": "Easy",
     "timeLimit": 2000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Hard Array Challenge 176",
-    "description": "Rotate the array of student scores by k steps to the right.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
+    "title": "Array Rotate Challenge",
+    "description": "Given an integer array nums, rotate the array to the right by k steps, where k is non-negative.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Hard Array Challenge 177",
-    "description": "You are provided an array of daily temperatures. Determine if there exists a subset that it forms a valid sequence.",
-    "difficulty": "Hard",
-    "timeLimit": 5000,
-    "imageUrl": "",
+    "title": "Day? Favorite Your on Candy Favorite Your Eat You Can Challenge",
+    "description": "You are given a (0-indexed) array of positive integers candiesCount where candiesCount[i] represents the number of candies of the ith type you have. You are also given a 2D array queries where queries[i] = [favoriteTypei, favoriteDayi, dailyCapi].\n\nYou play a game with the following rules:\n\n\n\tYou start eating candies on day 0.\n\tYou cannot eat any candy of type i unless you have eaten all candies of type i - 1.\n\tYou must eat at least one candy per day until you have eaten all the candies.\n\n\nConstruct a boolean array answer such that answer.length == queries.length and answer[i] is true if you can eat a candy of type favoriteTypei on day favoriteDayi without eating more than dailyCapi candies on any day, and false otherwise. Note that you can eat different types of candy on the same day, provided that you follow rule 2.\n\nOutput the constructed array answer.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Easy Math Challenge 178",
-    "description": "Given an integer representing items in a knapsack, return true if it is a prime number.",
+    "title": "People to Candies Distribute Challenge",
+    "description": "We distribute some number of candies, to a row of n = num_people people in the following way:\n\nWe then give 1 candy to the first person, 2 candies to the second person, and so on until we give n candies to the last person.\n\nThen, we go back to the start of the row, giving n + 1 candies to the first person, n + 2 candies to the second person, and so on until we give 2 * n candies to the last person.\n\nThis process repeats (with us giving one more candy each time, and moving to the start of the row after we reach the end) until we run out of candies.  The last person will receive all of our remaining candies (not necessarily one more than the previous gift).\n\nOutput an array (of length num_people and sum candies) that represents the final distribution of candies.",
     "difficulty": "Easy",
     "timeLimit": 2000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
   },
   {
-    "title": "Easy Array Challenge 179",
-    "description": "Find the contiguous subarray of stock prices which has the largest sum and return its sum.",
-    "difficulty": "Easy",
+    "title": "Rank Network Maximal Challenge",
+    "description": "There is an infrastructure of n cities with some number of roads connecting these cities. Each roads[i] = [ai, bi] indicates that there is a bidirectional road between cities ai and bi.\n\nThe network rank of two different cities is defined as the total number of directly connected roads to either city. If a road is directly connected to both cities, it is only counted once.\n\nThe maximal network rank of the infrastructure is the maximum network rank of all pairs of different cities.\n\nGiven the integer n and the array roads, Output the maximal network rank of the entire infrastructure.",
+    "difficulty": "Medium",
     "timeLimit": 2000,
-    "imageUrl": "",
     "testCases": [
       {
-        "input": "Custom Test Input A",
-        "expectedOutput": "Expected Output A"
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
       },
       {
-        "input": "Custom Test Input B",
-        "expectedOutput": "Expected Output B"
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
       }
-    ]
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Array an of K-or the Find Challenge",
+    "description": "You are given an integer array nums, and an integer k. Let's introduce K-or operation by extending the standard bitwise OR. In K-or, a bit position in the result is set to 1 if at least k numbers in nums have a 1 in that position.\n\nOutput the K-or of nums.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Subarrays Arithmetic Challenge",
+    "description": "A sequence of numbers is called arithmetic if it consists of at least two elements, and the difference between every two consecutive elements is the same. More formally, a sequence s is arithmetic if and only if s[i+1] - s[i] == s[1] - s[0] for all valid i.\n\nFor example, these are arithmetic sequences:\n\n\n1, 3, 5, 7, 9\n7, 7, 7, 7\n3, -1, -5, -9\n\nThe following sequence is not arithmetic:\n\n\n1, 1, 2, 5, 7\n\nYou are given an array of n integers, nums, and two arrays of m integers each, l and r, representing the m range queries, where the ith query is the range [l[i], r[i]]. All the arrays are 0-indexed.\n\nOutput a list of boolean elements answer, where answer[i] is true if the subarray nums[l[i]], nums[l[i]+1], ... , nums[r[i]] can be rearranged to form an arithmetic sequence, and false otherwise.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Numbers Deci-Binary Of Number Minimum Into Partitioning Challenge",
+    "description": "A decimal number is called deci-binary if each of its digits is either 0 or 1 without any leading zeros. For example, 101 and 1100 are deci-binary, while 112 and 3001 are not.\n\nGiven a string n that represents a positive decimal integer, Output the minimum number of positive deci-binary numbers needed so that they sum up to n.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Collision Asteroid Challenge",
+    "description": "We are given an array asteroids of integers representing asteroids in a row. The indices of the asteroid in the array represent their relative position in space.\n\nFor each asteroid, the absolute value represents its size, and the sign represents its direction (positive meaning right, negative meaning left). Each asteroid moves at the same speed.\n\nFind out the state of the asteroids after all collisions. If two asteroids meet, the smaller one will explode. If both are the same size, both will explode. Two asteroids moving in the same direction will never meet.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Parallel in Functions Asynchronous Execute Challenge",
+    "description": "Given an array of asynchronous functions functions, Output a new promise promise. Each function in the array accepts no arguments and Outputs a promise. All the promises should be executed in parallel.\n\npromise resolves:\n\n\n\tWhen all the promises Outputed from functions were resolved successfully in parallel. The resolved value of promise should be an array of all the resolved values of promises in the same order as they were in the functions. The promise should resolve when all the asynchronous functions in the array have completed execution in parallel.\n\n\npromise rejects:\n\n\n\tWhen any of the promises Outputed from functions were rejected. promise should also reject with the reason of the first rejection.\n\n\nPlease solve it without using the built-in Promise.all function.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Value Hash Given With Substring Find Challenge",
+    "description": "The hash of a 0-indexed string s of length k, given integers p and m, is computed using the following function:\n\n\n\thash(s, p, m) = (val(s[0]) * p0 + val(s[1]) * p1 + ... + val(s[k-1]) * pk-1) mod m.\n\n\nWhere val(s[i]) represents the index of s[i] in the alphabet from val('a') = 1 to val('z') = 26.\n\nYou are given a string s and the integers power, modulo, k, and hashValue. Output sub, the first substring of s of length k such that hash(sub, power, modulo) == hashValue.\n\nThe test cases will be generated such that an answer always exists.\n\nA substring is a contiguous non-empty sequence of characters within a string.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Targets Sequential Destroy Challenge",
+    "description": "You are given a 0-indexed array nums consisting of positive integers, representing targets on a number line. You are also given an integer space.\n\nYou have a machine which can destroy targets. Seeding the machine with some nums[i] allows it to destroy all targets with values that can be represented as nums[i] + c * space, where c is any non-negative integer. You want to destroy the maximum number of targets in nums.\n\nOutput the minimum value of nums[i] you can seed the machine with to destroy the maximum number of targets.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "III Rooms Meeting Challenge",
+    "description": "You are given an integer n. There are n rooms numbered from 0 to n - 1.\n\nYou are given a 2D integer array meetings where meetings[i] = [starti, endi] means that a meeting will be held during the half-closed time interval [starti, endi). All the values of starti are unique.\n\nMeetings are allocated to rooms in the following manner:\n\n\n\tEach meeting will take place in the unused room with the lowest number.\n\tIf there are no available rooms, the meeting will be delayed until a room becomes free. The delayed meeting should have the same duration as the original meeting.\n\tWhen a room becomes unused, meetings that have an earlier original start time should be given the room.\n\n\nOutput the number of the room that held the most meetings. If there are multiple rooms, Output the room with the lowest number.\n\nA half-closed interval [a, b) is the interval between a and b including a and not including b.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Trail Freedom Challenge",
+    "description": "In the video game Fallout 4, the quest \"Road to Freedom\" requires players to reach a metal dial called the \"Freedom Trail Ring\" and use the dial to spell a specific keyword to open the door.\n\nGiven a string ring that represents the code engraved on the outer ring and another string key that represents the keyword that needs to be spelled, Output the minimum number of steps to spell all the characters in the keyword.\n\nInitially, the first character of the ring is aligned at the \"12:00\" direction. You should spell all the characters in key one by one by rotating ring clockwise or anticlockwise to make each character of the string key aligned at the \"12:00\" direction and then by pressing the center button.\n\nAt the stage of rotating the ring to spell the key character key[i]:\n\n\n\tYou can rotate the ring clockwise or anticlockwise by one place, which counts as one step. The final purpose of the rotation is to align one of ring's characters at the \"12:00\" direction, where this character must equal key[i].\n\tIf the character key[i] has been aligned at the \"12:00\" direction, press the center button to spell, which also counts as one step. After the pressing, you could begin to spell the next character in the key (next stage). Otherwise, you have finished all the spelling.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Group Largest Count Challenge",
+    "description": "You are given an integer n.\n\nWe need to group the numbers from 1 to n according to the sum of its digits. For example, the numbers 14 and 5 belong to the same group, whereas 13 and 3 belong to different groups.\n\nOutput the number of groups that have the largest size, i.e. the maximum number of elements.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Subarrays Nice of Number Count Challenge",
+    "description": "Provided an array of numbers nums and an integer k. A continuous subarray is called nice if there are k odd numbers on it.\n\nOutput the number of nice sub-arrays.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Subarrays Zero-Filled of Number Challenge",
+    "description": "Given an integer array nums, Output the number of subarrays filled with 0.\n\nA subarray is a contiguous non-empty sequence of elements within an array.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": " Elements K Exactly With Sum Maximum Challenge",
+    "description": "You are given a 0-indexed integer array nums and an integer k. Your task is to perform the following operation exactly k times in order to maximize your score:\n\n\n\tSelect an element m from nums.\n\tRemove the selected element m from the array.\n\tAdd a new element with a value of m + 1 to the array.\n\tIncrease your score by m.\n\n\nOutput the maximum score you can achieve after performing the operation exactly k times.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Adjacent No With Planting Flower Challenge",
+    "description": "You have n gardens, labeled from 1 to n, and an array paths where paths[i] = [xi, yi] describes a bidirectional path between garden xi to garden yi. In each garden, you want to plant one of 4 types of flowers.\n\nAll gardens have at most 3 paths coming into or leaving it.\n\nYour task is to choose a flower type for each garden such that, for any two gardens connected by a path, they have different types of flowers.\n\nOutput any such a choice as an array answer, where answer[i] is the type of flower planted in the (i+1)th garden. The flower types are denoted 1, 2, 3, or 4. It is guaranteed an answer exists.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "IV Partitioning Palindrome Challenge",
+    "description": "Given a string s, Output true if it is possible to split the string s into three non-empty palindromic substrings. Otherwise, Output false.​​​​​\n\nA string is said to be palindrome if it the same string when reversed.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "I State Initial to Word Revert to Time Minimum Challenge",
+    "description": "You are given a 0-indexed string word and an integer k.\n\nAt every second, you must perform the following operations:\n\n\n\tRemove the first k characters of word.\n\tAdd any k characters to the end of word.\n\n\nNote that you do not necessarily need to add the same characters that you removed. However, you must perform both operations at every second.\n\nOutput the minimum time greater than zero required for word to revert to its initial state.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Groups of Number Maximum the Into Nodes Divide Challenge",
+    "description": "You are given a positive integer n representing the number of nodes in an undirected graph. The nodes are labeled from 1 to n.\n\nYou are also given a 2D integer array edges, where edges[i] = [ai, bi] indicates that there is a bidirectional edge between nodes ai and bi. Notice that the given graph may be disconnected.\n\nDivide the nodes of the graph into m groups (1-indexed) such that:\n\n\n\tEach node in the graph belongs to exactly one group.\n\tFor every pair of nodes in the graph that are connected by an edge [ai, bi], if ai belongs to the group with index x, and bi belongs to the group with index y, then |y - x| = 1.\n\n\nOutput the maximum number of groups (i.e., maximum m) into which you can divide the nodes. Output -1 if it is impossible to group the nodes with the given conditions.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Referee Customer Find Challenge",
+    "description": "Table: Customer\n\n\n+-------------+---------+\n| Column Name | Type    |\n+-------------+---------+\n| id          | int     |\n| name        | varchar |\n| referee_id  | int     |\n+-------------+---------+\nIn SQL, id is the primary key column for this table.\nEach row of this table indicates the id of a customer, their name, and the id of the customer who referred them.\n\n\n \n\nFind the names of the customer that are either:\n\n\n\treferred by any customer with id != 2.\n\tnot referred by any customer.\n\n\nOutput the result table in any order.\n\nThe result format is in the following example.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Tree Binary from String Construct Challenge",
+    "description": "Given the root node of a binary tree, your task is to create a string representation of the tree following a specific set of formatting rules. The representation should be based on a preorder traversal of the binary tree and must adhere to the following guidelines:\n\n\n\t\n\tNode Representation: Each node in the tree should be represented by its integer value.\n\t\n\t\n\tParentheses for Children: If a node has at least one child (either left or right), its children should be represented inside parentheses. Specifically:\n\n\t\n\t\tIf a node has a left child, the value of the left child should be enclosed in parentheses immediately following the node's value.\n\t\tIf a node has a right child, the value of the right child should also be enclosed in parentheses. The parentheses for the right child should follow those of the left child.\n\t\n\t\n\t\n\tOmitting Empty Parentheses: Any empty parentheses pairs (i.e., ()) should be omitted from the final string representation of the tree, with one specific exception: when a node has a right child but no left child. In such cases, you must include an empty pair of parentheses to indicate the absence of the left child. This ensures that the one-to-one mapping between the string representation and the original binary tree structure is maintained.\n\n\tIn summary, empty parentheses pairs should be omitted when a node has only a left child or no children. However, when a node has a right child but no left child, an empty pair of parentheses must precede the representation of the right child to reflect the tree's structure accurately.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Queries XOR Substring Challenge",
+    "description": "You are given a binary string s, and a 2D integer array queries where queries[i] = [firsti, secondi].\n\nFor the ith query, find the shortest substring of s whose decimal value, val, yields secondi when bitwise XORed with firsti. In other words, val ^ firsti == secondi.\n\nThe answer to the ith query is the endpoints (0-indexed) of the substring [lefti, righti] or [-1, -1] if no such substring exists. If there are multiple answers, choose the one with the minimum lefti.\n\nOutput an array ans where ans[i] = [lefti, righti] is the answer to the ith query.\n\nA substring is a contiguous non-empty sequence of characters within a string.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Pairs K-Sum of Number Max Challenge",
+    "description": "You are given an integer array nums and an integer k.\n\nIn one operation, you can pick two numbers from the array whose sum equals k and remove them from the array.\n\nOutput the maximum number of operations you can perform on the array.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Puzzle Each for Words Valid of Number Challenge",
+    "description": "With respect to a given puzzle string, a word is valid if both the following conditions are satisfied:\n\n\tword contains the first letter of puzzle.\n\tFor each letter in word, that letter is in puzzle.\n\t\n\t\tFor example, if the puzzle is \"abcdefg\", then valid words are \"faced\", \"cabbage\", and \"baggage\", while\n\t\tinvalid words are \"beefed\" (does not include 'a') and \"based\" (includes 's' which is not in the puzzle).\n\t\n\t\n\nOutput an array answer, where answer[i] is the number of words in the given word list words that is valid with respect to the puzzle puzzles[i].",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Life of Game Challenge",
+    "description": "According to Wikipedia's article: \"The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970.\"\n\nThe board is made up of an m x n grid of cells, where each cell has an initial state: live (represented by a 1) or dead (represented by a 0). Each cell interacts with its eight neighbors (horizontal, vertical, diagonal) using the following four rules (taken from the above Wikipedia article):\n\n\n\tAny live cell with fewer than two live neighbors dies as if caused by under-population.\n\tAny live cell with two or three live neighbors lives on to the next generation.\n\tAny live cell with more than three live neighbors dies, as if by over-population.\n\tAny dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.\n\n\nThe next state of the board is determined by applying the above rules simultaneously to every cell in the current state of the m x n grid board. In this process, births and deaths occur simultaneously.\n\nGiven the current state of the board, update the board to reflect its next state.\n\nNote that you do not need to Output anything.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Columns Modify Challenge",
+    "description": "DataFrame employees\n+-------------+--------+\n| Column Name | Type   |\n+-------------+--------+\n| name        | object |\n| salary      | int    |\n+-------------+--------+\n\n\nA company intends to give its employees a pay rise.\n\nWrite a solution to modify the salary column by multiplying each salary by 2.\n\nThe result format is in the following example.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "I Indices Mark to Second Earliest Challenge",
+    "description": "You are given two 1-indexed integer arrays, nums and, changeIndices, having lengths n and m, respectively.\n\nInitially, all indices in nums are unmarked. Your task is to mark all indices in nums.\n\nIn each second, s, in order from 1 to m (inclusive), you can perform one of the following operations:\n\n\n\tChoose an index i in the range [1, n] and decrement nums[i] by 1.\n\tIf nums[changeIndices[s]] is equal to 0, mark the index changeIndices[s].\n\tDo nothing.\n\n\nOutput an integer denoting the earliest second in the range [1, m] when all indices in nums can be marked by choosing operations optimally, or -1 if it is impossible.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Beautiful Array Make to Deletions Minimum Challenge",
+    "description": "You are given a 0-indexed integer array nums. The array nums is beautiful if:\n\n\n\tnums.length is even.\n\tnums[i] != nums[i + 1] for all i % 2 == 0.\n\n\nNote that an empty array is considered beautiful.\n\nYou can delete any number of elements from nums. When you delete an element, all the elements to the right of the deleted element will be shifted one unit to the left to fill the gap created and all the elements to the left of the deleted element will remain unchanged.\n\nOutput the minimum number of elements to delete from nums to make it beautiful.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Minesweeper Challenge",
+    "description": "Let's play the minesweeper game (Wikipedia, online game)!\n\nYou are given an m x n char matrix board representing the game board where:\n\n\n\t'M' represents an unrevealed mine,\n\t'E' represents an unrevealed empty square,\n\t'B' represents a revealed blank square that has no adjacent mines (i.e., above, below, left, right, and all 4 diagonals),\n\tdigit ('1' to '8') represents how many mines are adjacent to this revealed square, and\n\t'X' represents a revealed mine.\n\n\nYou are also given an integer array click where click = [clickr, clickc] represents the next click position among all the unrevealed squares ('M' or 'E').\n\nOutput the board after revealing this position according to the following rules:\n\n\n\tIf a mine 'M' is revealed, then the game is over. You should change it to 'X'.\n\tIf an empty square 'E' with no adjacent mines is revealed, then change it to a revealed blank 'B' and all of its adjacent unrevealed squares should be revealed recursively.\n\tIf an empty square 'E' with at least one adjacent mine is revealed, then change it to a digit ('1' to '8') representing the number of adjacent mines.\n\tOutput the board when no more squares will be revealed.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Groups Large of Positions Challenge",
+    "description": "In a string s of lowercase letters, these letters form consecutive groups of the same character.\n\nFor example, a string like s = \"abbxxxxzyy\" has the groups \"a\", \"bb\", \"xxxx\", \"z\", and \"yy\".\n\nA group is identified by an interval [start, end], where start and end denote the start and end indices (inclusive) of the group. In the above example, \"xxxx\" has the interval [3,6].\n\nA group is considered large if it has 3 or more characters.\n\nOutput the intervals of every large group sorted in increasing order by start index.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Points Reaching Challenge",
+    "description": "Given four integers sx, sy, tx, and ty, Output true if it is possible to convert the point (sx, sy) to the point (tx, ty) through some operations, or false otherwise.\n\nThe allowed operation on some point (x, y) is to convert it to either (x, x + y) or (x + y, y).",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Cameras Tree Binary Challenge",
+    "description": "You are given the root of a binary tree. We install cameras on the tree nodes where each camera at a node can monitor its parent, itself, and its immediate children.\n\nOutput the minimum number of cameras needed to monitor all nodes of the tree.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Array Sorted a of Squares Challenge",
+    "description": "Given an integer array nums sorted in non-decreasing order, Output an array of the squares of each number sorted in non-decreasing order.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
   }
 ]
