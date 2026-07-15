@@ -7,7 +7,7 @@ import './TestBuilder.css';
 
 let cachedStandardQuizzes = [];
 
-export default function TestBuilder({ onPublish, refreshTrigger, codingTests, openCreateCodingQuestion, deleteCodingTest }) {
+export default function TestBuilder({ onPublish, refreshTrigger }) {
   const [questions, setQuestions] = useState(questionsData);
   const [categoryFilter, setCategoryFilter] = useState("All");
   const [selectedQuestions, setSelectedQuestions] = useState([]);
@@ -148,11 +148,6 @@ export default function TestBuilder({ onPublish, refreshTrigger, codingTests, op
             <h3 style={{ color: '#166534', marginBottom: '8px', fontSize: '1.1rem' }}>📝 Create Standard Quiz</h3>
             <p style={{ color: '#14532d', margin: 0 }}>Select questions from the bank and create a timed multiple-choice quiz.</p>
           </div>
-          
-          <div className="module-card hover-lift" style={{ background: 'linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%)', border: '1px solid #a5b4fc', cursor: 'pointer', transition: 'transform 0.2s' }} onClick={() => openCreateCodingQuestion && openCreateCodingQuestion()}>
-            <h3 style={{ color: '#3730a3', marginBottom: '8px', fontSize: '1.1rem' }}>💻 Create Coding Test</h3>
-            <p style={{ color: '#312e81', margin: 0 }}>Assign algorithmic programming questions with automated test cases.</p>
-          </div>
         </div>
       </div>
 
@@ -181,29 +176,6 @@ export default function TestBuilder({ onPublish, refreshTrigger, codingTests, op
               ))}
             </div>
           )}
-        </div>
-      )}
-
-      {step === 0 && codingTests && codingTests.length > 0 && (
-        <div className="test-builder-step" style={{ marginTop: '32px' }}>
-          <h3 style={{ marginBottom: '16px', fontSize: '1.2rem', color: '#1e293b' }}>Published Coding Tests</h3>
-          <div className="questions-list" style={{ display: 'grid', gap: '12px' }}>
-            {codingTests.map(quiz => (
-              <div key={quiz.id} className="question-card" style={{ borderLeft: '4px solid #8b5cf6', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div>
-                  <h4 style={{ margin: '0 0 4px 0', fontSize: '1.1rem' }}>{quiz.title}</h4>
-                  <span style={{ fontSize: '0.85rem', color: '#64748b' }}>Due: {new Date(quiz.dueDate).toLocaleString()} • {quiz.questions?.length || 0} questions</span>
-                </div>
-                <button 
-                  className="ghost-button" 
-                  style={{ color: '#e11d48', padding: '6px 12px' }}
-                  onClick={(e) => { e.stopPropagation(); if (deleteCodingTest) deleteCodingTest(quiz.id); }}
-                >
-                  Delete
-                </button>
-              </div>
-            ))}
-          </div>
         </div>
       )}
 
