@@ -350,5 +350,1365 @@
         "expectedOutput": "[]"
       }
     ]
+  },
+  {
+    "title": "Hard String Challenge 100",
+    "description": "Reverse the words in a given string of sentence.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Medium Array Challenge 101",
+    "description": "Given an array of integers representing stock prices, find the shortest {entity} such that the sum is maximized.",
+    "difficulty": "Medium",
+    "timeLimit": 3000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy Math Challenge 102",
+    "description": "Compute the nth Fibonacci number which determines the number of distinct paths.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Medium String Challenge 103",
+    "description": "Reverse the words in a given string of DNA sequence.",
+    "difficulty": "Medium",
+    "timeLimit": 3000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Array Challenge 104",
+    "description": "Given an array of integers representing building heights, find the minimum {entity} such that it is strictly increasing.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Array Challenge 105",
+    "description": "Find the contiguous subarray of building heights which has the largest sum and return its sum.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard String Challenge 106",
+    "description": "Group anagrams together from an array of user password.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Array Challenge 107",
+    "description": "Find the contiguous subarray of stock prices which has the largest sum and return its sum.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard String Challenge 108",
+    "description": "Find the length of the longest substring of DNA sequence that palindrome.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy Array Challenge 109",
+    "description": "You are provided an array of building heights. Determine if there exists a subset that it is strictly increasing.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Array Challenge 110",
+    "description": "Given an array of integers representing building heights, find the shortest {entity} such that the sum is maximized.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Medium Math Challenge 111",
+    "description": "Compute the nth Fibonacci number which determines the items in a knapsack.",
+    "difficulty": "Medium",
+    "timeLimit": 3000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Medium String Challenge 112",
+    "description": "Find the length of the shortest substring of user password that anagram of another string.",
+    "difficulty": "Medium",
+    "timeLimit": 3000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Array Challenge 113",
+    "description": "You are provided an array of building heights. Determine if there exists a subset that it is strictly increasing.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy Array Challenge 114",
+    "description": "Given an array of integers representing student scores, find the maximum {entity} such that the sum is maximized.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy String Challenge 115",
+    "description": "Find the length of the longest substring of encoded message that palindrome.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Math Challenge 116",
+    "description": "Find the factorial of a number representing steps in a grid.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Medium String Challenge 117",
+    "description": "Reverse the words in a given string of encoded message.",
+    "difficulty": "Medium",
+    "timeLimit": 3000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy String Challenge 118",
+    "description": "Given a string representing a sentence, determine if it is a valid anagram of another string.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Array Challenge 119",
+    "description": "Find the contiguous subarray of daily temperatures which has the largest sum and return its sum.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Medium String Challenge 120",
+    "description": "Group anagrams together from an array of sentence.",
+    "difficulty": "Medium",
+    "timeLimit": 3000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy Array Challenge 121",
+    "description": "Given an array of integers representing stock prices, find the longest {entity} such that the sum is maximized.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Medium String Challenge 122",
+    "description": "Reverse the words in a given string of encoded message.",
+    "difficulty": "Medium",
+    "timeLimit": 3000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy Array Challenge 123",
+    "description": "Find the contiguous subarray of building heights which has the largest sum and return its sum.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy Math Challenge 124",
+    "description": "Calculate the greatest common divisor of two integers representing items in a knapsack.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy Array Challenge 125",
+    "description": "Find the contiguous subarray of stock prices which has the largest sum and return its sum.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Math Challenge 126",
+    "description": "Find the factorial of a number representing steps in a grid.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Medium Math Challenge 127",
+    "description": "Find the factorial of a number representing number of distinct paths.",
+    "difficulty": "Medium",
+    "timeLimit": 3000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Math Challenge 128",
+    "description": "Given an integer representing items in a knapsack, return true if it is a prime number.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Medium Math Challenge 129",
+    "description": "Given an integer representing number of distinct paths, return true if it is a prime number.",
+    "difficulty": "Medium",
+    "timeLimit": 3000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy Math Challenge 130",
+    "description": "Given an integer representing number of distinct paths, return true if it is a prime number.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy Array Challenge 131",
+    "description": "You are provided an array of building heights. Determine if there exists a subset that it is strictly increasing.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Medium Array Challenge 132",
+    "description": "Given an array of integers representing daily temperatures, find the maximum {entity} such that the sum is maximized.",
+    "difficulty": "Medium",
+    "timeLimit": 3000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Array Challenge 133",
+    "description": "Rotate the array of daily temperatures by k steps to the right.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Medium Array Challenge 134",
+    "description": "Find the contiguous subarray of student scores which has the largest sum and return its sum.",
+    "difficulty": "Medium",
+    "timeLimit": 3000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Medium String Challenge 135",
+    "description": "Find the length of the shortest substring of DNA sequence that anagram of another string.",
+    "difficulty": "Medium",
+    "timeLimit": 3000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Medium Math Challenge 136",
+    "description": "Calculate the least common divisor of two integers representing number of distinct paths.",
+    "difficulty": "Medium",
+    "timeLimit": 3000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy String Challenge 137",
+    "description": "Given a string representing a DNA sequence, determine if it is a valid sequence of unique characters.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy String Challenge 138",
+    "description": "Group anagrams together from an array of sentence.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Array Challenge 139",
+    "description": "Find the contiguous subarray of stock prices which has the largest sum and return its sum.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Medium Math Challenge 140",
+    "description": "Calculate the greatest common divisor of two integers representing steps in a grid.",
+    "difficulty": "Medium",
+    "timeLimit": 3000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy Math Challenge 141",
+    "description": "Calculate the least common divisor of two integers representing items in a knapsack.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy Array Challenge 142",
+    "description": "You are provided an array of stock prices. Determine if there exists a subset that no two elements are adjacent.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard String Challenge 143",
+    "description": "Given a string representing a DNA sequence, determine if it is a valid sequence of unique characters.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Math Challenge 144",
+    "description": "Find the factorial of a number representing items in a knapsack.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Array Challenge 145",
+    "description": "Rotate the array of student scores by k steps to the right.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Array Challenge 146",
+    "description": "Rotate the array of stock prices by k steps to the right.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Medium String Challenge 147",
+    "description": "Group anagrams together from an array of sentence.",
+    "difficulty": "Medium",
+    "timeLimit": 3000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Medium Array Challenge 148",
+    "description": "Given an array of integers representing student scores, find the minimum {entity} such that no two elements are adjacent.",
+    "difficulty": "Medium",
+    "timeLimit": 3000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Array Challenge 149",
+    "description": "Find the contiguous subarray of student scores which has the largest sum and return its sum.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Array Challenge 150",
+    "description": "Find the contiguous subarray of daily temperatures which has the largest sum and return its sum.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Medium Array Challenge 151",
+    "description": "You are provided an array of daily temperatures. Determine if there exists a subset that the sum is maximized.",
+    "difficulty": "Medium",
+    "timeLimit": 3000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Math Challenge 152",
+    "description": "Find the factorial of a number representing number of distinct paths.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy String Challenge 153",
+    "description": "Group anagrams together from an array of encoded message.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy Math Challenge 154",
+    "description": "Compute the nth Fibonacci number which determines the steps in a grid.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy String Challenge 155",
+    "description": "Find the length of the shortest substring of DNA sequence that palindrome.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Medium Math Challenge 156",
+    "description": "Calculate the greatest common divisor of two integers representing items in a knapsack.",
+    "difficulty": "Medium",
+    "timeLimit": 3000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Array Challenge 157",
+    "description": "Given an array of integers representing stock prices, find the minimum {entity} such that it is strictly increasing.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard String Challenge 158",
+    "description": "Group anagrams together from an array of encoded message.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Medium String Challenge 159",
+    "description": "Given a string representing a DNA sequence, determine if it is a valid anagram of another string.",
+    "difficulty": "Medium",
+    "timeLimit": 3000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy Array Challenge 160",
+    "description": "Given an array of integers representing daily temperatures, find the longest {entity} such that no two elements are adjacent.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy String Challenge 161",
+    "description": "Group anagrams together from an array of encoded message.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy Math Challenge 162",
+    "description": "Compute the nth Fibonacci number which determines the number of distinct paths.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard String Challenge 163",
+    "description": "Given a string representing a encoded message, determine if it is a valid anagram of another string.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy Math Challenge 164",
+    "description": "Compute the nth Fibonacci number which determines the steps in a grid.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Medium String Challenge 165",
+    "description": "Find the length of the shortest substring of user password that sequence of unique characters.",
+    "difficulty": "Medium",
+    "timeLimit": 3000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy String Challenge 166",
+    "description": "Group anagrams together from an array of user password.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Medium Array Challenge 167",
+    "description": "Rotate the array of daily temperatures by k steps to the right.",
+    "difficulty": "Medium",
+    "timeLimit": 3000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy String Challenge 168",
+    "description": "Group anagrams together from an array of user password.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Array Challenge 169",
+    "description": "Given an array of integers representing stock prices, find the maximum {entity} such that it is strictly increasing.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy Array Challenge 170",
+    "description": "Given an array of integers representing stock prices, find the longest {entity} such that it is strictly increasing.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Math Challenge 171",
+    "description": "Given an integer representing steps in a grid, return true if it is a prime number.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Medium String Challenge 172",
+    "description": "Group anagrams together from an array of DNA sequence.",
+    "difficulty": "Medium",
+    "timeLimit": 3000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Math Challenge 173",
+    "description": "Compute the nth Fibonacci number which determines the number of distinct paths.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Math Challenge 174",
+    "description": "Compute the nth Fibonacci number which determines the number of distinct paths.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy Array Challenge 175",
+    "description": "Given an array of integers representing daily temperatures, find the maximum {entity} such that it forms a valid sequence.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Array Challenge 176",
+    "description": "Rotate the array of student scores by k steps to the right.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Hard Array Challenge 177",
+    "description": "You are provided an array of daily temperatures. Determine if there exists a subset that it forms a valid sequence.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy Math Challenge 178",
+    "description": "Given an integer representing items in a knapsack, return true if it is a prime number.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
+  },
+  {
+    "title": "Easy Array Challenge 179",
+    "description": "Find the contiguous subarray of stock prices which has the largest sum and return its sum.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "imageUrl": "",
+    "testCases": [
+      {
+        "input": "Custom Test Input A",
+        "expectedOutput": "Expected Output A"
+      },
+      {
+        "input": "Custom Test Input B",
+        "expectedOutput": "Expected Output B"
+      }
+    ]
   }
 ]
