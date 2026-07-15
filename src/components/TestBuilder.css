@@ -98,6 +98,13 @@
   border: 1px solid var(--line);
 }
 
+.question-card p {
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.6;
+  margin: 12px 0;
+}
+
 .q-options {
   display: flex;
   gap: 12px;

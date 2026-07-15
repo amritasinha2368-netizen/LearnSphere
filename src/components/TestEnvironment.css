@@ -67,9 +67,11 @@
 }
 
 .question-box h3 {
-  font-size: 1.5rem;
-  line-height: 1.5;
-  margin-bottom: 30px;
+  font-size: 1.15rem;
+  margin-bottom: 24px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
   color: var(--ink, #142033);
 }
 
