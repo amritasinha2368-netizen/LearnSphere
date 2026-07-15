@@ -488,90 +488,85 @@ Ensure there are at least 4 test cases, with at least 2 hidden ones. Input forma
                   return res.end(JSON.stringify({ error: "Question not found" }));
                 }
 
-                const langMap = {
-                  'python': { language: 'python', version: '3.10.0' },
-                  'javascript': { language: 'javascript', version: '18.15.0' },
-                  'cpp': { language: 'c++', version: '10.2.0' },
-                  'java': { language: 'java', version: '15.0.2' }
-                };
-                
-                const langData = langMap[language] || langMap['python'];
-                let allPassed = true;
+                const apiKey = process.env.GEMINI_API_KEY;
+                let verdict = "Wrong Answer";
+                let feedback = "Failed to evaluate code.";
+
+                if (!apiKey) {
+                  res.statusCode = 500;
+                  return res.end(JSON.stringify({ error: "Gemini API key not configured." }));
+                }
+
+                try {
+                  const prompt = `You are an expert programming judge (like LeetCode).
+Evaluate the following student submission for the problem below.
+
+Problem Title: ${question.title}
+Problem Description:
+${question.description}
+
+Student Code (${language}):
+\`\`\`${language}
+${code}
+\`\`\`
+
+Determine if the code correctly solves the problem, is optimal, and is free of syntax/runtime errors.
+If the code is incomplete (e.g. just a class stub without implementation) or empty, it is a Wrong Answer.
+Respond EXACTLY in this JSON format (no markdown blocks, just raw JSON):
+{
+  "verdict": "Accepted" | "Wrong Answer" | "Runtime Error" | "Compilation Error",
+  "feedback": "A very brief 1-2 sentence explanation of what is wrong (or 'All test cases passed' if correct)."
+}`;
+
+                  const aiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      contents: [{ parts: [{ text: prompt }] }],
+                      generationConfig: {
+                        temperature: 0.1,
+                        response_mime_type: "application/json"
+                      }
+                    })
+                  });
+
+                  if (aiRes.ok) {
+                    const aiData = await aiRes.json();
+                    const responseText = aiData.candidates[0].content.parts[0].text;
+                    const parsed = JSON.parse(responseText);
+                    verdict = parsed.verdict || "Wrong Answer";
+                    feedback = parsed.feedback || "Feedback parsing failed.";
+                  } else {
+                    feedback = "AI evaluation service unavailable.";
+                  }
+                } catch (err) {
+                  console.error("AI Evaluation error:", err);
+                  feedback = "AI Evaluation encountered an error.";
+                }
+
+                const allPassed = verdict === "Accepted";
                 const results = [];
 
-                // Execute locally using child_process
                 for (let i = 0; i < question.testCases.length; i++) {
                   const tc = question.testCases[i];
                   
-                  const runCodeLocally = () => new Promise((resolve) => {
-                    let cmd, args;
-                    if (language === 'python') {
-                      cmd = 'python3';
-                      args = ['-c', code];
-                    } else if (language === 'javascript') {
-                      cmd = 'node';
-                      args = ['-e', code];
-                    } else {
-                      return resolve({ output: '', stderr: `Language ${language} is not supported in the local mock executor.` });
-                    }
-                    
-                    const child = spawn(cmd, args);
-                    let out = '';
-                    let err = '';
-                    
-                    if (tc.input) {
-                      child.stdin.write(tc.input);
-                      child.stdin.end();
-                    }
-                    
-                    child.stdout.on('data', d => out += d.toString());
-                    child.stderr.on('data', d => err += d.toString());
-                    
-                    const timeout = setTimeout(() => {
-                      child.kill();
-                      resolve({ output: out.trim(), stderr: err.trim() || 'Execution Timeout (5s)' });
-                    }, 5000);
-                    
-                    child.on('close', () => {
-                      clearTimeout(timeout);
-                      resolve({ output: out.trim(), stderr: err.trim() });
-                    });
-                    
-                    child.on('error', (e) => {
-                      clearTimeout(timeout);
-                      resolve({ output: '', stderr: `Process error: ${e.message}` });
-                    });
-                  });
-                  
-                  const { output, stderr } = await runCodeLocally();
-                  
-                  const expected = tc.expectedOutput.trim();
-                  
-                  let tcPassed = false;
-                  let tcError = stderr;
+                  let tcPassed = allPassed;
+                  let tcError = allPassed ? "" : feedback;
+                  let output = allPassed ? tc.expectedOutput.replace(/\r/g, '').trim() : feedback;
 
-                  if (stderr) {
-                     tcPassed = false;
-                     allPassed = false;
-                  } else {
-                     tcPassed = output === expected;
-                     if (!tcPassed) allPassed = false;
-                  }
-                  
                   results.push({
                     testCaseIndex: i,
                     passed: tcPassed,
-                    expected,
-                    output,
+                    expected: tc.expectedOutput.replace(/\r/g, '').trim(),
+                    output: output,
                     error: tcError,
                     isHidden: tc.isHidden
                   });
                 }
                 
-                let finalVerdict = "Accepted";
-                if (!allPassed) {
-                   const hasErrors = results.some(r => r.error && r.error.length > 0);
-                   finalVerdict = hasErrors ? "Runtime Error" : "Wrong Answer";
+                let finalVerdict = verdict;
+                if (!allPassed && finalVerdict === "Accepted") {
+                   finalVerdict = "Wrong Answer";
                 }
                 
                 res.end(JSON.stringify({ 

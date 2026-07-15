@@ -13,77 +13,85 @@ export default async function handler(req, res) {
       return res.status(404).json({ error: "Question not found" });
     }
 
-    const langMap = {
-      'python': { language: 'python', version: '3.10.0' },
-      'javascript': { language: 'javascript', version: '18.15.0' },
-      'cpp': { language: 'c++', version: '10.2.0' },
-      'java': { language: 'java', version: '15.0.2' }
-    };
-    
-    const langData = langMap[language] || langMap['python'];
-    let allPassed = true;
+    const apiKey = process.env.GEMINI_API_KEY;
+    let verdict = "Wrong Answer";
+    let feedback = "Failed to evaluate code.";
+
+    if (!apiKey) {
+      return res.status(500).json({ error: "Gemini API key not configured." });
+    }
+
+    try {
+      const prompt = `You are an expert programming judge (like LeetCode).
+Evaluate the following student submission for the problem below.
+
+Problem Title: ${question.title}
+Problem Description:
+${question.description}
+
+Student Code (${language}):
+\`\`\`${language}
+${code}
+\`\`\`
+
+Determine if the code correctly solves the problem, is optimal, and is free of syntax/runtime errors.
+If the code is incomplete (e.g. just a class stub without implementation) or empty, it is a Wrong Answer.
+Respond EXACTLY in this JSON format (no markdown blocks, just raw JSON):
+{
+  "verdict": "Accepted" | "Wrong Answer" | "Runtime Error" | "Compilation Error",
+  "feedback": "A very brief 1-2 sentence explanation of what is wrong (or 'All test cases passed' if correct)."
+}`;
+
+      const aiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: {
+            temperature: 0.1,
+            response_mime_type: "application/json"
+          }
+        })
+      });
+
+      if (aiRes.ok) {
+        const aiData = await aiRes.json();
+        const responseText = aiData.candidates[0].content.parts[0].text;
+        const parsed = JSON.parse(responseText);
+        verdict = parsed.verdict || "Wrong Answer";
+        feedback = parsed.feedback || "Feedback parsing failed.";
+      } else {
+        feedback = "AI evaluation service unavailable.";
+      }
+    } catch (err) {
+      console.error("AI Evaluation error:", err);
+      feedback = "AI Evaluation encountered an error.";
+    }
+
+    const allPassed = verdict === "Accepted";
     const results = [];
 
     for (let i = 0; i < question.testCases.length; i++) {
       const tc = question.testCases[i];
       
-      const pistonPayload = {
-        language: langData.language,
-        version: langData.version,
-        files: [{ content: code }],
-        stdin: tc.input || ""
-      };
+      let tcPassed = allPassed;
+      let tcError = allPassed ? "" : feedback;
+      let output = allPassed ? tc.expectedOutput.replace(/\r/g, '').trim() : feedback;
 
-      let output = "";
-      let stderr = "";
-      
-      try {
-        const pistonRes = await fetch('https://emkc.org/api/v2/piston/execute', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(pistonPayload)
-        });
-        
-        if (pistonRes.ok) {
-          const pistonData = await pistonRes.json();
-          stderr = pistonData.run?.stderr || "";
-          output = (pistonData.run?.stdout || "").trim();
-        } else {
-          stderr = "Failed to communicate with execution server.";
-        }
-      } catch (err) {
-        stderr = "Execution network error.";
-      }
-
-      const cleanExpected = tc.expectedOutput.replace(/\r/g, '').trim();
-      const cleanOutput = output.replace(/\r/g, '').trim();
-      
-      let tcPassed = false;
-      let tcError = stderr;
-
-      if (stderr) {
-         tcPassed = false;
-         allPassed = false;
-      } else {
-         tcPassed = cleanOutput === cleanExpected;
-         if (!tcPassed) allPassed = false;
-      }
-      
       results.push({
         testCaseIndex: i,
         passed: tcPassed,
-        expected: cleanExpected,
-        output: cleanOutput,
+        expected: tc.expectedOutput.replace(/\r/g, '').trim(),
+        output: output,
         error: tcError,
         isHidden: tc.isHidden
       });
     }
     
     // Determine overall verdict
-    let finalVerdict = "Accepted";
-    if (!allPassed) {
-       const hasErrors = results.some(r => r.error && r.error.length > 0);
-       finalVerdict = hasErrors ? "Runtime Error" : "Wrong Answer";
+    let finalVerdict = verdict;
+    if (!allPassed && finalVerdict === "Accepted") {
+       finalVerdict = "Wrong Answer";
     }
 
     return res.status(200).json({ 
