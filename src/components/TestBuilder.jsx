@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { questionsData } from '../data/questionsData.js';
+import { studentData } from "../data/lmsData.js";
 import './TestBuilder.css';
 
 let cachedStandardQuizzes = [];
@@ -26,8 +27,15 @@ export default function TestBuilder({ onPublish, refreshTrigger }) {
     fetch('/api/lms-data?type=standard-quizzes')
       .then(res => res.json())
       .then(data => {
-        cachedStandardQuizzes = data;
-        setPublishedQuizzes(data);
+        const fetchedTitles = data.map(q => q.title);
+        const mergedQuizzes = [...data];
+        studentData.quizzes.forEach(mockQuiz => {
+          if (!fetchedTitles.includes(mockQuiz.title)) {
+            mergedQuizzes.push(mockQuiz);
+          }
+        });
+        cachedStandardQuizzes = mergedQuizzes;
+        setPublishedQuizzes(mergedQuizzes);
       })
       .catch(err => console.error("Error fetching standard quizzes:", err));
   };

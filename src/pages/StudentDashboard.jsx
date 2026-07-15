@@ -564,10 +564,13 @@ export default function StudentDashboard({ session, onLogout }) {
       }
       return quiz;
     });
-    // If backend returns nothing, fallback to mock data
-    if (allQuizzes.length === 0) {
-      allQuizzes.push(...studentData.quizzes);
-    }
+    // Merge mock data quizzes if they aren't already fetched from backend
+    const dbTitles = allQuizzes.map(q => q.title);
+    studentData.quizzes.forEach(mockQuiz => {
+      if (!dbTitles.includes(mockQuiz.title)) {
+        allQuizzes.push(mockQuiz);
+      }
+    });
     const allCodingTests = Array.isArray(codingTests) ? codingTests : [];
     
     const now = new Date();
