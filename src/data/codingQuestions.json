@@ -1698,5 +1698,855 @@
       }
     ],
     "imageUrl": ""
+  },
+  {
+    "title": "Symmetric Tree",
+    "description": "Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/02/19/symtree1.jpg\" style=\"width: 354px; height: 291px;\" />\n\nInput: root = [1,2,2,3,4,4,3]\nOutput: true\n\n<strong class=\"example\">Example 2:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/02/19/symtree2.jpg\" style=\"width: 308px; height: 258px;\" />\n\nInput: root = [1,2,2,null,3,null,3]\nOutput: false\n\n \n\nConstraints:\n\n\t• The number of nodes in the tree is in the range [1, 1000].\n\n\t• -100 <= Node.val <= 100\n\n \n\nFollow up: Could you solve it both recursively and iteratively?",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Binary Tree Level Order Traversal",
+    "description": "Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/02/19/tree1.jpg\" style=\"width: 277px; height: 302px;\" />\n\nInput: root = [3,9,20,null,null,15,7]\nOutput: [[3],[9,20],[15,7]]\n\n<strong class=\"example\">Example 2:\n\nInput: root = [1]\nOutput: [[1]]\n\n<strong class=\"example\">Example 3:\n\nInput: root = []\nOutput: []\n\n \n\nConstraints:\n\n\t• The number of nodes in the tree is in the range [0, 2000].\n\n\t• -1000 <= Node.val <= 1000",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Binary Tree Zigzag Level Order Traversal",
+    "description": "Given the root of a binary tree, return the zigzag level order traversal of its nodes' values. (i.e., from left to right, then right to left for the next level and alternate between).\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/02/19/tree1.jpg\" style=\"width: 277px; height: 302px;\" />\n\nInput: root = [3,9,20,null,null,15,7]\nOutput: [[3],[20,9],[15,7]]\n\n<strong class=\"example\">Example 2:\n\nInput: root = [1]\nOutput: [[1]]\n\n<strong class=\"example\">Example 3:\n\nInput: root = []\nOutput: []\n\n \n\nConstraints:\n\n\t• The number of nodes in the tree is in the range [0, 2000].\n\n\t• -100 <= Node.val <= 100",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Maximum Depth of Binary Tree",
+    "description": "Given the root of a binary tree, return its maximum depth.\n\nA binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2020/11/26/tmp-tree.jpg\" style=\"width: 400px; height: 277px;\" />\n\nInput: root = [3,9,20,null,null,15,7]\nOutput: 3\n\n<strong class=\"example\">Example 2:\n\nInput: root = [1,null,2]\nOutput: 2\n\n \n\nConstraints:\n\n\t• The number of nodes in the tree is in the range [0, 10^4].\n\n\t• -100 <= Node.val <= 100",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Construct Binary Tree from Preorder and Inorder Traversal",
+    "description": "Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and inorder is the inorder traversal of the same tree, construct and return the binary tree.\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/02/19/tree.jpg\" style=\"width: 277px; height: 302px;\" />\n\nInput: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]\nOutput: [3,9,20,null,null,15,7]\n\n<strong class=\"example\">Example 2:\n\nInput: preorder = [-1], inorder = [-1]\nOutput: [-1]\n\n \n\nConstraints:\n\n\t• 1 <= preorder.length <= 3000\n\n\t• inorder.length == preorder.length\n\n\t• -3000 <= preorder[i], inorder[i] <= 3000\n\n\t• preorder and inorder consist of unique values.\n\n\t• Each value of inorder also appears in preorder.\n\n\t• preorder is guaranteed to be the preorder traversal of the tree.\n\n\t• inorder is guaranteed to be the inorder traversal of the tree.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Construct Binary Tree from Inorder and Postorder Traversal",
+    "description": "Given two integer arrays inorder and postorder where inorder is the inorder traversal of a binary tree and postorder is the postorder traversal of the same tree, construct and return the binary tree.\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/02/19/tree.jpg\" style=\"width: 277px; height: 302px;\" />\n\nInput: inorder = [9,3,15,20,7], postorder = [9,15,7,20,3]\nOutput: [3,9,20,null,null,15,7]\n\n<strong class=\"example\">Example 2:\n\nInput: inorder = [-1], postorder = [-1]\nOutput: [-1]\n\n \n\nConstraints:\n\n\t• 1 <= inorder.length <= 3000\n\n\t• postorder.length == inorder.length\n\n\t• -3000 <= inorder[i], postorder[i] <= 3000\n\n\t• inorder and postorder consist of unique values.\n\n\t• Each value of postorder also appears in inorder.\n\n\t• inorder is guaranteed to be the inorder traversal of the tree.\n\n\t• postorder is guaranteed to be the postorder traversal of the tree.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Binary Tree Level Order Traversal II",
+    "description": "Given the root of a binary tree, return the bottom-up level order traversal of its nodes' values. (i.e., from left to right, level by level from leaf to root).\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/02/19/tree1.jpg\" style=\"width: 277px; height: 302px;\" />\n\nInput: root = [3,9,20,null,null,15,7]\nOutput: [[15,7],[9,20],[3]]\n\n<strong class=\"example\">Example 2:\n\nInput: root = [1]\nOutput: [[1]]\n\n<strong class=\"example\">Example 3:\n\nInput: root = []\nOutput: []\n\n \n\nConstraints:\n\n\t• The number of nodes in the tree is in the range [0, 2000].\n\n\t• -1000 <= Node.val <= 1000",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Convert Sorted Array to Binary Search Tree",
+    "description": "Given an integer array nums where the elements are sorted in ascending order, convert it to a height-balanced binary search tree.\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/02/18/btree1.jpg\" style=\"width: 302px; height: 222px;\" />\n\nInput: nums = [-10,-3,0,5,9]\nOutput: [0,-3,9,-10,null,5]\nExplanation: [0,-10,5,null,-3,null,9] is also accepted:\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/02/18/btree2.jpg\" style=\"width: 302px; height: 222px;\" />\n\n<strong class=\"example\">Example 2:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/02/18/btree.jpg\" style=\"width: 342px; height: 142px;\" />\n\nInput: nums = [1,3]\nOutput: [3,1]\nExplanation: [1,null,3] and [3,1] are both height-balanced BSTs.\n\n \n\nConstraints:\n\n\t• 1 <= nums.length <= 10^4\n\n\t• -10^4 <= nums[i] <= 10^4\n\n\t• nums is sorted in a strictly increasing order.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Convert Sorted List to Binary Search Tree",
+    "description": "Given the head of a singly linked list where elements are sorted in ascending order, convert it to a height-balanced binary search tree.\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2020/08/17/linked.jpg\" style=\"width: 500px; height: 388px;\" />\n\nInput: head = [-10,-3,0,5,9]\nOutput: [0,-3,9,-10,null,5]\nExplanation: One possible answer is [0,-3,9,-10,null,5], which represents the shown height balanced BST.\n\n<strong class=\"example\">Example 2:\n\nInput: head = []\nOutput: []\n\n \n\nConstraints:\n\n\t• The number of nodes in head is in the range [0, 2 * 10^4].\n\n\t• -10^5 <= Node.val <= 10^5",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Balanced Binary Tree",
+    "description": "Given a binary tree, determine if it is height-balanced.\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2020/10/06/balance_1.jpg\" style=\"width: 342px; height: 221px;\" />\n\nInput: root = [3,9,20,null,null,15,7]\nOutput: true\n\n<strong class=\"example\">Example 2:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2020/10/06/balance_2.jpg\" style=\"width: 452px; height: 301px;\" />\n\nInput: root = [1,2,2,3,3,null,null,4,4]\nOutput: false\n\n<strong class=\"example\">Example 3:\n\nInput: root = []\nOutput: true\n\n \n\nConstraints:\n\n\t• The number of nodes in the tree is in the range [0, 5000].\n\n\t• -10^4 <= Node.val <= 10^4",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Minimum Depth of Binary Tree",
+    "description": "Given a binary tree, find its minimum depth.\n\nThe minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.\n\nNote: A leaf is a node with no children.\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2020/10/12/ex_depth.jpg\" style=\"width: 432px; height: 302px;\" />\n\nInput: root = [3,9,20,null,null,15,7]\nOutput: 2\n\n<strong class=\"example\">Example 2:\n\nInput: root = [2,null,3,null,4,null,5,null,6]\nOutput: 5\n\n \n\nConstraints:\n\n\t• The number of nodes in the tree is in the range [0, 10^5].\n\n\t• -1000 <= Node.val <= 1000",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Path Sum",
+    "description": "Given the root of a binary tree and an integer targetSum, return true if the tree has a root-to-leaf path such that adding up all the values along the path equals targetSum.\n\nA leaf is a node with no children.\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/01/18/pathsum1.jpg\" style=\"width: 500px; height: 356px;\" />\n\nInput: root = [5,4,8,11,null,13,4,7,2,null,null,null,1], targetSum = 22\nOutput: true\nExplanation: The root-to-leaf path with the target sum is shown.\n\n<strong class=\"example\">Example 2:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/01/18/pathsum2.jpg\" />\n\nInput: root = [1,2,3], targetSum = 5\nOutput: false\nExplanation: There are two root-to-leaf paths in the tree:\n(1 --> 2): The sum is 3.\n(1 --> 3): The sum is 4.\nThere is no root-to-leaf path with sum = 5.\n\n<strong class=\"example\">Example 3:\n\nInput: root = [], targetSum = 0\nOutput: false\nExplanation: Since the tree is empty, there are no root-to-leaf paths.\n\n \n\nConstraints:\n\n\t• The number of nodes in the tree is in the range [0, 5000].\n\n\t• -1000 <= Node.val <= 1000\n\n\t• -1000 <= targetSum <= 1000",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Path Sum II",
+    "description": "Given the root of a binary tree and an integer targetSum, return all root-to-leaf paths where the sum of the node values in the path equals targetSum. Each path should be returned as a list of the node values, not node references.\n\nA root-to-leaf path is a path starting from the root and ending at any leaf node. A leaf is a node with no children.\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/01/18/pathsumii1.jpg\" style=\"width: 500px; height: 356px;\" />\n\nInput: root = [5,4,8,11,null,13,4,7,2,null,null,5,1], targetSum = 22\nOutput: [[5,4,11,2],[5,8,4,5]]\nExplanation: There are two paths whose sum equals targetSum:\n5 + 4 + 11 + 2 = 22\n5 + 8 + 4 + 5 = 22\n\n<strong class=\"example\">Example 2:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/01/18/pathsum2.jpg\" style=\"width: 212px; height: 181px;\" />\n\nInput: root = [1,2,3], targetSum = 5\nOutput: []\n\n<strong class=\"example\">Example 3:\n\nInput: root = [1,2], targetSum = 0\nOutput: []\n\n \n\nConstraints:\n\n\t• The number of nodes in the tree is in the range [0, 5000].\n\n\t• -1000 <= Node.val <= 1000\n\n\t• -1000 <= targetSum <= 1000",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Flatten Binary Tree to Linked List",
+    "description": "Given the root of a binary tree, flatten the tree into a \"linked list\":\n\n\t• The \"linked list\" should use the same TreeNode class where the right child pointer points to the next node in the list and the left child pointer is always null.\n\n\t• The \"linked list\" should be in the same order as a <a href=\"https://en.wikipedia.org/wiki/Tree_traversal#Pre-order,_NLR\" target=\"_blank\">pre-order traversal</a> of the binary tree.\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/01/14/flaten.jpg\" style=\"width: 500px; height: 226px;\" />\n\nInput: root = [1,2,5,3,4,null,6]\nOutput: [1,null,2,null,3,null,4,null,5,null,6]\n\n<strong class=\"example\">Example 2:\n\nInput: root = []\nOutput: []\n\n<strong class=\"example\">Example 3:\n\nInput: root = [0]\nOutput: [0]\n\n \n\nConstraints:\n\n\t• The number of nodes in the tree is in the range [0, 2000].\n\n\t• -100 <= Node.val <= 100\n\n \n\nFollow up: Can you flatten the tree in-place (with O(1) extra space)?",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Distinct Subsequences",
+    "description": "Given two strings s and t, return <i>the number of distinct</i> <b><i>subsequences</i></b><i> of </i>s<i> which equals </i>t.\n\nThe test cases are generated so that the answer fits on a 32-bit signed integer.\n\n \n\n<strong class=\"example\">Example 1:\n\nInput: s = \"rabbbit\", t = \"rabbit\"\nOutput: 3\nExplanation:\nAs shown below, there are 3 ways you can generate \"rabbit\" from s.\n<u>rabb</u>b<u>it</u>\n<u>ra</u>b<u>bbit</u>\n<u>rab</u>b<u>bit</u>\n\n<strong class=\"example\">Example 2:\n\nInput: s = \"babgbag\", t = \"bag\"\nOutput: 5\nExplanation:\nAs shown below, there are 5 ways you can generate \"bag\" from s.\n<u>ba</u>b<u>g</u>bag\n<u>ba</u>bgba<u>g</u>\n<u>b</u>abgb<u>ag</u>\nba<u>b</u>gb<u>ag</u>\nbabg<u>bag</u>\n\n \n\nConstraints:\n\n\t• 1 <= s.length, t.length <= 1000\n\n\t• s and t consist of English letters.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Populating Next Right Pointers in Each Node",
+    "description": "You are given a perfect binary tree where all leaves are on the same level, and every parent has two children. The binary tree has the following definition:\n\nstruct Node {\n  int val;\n  Node *left;\n  Node *right;\n  Node *next;\n}\n\nPopulate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.\n\nInitially, all next pointers are set to NULL.\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2019/02/14/116_sample.png\" style=\"width: 500px; height: 171px;\" />\n\nInput: root = [1,2,3,4,5,6,7]\nOutput: [1,#,2,3,#,4,5,6,7,#]\nExplanation: Given the above perfect binary tree (Figure A), your function should populate each next pointer to point to its next right node, just like in Figure B. The serialized output is in level order as connected by the next pointers, with '#' signifying the end of each level.\n\n<strong class=\"example\">Example 2:\n\nInput: root = []\nOutput: []\n\n \n\nConstraints:\n\n\t• The number of nodes in the tree is in the range [0, 2^12 - 1].\n\n\t• -1000 <= Node.val <= 1000",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Populating Next Right Pointers in Each Node II",
+    "description": "Given a binary tree\n\nstruct Node {\n  int val;\n  Node *left;\n  Node *right;\n  Node *next;\n}\n\nPopulate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.\n\nInitially, all next pointers are set to NULL.\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2019/02/15/117_sample.png\" style=\"width: 500px; height: 171px;\" />\n\nInput: root = [1,2,3,4,5,null,7]\nOutput: [1,#,2,3,#,4,5,7,#]\nExplanation: Given the above binary tree (Figure A), your function should populate each next pointer to point to its next right node, just like in Figure B. The serialized output is in level order as connected by the next pointers, with '#' signifying the end of each level.\n\n<strong class=\"example\">Example 2:\n\nInput: root = []\nOutput: []\n\n \n\nConstraints:\n\n\t• The number of nodes in the tree is in the range [0, 6000].\n\n\t• -100 <= Node.val <= 100",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Pascal's Triangle",
+    "description": "Given an integer numRows, return the first numRows of Pascal's triangle.\n\nIn Pascal's triangle, each number is the sum of the two numbers directly above it as shown:\n\n<img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/0/0d/PascalTriangleAnimated2.gif\" style=\"height:240px; width:260px\" />\n \n\n<strong class=\"example\">Example 1:\n\nInput: numRows = 5\nOutput: [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]\n\n<strong class=\"example\">Example 2:\n\nInput: numRows = 1\nOutput: [[1]]\n\n \n\nConstraints:\n\n\t• 1 <= numRows <= 30",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Pascal's Triangle II",
+    "description": "Given an integer rowIndex, return the rowIndex^th (0-indexed) row of the Pascal's triangle.\n\nIn Pascal's triangle, each number is the sum of the two numbers directly above it as shown:\n\n<img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/0/0d/PascalTriangleAnimated2.gif\" style=\"height:240px; width:260px\" />\n \n\n<strong class=\"example\">Example 1:\n\nInput: rowIndex = 3\nOutput: [1,3,3,1]\n\n<strong class=\"example\">Example 2:\n\nInput: rowIndex = 0\nOutput: [1]\n\n<strong class=\"example\">Example 3:\n\nInput: rowIndex = 1\nOutput: [1,1]\n\n \n\nConstraints:\n\n\t• 0 <= rowIndex <= 33\n\n \n\nFollow up: Could you optimize your algorithm to use only O(rowIndex) extra space?",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Triangle",
+    "description": "Given a triangle array, return the minimum path sum from top to bottom.\n\nFor each step, you may move to an adjacent number of the row below. More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.\n\n \n\n<strong class=\"example\">Example 1:\n\nInput: triangle = [[2],[3,4],[6,5,7],[4,1,8,3]]\nOutput: 11\nExplanation: The triangle looks like:\n   <u>2</u>\n  <u>3</u> 4\n 6 <u>5</u> 7\n4 <u>1</u> 8 3\nThe minimum path sum from top to bottom is 2 + 3 + 5 + 1 = 11 (underlined above).\n\n<strong class=\"example\">Example 2:\n\nInput: triangle = [[-10]]\nOutput: -10\n\n \n\nConstraints:\n\n\t• 1 <= triangle.length <= 200\n\n\t• triangle[0].length == 1\n\n\t• triangle[i].length == triangle[i - 1].length + 1\n\n\t• -10^4 <= triangle[i][j] <= 10^4\n\n \n\nFollow up: Could you do this using only O(n) extra space, where n is the total number of rows in the triangle?",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Best Time to Buy and Sell Stock",
+    "description": "You are given an array prices where prices[i] is the price of a given stock on the i^th day.\n\nYou want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.\n\nReturn the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.\n\n \n\n<strong class=\"example\">Example 1:\n\nInput: prices = [7,1,5,3,6,4]\nOutput: 5\nExplanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.\nNote that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.\n\n<strong class=\"example\">Example 2:\n\nInput: prices = [7,6,4,3,1]\nOutput: 0\nExplanation: In this case, no transactions are done and the max profit = 0.\n\n \n\nConstraints:\n\n\t• 1 <= prices.length <= 10^5\n\n\t• 0 <= prices[i] <= 10^4",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Best Time to Buy and Sell Stock II",
+    "description": "You are given an integer array prices where prices[i] is the price of a given stock on the i^th day.\n\nOn each day, you may decide to buy and/or sell the stock. You can only hold at most one share of the stock at any time. However, you can sell and buy the stock multiple times on the same day, ensuring you never hold more than one share of the stock.\n\nFind and return the maximum profit you can achieve.\n\n \n\n<strong class=\"example\">Example 1:\n\nInput: prices = [7,1,5,3,6,4]\nOutput: 7\nExplanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.\nThen buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.\nTotal profit is 4 + 3 = 7.\n\n<strong class=\"example\">Example 2:\n\nInput: prices = [1,2,3,4,5]\nOutput: 4\nExplanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4.\nTotal profit is 4.\n\n<strong class=\"example\">Example 3:\n\nInput: prices = [7,6,4,3,1]\nOutput: 0\nExplanation: There is no way to make a positive profit, so we never buy the stock to achieve the maximum profit of 0.\n\n \n\nConstraints:\n\n\t• 1 <= prices.length <= 3 * 10^4\n\n\t• 0 <= prices[i] <= 10^4",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Best Time to Buy and Sell Stock III",
+    "description": "You are given an array prices where prices[i] is the price of a given stock on the i^th day.\n\nFind the maximum profit you can achieve. You may complete at most two transactions.\n\nNote: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).\n\n \n\n<strong class=\"example\">Example 1:\n\nInput: prices = [3,3,5,0,0,3,1,4]\nOutput: 6\nExplanation: Buy on day 4 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.\nThen buy on day 7 (price = 1) and sell on day 8 (price = 4), profit = 4-1 = 3.\n\n<strong class=\"example\">Example 2:\n\nInput: prices = [1,2,3,4,5]\nOutput: 4\nExplanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4.\nNote that you cannot buy on day 1, buy on day 2 and sell them later, as you are engaging multiple transactions at the same time. You must sell before buying again.\n\n<strong class=\"example\">Example 3:\n\nInput: prices = [7,6,4,3,1]\nOutput: 0\nExplanation: In this case, no transaction is done, i.e. max profit = 0.\n\n \n\nConstraints:\n\n\t• 1 <= prices.length <= 10^5\n\n\t• 0 <= prices[i] <= 10^5",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Binary Tree Maximum Path Sum",
+    "description": "A path in a binary tree is a sequence of nodes where each pair of adjacent nodes in the sequence has an edge connecting them. A node can only appear in the sequence at most once. Note that the path does not need to pass through the root.\n\nThe path sum of a path is the sum of the node's values in the path.\n\nGiven the root of a binary tree, return the maximum path sum of any non-empty path.\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2020/10/13/exx1.jpg\" style=\"width: 322px; height: 182px;\" />\n\nInput: root = [1,2,3]\nOutput: 6\nExplanation: The optimal path is 2 -> 1 -> 3 with a path sum of 2 + 1 + 3 = 6.\n\n<strong class=\"example\">Example 2:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2020/10/13/exx2.jpg\" />\n\nInput: root = [-10,9,20,null,null,15,7]\nOutput: 42\nExplanation: The optimal path is 15 -> 20 -> 7 with a path sum of 15 + 20 + 7 = 42.\n\n \n\nConstraints:\n\n\t• The number of nodes in the tree is in the range [1, 3 * 10^4].\n\n\t• -1000 <= Node.val <= 1000",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Valid Palindrome",
+    "description": "A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.\n\nGiven a string s, return true if it is a palindrome, or false otherwise.\n\n \n\n<strong class=\"example\">Example 1:\n\nInput: s = \"A man, a plan, a canal: Panama\"\nOutput: true\nExplanation: \"amanaplanacanalpanama\" is a palindrome.\n\n<strong class=\"example\">Example 2:\n\nInput: s = \"race a car\"\nOutput: false\nExplanation: \"raceacar\" is not a palindrome.\n\n<strong class=\"example\">Example 3:\n\nInput: s = \" \"\nOutput: true\nExplanation: s is an empty string \"\" after removing non-alphanumeric characters.\nSince an empty string reads the same forward and backward, it is a palindrome.\n\n \n\nConstraints:\n\n\t• 1 <= s.length <= 2 * 10^5\n\n\t• s consists only of printable ASCII characters.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Word Ladder II",
+    "description": "A transformation sequence from word beginWord to word endWord using a dictionary wordList is a sequence of words beginWord -> s_1 -> s_2 -> ... -> s_k such that:\n\n\t• Every adjacent pair of words differs by a single letter.\n\n\t• Every s_i for 1 <= i <= k is in wordList. Note that beginWord does not need to be in wordList.\n\n\t• s_k == endWord\n\nGiven two words, beginWord and endWord, and a dictionary wordList, return all the shortest transformation sequences from beginWord to endWord, or an empty list if no such sequence exists. Each sequence should be returned as a list of the words [beginWord, s_1, s_2, ..., s_k].\n\n \n\n<strong class=\"example\">Example 1:\n\nInput: beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]\nOutput: [[\"hit\",\"hot\",\"dot\",\"dog\",\"cog\"],[\"hit\",\"hot\",\"lot\",\"log\",\"cog\"]]\nExplanation: There are 2 shortest transformation sequences:\n\"hit\" -> \"hot\" -> \"dot\" -> \"dog\" -> \"cog\"\n\"hit\" -> \"hot\" -> \"lot\" -> \"log\" -> \"cog\"\n\n<strong class=\"example\">Example 2:\n\nInput: beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\"]\nOutput: []\nExplanation: The endWord \"cog\" is not in wordList, therefore there is no valid transformation sequence.\n\n \n\nConstraints:\n\n\t• 1 <= beginWord.length <= 5\n\n\t• endWord.length == beginWord.length\n\n\t• 1 <= wordList.length <= 500\n\n\t• wordList[i].length == beginWord.length\n\n\t• beginWord, endWord, and wordList[i] consist of lowercase English letters.\n\n\t• beginWord != endWord\n\n\t• All the words in wordList are unique.\n\n\t• The sum of all shortest transformation sequences does not exceed 10^5.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Word Ladder",
+    "description": "A transformation sequence from word beginWord to word endWord using a dictionary wordList is a sequence of words beginWord -> s_1 -> s_2 -> ... -> s_k such that:\n\n\t• Every adjacent pair of words differs by a single letter.\n\n\t• Every s_i for 1 <= i <= k is in wordList. Note that beginWord does not need to be in wordList.\n\n\t• s_k == endWord\n\nGiven two words, beginWord and endWord, and a dictionary wordList, return the number of words in the shortest transformation sequence from beginWord to endWord, or 0 if no such sequence exists.\n\n \n\n<strong class=\"example\">Example 1:\n\nInput: beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]\nOutput: 5\nExplanation: One shortest transformation sequence is \"hit\" -> \"hot\" -> \"dot\" -> \"dog\" -> cog\", which is 5 words long.\n\n<strong class=\"example\">Example 2:\n\nInput: beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\"]\nOutput: 0\nExplanation: The endWord \"cog\" is not in wordList, therefore there is no valid transformation sequence.\n\n \n\nConstraints:\n\n\t• 1 <= beginWord.length <= 10\n\n\t• endWord.length == beginWord.length\n\n\t• 1 <= wordList.length <= 5000\n\n\t• wordList[i].length == beginWord.length\n\n\t• beginWord, endWord, and wordList[i] consist of lowercase English letters.\n\n\t• beginWord != endWord\n\n\t• All the words in wordList are unique.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Longest Consecutive Sequence",
+    "description": "Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.\n\nYou must write an algorithm that runs in O(n) time.\n\n \n\n<strong class=\"example\">Example 1:\n\nInput: nums = [100,4,200,1,3,2]\nOutput: 4\nExplanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.\n\n<strong class=\"example\">Example 2:\n\nInput: nums = [0,3,7,2,5,8,4,6,0,1]\nOutput: 9\n\n<strong class=\"example\">Example 3:\n\nInput: nums = [1,0,1,2]\nOutput: 3\n\n \n\nConstraints:\n\n\t• 0 <= nums.length <= 10^5\n\n\t• -10^9 <= nums[i] <= 10^9",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Sum Root to Leaf Numbers",
+    "description": "You are given the root of a binary tree containing digits from 0 to 9 only.\n\nEach root-to-leaf path in the tree represents a number.\n\n\t• For example, the root-to-leaf path 1 -> 2 -> 3 represents the number 123.\n\nReturn the total sum of all root-to-leaf numbers. Test cases are generated so that the answer will fit in a 32-bit integer.\n\nA leaf node is a node with no children.\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/02/19/num1tree.jpg\" style=\"width: 212px; height: 182px;\" />\n\nInput: root = [1,2,3]\nOutput: 25\nExplanation:\nThe root-to-leaf path 1->2 represents the number 12.\nThe root-to-leaf path 1->3 represents the number 13.\nTherefore, sum = 12 + 13 = 25.\n\n<strong class=\"example\">Example 2:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/02/19/num2tree.jpg\" style=\"width: 292px; height: 302px;\" />\n\nInput: root = [4,9,0,5,1]\nOutput: 1026\nExplanation:\nThe root-to-leaf path 4->9->5 represents the number 495.\nThe root-to-leaf path 4->9->1 represents the number 491.\nThe root-to-leaf path 4->0 represents the number 40.\nTherefore, sum = 495 + 491 + 40 = 1026.\n\n \n\nConstraints:\n\n\t• The number of nodes in the tree is in the range [1, 1000].\n\n\t• 0 <= Node.val <= 9\n\n\t• The depth of the tree will not exceed 10.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Surrounded Regions",
+    "description": "You are given an m x n matrix board containing letters 'X' and 'O', capture regions that are surrounded:\n\n\t• Connect: A cell is connected to adjacent cells horizontally or vertically.\n\n\t• Region: To form a region connect every 'O' cell.\n\n\t• Surround: A region is surrounded if none of the 'O' cells in that region are on the edge of the board. Such regions are completely enclosed by 'X' cells.\n\nTo capture a surrounded region, replace all 'O's with 'X's in-place within the original board. You do not need to return anything.\n\n \n\n<strong class=\"example\">Example 1:\n\nInput: board = [[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"O\",\"O\",\"X\"],[\"X\",\"X\",\"O\",\"X\"],[\"X\",\"O\",\"X\",\"X\"]]\n\nOutput: [[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"O\",\"X\",\"X\"]]\n\nExplanation:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/02/19/xogrid.jpg\" style=\"width: 367px; height: 158px;\" />\nIn the above diagram, the bottom region is not captured because it is on the edge of the board and cannot be surrounded.\n\n<strong class=\"example\">Example 2:\n\nInput: board = [[\"X\"]]\n\nOutput: [[\"X\"]]\n\n \n\nConstraints:\n\n\t• m == board.length\n\n\t• n == board[i].length\n\n\t• 1 <= m, n <= 200\n\n\t• board[i][j] is 'X' or 'O'.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Palindrome Partitioning",
+    "description": "Given a string s, partition s such that every substring of the partition is a palindrome. Return all possible palindrome partitioning of s.\n\n \n\n<strong class=\"example\">Example 1:\n\nInput: s = \"aab\"\nOutput: [[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]\n\n<strong class=\"example\">Example 2:\n\nInput: s = \"a\"\nOutput: [[\"a\"]]\n\n \n\nConstraints:\n\n\t• 1 <= s.length <= 16\n\n\t• s contains only lowercase English letters.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Palindrome Partitioning II",
+    "description": "Given a string s, partition s such that every substring of the partition is a palindrome.\n\nReturn the minimum cuts needed for a palindrome partitioning of s.\n\n \n\n<strong class=\"example\">Example 1:\n\nInput: s = \"aab\"\nOutput: 1\nExplanation: The palindrome partitioning [\"aa\",\"b\"] could be produced using 1 cut.\n\n<strong class=\"example\">Example 2:\n\nInput: s = \"a\"\nOutput: 0\n\n<strong class=\"example\">Example 3:\n\nInput: s = \"ab\"\nOutput: 1\n\n \n\nConstraints:\n\n\t• 1 <= s.length <= 2000\n\n\t• s consists of lowercase English letters only.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Clone Graph",
+    "description": "Given a reference of a node in a <a href=\"https://en.wikipedia.org/wiki/Connectivity_(graph_theory)#Connected_graph\" target=\"_blank\">connected</a> undirected graph.\n\nReturn a <a href=\"https://en.wikipedia.org/wiki/Object_copying#Deep_copy\" target=\"_blank\">deep copy</a> (clone) of the graph.\n\nEach node in the graph contains a value (int) and a list (List[Node]) of its neighbors.\n\nclass Node {\n    public int val;\n    public List<Node> neighbors;\n}\n\n \n\nTest case format:\n\nFor simplicity, each node's value is the same as the node's index (1-indexed). For example, the first node with val == 1, the second node with val == 2, and so on. The graph is represented in the test case using an adjacency list.\n\n<b>An adjacency list</b> is a collection of unordered <b>lists</b> used to represent a finite graph. Each list describes the set of neighbors of a node in the graph.\n\nThe given node will always be the first node with val = 1. You must return the copy of the given node as a reference to the cloned graph.\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2019/11/04/133_clone_graph_question.png\" style=\"width: 454px; height: 500px;\" />\n\nInput: adjList = [[2,4],[1,3],[2,4],[1,3]]\nOutput: [[2,4],[1,3],[2,4],[1,3]]\nExplanation: There are 4 nodes in the graph.\n1st node (val = 1)'s neighbors are 2nd node (val = 2) and 4th node (val = 4).\n2nd node (val = 2)'s neighbors are 1st node (val = 1) and 3rd node (val = 3).\n3rd node (val = 3)'s neighbors are 2nd node (val = 2) and 4th node (val = 4).\n4th node (val = 4)'s neighbors are 1st node (val = 1) and 3rd node (val = 3).\n\n<strong class=\"example\">Example 2:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2020/01/07/graph.png\" style=\"width: 163px; height: 148px;\" />\n\nInput: adjList = [[]]\nOutput: [[]]\nExplanation: Note that the input contains one empty list. The graph consists of only one node with val = 1 and it does not have any neighbors.\n\n<strong class=\"example\">Example 3:\n\nInput: adjList = []\nOutput: []\nExplanation: This an empty graph, it does not have any nodes.\n\n \n\nConstraints:\n\n\t• The number of nodes in the graph is in the range [0, 100].\n\n\t• 1 <= Node.val <= 100\n\n\t• Node.val is unique for each node.\n\n\t• There are no repeated edges and no self-loops in the graph.\n\n\t• The Graph is connected and all nodes can be visited starting from the given node.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Gas Station",
+    "description": "There are n gas stations along a circular route, where the amount of gas at the i^th station is gas[i].\n\nYou have a car with an unlimited gas tank and it costs cost[i] of gas to travel from the i^th station to its next (i + 1)^th station. You begin the journey with an empty tank at one of the gas stations.\n\nGiven two integer arrays gas and cost, return the starting gas station's index if you can travel around the circuit once in the clockwise direction, otherwise return -1. If there exists a solution, it is guaranteed to be unique.\n\n \n\n<strong class=\"example\">Example 1:\n\nInput: gas = [1,2,3,4,5], cost = [3,4,5,1,2]\nOutput: 3\nExplanation:\nStart at station 3 (index 3) and fill up with 4 unit of gas. Your tank = 0 + 4 = 4\nTravel to station 4. Your tank = 4 - 1 + 5 = 8\nTravel to station 0. Your tank = 8 - 2 + 1 = 7\nTravel to station 1. Your tank = 7 - 3 + 2 = 6\nTravel to station 2. Your tank = 6 - 4 + 3 = 5\nTravel to station 3. The cost is 5. Your gas is just enough to travel back to station 3.\nTherefore, return 3 as the starting index.\n\n<strong class=\"example\">Example 2:\n\nInput: gas = [2,3,4], cost = [3,4,3]\nOutput: -1\nExplanation:\nYou can't start at station 0 or 1, as there is not enough gas to travel to the next station.\nLet's start at station 2 and fill up with 4 unit of gas. Your tank = 0 + 4 = 4\nTravel to station 0. Your tank = 4 - 3 + 2 = 3\nTravel to station 1. Your tank = 3 - 3 + 3 = 3\nYou cannot travel back to station 2, as it requires 4 unit of gas but you only have 3.\nTherefore, you can't travel around the circuit once no matter where you start.\n\n \n\nConstraints:\n\n\t• n == gas.length == cost.length\n\n\t• 1 <= n <= 10^5\n\n\t• 0 <= gas[i], cost[i] <= 10^4\n\n\t• The input is generated such that the answer is unique.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Candy",
+    "description": "There are n children standing in a line. Each child is assigned a rating value given in the integer array ratings.\n\nYou are giving candies to these children subjected to the following requirements:\n\n\t• Each child must have at least one candy.\n\n\t• Children with a higher rating get more candies than their neighbors.\n\nReturn the minimum number of candies you need to have to distribute the candies to the children.\n\n \n\n<strong class=\"example\">Example 1:\n\nInput: ratings = [1,0,2]\nOutput: 5\nExplanation: You can allocate to the first, second and third child with 2, 1, 2 candies respectively.\n\n<strong class=\"example\">Example 2:\n\nInput: ratings = [1,2,2]\nOutput: 4\nExplanation: You can allocate to the first, second and third child with 1, 2, 1 candies respectively.\nThe third child gets 1 candy because it satisfies the above two conditions.\n\n \n\nConstraints:\n\n\t• n == ratings.length\n\n\t• 1 <= n <= 2 * 10^4\n\n\t• 0 <= ratings[i] <= 2 * 10^4",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Single Number",
+    "description": "Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.\n\nYou must implement a solution with a linear runtime complexity and use only constant extra space.\n\n \n\n<strong class=\"example\">Example 1:\n\nInput: nums = [2,2,1]\n\nOutput: 1\n\n<strong class=\"example\">Example 2:\n\nInput: nums = [4,1,2,1,2]\n\nOutput: 4\n\n<strong class=\"example\">Example 3:\n\nInput: nums = [1]\n\nOutput: 1\n\n \n\nConstraints:\n\n\t• 1 <= nums.length <= 3 * 10^4\n\n\t• -3 * 10^4 <= nums[i] <= 3 * 10^4\n\n\t• Each element in the array appears twice except for one element which appears only once.",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Single Number II",
+    "description": "Given an integer array nums where every element appears three times except for one, which appears exactly once. Find the single element and return it.\n\nYou must implement a solution with a linear runtime complexity and use only constant extra space.\n\n \n\n<strong class=\"example\">Example 1:\n\nInput: nums = [2,2,3,2]\nOutput: 3\n\n<strong class=\"example\">Example 2:\n\nInput: nums = [0,1,0,1,0,1,99]\nOutput: 99\n\n \n\nConstraints:\n\n\t• 1 <= nums.length <= 3 * 10^4\n\n\t• -2^31 <= nums[i] <= 2^31 - 1\n\n\t• Each element in nums appears exactly three times except for one element which appears once.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Copy List with Random Pointer",
+    "description": "A linked list of length n is given such that each node contains an additional random pointer, which could point to any node in the list, or null.\n\nConstruct a <a href=\"https://en.wikipedia.org/wiki/Object_copying#Deep_copy\" target=\"_blank\">deep copy</a> of the list. The deep copy should consist of exactly n brand new nodes, where each new node has its value set to the value of its corresponding original node. Both the next and random pointer of the new nodes should point to new nodes in the copied list such that the pointers in the original list and copied list represent the same list state. None of the pointers in the new list should point to nodes in the original list.\n\nFor example, if there are two nodes X and Y in the original list, where X.random --> Y, then for the corresponding two nodes x and y in the copied list, x.random --> y.\n\nReturn the head of the copied linked list.\n\nThe linked list is represented in the input/output as a list of n nodes. Each node is represented as a pair of [val, random_index] where:\n\n\t• val: an integer representing Node.val\n\n\t• random_index: the index of the node (range from 0 to n-1) that the random pointer points to, or null if it does not point to any node.\n\nYour code will only be given the head of the original linked list.\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2019/12/18/e1.png\" style=\"width: 700px; height: 142px;\" />\n\nInput: head = [[7,null],[13,0],[11,4],[10,2],[1,0]]\nOutput: [[7,null],[13,0],[11,4],[10,2],[1,0]]\n\n<strong class=\"example\">Example 2:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2019/12/18/e2.png\" style=\"width: 700px; height: 114px;\" />\n\nInput: head = [[1,1],[2,1]]\nOutput: [[1,1],[2,1]]\n\n<strong class=\"example\">Example 3:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2019/12/18/e3.png\" style=\"width: 700px; height: 122px;\" />\n\nInput: head = [[3,null],[3,0],[3,null]]\nOutput: [[3,null],[3,0],[3,null]]\n\n \n\nConstraints:\n\n\t• 0 <= n <= 1000\n\n\t• -10^4 <= Node.val <= 10^4\n\n\t• Node.random is null or is pointing to some node in the linked list.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Word Break",
+    "description": "Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a space-separated sequence of one or more dictionary words.\n\nNote that the same word in the dictionary may be reused multiple times in the segmentation.\n\n \n\n<strong class=\"example\">Example 1:\n\nInput: s = \"leetcode\", wordDict = [\"leet\",\"code\"]\nOutput: true\nExplanation: Return true because \"leetcode\" can be segmented as \"leet code\".\n\n<strong class=\"example\">Example 2:\n\nInput: s = \"applepenapple\", wordDict = [\"apple\",\"pen\"]\nOutput: true\nExplanation: Return true because \"applepenapple\" can be segmented as \"apple pen apple\".\nNote that you are allowed to reuse a dictionary word.\n\n<strong class=\"example\">Example 3:\n\nInput: s = \"catsandog\", wordDict = [\"cats\",\"dog\",\"sand\",\"and\",\"cat\"]\nOutput: false\n\n \n\nConstraints:\n\n\t• 1 <= s.length <= 300\n\n\t• 1 <= wordDict.length <= 1000\n\n\t• 1 <= wordDict[i].length <= 20\n\n\t• s and wordDict[i] consist of only lowercase English letters.\n\n\t• All the strings of wordDict are unique.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Word Break II",
+    "description": "Given a string s and a dictionary of strings wordDict, add spaces in s to construct a sentence where each word is a valid dictionary word. Return all such possible sentences in any order.\n\nNote that the same word in the dictionary may be reused multiple times in the segmentation.\n\n \n\n<strong class=\"example\">Example 1:\n\nInput: s = \"catsanddog\", wordDict = [\"cat\",\"cats\",\"and\",\"sand\",\"dog\"]\nOutput: [\"cats and dog\",\"cat sand dog\"]\n\n<strong class=\"example\">Example 2:\n\nInput: s = \"pineapplepenapple\", wordDict = [\"apple\",\"pen\",\"applepen\",\"pine\",\"pineapple\"]\nOutput: [\"pine apple pen apple\",\"pineapple pen apple\",\"pine applepen apple\"]\nExplanation: Note that you are allowed to reuse a dictionary word.\n\n<strong class=\"example\">Example 3:\n\nInput: s = \"catsandog\", wordDict = [\"cats\",\"dog\",\"sand\",\"and\",\"cat\"]\nOutput: []\n\n \n\nConstraints:\n\n\t• 1 <= s.length <= 20\n\n\t• 1 <= wordDict.length <= 1000\n\n\t• 1 <= wordDict[i].length <= 10\n\n\t• s and wordDict[i] consist of only lowercase English letters.\n\n\t• All the strings of wordDict are unique.\n\n\t• Input is generated in a way that the length of the answer doesn't exceed 10^5.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Linked List Cycle",
+    "description": "Given head, the head of a linked list, determine if the linked list has a cycle in it.\n\nThere is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to. Note that pos is not passed as a parameter.\n\nReturn true if there is a cycle in the linked list. Otherwise, return false.\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist.png\" style=\"width: 300px; height: 97px; margin-top: 8px; margin-bottom: 8px;\" />\n\nInput: head = [3,2,0,-4], pos = 1\nOutput: true\nExplanation: There is a cycle in the linked list, where the tail connects to the 1st node (0-indexed).\n\n<strong class=\"example\">Example 2:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist_test2.png\" style=\"width: 141px; height: 74px;\" />\n\nInput: head = [1,2], pos = 0\nOutput: true\nExplanation: There is a cycle in the linked list, where the tail connects to the 0th node.\n\n<strong class=\"example\">Example 3:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist_test3.png\" style=\"width: 45px; height: 45px;\" />\n\nInput: head = [1], pos = -1\nOutput: false\nExplanation: There is no cycle in the linked list.\n\n \n\nConstraints:\n\n\t• The number of the nodes in the list is in the range [0, 10^4].\n\n\t• -10^5 <= Node.val <= 10^5\n\n\t• pos is -1 or a valid index in the linked-list.\n\n \n\nFollow up: Can you solve it using O(1) (i.e. constant) memory?",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Linked List Cycle II",
+    "description": "Given the head of a linked list, return the node where the cycle begins. If there is no cycle, return null.\n\nThere is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to (0-indexed). It is -1 if there is no cycle. Note that pos is not passed as a parameter.\n\nDo not modify the linked list.\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist.png\" style=\"height: 145px; width: 450px;\" />\n\nInput: head = [3,2,0,-4], pos = 1\nOutput: tail connects to node index 1\nExplanation: There is a cycle in the linked list, where tail connects to the second node.\n\n<strong class=\"example\">Example 2:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist_test2.png\" style=\"height: 105px; width: 201px;\" />\n\nInput: head = [1,2], pos = 0\nOutput: tail connects to node index 0\nExplanation: There is a cycle in the linked list, where tail connects to the first node.\n\n<strong class=\"example\">Example 3:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist_test3.png\" style=\"height: 65px; width: 65px;\" />\n\nInput: head = [1], pos = -1\nOutput: no cycle\nExplanation: There is no cycle in the linked list.\n\n \n\nConstraints:\n\n\t• The number of the nodes in the list is in the range [0, 10^4].\n\n\t• -10^5 <= Node.val <= 10^5\n\n\t• pos is -1 or a valid index in the linked-list.\n\n \n\nFollow up: Can you solve it using O(1) (i.e. constant) memory?",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Reorder List",
+    "description": "You are given the head of a singly linked-list. The list can be represented as:\n\nL_0 &rarr; L_1 &rarr; &hellip; &rarr; L_n - 1 &rarr; L_n\n\nReorder the list to be on the following form:\n\nL_0 &rarr; L_n &rarr; L_1 &rarr; L_n - 1 &rarr; L_2 &rarr; L_n - 2 &rarr; &hellip;\n\nYou may not modify the values in the list's nodes. Only nodes themselves may be changed.\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/03/04/reorder1linked-list.jpg\" style=\"width: 422px; height: 222px;\" />\n\nInput: head = [1,2,3,4]\nOutput: [1,4,2,3]\n\n<strong class=\"example\">Example 2:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/03/09/reorder2-linked-list.jpg\" style=\"width: 542px; height: 222px;\" />\n\nInput: head = [1,2,3,4,5]\nOutput: [1,5,2,4,3]\n\n \n\nConstraints:\n\n\t• The number of nodes in the list is in the range [1, 5 * 10^4].\n\n\t• 1 <= Node.val <= 1000",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Binary Tree Preorder Traversal",
+    "description": "Given the root of a binary tree, return the preorder traversal of its nodes' values.\n\n \n\n<strong class=\"example\">Example 1:\n\nInput: root = [1,null,2,3]\n\nOutput: [1,2,3]\n\nExplanation:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2024/08/29/screenshot-2024-08-29-202743.png\" style=\"width: 200px; height: 264px;\" />\n\n<strong class=\"example\">Example 2:\n\nInput: root = [1,2,3,4,5,null,8,null,null,6,7,9]\n\nOutput: [1,2,4,5,6,7,3,8,9]\n\nExplanation:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2024/08/29/tree_2.png\" style=\"width: 350px; height: 286px;\" />\n\n<strong class=\"example\">Example 3:\n\nInput: root = []\n\nOutput: []\n\n<strong class=\"example\">Example 4:\n\nInput: root = [1]\n\nOutput: [1]\n\n \n\nConstraints:\n\n\t• The number of nodes in the tree is in the range [0, 100].\n\n\t• -100 <= Node.val <= 100\n\n \n\nFollow up: Recursive solution is trivial, could you do it iteratively?",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Binary Tree Postorder Traversal",
+    "description": "Given the root of a binary tree, return the postorder traversal of its nodes' values.\n\n \n\n<strong class=\"example\">Example 1:\n\nInput: root = [1,null,2,3]\n\nOutput: [3,2,1]\n\nExplanation:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2024/08/29/screenshot-2024-08-29-202743.png\" style=\"width: 200px; height: 264px;\" />\n\n<strong class=\"example\">Example 2:\n\nInput: root = [1,2,3,4,5,null,8,null,null,6,7,9]\n\nOutput: [4,6,7,5,2,9,8,3,1]\n\nExplanation:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2024/08/29/tree_2.png\" style=\"width: 350px; height: 286px;\" />\n\n<strong class=\"example\">Example 3:\n\nInput: root = []\n\nOutput: []\n\n<strong class=\"example\">Example 4:\n\nInput: root = [1]\n\nOutput: [1]\n\n \n\nConstraints:\n\n\t• The number of the nodes in the tree is in the range [0, 100].\n\n\t• -100 <= Node.val <= 100\n\n \n\nFollow up: Recursive solution is trivial, could you do it iteratively?",
+    "difficulty": "Easy",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "LRU Cache",
+    "description": "Design a data structure that follows the constraints of a <a href=\"https://en.wikipedia.org/wiki/Cache_replacement_policies#LRU\" target=\"_blank\">Least Recently Used (LRU) cache</a>.\n\nImplement the LRUCache class:\n\n\t• LRUCache(int capacity) Initialize the LRU cache with positive size capacity.\n\n\t• int get(int key) Return the value of the key if the key exists, otherwise return -1.\n\n\t• void put(int key, int value) Update the value of the key if the key exists. Otherwise, add the key-value pair to the cache. If the number of keys exceeds the capacity from this operation, evict the least recently used key.\n\nThe functions get and put must each run in O(1) average time complexity.\n\n \n\n<strong class=\"example\">Example 1:\n\nInput\n[\"LRUCache\", \"put\", \"put\", \"get\", \"put\", \"get\", \"put\", \"get\", \"get\", \"get\"]\n[[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]]\nOutput\n[null, null, null, 1, null, -1, null, -1, 3, 4]\n\nExplanation\nLRUCache lRUCache = new LRUCache(2);\nlRUCache.put(1, 1); // cache is {1=1}\nlRUCache.put(2, 2); // cache is {1=1, 2=2}\nlRUCache.get(1);    // return 1\nlRUCache.put(3, 3); // LRU key was 2, evicts key 2, cache is {1=1, 3=3}\nlRUCache.get(2);    // returns -1 (not found)\nlRUCache.put(4, 4); // LRU key was 1, evicts key 1, cache is {4=4, 3=3}\nlRUCache.get(1);    // return -1 (not found)\nlRUCache.get(3);    // return 3\nlRUCache.get(4);    // return 4\n\n \n\nConstraints:\n\n\t• 1 <= capacity <= 3000\n\n\t• 0 <= key <= 10^4\n\n\t• 0 <= value <= 10^5\n\n\t• At most 2 * 10^5 calls will be made to get and put.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Insertion Sort List",
+    "description": "Given the head of a singly linked list, sort the list using insertion sort, and return the sorted list's head.\n\nThe steps of the insertion sort algorithm:\n\n<ol>\n\t• Insertion sort iterates, consuming one input element each repetition and growing a sorted output list.\n\n\t• At each iteration, insertion sort removes one element from the input data, finds the location it belongs within the sorted list and inserts it there.\n\n\t• It repeats until no input elements remain.\n\n</ol>\n\nThe following is a graphical example of the insertion sort algorithm. The partially sorted list (black) initially contains only the first element in the list. One element (red) is removed from the input data and inserted in-place into the sorted list with each iteration.\n\n<img alt=\"\" src=\"https://upload.wikimedia.org/wikipedia/commons/0/0f/Insertion-sort-example-300px.gif\" style=\"height:180px; width:300px\" />\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/03/04/sort1linked-list.jpg\" style=\"width: 422px; height: 222px;\" />\n\nInput: head = [4,2,1,3]\nOutput: [1,2,3,4]\n\n<strong class=\"example\">Example 2:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/03/04/sort2linked-list.jpg\" style=\"width: 542px; height: 222px;\" />\n\nInput: head = [-1,5,3,4,0]\nOutput: [-1,0,3,4,5]\n\n \n\nConstraints:\n\n\t• The number of nodes in the list is in the range [1, 5000].\n\n\t• -5000 <= Node.val <= 5000",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Sort List",
+    "description": "Given the head of a linked list, return the list after sorting it in ascending order.\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2020/09/14/sort_list_1.jpg\" style=\"width: 450px; height: 194px;\" />\n\nInput: head = [4,2,1,3]\nOutput: [1,2,3,4]\n\n<strong class=\"example\">Example 2:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2020/09/14/sort_list_2.jpg\" style=\"width: 550px; height: 184px;\" />\n\nInput: head = [-1,5,3,4,0]\nOutput: [-1,0,3,4,5]\n\n<strong class=\"example\">Example 3:\n\nInput: head = []\nOutput: []\n\n \n\nConstraints:\n\n\t• The number of nodes in the list is in the range [0, 5 * 10^4].\n\n\t• -10^5 <= Node.val <= 10^5\n\n \n\nFollow up: Can you sort the linked list in O(n logn) time and O(1) memory (i.e. constant space)?",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Max Points on a Line",
+    "description": "Given an array of points where points[i] = [x_i, y_i] represents a point on the X-Y plane, return the maximum number of points that lie on the same straight line.\n\n \n\n<strong class=\"example\">Example 1:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/02/25/plane1.jpg\" style=\"width: 300px; height: 294px;\" />\n\nInput: points = [[1,1],[2,2],[3,3]]\nOutput: 3\n\n<strong class=\"example\">Example 2:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/02/25/plane2.jpg\" style=\"width: 300px; height: 294px;\" />\n\nInput: points = [[1,1],[3,2],[5,3],[4,1],[2,3],[1,4]]\nOutput: 4\n\n \n\nConstraints:\n\n\t• 1 <= points.length <= 300\n\n\t• points[i].length == 2\n\n\t• -10^4 <= x_i, y_i <= 10^4\n\n\t• All the points are unique.",
+    "difficulty": "Hard",
+    "timeLimit": 5000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
+    "title": "Evaluate Reverse Polish Notation",
+    "description": "You are given an array of strings tokens that represents an arithmetic expression in a <a href=\"http://en.wikipedia.org/wiki/Reverse_Polish_notation\" target=\"_blank\">Reverse Polish Notation</a>.\n\nEvaluate the expression. Return an integer that represents the value of the expression.\n\nNote that:\n\n\t• The valid operators are '+', '-', '*', and '/'.\n\n\t• Each operand may be an integer or another expression.\n\n\t• The division between two integers always truncates toward zero.\n\n\t• There will not be any division by zero.\n\n\t• The input represents a valid arithmetic expression in a reverse polish notation.\n\n\t• The answer and all the intermediate calculations can be represented in a 32-bit integer.\n\n \n\n<strong class=\"example\">Example 1:\n\nInput: tokens = [\"2\",\"1\",\"+\",\"3\",\"*\"]\nOutput: 9\nExplanation: ((2 + 1) * 3) = 9\n\n<strong class=\"example\">Example 2:\n\nInput: tokens = [\"4\",\"13\",\"5\",\"/\",\"+\"]\nOutput: 6\nExplanation: (4 + (13 / 5)) = 6\n\n<strong class=\"example\">Example 3:\n\nInput: tokens = [\"10\",\"6\",\"9\",\"3\",\"+\",\"-11\",\"*\",\"/\",\"*\",\"17\",\"+\",\"5\",\"+\"]\nOutput: 22\nExplanation: ((10 * (6 / ((9 + 3) * -11))) + 17) + 5\n= ((10 * (6 / (12 * -11))) + 17) + 5\n= ((10 * (6 / -132)) + 17) + 5\n= ((10 * 0) + 17) + 5\n= (0 + 17) + 5\n= 17 + 5\n= 22\n\n \n\nConstraints:\n\n\t• 1 <= tokens.length <= 10^4\n\n\t• tokens[i] is either an operator: \"+\", \"-\", \"*\", or \"/\", or an integer in the range [-200, 200].",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "Standard Input 1",
+        "expectedOutput": "Refer to description"
+      },
+      {
+        "input": "Custom Input A",
+        "expectedOutput": "Custom Output A"
+      }
+    ],
+    "imageUrl": ""
   }
 ]

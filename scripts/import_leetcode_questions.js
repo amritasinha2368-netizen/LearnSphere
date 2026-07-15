@@ -63,8 +63,8 @@ async function run() {
       return q && q.content && !q.isPaidOnly;
     });
     
-    // Get the first 100 valid questions
-    const selected = validQuestions.slice(0, 100);
+    // Get the first 150 valid questions
+    const selected = validQuestions.slice(0, 150);
     
     const finalQuestions = [];
     
