@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Latex from 'react-latex-next';
+import 'katex/dist/katex.min.css';
 import './TestEnvironment.css';
 
 export default function TestEnvironment({ test, onExit }) {
@@ -110,12 +112,12 @@ export default function TestEnvironment({ test, onExit }) {
       <div className="test-body-layout">
         <main className="test-arena">
           <div className="question-box">
-            <h3><span>Q{currentQuestionIndex + 1}.</span> {currentQ.question || currentQ.prompt || "Question Text"}</h3>
+            <h3><span>Q{currentQuestionIndex + 1}.</span> <Latex>{currentQ.question || currentQ.prompt || "Question Text"}</Latex></h3>
             {currentQ.imageUrl && (
               <img src={currentQ.imageUrl} alt="Question" style={{ maxWidth: '100%', borderRadius: '8px', marginBottom: '16px' }} />
             )}
             <div className="options-grid">
-              {(currentQ.options || []).map(opt => {
+              {(currentQ.options || []).map((opt, oIdx) => {
                 const isSelected = answers[currentQ.id || currentQ.prompt] === opt;
                 return (
                   <div 
@@ -124,7 +126,7 @@ export default function TestEnvironment({ test, onExit }) {
                     onClick={() => handleSelectOption(currentQ.id || currentQ.prompt, opt)}
                   >
                     <div className="radio-circle">{isSelected && <div className="radio-dot"/>}</div>
-                    <span>{opt}</span>
+                    <span className="opt-text"><Latex>{opt}</Latex></span>
                   </div>
                 );
               })}

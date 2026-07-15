@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { questionsData } from '../data/questionsData.js';
 import { studentData } from "../data/lmsData.js";
+import Latex from 'react-latex-next';
+import 'katex/dist/katex.min.css';
 import './TestBuilder.css';
 
 let cachedStandardQuizzes = [];
@@ -207,10 +209,10 @@ export default function TestBuilder({ onPublish, refreshTrigger }) {
                     <input type="checkbox" checked={isSelected} readOnly />
                     <span className="q-badge">{q.category}</span>
                   </div>
-                  <p><b>Q{idx + 1}:</b> {q.question}</p>
+                  <p><b>Q{idx + 1}:</b> <Latex>{q.question}</Latex></p>
                   <div className="q-options">
                     {q.options.map(opt => (
-                      <span key={opt} className={opt === q.answer ? 'correct-opt' : ''}>{opt}</span>
+                      <span key={opt} className={opt === q.answer ? 'correct-opt' : ''}><Latex>{opt}</Latex></span>
                     ))}
                   </div>
                 </div>
