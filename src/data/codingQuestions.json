@@ -1,5 +1,18 @@
 [
   {
+    "title": "Extract LeetCode Prompt",
+    "description": "Write a Python script that parses a LeetCode HTML dump using BeautifulSoup. It should extract the problem title, difficulty, description (stripping HTML formatting except for code blocks and lists), and the starter code from the Monaco editor view lines. Finally, it must print these details in a formatted layout.",
+    "difficulty": "Medium",
+    "timeLimit": 2000,
+    "testCases": [
+      {
+        "input": "<html><body><div class=\"text-title-large\">1. Two Sum</div><div class=\"text-difficulty-easy\">Easy</div><div class=\"HTMLContent_html\"><p>Given an array of integers...</p></div><div class=\"view-lines\"><div class=\"view-line\"><span>class Solution:</span></div></div></body></html>",
+        "expectedOutput": "==================================================\nTITLE: Two Sum [Easy]\n==================================================\n\n--- DESCRIPTION ---\nGiven an array of integers...\n\n--- STARTER CODE ---\nclass Solution:\n=================================================="
+      }
+    ],
+    "imageUrl": ""
+  },
+  {
     "title": "Game Toe Tac Tic a on Winner Find Challenge",
     "description": "Tic-tac-toe is played by two players A and B on a 3 x 3 grid. The rules of Tic-Tac-Toe are:\n\n\n\tPlayers take turns placing characters into empty squares ' '.\n\tThe first player A always places 'X' characters, while the second player B always places 'O' characters.\n\t'X' and 'O' characters are always placed into empty squares, never on filled ones.\n\tThe game ends when there are three of the same (non-empty) character filling any row, column, or diagonal.\n\tThe game also ends if all squares are non-empty.\n\tNo more moves can be played if the game is over.\n\n\nGiven a 2D integer array moves where moves[i] = [rowi, coli] indicates that the ith move will be played on grid[rowi][coli]. Output the winner of the game if it exists (A or B). In case the game ends in a draw Output \"Draw\". If there are still movements to play Output \"Pending\".\n\nYou can assume that moves is valid (i.e., it follows the rules of Tic-Tac-Toe), the grid is initially empty, and A will play first.",
     "difficulty": "Easy",
