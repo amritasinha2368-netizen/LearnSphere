@@ -589,7 +589,7 @@ export default function TeacherDashboard({ session, onLogout }) {
   }
 
 
-  function openCreateCodingQuestion(prefill = null) {
+  function openCreateCodingQuestion() {
     setAction({
       id: "create-coding-question",
       kicker: "Create Coding Question",
@@ -597,7 +597,6 @@ export default function TeacherDashboard({ session, onLogout }) {
       description: "Define a new competitive programming problem, test cases, and time limits.",
       type: "create-coding-question",
       primaryLabel: "Publish Question",
-      prefill: prefill
     });
   }
 
