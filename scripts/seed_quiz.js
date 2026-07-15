@@ -38,7 +38,7 @@ async function seedQuiz() {
   }));
 
   const megaQuiz = {
-    title: "JEE Mains Advanced Grand Mock Test (200 Questions)",
+    title: "Grand Mock Test (200 Questions)",
     publishTime: new Date(Date.now() - 1000 * 60 * 60 * 24), // Published yesterday
     endTime: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7), // Due in 7 days
     durationMinutes: 180,

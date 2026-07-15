@@ -188,8 +188,8 @@ export const studentData = {
       ],
     },
     {
-      subject: "Science & Math (JEE)",
-      title: "JEE Mains Advanced Grand Mock Test (200 Questions)",
+      subject: "Science & Math",
+      title: "Grand Mock Test (200 Questions)",
       score: 0,
       total: 200,
       status: "Assigned today",

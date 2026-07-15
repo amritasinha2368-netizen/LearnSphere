@@ -78,7 +78,7 @@ async function run() {
   
   // Process them to avoid copyright
   const processed = selected.map((q, idx) => ({
-    id: `jee_mock_${idx + 1}`,
+    id: `test_q_${idx + 1}`,
     question: paraphrase(q.question_text),
     options: [
       { id: 'a', text: q.options.a },
