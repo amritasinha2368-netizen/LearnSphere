@@ -1,15 +1,4 @@
-import samkaryaQuestions from "./samkaryaQuestions.json";
-
 export const questionsData = [
-  ...samkaryaQuestions.map(q => ({
-    id: q.id,
-    category: "Science & Math",
-    difficulty: q.difficulty || "hard",
-    question: q.question,
-    options: q.options.map(o => o.text),
-    answer: q.options.find(o => o.id === q.answer)?.text || q.options[0].text
-  })),
-
   {
     "id": "grammar_1",
     "category": "English Grammar",
