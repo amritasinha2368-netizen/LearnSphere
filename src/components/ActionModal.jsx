@@ -83,6 +83,76 @@ export default function ActionModal({ action, onClose, onSubmit }) {
     }
   };
 
+  const handleLeetCodeImport = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const html_content = event.target.result;
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html_content, 'text/html');
+
+      // 1. Extract Problem Title & Difficulty
+      const titleElement = Array.from(doc.querySelectorAll('div')).find(el => 
+        el.className && typeof el.className === 'string' && (el.className.includes('text-title-large') || el.className.includes('font-semibold'))
+      );
+      let title = titleElement ? titleElement.textContent.trim() : "Unknown Title";
+      title = title.replace(/^\d+\.\s*/, '');
+
+      const difficultyElement = Array.from(doc.querySelectorAll('div')).find(el => 
+        el.className && typeof el.className === 'string' && (el.className.includes('text-difficulty-easy') || el.className.includes('text-difficulty-medium') || el.className.includes('text-difficulty-hard'))
+      );
+      let difficulty = difficultyElement ? difficultyElement.textContent.trim() : "Medium";
+      if (difficulty !== "Easy" && difficulty !== "Hard") difficulty = "Medium";
+
+      // 2. Extract Problem Description
+      const descriptionDiv = Array.from(doc.querySelectorAll('div')).find(el => 
+        el.className && typeof el.className === 'string' && el.className.includes('HTMLContent_html')
+      );
+      
+      let description_text = "";
+      if (descriptionDiv) {
+        const elements = descriptionDiv.querySelectorAll('p, pre, ul, li');
+        elements.forEach(p => {
+          const text = p.textContent.trim();
+          if (p.tagName.toLowerCase() === 'pre') {
+            description_text += `\n\`\`\`\n${text}\n\`\`\`\n`;
+          } else if (p.tagName.toLowerCase() === 'li') {
+            description_text += `* ${text}\n`;
+          } else {
+            description_text += `\n${text}\n`;
+          }
+        });
+      } else {
+        description_text = "Description container not found.";
+      }
+
+      // 3. Extract Starter Code
+      let starter_code = "";
+      const viewLinesContainer = doc.querySelector('.view-lines');
+      if (viewLinesContainer) {
+        const lines = viewLinesContainer.querySelectorAll('.view-line');
+        const codeLines = Array.from(lines).map(line => {
+          return Array.from(line.querySelectorAll('span')).map(span => span.textContent).join('').replace(/\xa0/g, ' ');
+        });
+        starter_code = codeLines.join('\n');
+      }
+
+      setNewQTitle(title);
+      setNewQDiff(difficulty);
+      
+      let fullDesc = description_text.trim();
+      if (starter_code) {
+        fullDesc += `\n\n### Starter Code\n\`\`\`\n${starter_code}\n\`\`\``;
+      }
+      setNewQDesc(fullDesc);
+    };
+    reader.readAsText(file);
+    // Reset input so the same file can be selected again
+    e.target.value = null;
+  };
+
   const fileInputRef = useRef(null);
 
   useEffect(() => {
@@ -112,10 +182,20 @@ export default function ActionModal({ action, onClose, onSubmit }) {
     } else if (action) {
       if (action.prefill) {
         if (action.prefill.status) setGrade(action.prefill.status);
-        if (action.prefill.title) setClassTitle(action.prefill.title);
+        if (action.prefill.title) {
+          setClassTitle(action.prefill.title);
+          setNewQTitle(action.prefill.title);
+        }
         if (action.prefill.time) setClassTime(action.prefill.time);
         if (action.prefill.room) setClassRoom(action.prefill.room);
         if (action.prefill.feedback) setFeedback(action.prefill.feedback);
+        
+        // Custom prefills for coding questions
+        if (action.prefill.description) setNewQDesc(action.prefill.description);
+        if (action.prefill.difficulty) setNewQDiff(action.prefill.difficulty);
+        if (action.prefill.starterCode) {
+           // If we want to store starter code specially, otherwise it's appended to description
+        }
       }
       if (action.subjectContext) setSubject(action.subjectContext);
     }
@@ -579,28 +659,53 @@ export default function ActionModal({ action, onClose, onSubmit }) {
         )}
         {action.type === "create-coding-question" && (
           <div className="modal-form write-content-form">
-            <div style={{ background: 'linear-gradient(135deg, #f0f9ff, #e0f2fe)', padding: '16px', borderRadius: '8px', border: '1px solid #bae6fd', marginBottom: '16px' }}>
-              <label style={{ color: '#0284c7', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
-                ✨ Auto-Generate with AI
-              </label>
-              <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
-                <input 
-                  type="text" 
-                  placeholder="e.g. A dynamic programming problem about robbing houses..."
-                  value={aiPrompt}
-                  onChange={(e) => setAiPrompt(e.target.value)}
-                  style={{ flex: 1, border: '1px solid #7dd3fc', padding: '8px 12px', borderRadius: '6px' }}
-                />
-                <button 
-                  type="button" 
-                  onClick={handleGenerateAI}
-                  disabled={isGenerating || !aiPrompt}
-                  style={{ 
-                    background: '#0ea5e9', color: '#fff', border: 'none', padding: '0 16px', borderRadius: '6px', fontWeight: 600, cursor: isGenerating || !aiPrompt ? 'not-allowed' : 'pointer', opacity: isGenerating || !aiPrompt ? 0.7 : 1, display: 'flex', alignItems: 'center', gap: '6px'
-                  }}
-                >
-                  {isGenerating ? <><Loader2 size={16} /> Generating...</> : 'Generate'}
-                </button>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
+              <div style={{ background: 'linear-gradient(135deg, #f0f9ff, #e0f2fe)', padding: '16px', borderRadius: '8px', border: '1px solid #bae6fd' }}>
+                <label style={{ color: '#0284c7', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
+                  ✨ Auto-Generate with AI
+                </label>
+                <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
+                  <input 
+                    type="text" 
+                    placeholder="e.g. A DP problem..."
+                    value={aiPrompt}
+                    onChange={(e) => setAiPrompt(e.target.value)}
+                    style={{ flex: 1, border: '1px solid #7dd3fc', padding: '8px 12px', borderRadius: '6px' }}
+                  />
+                  <button 
+                    type="button" 
+                    onClick={handleGenerateAI}
+                    disabled={isGenerating || !aiPrompt}
+                    style={{ 
+                      background: '#0ea5e9', color: '#fff', border: 'none', padding: '0 16px', borderRadius: '6px', fontWeight: 600, cursor: isGenerating || !aiPrompt ? 'not-allowed' : 'pointer', opacity: isGenerating || !aiPrompt ? 0.7 : 1, display: 'flex', alignItems: 'center', gap: '6px'
+                    }}
+                  >
+                    {isGenerating ? <><Loader2 size={16} /> Generating...</> : 'Generate'}
+                  </button>
+                </div>
+              </div>
+
+              <div style={{ background: 'linear-gradient(135deg, #f5f3ff, #ede9fe)', padding: '16px', borderRadius: '8px', border: '1px solid #ddd6fe', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <label style={{ color: '#6d28d9', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px', margin: '0 0 4px 0' }}>
+                  📄 Import from LeetCode
+                </label>
+                <span style={{ fontSize: '13px', color: '#5b21b6', marginBottom: '12px', display: 'block' }}>Upload an HTML dump to auto-extract problem details.</span>
+                <div style={{ display: 'flex' }}>
+                  <input 
+                    type="file" 
+                    accept=".html" 
+                    id="leetcode-html-upload" 
+                    style={{ display: 'none' }} 
+                    onChange={handleLeetCodeImport} 
+                  />
+                  <button 
+                    type="button" 
+                    onClick={() => document.getElementById('leetcode-html-upload').click()}
+                    style={{ background: '#8b5cf6', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: '6px', fontWeight: 600, cursor: 'pointer', width: '100%' }}
+                  >
+                    Upload HTML Dump
+                  </button>
+                </div>
               </div>
             </div>
 

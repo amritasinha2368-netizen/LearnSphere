@@ -111,6 +111,80 @@ export default function CodeBuilder({ openCreateCodingQuestion, onPublish, refre
     if (droppedFile) processFile(droppedFile);
   };
 
+  const handleLeetCodeImport = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const html_content = event.target.result;
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html_content, 'text/html');
+
+      // 1. Extract Problem Title & Difficulty
+      const titleElement = Array.from(doc.querySelectorAll('div')).find(el => 
+        el.className && typeof el.className === 'string' && (el.className.includes('text-title-large') || el.className.includes('font-semibold'))
+      );
+      let title = titleElement ? titleElement.textContent.trim() : "Unknown Title";
+      title = title.replace(/^\d+\.\s*/, '');
+
+      const difficultyElement = Array.from(doc.querySelectorAll('div')).find(el => 
+        el.className && typeof el.className === 'string' && (el.className.includes('text-difficulty-easy') || el.className.includes('text-difficulty-medium') || el.className.includes('text-difficulty-hard'))
+      );
+      let difficulty = difficultyElement ? difficultyElement.textContent.trim() : "Medium";
+      if (difficulty !== "Easy" && difficulty !== "Hard") difficulty = "Medium";
+
+      // 2. Extract Problem Description
+      const descriptionDiv = Array.from(doc.querySelectorAll('div')).find(el => 
+        el.className && typeof el.className === 'string' && el.className.includes('HTMLContent_html')
+      );
+      
+      let description_text = "";
+      if (descriptionDiv) {
+        const elements = descriptionDiv.querySelectorAll('p, pre, ul, li');
+        elements.forEach(p => {
+          const text = p.textContent.trim();
+          if (p.tagName.toLowerCase() === 'pre') {
+            description_text += `\n\`\`\`\n${text}\n\`\`\`\n`;
+          } else if (p.tagName.toLowerCase() === 'li') {
+            description_text += `* ${text}\n`;
+          } else {
+            description_text += `\n${text}\n`;
+          }
+        });
+      } else {
+        description_text = "Description container not found.";
+      }
+
+      // 3. Extract Starter Code
+      let starter_code = "";
+      const viewLinesContainer = doc.querySelector('.view-lines');
+      if (viewLinesContainer) {
+        const lines = viewLinesContainer.querySelectorAll('.view-line');
+        const codeLines = Array.from(lines).map(line => {
+          return Array.from(line.querySelectorAll('span')).map(span => span.textContent).join('').replace(/\xa0/g, ' ');
+        });
+        starter_code = codeLines.join('\n');
+      }
+
+      let fullDesc = description_text.trim();
+      if (starter_code) {
+        fullDesc += `\n\n### Starter Code\n\`\`\`\n${starter_code}\n\`\`\``;
+      }
+
+      // Automatically open the Create Coding Question modal with the prefilled data
+      if (openCreateCodingQuestion) {
+        openCreateCodingQuestion({
+          title: title,
+          description: fullDesc,
+          difficulty: difficulty
+        });
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = null; // reset
+  };
+
   const handleCodingPublish = async () => {
     if (!testTitle || !startTime || selectedCodingQuestions.length === 0) {
       setPublishError("Please fill test title, start time, and select at least one question.");
@@ -182,10 +256,15 @@ export default function CodeBuilder({ openCreateCodingQuestion, onPublish, refre
       </div>
 
       <div style={{ marginBottom: '32px' }}>
-        <div className="coding-assessment-actions" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-          <div className="module-card hover-lift" style={{ background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)', border: '1px solid #bae6fd', cursor: 'pointer', transition: 'transform 0.2s' }} onClick={openCreateCodingQuestion}>
+        <div className="coding-assessment-actions" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px' }}>
+          <div className="module-card hover-lift" style={{ background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)', border: '1px solid #bae6fd', cursor: 'pointer', transition: 'transform 0.2s' }} onClick={() => openCreateCodingQuestion()}>
             <h3 style={{ color: '#0369a1', marginBottom: '8px', fontSize: '1.1rem' }}>✨ Create Coding Question</h3>
             <p style={{ color: '#0c4a6e', margin: 0 }}>Author a new algorithm problem with AI assistance, test cases, and time limits.</p>
+          </div>
+          <div className="module-card hover-lift" style={{ background: 'linear-gradient(135deg, #fdf4ff 0%, #fae8ff 100%)', border: '1px solid #fbcfe8', cursor: 'pointer', transition: 'transform 0.2s' }} onClick={() => document.getElementById('leetcode-main-upload').click()}>
+            <h3 style={{ color: '#c026d3', marginBottom: '8px', fontSize: '1.1rem' }}>📄 Import from LeetCode</h3>
+            <p style={{ color: '#86198f', margin: 0 }}>Upload an HTML dump to auto-extract and create a question.</p>
+            <input type="file" id="leetcode-main-upload" accept=".html" style={{ display: 'none' }} onChange={handleLeetCodeImport} />
           </div>
           <div className="module-card hover-lift" style={{ background: 'linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%)', border: '1px solid #ddd6fe', cursor: 'pointer', transition: 'transform 0.2s' }} onClick={() => setCodingStep(1)}>
             <h3 style={{ color: '#6d28d9', marginBottom: '8px', fontSize: '1.1rem' }}>🚀 Publish Coding Test</h3>
