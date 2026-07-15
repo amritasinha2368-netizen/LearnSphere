@@ -6,6 +6,7 @@ import {
   ShieldCheck,
   UsersRound,
 } from "lucide-react";
+import samkaryaData from "./samkaryaQuestions.json";
 
 export const roles = [
   {
@@ -186,6 +187,19 @@ export const studentData = {
         },
       ],
     },
+    {
+      subject: "Science & Math (JEE)",
+      title: "JEE Mains Advanced Grand Mock Test (200 Questions)",
+      score: 0,
+      total: 200,
+      status: "Assigned today",
+      action: "Attempt quiz",
+      duration: "180 min",
+      questions: samkaryaData.map(q => ({
+        prompt: q.question,
+        options: q.options.map(o => o.text),
+      }))
+    }
   ],
   badges: [
     {
