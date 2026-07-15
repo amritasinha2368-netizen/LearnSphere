@@ -547,26 +547,35 @@ Ensure there are at least 4 test cases, with at least 2 hidden ones. Input forma
                   
                   const expected = tc.expectedOutput.trim();
                   
-                  if (stderr && !output) {
-                     results.push({ passed: false, error: stderr, expected, output, isHidden: tc.isHidden });
+                  let tcPassed = false;
+                  let tcError = stderr;
+
+                  if (stderr) {
+                     tcPassed = false;
                      allPassed = false;
-                     continue;
+                  } else {
+                     tcPassed = output === expected;
+                     if (!tcPassed) allPassed = false;
                   }
-                  
-                  const passed = output === expected;
-                  if (!passed) allPassed = false;
                   
                   results.push({
                     testCaseIndex: i,
-                    passed,
+                    passed: tcPassed,
                     expected,
                     output,
+                    error: tcError,
                     isHidden: tc.isHidden
                   });
                 }
                 
+                let finalVerdict = "Accepted";
+                if (!allPassed) {
+                   const hasErrors = results.some(r => r.error && r.error.length > 0);
+                   finalVerdict = hasErrors ? "Runtime Error" : "Wrong Answer";
+                }
+                
                 res.end(JSON.stringify({ 
-                  verdict: allPassed ? "Accepted" : "Wrong Answer",
+                  verdict: finalVerdict,
                   results: results.map(r => r.isHidden ? { passed: r.passed, error: r.error, isHidden: true } : r)
                 }));
               } catch (err) {

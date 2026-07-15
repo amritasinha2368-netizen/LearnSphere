@@ -58,26 +58,36 @@ export default async function handler(req, res) {
       const cleanExpected = tc.expectedOutput.replace(/\r/g, '').trim();
       const cleanOutput = output.replace(/\r/g, '').trim();
       
-      if (stderr && !cleanOutput) {
-         results.push({ passed: false, error: stderr, expected: cleanExpected, output: cleanOutput, isHidden: tc.isHidden });
+      let tcPassed = false;
+      let tcError = stderr;
+
+      if (stderr) {
+         tcPassed = false;
          allPassed = false;
-         continue;
+      } else {
+         tcPassed = cleanOutput === cleanExpected;
+         if (!tcPassed) allPassed = false;
       }
-      
-      const passed = cleanOutput === cleanExpected;
-      if (!passed) allPassed = false;
       
       results.push({
         testCaseIndex: i,
-        passed,
+        passed: tcPassed,
         expected: cleanExpected,
         output: cleanOutput,
+        error: tcError,
         isHidden: tc.isHidden
       });
     }
     
+    // Determine overall verdict
+    let finalVerdict = "Accepted";
+    if (!allPassed) {
+       const hasErrors = results.some(r => r.error && r.error.length > 0);
+       finalVerdict = hasErrors ? "Runtime Error" : "Wrong Answer";
+    }
+
     return res.status(200).json({ 
-      verdict: allPassed ? "Accepted" : "Wrong Answer",
+      verdict: finalVerdict,
       results: results.map(r => r.isHidden ? { passed: r.passed, error: r.error, isHidden: true } : r)
     });
   } catch (err) {
