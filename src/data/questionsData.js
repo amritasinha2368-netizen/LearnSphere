@@ -1,4 +1,14 @@
+import englishQuestions from "./englishQuestions.json" with { type: "json" };
+
 export const questionsData = [
+  ...englishQuestions.map(q => ({
+    id: q.id,
+    category: "English Comprehension",
+    difficulty: q.difficulty || "easy",
+    question: q.question,
+    options: q.options,
+    answer: q.answer
+  })),
   {
     "id": "grammar_1",
     "category": "English Grammar",

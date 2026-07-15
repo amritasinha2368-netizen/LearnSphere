@@ -6,6 +6,7 @@ import {
   ShieldCheck,
   UsersRound,
 } from "lucide-react";
+import englishQuestions from "./englishQuestions.json" with { type: "json" };
 
 export const roles = [
   {
@@ -186,6 +187,19 @@ export const studentData = {
         },
       ],
     },
+    {
+      subject: "English",
+      title: "English Comprehension & Grammar Mock Test",
+      score: 0,
+      total: 200,
+      status: "Assigned today",
+      action: "Attempt quiz",
+      duration: "120 min",
+      questions: englishQuestions.map(q => ({
+        prompt: q.question,
+        options: q.options,
+      }))
+    }
   ],
   badges: [
     {
