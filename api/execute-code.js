@@ -42,7 +42,7 @@ Respond EXACTLY in this JSON format (no markdown blocks, just raw JSON):
   "feedback": "A very brief 1-2 sentence explanation of what is wrong (or 'All test cases passed' if correct)."
 }`;
 
-      const aiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+      const aiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
