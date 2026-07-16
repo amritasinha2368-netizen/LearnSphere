@@ -42,7 +42,7 @@ const navItems = [
   { id: "classes", label: "Classes", icon: CalendarClock },
   { id: "tests", label: "Test Builder", icon: FilePenLine },
   { id: "code", label: "Code Builder", icon: TerminalSquare },
-  { id: "marks", label: "Quiz Marks", icon: ClipboardCheck },
+
   { id: "actions", label: "Feedback", icon: MessageSquarePlus },
   { id: "announcements", label: "Notices", icon: Megaphone },
   { id: "leaderboard", label: "Leaderboard", icon: Trophy },
@@ -644,8 +644,7 @@ export default function TeacherDashboard({ session, onLogout }) {
             <div className="compact-list">
               <button className="compact-item green" type="button" onClick={() => setActiveView("assignments")}><b>1</b><span><strong>Publish assignment</strong><em>Graph traversal lab</em></span><i>Ready</i></button>
               <button className="compact-item blue" type="button" onClick={() => setActiveView("calendar")}><b>2</b><span><strong>Global Calendar</strong><em>All upcoming schedules</em></span><i>Calendar</i></button>
-              <button className="compact-item violet" type="button" onClick={() => setActiveView("marks")}><b>3</b><span><strong>Publish Quiz Marks</strong><em>Review test attempts</em></span><i>Marks</i></button>
-              <button className="compact-item amber" type="button" onClick={() => setActiveView("classes")}><b>4</b><span><strong>Scheduled Classes</strong><em>View upcoming classes</em></span><i>Plan</i></button>
+              <button className="compact-item amber" type="button" onClick={() => setActiveView("classes")}><b>3</b><span><strong>Scheduled Classes</strong><em>View upcoming classes</em></span><i>Plan</i></button>
             </div>
           </article>
         </div>
@@ -1031,7 +1030,7 @@ export default function TeacherDashboard({ session, onLogout }) {
       </section>
     ),
     'quiz-attempts-view': renderQuizAttempts,
-    marks: renderMarks,
+
     actions: renderFeedback,
     announcements: renderAnnouncements,
     leaderboard: () => (
