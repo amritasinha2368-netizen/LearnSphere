@@ -150,8 +150,8 @@ export default function StudentDashboard({ session, onLogout }) {
     if (action.kicker === "Assignment upload" && action.assignmentId) {
       try {
         const payload = {
-          studentName: studentData.profile.name,
-          studentId: "student_123", // Dummy ID
+          studentName: session?.name || studentData.profile.name,
+          studentId: session?.id || "student_123",
           fileUrl: data.fileUrl,
           note: data.note
         };
@@ -218,7 +218,8 @@ export default function StudentDashboard({ session, onLogout }) {
   }
 
   function openAssignment(assignment) {
-    const existingSubmission = assignment.submissions?.find(sub => sub.studentId === "student_123");
+    const studentId = session?.id || "student_123";
+    const existingSubmission = assignment.submissions?.find(sub => sub.studentId === studentId);
 
     setAction({
       kicker: "Assignment upload",
