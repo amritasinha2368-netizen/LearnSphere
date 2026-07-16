@@ -961,6 +961,8 @@ button {
   align-items: flex-start;
   gap: 22px;
   margin-bottom: 16px;
+  position: relative;
+  z-index: 50;
 }
 
 .dashboard-topbar h1 {
