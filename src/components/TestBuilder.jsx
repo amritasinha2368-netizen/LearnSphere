@@ -31,11 +31,7 @@ export default function TestBuilder({ onPublish, refreshTrigger }) {
       .then(data => {
         const fetchedTitles = data.map(q => q.title);
         const mergedQuizzes = [...data];
-        studentData.quizzes.forEach(mockQuiz => {
-          if (!fetchedTitles.includes(mockQuiz.title)) {
-            mergedQuizzes.push(mockQuiz);
-          }
-        });
+
         cachedStandardQuizzes = mergedQuizzes;
         setPublishedQuizzes(mergedQuizzes);
       })
