@@ -38,7 +38,7 @@ Determine if the code correctly solves the problem, is optimal, and is free of s
 If the code is incomplete (e.g. just a class stub without implementation) or empty, it is a Wrong Answer.
 Respond EXACTLY in this JSON format (no markdown blocks, just raw JSON):
 {
-  "verdict": "Accepted" | "Wrong Answer" | "Runtime Error" | "Compilation Error",
+  "verdict": "Accepted" | "Wrong Answer" | "<Specific Error Name> (e.g., IndentationError, SyntaxError, TypeError, ReferenceError, etc.)",
   "feedback": "A very brief 1-2 sentence explanation of what is wrong (or 'All test cases passed' if correct)."
 }`;
 

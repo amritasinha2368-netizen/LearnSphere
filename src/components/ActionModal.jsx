@@ -24,6 +24,7 @@ export default function ActionModal({ action, onClose, onSubmit }) {
   // New States for Classes and Subjects
   const [classTitle, setClassTitle] = useState("");
   const [classTime, setClassTime] = useState("");
+  const [classDate, setClassDate] = useState("");
   const [classRoom, setClassRoom] = useState("");
   
   const [subjectSection, setSubjectSection] = useState("");
@@ -111,7 +112,7 @@ export default function ActionModal({ action, onClose, onSubmit }) {
       setTeacherName("");
     } else if (action) {
       if (action.prefill) {
-        if (action.prefill.status) setGrade(action.prefill.status);
+        if (action.prefill.status || action.prefill.grade) setGrade(action.prefill.status || action.prefill.grade);
         if (action.prefill.title) setClassTitle(action.prefill.title);
         if (action.prefill.time) setClassTime(action.prefill.time);
         if (action.prefill.room) setClassRoom(action.prefill.room);
@@ -193,6 +194,7 @@ export default function ActionModal({ action, onClose, onSubmit }) {
         onSubmit({
           actionType: action.type,
           title: classTitle,
+          date: classDate,
           time: classTime,
           room: classRoom,
         });
@@ -796,9 +798,10 @@ export default function ActionModal({ action, onClose, onSubmit }) {
           <div className="modal-form">
             <label>Class Title <input type="text" value={classTitle} onChange={e => setClassTitle(e.target.value)} required placeholder="e.g. Intro to Databases" /></label>
             <div className="split-row">
+              <label>Date <input type="date" value={classDate} onChange={e => setClassDate(e.target.value)} required /></label>
               <label>Time <input type="time" value={classTime} onChange={e => setClassTime(e.target.value)} required /></label>
-              <label>Room <input type="text" value={classRoom} onChange={e => setClassRoom(e.target.value)} required placeholder="e.g. Room 402" /></label>
             </div>
+            <label>Room <input type="text" value={classRoom} onChange={e => setClassRoom(e.target.value)} required placeholder="e.g. Room 402" /></label>
           </div>
         )}
 

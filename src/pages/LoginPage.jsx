@@ -102,7 +102,7 @@ export default function LoginPage({ onLogin }) {
     <main className="login-page minimal-login">
       <section className="login-hero minimal-hero" aria-label="LearnSphere identity">
         <div className="brand-lockup login-brand">
-          <span className="brand-mark">LS</span>
+          <img src="/logo.jpg" alt="LearnSphere" className="brand-mark" style={{ width: '40px', height: '40px', borderRadius: '12px', objectFit: 'cover', padding: 0, background: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
           <div>
             <strong>LearnSphere</strong>
             <small>Institution learning management system</small>

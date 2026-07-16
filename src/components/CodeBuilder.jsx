@@ -149,6 +149,20 @@ export default function CodeBuilder({ openCreateCodingQuestion, onPublish, refre
       questions: selectedCodingQuestions.map(q => q._id)
     };
 
+    // Optimistic UI Update: Instantly inject a dummy card on the screen
+    const tempTest = {
+      id: "temp-" + Date.now(),
+      _id: "temp-" + Date.now(),
+      title: payload.title,
+      dueDate: payload.dueDate,
+      questions: selectedCodingQuestions
+    };
+    setPublishedTests([tempTest, ...publishedTests]);
+    setCodingStep(0);
+    setTestTitle("");
+    setCodingSubject("");
+    setSelectedCodingQuestions([]);
+
     try {
       const res = await fetch('/api/coding-tests', {
         method: 'POST',

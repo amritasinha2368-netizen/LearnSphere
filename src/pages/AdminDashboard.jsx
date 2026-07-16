@@ -84,15 +84,7 @@ function AdminMetric({ code, label, value, detail, tone = "blue" }) {
 }
 
 export default function AdminDashboard({ session, onLogout }) {
-  const [activeView, setActiveViewState] = useState(() => {
-    try {
-      const saved = localStorage.getItem("admin_active_view");
-      if (saved) return saved;
-    } catch (e) {
-      console.error(e);
-    }
-    return "overview";
-  });
+  const [activeView, setActiveViewState] = useState("overview");
 
   const setActiveView = (view) => {
     setActiveViewState(view);
@@ -106,6 +98,7 @@ export default function AdminDashboard({ session, onLogout }) {
 
   // Inline Class Scheduling States
   const [newClassTitle, setNewClassTitle] = useState("");
+  const [newClassDate, setNewClassDate] = useState("");
   const [newClassTime, setNewClassTime] = useState("");
   const [newClassRoom, setNewClassRoom] = useState("");
 
@@ -962,7 +955,7 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
                 <Trash2 size={18} />
               </button>
               <div className="button-row" style={{ display: 'flex', gap: '8px', marginTop: '12px', flexWrap: 'wrap' }}>
-                <button type="button" onClick={() => openSubject(subject)}>Open subject</button>
+                <button type="button" onClick={() => openSubject(subject)}>Create chapters</button>
                 <button type="button" className="ghost-button" onClick={() => openUploadMaterial(subject)}>Upload Material</button>
               </div>
             </article>
@@ -1011,13 +1004,13 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
       <section className="role-view">
         {sectionTitle("Who Submitted", "Submission monitor shows student assignments pushed to the backend server.")}
         <div className="module-grid three">
-          {!loadingAssignments && backendAssignments.filter(a => a.submissions && a.submissions.length > 0).map((item) => (
+          {!loadingAssignments && backendAssignments.map((item) => (
             <article className="module-card" key={item.id}>
               <span className="module-code green">SB</span>
               <h3>{item.title}</h3>
               <p>{item.subject}</p>
               <div style={{ marginTop: '12px', padding: '12px', background: '#f8fafc', borderRadius: '6px', border: '1px solid #e2e8f0', textAlign: 'center' }}>
-                <b style={{ fontSize: '18px', color: '#0f172a', display: 'block' }}>{item.submissions.length}</b>
+                <b style={{ fontSize: '18px', color: '#0f172a', display: 'block' }}>{item.submissions?.length || 0}</b>
                 <span style={{ fontSize: '12px', color: '#64748b' }}>submissions received</span>
               </div>
               <button 
@@ -1029,8 +1022,8 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
               </button>
             </article>
           ))}
-          {!loadingAssignments && backendAssignments.filter(a => a.submissions && a.submissions.length > 0).length === 0 && (
-             <p style={{color: '#666'}}>No student submissions received yet.</p>
+          {!loadingAssignments && backendAssignments.length === 0 && (
+             <p style={{color: '#666'}}>No assignments created yet.</p>
           )}
         </div>
       </section>
@@ -1039,17 +1032,18 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
 
   const handleScheduleClass = async (e) => {
     e.preventDefault();
-    if (!newClassTitle || !newClassTime || !newClassRoom) return;
+    if (!newClassTitle || !newClassTime || !newClassRoom || !newClassDate) return;
     try {
       const res = await fetch('/api/lms-data?type=classes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: newClassTitle, time: newClassTime, room: newClassRoom })
+        body: JSON.stringify({ title: newClassTitle, date: newClassDate, time: newClassTime, room: newClassRoom })
       });
       if (res.ok) {
         const newClass = await res.json();
         setDbClasses([newClass, ...dbClasses]);
         setNewClassTitle("");
+        setNewClassDate("");
         setNewClassTime("");
         setNewClassRoom("");
       }
@@ -1069,9 +1063,13 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: 500 }}>Subject / Title</label>
             <input type="text" value={newClassTitle} onChange={e => setNewClassTitle(e.target.value)} required placeholder="e.g. Data Structures" style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--line)' }} />
           </div>
-          <div style={{ flex: 1, minWidth: '200px' }}>
+          <div style={{ flex: 1, minWidth: '150px' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: 500 }}>Date</label>
+            <input type="date" value={newClassDate} onChange={e => setNewClassDate(e.target.value)} required style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--line)' }} />
+          </div>
+          <div style={{ flex: 1, minWidth: '150px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: 500 }}>Time</label>
-            <input type="text" value={newClassTime} onChange={e => setNewClassTime(e.target.value)} required placeholder="e.g. 09:30 AM, Monday" style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--line)' }} />
+            <input type="time" value={newClassTime} onChange={e => setNewClassTime(e.target.value)} required style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--line)' }} />
           </div>
           <div style={{ flex: 1, minWidth: '200px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: 500 }}>Room / Link</label>
@@ -1300,7 +1298,7 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
     subjects: renderSubjects,
     assignments: renderAssignments,
     submissions: renderSubmissions,
-    calendar: () => <CalendarWorkspace classes={dbClasses} notices={dbNotices} assignments={backendAssignments} />,
+    calendar: () => <CalendarWorkspace classes={dbClasses} notices={dbNotices} assignments={backendAssignments} subjects={dbSubjects} dbEvents={dbEvents} />,
     classes: renderClasses,
     tests: () => (
       <section className="role-view">
@@ -1342,6 +1340,7 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
         <SubjectDetails 
           subject={activeSubject} 
           onBack={() => setActiveSubject(null)} 
+          onUpdate={(updated) => setDbSubjects(dbSubjects.map(s => (s._id === updated._id || s.id === updated.id) ? updated : s))}
           role="admin"
         />
       </RoleShell>

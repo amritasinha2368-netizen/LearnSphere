@@ -62,15 +62,7 @@ function DashboardMetric({ icon: Icon, code, label, value, detail, tone = "blue"
 }
 
 export default function StudentDashboard({ session, onLogout }) {
-  const [activeView, setActiveViewState] = useState(() => {
-    try {
-      const saved = localStorage.getItem("student_active_view");
-      if (saved) return saved;
-    } catch (e) {
-      console.error(e);
-    }
-    return "overview";
-  });
+  const [activeView, setActiveViewState] = useState("overview");
 
   const setActiveView = (view) => {
     setActiveViewState(view);
@@ -388,9 +380,8 @@ export default function StudentDashboard({ session, onLogout }) {
                 <em>Mentor: {studentData.batch.mentor}</em>
               </div>
             </div>
-            <div className="batch-stat-grid">
+            <div className="batch-stat-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
               <div><strong>{studentData.batch.strength}</strong><span>Students</span></div>
-              <div><strong>{studentData.batch.attendance}</strong><span>Attendance</span></div>
               <div><strong>#{studentData.xp.rank}</strong><span>Your rank</span></div>
               <div><strong>{studentData.batch.batchAverageXp}</strong><span>Batch avg XP</span></div>
             </div>
@@ -842,7 +833,7 @@ export default function StudentDashboard({ session, onLogout }) {
     quizzes: renderQuizzes,
     badges: renderBadges,
     announcements: renderAnnouncements,
-    calendar: () => <CalendarWorkspace classes={dbClasses} notices={dbNotices} assignments={backendAssignments} />,
+    calendar: () => <CalendarWorkspace classes={dbClasses} notices={dbNotices} assignments={backendAssignments} subjects={dbSubjects} dbEvents={dbEvents} />,
     xp: renderXp,
     leaderboard: renderLeaderboard,
   };

@@ -11,21 +11,20 @@ export default function TestEnvironment({ test, onExit }) {
   const [results, setResults] = useState(null);
 
   useEffect(() => {
-    if (isSubmitted) return;
-
-    const timerId = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev <= 1) {
-          clearInterval(timerId);
-          handleSubmit();
-          return 0;
-        }
-        return prev - 1;
-      });
+    if (isSubmitted || timeLeft <= 0) return;
+    
+    const timerId = setTimeout(() => {
+      setTimeLeft(prev => prev - 1);
     }, 1000);
+    
+    return () => clearTimeout(timerId);
+  }, [timeLeft, isSubmitted]);
 
-    return () => clearInterval(timerId);
-  }, [isSubmitted]);
+  useEffect(() => {
+    if (timeLeft <= 0 && !isSubmitted) {
+      handleSubmit();
+    }
+  }, [timeLeft, isSubmitted]);
 
   const handleSelectOption = (qId, option) => {
     if (isSubmitted) return;
@@ -41,7 +40,8 @@ export default function TestEnvironment({ test, onExit }) {
     let unattempted = 0;
 
     test.questions.forEach(q => {
-      const userAns = answers[q.id];
+      const qId = q.id || q.prompt;
+      const userAns = answers[qId];
       if (!userAns) {
         unattempted++;
       } else if (userAns === q.answer) {

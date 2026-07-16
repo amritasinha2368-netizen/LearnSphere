@@ -9,9 +9,10 @@ function getYoutubeId(url) {
 }
 
 export default function MaterialPreview({ material }) {
-  const { title, url, type } = material;
+  const { title, url: providedUrl, fileUrl, type } = material;
+  const url = providedUrl || fileUrl;
   
-  if (!url) return null;
+  if (!url) return <div style={{ padding: '12px', color: 'red' }}>Error: Material missing URL</div>;
 
   const ytId = getYoutubeId(url);
   

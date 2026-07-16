@@ -3,7 +3,7 @@ import { ChevronDown, ChevronRight, FileText, ArrowLeft, BookOpen, Layers, Plus,
 import MaterialPreview from "./MaterialPreview.jsx";
 import ProgressBar from "./ProgressBar.jsx";
 
-export default function SubjectDetails({ subject, onBack, role = 'student' }) {
+export default function SubjectDetails({ subject, onBack, onUpdate, role = 'student' }) {
   const [openChapters, setOpenChapters] = useState([0]);
   const [localSubject, setLocalSubject] = useState(subject);
   
@@ -38,6 +38,7 @@ export default function SubjectDetails({ subject, onBack, role = 'student' }) {
       if (res.ok) {
         const updated = await res.json();
         setLocalSubject(updated);
+        if (onUpdate) onUpdate(updated);
       }
     } catch (err) { console.error(err); }
   };
@@ -59,6 +60,7 @@ export default function SubjectDetails({ subject, onBack, role = 'student' }) {
       if (res.ok) {
         const updated = await res.json();
         setLocalSubject(updated);
+        if (onUpdate) onUpdate(updated);
         setNewChapterTitle("");
         setIsAddingChapter(false);
       }
@@ -99,6 +101,7 @@ export default function SubjectDetails({ subject, onBack, role = 'student' }) {
       if (res.ok) {
         const updated = await res.json();
         setLocalSubject(updated);
+        if (onUpdate) onUpdate(updated);
         setAddingMaterialTo(null);
         setMatTitle('');
         setMatUrl('');
@@ -247,7 +250,13 @@ export default function SubjectDetails({ subject, onBack, role = 'student' }) {
                 {canManage && addingMaterialTo !== (chapter.id || chapter._id) && (
                   <button 
                     type="button"
-                    onClick={() => setAddingMaterialTo(chapter.id || chapter._id)}
+                    onClick={() => {
+                      setAddingMaterialTo(chapter.id || chapter._id);
+                      setMatTitle('');
+                      setMatUrl('');
+                      setMatFile(null);
+                      setMatType('video');
+                    }}
                     style={{ marginTop: '16px', display: 'flex', alignItems: 'center', gap: '6px', background: 'transparent', color: 'var(--primary)', border: '1px dashed var(--primary)', padding: '12px', borderRadius: '8px', cursor: 'pointer', fontWeight: 600, width: '100%', justifyContent: 'center' }}
                   >
                     <Plus size={16} /> Add Topic / Material

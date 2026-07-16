@@ -62,15 +62,7 @@ function TeacherMetric({ code, label, value, detail, tone = "blue" }) {
 }
 
 export default function TeacherDashboard({ session, onLogout }) {
-  const [activeView, setActiveViewState] = useState(() => {
-    try {
-      const saved = localStorage.getItem("teacher_active_view");
-      if (saved) return saved;
-    } catch (e) {
-      console.error(e);
-    }
-    return "overview";
-  });
+  const [activeView, setActiveViewState] = useState("overview");
 
   const setActiveView = (view) => {
     setActiveViewState(view);
@@ -79,6 +71,7 @@ export default function TeacherDashboard({ session, onLogout }) {
   const [action, setAction] = useState(null);
   const [activeSubject, setActiveSubject] = useState(null);
   const [newClassTitle, setNewClassTitle] = useState("");
+  const [newClassDate, setNewClassDate] = useState("");
   const [newClassTime, setNewClassTime] = useState("");
   const [newClassRoom, setNewClassRoom] = useState("");
   const [selectedQuiz, setSelectedQuiz] = useState(null);
@@ -304,6 +297,7 @@ export default function TeacherDashboard({ session, onLogout }) {
       try {
         const payload = {
           title: data.title,
+          date: data.date,
           time: data.time,
           room: data.room
         };
@@ -681,7 +675,7 @@ export default function TeacherDashboard({ session, onLogout }) {
                 <Trash2 size={18} />
               </button>
               <div className="button-row" style={{ display: 'flex', gap: '8px', marginTop: '12px', flexWrap: 'wrap' }}>
-                <button type="button" onClick={() => openSubject(subject)}>Open subject</button>
+                <button type="button" onClick={() => openSubject(subject)}>Create chapters</button>
                 <button type="button" className="ghost-button" onClick={() => openUploadMaterial(subject)}>Upload Material</button>
               </div>
             </article>
@@ -730,13 +724,13 @@ export default function TeacherDashboard({ session, onLogout }) {
       <section className="role-view">
         {sectionTitle("Who Submitted", "Submission monitor shows student assignments pushed to the backend server.")}
         <div className="module-grid three">
-          {!loadingAssignments && backendAssignments.filter(a => a.submissions && a.submissions.length > 0).map((item) => (
+          {!loadingAssignments && backendAssignments.map((item) => (
             <article className="module-card" key={item.id}>
               <span className="module-code green">SB</span>
               <h3>{item.title}</h3>
               <p>{item.subject}</p>
               <div style={{ marginTop: '12px', padding: '12px', background: '#f8fafc', borderRadius: '6px', border: '1px solid #e2e8f0', textAlign: 'center' }}>
-                <b style={{ fontSize: '18px', color: '#0f172a', display: 'block' }}>{item.submissions.length}</b>
+                <b style={{ fontSize: '18px', color: '#0f172a', display: 'block' }}>{item.submissions?.length || 0}</b>
                 <span style={{ fontSize: '12px', color: '#64748b' }}>submissions received</span>
               </div>
               <button 
@@ -748,8 +742,8 @@ export default function TeacherDashboard({ session, onLogout }) {
               </button>
             </article>
           ))}
-          {!loadingAssignments && backendAssignments.filter(a => a.submissions && a.submissions.length > 0).length === 0 && (
-             <p style={{color: '#666'}}>No student submissions received yet.</p>
+          {!loadingAssignments && backendAssignments.length === 0 && (
+             <p style={{color: '#666'}}>No assignments created yet.</p>
           )}
         </div>
       </section>
@@ -758,17 +752,18 @@ export default function TeacherDashboard({ session, onLogout }) {
 
   const handleScheduleClass = async (e) => {
     e.preventDefault();
-    if (!newClassTitle || !newClassTime || !newClassRoom) return;
+    if (!newClassTitle || !newClassTime || !newClassRoom || !newClassDate) return;
     try {
       const res = await fetch('/api/lms-data?type=classes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: newClassTitle, time: newClassTime, room: newClassRoom })
+        body: JSON.stringify({ title: newClassTitle, date: newClassDate, time: newClassTime, room: newClassRoom })
       });
       if (res.ok) {
         const newClass = await res.json();
         setDbClasses([newClass, ...dbClasses]);
         setNewClassTitle("");
+        setNewClassDate("");
         setNewClassTime("");
         setNewClassRoom("");
       }
@@ -981,7 +976,7 @@ export default function TeacherDashboard({ session, onLogout }) {
 
   const views = {
     overview: renderOverview,
-    calendar: () => <CalendarWorkspace classes={dbClasses} notices={dbNotices} assignments={backendAssignments} />,
+    calendar: () => <CalendarWorkspace classes={dbClasses} notices={dbNotices} assignments={backendAssignments} subjects={dbSubjects} dbEvents={dbEvents} />,
     classes: renderClasses,
     subjects: renderSubjects,
     assignments: renderAssignments,
@@ -1036,6 +1031,7 @@ export default function TeacherDashboard({ session, onLogout }) {
         <SubjectDetails 
           subject={activeSubject} 
           onBack={() => setActiveSubject(null)} 
+          onUpdate={(updated) => setDbSubjects(dbSubjects.map(s => (s._id === updated._id || s.id === updated.id) ? updated : s))}
           role="teacher"
         />
       </RoleShell>

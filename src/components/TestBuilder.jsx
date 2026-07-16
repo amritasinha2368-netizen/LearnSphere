@@ -94,7 +94,7 @@ export default function TestBuilder({ onPublish, refreshTrigger }) {
       startTime: new Date(startTime).toISOString(),
       endTime: new Date(endTime).toISOString(),
       durationMinutes: Number(durationMinutes),
-      questions: selectedQuestions.map(q => ({ title: q.question, type: q.type, marks: q.marks }))
+      questions: selectedQuestions
     };
     setPublishedQuizzes([tempQuiz, ...publishedQuizzes]);
     
@@ -113,7 +113,7 @@ export default function TestBuilder({ onPublish, refreshTrigger }) {
           startTime: new Date(startTime).toISOString(),
           endTime: new Date(endTime).toISOString(),
           durationMinutes: Number(durationMinutes),
-          questions: selectedQuestions.map(q => q.id)
+          questions: selectedQuestions
         })
       });
       
