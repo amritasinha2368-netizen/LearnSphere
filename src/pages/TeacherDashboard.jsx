@@ -951,6 +951,24 @@ export default function TeacherDashboard({ session, onLogout }) {
     );
   }
 
+  const deleteNotice = async (id) => {
+    if (!id) return;
+    if (!confirm("Are you sure you want to delete this notice?")) return;
+    try {
+      const res = await fetch(`/api/lms-data?type=notices&id=${id}`, {
+        method: 'DELETE'
+      });
+      if (res.ok) {
+        setDbNotices(dbNotices.filter(n => (n.id || n._id) !== id));
+      } else {
+        alert("Failed to delete notice.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Failed to delete notice.");
+    }
+  };
+
   function renderAnnouncements() {
     return (
       <section className="role-view">
@@ -966,6 +984,16 @@ export default function TeacherDashboard({ session, onLogout }) {
                   <span style={{ fontSize: '12px', color: '#64748b', display: 'block' }}>{notice.status || 'Draft'} - {notice.audience || 'All'} • {new Date(notice.date || Date.now()).toLocaleDateString()}</span>
                   {notice.content && <p style={{ fontSize: '13px', color: '#334155', marginTop: '4px' }}>{notice.content}</p>}
                 </div>
+                {(notice._id || notice.id) && (
+                  <button 
+                    type="button" 
+                    onClick={() => deleteNotice(notice._id || notice.id)} 
+                    style={{ background: 'transparent', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '8px' }}
+                    title="Delete notice"
+                  >
+                    <Trash2 size={18} />
+                  </button>
+                )}
               </div>
             ))}
           </div>
@@ -1031,7 +1059,12 @@ export default function TeacherDashboard({ session, onLogout }) {
         <SubjectDetails 
           subject={activeSubject} 
           onBack={() => setActiveSubject(null)} 
-          onUpdate={(updated) => setDbSubjects(dbSubjects.map(s => (s._id === updated._id || s.id === updated.id) ? updated : s))}
+          onUpdate={(updated) => {
+            setDbSubjects(dbSubjects.map(s => (s._id === updated._id || s.id === updated.id) ? updated : s));
+            if (activeSubject && (activeSubject._id === updated._id || activeSubject.id === updated.id)) {
+              setActiveSubject(updated);
+            }
+          }}
           role="teacher"
         />
       </RoleShell>

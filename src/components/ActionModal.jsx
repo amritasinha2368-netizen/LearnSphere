@@ -166,14 +166,34 @@ export default function ActionModal({ action, onClose, onSubmit }) {
     }
   }
 
-  function handleDone() {
+  async function handleDone() {
+    let finalUrl = uploadedCloudUrl;
+
+    if (file && uploadStatus === "idle") {
+      setUploadStatus("uploading");
+      try {
+        finalUrl = await uploadFileToCloud(file, (progress) => {
+          setUploadProgress(progress);
+        });
+        setUploadedCloudUrl(finalUrl);
+        setUploadStatus("success");
+      } catch (err) {
+        console.error(err);
+        setUploadStatus("error");
+        return; // Halt submission if upload fails
+      }
+    } else if (uploadStatus === "uploading") {
+      alert("Please wait for the file to finish uploading before submitting.");
+      return;
+    }
+
     if (onSubmit) {
       if (action.type === 'create-coding-question') {
         onSubmit({
           actionType: action.type,
           title: newQTitle,
           description: newQDesc,
-          imageUrl: uploadedCloudUrl,
+          imageUrl: finalUrl,
           difficulty: newQDiff,
           timeLimit: newQTimeLimit,
           testCases: newQTestCases,
@@ -209,7 +229,7 @@ export default function ActionModal({ action, onClose, onSubmit }) {
         onSubmit({
           actionType: action.type,
           title: writeTitle,
-          fileUrl: uploadedCloudUrl || noteText, // fallback to link if pasted
+          fileUrl: finalUrl || noteText, // fallback to link if pasted
           subjectId: action.subjectId
         });
       } else if (action.type === 'send-feedback') {
@@ -255,7 +275,7 @@ export default function ActionModal({ action, onClose, onSubmit }) {
       } else {
         const data = {
           actionType: action.type,
-          fileUrl: uploadedCloudUrl,
+          fileUrl: finalUrl,
           note: noteText,
           title: writeTitle,
           body: writeBody,

@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronDown, ChevronRight, FileText, ArrowLeft, BookOpen, Layers, Plus, Link as LinkIcon, UploadCloud, Video, Image as ImageIcon, Trash2 } from "lucide-react";
 import MaterialPreview from "./MaterialPreview.jsx";
 import ProgressBar from "./ProgressBar.jsx";
 
 export default function SubjectDetails({ subject, onBack, onUpdate, role = 'student' }) {
-  const [openChapters, setOpenChapters] = useState([0]);
+  const [openChapters, setOpenChapters] = useState(() => subject?.chapters ? subject.chapters.map((_, i) => i) : []);
   const [localSubject, setLocalSubject] = useState(subject);
+  
+  useEffect(() => {
+    setLocalSubject(subject);
+  }, [subject]);
   
   // Chapter creation state
   const [isAddingChapter, setIsAddingChapter] = useState(false);

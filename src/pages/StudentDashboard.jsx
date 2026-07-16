@@ -16,6 +16,7 @@ import {
   Trophy,
   UploadCloud,
   Megaphone,
+  Star,
   ChevronLeft,
   ChevronRight
 } from "lucide-react";
@@ -704,6 +705,15 @@ export default function StudentDashboard({ session, onLogout }) {
     );
   }
 
+  function BadgeIcon({ name, ...props }) {
+    if (name === "Top Performer") return <Trophy {...props} />;
+    if (name === "Streak Star") return <Sparkles {...props} />;
+    if (name === "Subject Explorer") return <Star {...props} />;
+    if (name === "Quick Submitter") return <Star {...props} />;
+    if (name === "Quiz Master") return <Medal {...props} />;
+    return <Star {...props} />;
+  }
+
   function renderBadges() {
     const earnedBadges = studentData.badges.filter((badge) => badge.earned);
     const lockedBadges = studentData.badges.filter((badge) => !badge.earned);
@@ -721,7 +731,7 @@ export default function StudentDashboard({ session, onLogout }) {
             </div>
             <div className="earned-badge-row">
               {earnedBadges.map((badge) => (
-                <span key={badge.name} title={badge.name}>{badge.emoji}<b>{badge.name}</b></span>
+                <span key={badge.name} title={badge.name}><BadgeIcon name={badge.name} size={18} /><b>{badge.name}</b></span>
               ))}
             </div>
           </article>
@@ -740,7 +750,7 @@ export default function StudentDashboard({ session, onLogout }) {
           {studentData.badges.map((badge) => (
             <article className={badge.earned ? "badge-detail-card earned" : "badge-detail-card"} key={badge.name}>
               <div className="badge-detail-head">
-                <span className="badge-emoji">{badge.emoji}</span>
+                <span className="badge-emoji"><BadgeIcon name={badge.name} size={24} /></span>
                 <i>{badge.earned ? "Unlocked" : "Locked"}</i>
               </div>
               <h3>{badge.name}</h3>

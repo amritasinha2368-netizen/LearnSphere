@@ -699,6 +699,24 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
     return <Medal {...props} />;
   }
 
+  const deleteNotice = async (id) => {
+    if (!id) return;
+    if (!confirm("Are you sure you want to delete this notice?")) return;
+    try {
+      const res = await fetch(`/api/lms-data?type=notices&id=${id}`, {
+        method: 'DELETE'
+      });
+      if (res.ok) {
+        setDbNotices(dbNotices.filter(n => (n.id || n._id) !== id));
+      } else {
+        alert("Failed to delete notice.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Failed to delete notice.");
+    }
+  };
+
   function renderAnnouncements() {
     return (
       <section className="role-view">
@@ -709,10 +727,22 @@ function sectionTitle(title, subtitle, actionLabel, actionHandler) {
               <div className="list-action-row" key={notice._id || notice.title || idx}>
                 <b>{(notice.status || notice.title || 'N')[0]}</b>
                 <span><strong>{notice.title}</strong><em>{notice.status || 'Draft'} - {notice.audience || 'All'}</em></span>
-                <button type="button" onClick={() => openAdminAction(notice.title, [
-                  { label: "Status", value: notice.status },
-                  { label: "Audience", value: notice.audience },
-                ])}>Open</button>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  <button type="button" onClick={() => openAdminAction(notice.title, [
+                    { label: "Status", value: notice.status },
+                    { label: "Audience", value: notice.audience },
+                  ])}>Open</button>
+                  {(notice._id || notice.id) && (
+                    <button 
+                      type="button" 
+                      onClick={() => deleteNotice(notice._id || notice.id)} 
+                      style={{ background: 'transparent', border: '1px solid #e2e8f0', color: '#ef4444', cursor: 'pointer', padding: '8px 12px', borderRadius: '4px' }}
+                      title="Delete notice"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -1340,7 +1370,12 @@ const [deletingAssignmentId, setDeletingAssignmentId] = useState(null);
         <SubjectDetails 
           subject={activeSubject} 
           onBack={() => setActiveSubject(null)} 
-          onUpdate={(updated) => setDbSubjects(dbSubjects.map(s => (s._id === updated._id || s.id === updated.id) ? updated : s))}
+          onUpdate={(updated) => {
+            setDbSubjects(dbSubjects.map(s => (s._id === updated._id || s.id === updated.id) ? updated : s));
+            if (activeSubject && (activeSubject._id === updated._id || activeSubject.id === updated.id)) {
+              setActiveSubject(updated);
+            }
+          }}
           role="admin"
         />
       </RoleShell>
