@@ -955,7 +955,7 @@ button {
   background: linear-gradient(135deg, rgba(255, 244, 223, 0.88), rgba(255, 255, 255, 0.18));
 }
 
-.dashboard-topbar {
+.dashboard-main > header.dashboard-topbar {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
