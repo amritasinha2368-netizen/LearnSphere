@@ -98,6 +98,7 @@ export default async function handler(req, res) {
               type: data.materialType || 'link',
               addedBy: data.addedBy || "Teacher"
             });
+            subject.markModified('chapters');
           }
         } else if (data.action === 'delete_chapter') {
           subject.chapters.pull({ _id: data.chapterId });
