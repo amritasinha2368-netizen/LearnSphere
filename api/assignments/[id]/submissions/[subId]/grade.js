@@ -1,5 +1,5 @@
-import connectToDatabase from '../../../../../../src/lib/mongodb.js';
-import Assignment from '../../../../../../src/models/Assignment.js';
+import connectToDatabase from '../../../../../src/lib/mongodb.js';
+import Assignment from '../../../../../src/models/Assignment.js';
 
 export default async function handler(req, res) {
   try {
