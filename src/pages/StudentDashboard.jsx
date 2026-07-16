@@ -140,7 +140,7 @@ export default function StudentDashboard({ session, onLogout }) {
   const studentData = {
     ...studentDataMock,
     subjects: dbSubjects.length > 0 ? dbSubjects : studentDataMock.subjects,
-    classSchedule: dbClasses.length > 0 ? dbClasses : studentDataMock.classSchedule,
+    classSchedule: dbClasses,
     badges: dbBadges.length > 0 ? dbBadges : studentDataMock.badges,
   };
 
@@ -706,13 +706,48 @@ export default function StudentDashboard({ session, onLogout }) {
     );
   }
 
-  function BadgeIcon({ name, ...props }) {
-    if (name === "Top Performer") return <Trophy {...props} />;
-    if (name === "Streak Star") return <Sparkles {...props} />;
-    if (name === "Subject Explorer") return <Star {...props} />;
-    if (name === "Quick Submitter") return <Star {...props} />;
-    if (name === "Quiz Master") return <Medal {...props} />;
-    return <Star {...props} />;
+  function BadgeIcon({ name, size = 24, earned = true, ...props }) {
+    const badges = {
+      "Top Performer": { icon: Trophy, color: "#f59e0b", bg: "linear-gradient(135deg, #fef3c7, #fde68a)" },
+      "Streak Star": { icon: Sparkles, color: "#8b5cf6", bg: "linear-gradient(135deg, #ede9fe, #ddd6fe)" },
+      "Subject Explorer": { icon: Award, color: "#0ea5e9", bg: "linear-gradient(135deg, #e0f2fe, #bae6fd)" },
+      "Quick Submitter": { icon: Star, color: "#ef4444", bg: "linear-gradient(135deg, #fee2e2, #fecaca)" },
+      "Quiz Master": { icon: Medal, color: "#10b981", bg: "linear-gradient(135deg, #d1fae5, #a7f3d0)" }
+    };
+
+    const defaultBadge = { icon: Award, color: "#ec4899", bg: "linear-gradient(135deg, #fce7f3, #fbcfe8)" };
+    const badge = badges[name] || defaultBadge;
+    const Icon = badge.icon;
+
+    if (!earned) {
+      return (
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          width: size * 1.8, height: size * 1.8, borderRadius: '50%',
+          background: '#f1f5f9', color: '#94a3b8',
+          boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.05)',
+          border: '2px solid #e2e8f0',
+          flexShrink: 0
+        }} {...props}>
+          <Icon size={size * 0.8} />
+        </div>
+      );
+    }
+
+    return (
+      <div style={{
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        width: size * 1.8, height: size * 1.8, borderRadius: '50%',
+        background: badge.bg, color: badge.color,
+        boxShadow: `0 4px 10px ${badge.color}40, inset 0 2px 0 rgba(255,255,255,0.6)`,
+        border: `2px solid ${badge.color}20`,
+        position: 'relative',
+        overflow: 'hidden',
+        flexShrink: 0
+      }} {...props}>
+        <Icon size={size * 0.8} style={{ filter: `drop-shadow(0 2px 2px ${badge.color}80)` }} />
+      </div>
+    );
   }
 
   function renderBadges() {
@@ -732,7 +767,7 @@ export default function StudentDashboard({ session, onLogout }) {
             </div>
             <div className="earned-badge-row">
               {earnedBadges.map((badge) => (
-                <span key={badge.name} title={badge.name}><BadgeIcon name={badge.name} size={18} /><b>{badge.name}</b></span>
+                <span key={badge.name} title={badge.name}><BadgeIcon name={badge.name} size={18} earned={true} /><b>{badge.name}</b></span>
               ))}
             </div>
           </article>
@@ -751,7 +786,7 @@ export default function StudentDashboard({ session, onLogout }) {
           {studentData.badges.map((badge) => (
             <article className={badge.earned ? "badge-detail-card earned" : "badge-detail-card"} key={badge.name}>
               <div className="badge-detail-head">
-                <span className="badge-emoji"><BadgeIcon name={badge.name} size={24} /></span>
+                <span className="badge-emoji"><BadgeIcon name={badge.name} size={24} earned={badge.earned} /></span>
                 <i>{badge.earned ? "Unlocked" : "Locked"}</i>
               </div>
               <h3>{badge.name}</h3>
