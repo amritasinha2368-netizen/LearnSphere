@@ -218,7 +218,7 @@ export default function StudentDashboard({ session, onLogout }) {
   }
 
   function openAssignment(assignment) {
-    const existingSubmission = assignment.submissions?.find(sub => sub.studentId === "student-123");
+    const existingSubmission = assignment.submissions?.find(sub => sub.studentId === "student_123");
 
     setAction({
       kicker: "Assignment upload",
